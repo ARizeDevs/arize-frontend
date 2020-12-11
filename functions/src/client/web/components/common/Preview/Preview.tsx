@@ -34,6 +34,8 @@ const Preview = (props : IProps) => {
 
     const [isAndroid , setIsAndroid] = useState(false)
 
+    console.log('---------')
+    console.log(contentFile)
     const renderInnerPreview = () => {
         return (
         <>
@@ -41,7 +43,7 @@ const Preview = (props : IProps) => {
                 <div style={{width:'90%',height:'95%'}}>
                     <ModelViewer 
                         autoPlay={true}
-                        glbURL={typeof window !== "undefined" ?window.URL.createObjectURL(contentFile):''}
+                        glbURL={typeof window !== "undefined" && contentFile ? window.URL.createObjectURL(contentFile):''}
                         actionButtonColor={buttonColor}
                         actionButtonInfoBackgroundColor={infoBackgroundColor}
                         actionButtonLink={link}
