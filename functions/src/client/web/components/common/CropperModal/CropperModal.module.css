@@ -1,0 +1,113 @@
+.modal {
+    position: absolute;
+    top: 5vh;
+    left: 15vw;
+    right: 15vw;
+    bottom: 5vh;
+    background-color: white;
+    border-radius: 40px;
+    outline: none;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--main-lightgray2-color);
+}
+
+.root {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.closeBTN {
+    cursor: pointer;
+    margin-right: 30px;
+    font-size: xx-large;
+}
+
+.footer {
+    height: 15%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footerSubContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.options {
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.body {
+    background-color: black;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 70%;
+    width: 100%;
+}
+
+.cropper {
+    width: 70%;
+    height: 100%;
+}
+
+.cropper > div:first-of-type {
+    width: 100%;
+    height: 100%;
+}
+
+.cropper > div > img {
+    max-width: 100%;
+    max-height: 100%;
+    min-height: 100%;
+    margin: auto;
+}
+
+.cropperActive90 > div > img {
+    transform: rotate(90deg);
+}
+
+.cropperActive180 > div > img {
+    transform: rotate(180deg);
+}
+
+.cropperActive270 > div > img {
+    transform: rotate(270deg);
+}
+
+.cropperActiveFlipV > div > img {
+    transform: scaleX(-1);
+}
+
+.cropperActiveFlipH > div > img {
+    transform: scaleY(-1);
+}
+

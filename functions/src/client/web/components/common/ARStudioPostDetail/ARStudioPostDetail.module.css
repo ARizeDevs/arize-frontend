@@ -1,0 +1,39 @@
+.root {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.imageInputContainer {
+    width: 45%;
+    height: 100%;
+}
+
+.contentImageContainer {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.inputWrapper {
+    flex: 1 1 auto;
+    width: 90%;
+    padding-left: 10%;
+    padding-right: 10%;
+    height: 60vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+.buttonWrapper {
+    flex: 0 0 auto;
+    width: 100%;
+}

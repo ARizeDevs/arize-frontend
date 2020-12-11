@@ -1,0 +1,116 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.bodyContainer::-webkit-scrollbar {
+    display: none;
+  }
+
+.bodyContainer {
+    margin-left: auto;
+    margin-right: auto;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    overflow-y: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    width: 100vw;
+}
+
+.btn {
+    color : black;
+}
+
+.icon {
+    cursor: pointer;
+}
+
+.modelViewer {
+    width: 100vw;
+    height: 60vh;
+}
+
+.modelViewer * :focus {
+    outline: none !important;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.grayColor {
+    color : var(--main-lightgray2-color)
+}
+
+.divider {
+    width: 100%;
+    height: 1px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: var(--main-lightgray2-color) ;
+}
+
+@media screen and (max-width: 800px) {
+    .bodyContainer {
+        width: 100vw;
+    }
+
+    .modelViewer {
+        width: 100vw;
+        height: 100vw;
+    }
+
+    .container {
+        width: 95% !important;
+    }
+}
+
+.shareModal {
+    position: absolute;
+    top: 40vh;
+    left: 15vw;
+    right: 15vw;
+    bottom: 40vh;
+    background-color: white;
+    border-radius: 40px;
+    outline: none;
+}
+
+.qrModal {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background-color: white;
+    border-radius: 40px;
+    outline: none;
+}
+
+.overlay {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--main-lightgray2-color);
+}

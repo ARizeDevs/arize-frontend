@@ -1,0 +1,23 @@
+.root {
+    background-color: rgba(194, 194, 194, .5);
+    width: 130px;
+    height: 130px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color:'black';
+    margin: 2px;
+    cursor: pointer;    
+}
+
+.root:hover {
+    background-color: var(--main-blue-color);
+}
+
+.root:hover * {
+    /* background-color: var(--main-blue-color); */
+    fill : white;
+    color : white
+}

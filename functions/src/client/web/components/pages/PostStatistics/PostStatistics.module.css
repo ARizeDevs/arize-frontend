@@ -1,0 +1,96 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+.bodyContainer {
+    padding: 40px;
+    height: 92vh;
+    /* flex: 1 1; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    position: relative;
+    overflow-y: hidden;
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* align-items: flex-start; */
+    /* justify-content: space-evenly; */
+}
+
+.columnContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    margin: 10px;
+}
+
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.buttonContainer {
+    width: 100px;
+}
+
+.statisticsRoot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+}
+
+.chartsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    flex: 0 0 auto;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.notChartsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex: 1 1 auto;
+    flex-grow: 1;
+    /* height: 100%; */
+    overflow-y: auto;
+    width: 80%;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.listStatisticRootContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.listStatisticItem {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+}

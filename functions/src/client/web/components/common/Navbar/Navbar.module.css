@@ -1,0 +1,35 @@
+.root {
+    display: flex;   
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex: 0 0 auto;
+    /* left: 5vw; */
+    /* right: 5vw; */
+    /* top: 5vh; */
+    /* width: 100%; */
+    padding: 20px;
+    height: 8vh;
+}
+
+.subContainer {
+    display: flex;   
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.navbarLeftItems {
+    margin-left: 40px;
+    display: flex;   
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    cursor: pointer;
+    color : black
+}
+
+.navbarLeftItems:hover *{
+    color : var(--main-blue-color);
+    fill: var(--main-blue-color);
+}

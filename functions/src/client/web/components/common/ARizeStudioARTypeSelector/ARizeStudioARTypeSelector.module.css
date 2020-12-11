@@ -1,0 +1,19 @@
+.row {
+    display : flex;
+    flex-direction: row;
+    justify-content: start;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.arTypeRowTitle {
+    font-weight: normal;
+    color: var(--main-gray-color);
+    margin-bottom: 10px;
+}
+
+.itemsContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}

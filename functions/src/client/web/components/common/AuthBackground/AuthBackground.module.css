@@ -1,0 +1,33 @@
+.root {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top:50px;
+    margin-left: 50px;
+}
+
+.logoContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.logoContainer h1 {
+    color : white;
+}
+
+.titleContainer p {
+    color : white;
+}
+
+.backgroundCubesContainer {
+    margin-left: 100px;
+    width: 800px;
+}

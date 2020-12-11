@@ -1,0 +1,89 @@
+.root {
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+}
+
+.textRoot {
+    align-items: center;
+    justify-content: center;
+}
+
+.textRoot h4 {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.circleDeactive {
+    width: 20px;
+    height: 20px;
+    border: solid 6px;
+    border-color: var(--main-deactive-color);
+    border-radius: 50%;
+    margin: 5px;
+    position: relative;
+    color: var(--main-deactive-color);
+}
+
+.circleActive {
+    width: 20px;
+    height: 20px;
+    border: solid 6px;
+    border-color: var(--main-blue-color);
+    border-radius: 50%;
+    margin: 5px;
+    position: relative;
+    color: var(--main-blue-color);
+}
+
+.circleFill {
+    background-color: var(--main-blue-color);
+    /* padding: px; */
+}
+
+.textDeactive {
+    position: absolute;
+    bottom: 20px;
+    transform: translate(-25%,-25%);
+    margin-bottom: 10px;
+    white-space: nowrap;
+    color: var(--main-deactive-color);
+}
+
+.textActive {
+    position: absolute;
+    bottom: 20px;
+    transform: translate(-25%,-25%);
+    margin-bottom: 10px;
+    white-space: nowrap;
+    color: var(--main-blue-color);
+}
+
+.lineDeactive {
+    width: 30%;
+    height: 5px;
+    border-radius: 4px;
+    background-color: var(--main-deactive-color);
+    /* margin: 1px; */
+
+}
+
+.test h4 {
+    margin: 0%;
+    margin-left: 10%;
+}
+
+.test h1 {
+    margin: 0%;
+    margin-left: 10%;
+}
+
+.lineActive {
+    width: 30%;
+    height: 5px;
+    border-radius: 4px;
+    background-color: var(--main-blue-color);
+    /* margin: 1px; */
+}
+

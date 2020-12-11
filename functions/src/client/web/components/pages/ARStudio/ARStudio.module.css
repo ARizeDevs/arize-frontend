@@ -1,0 +1,74 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+.bodyContainer {
+    padding: 40px;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+    /* position: relative; */
+    overflow-y: auto;
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* align-items: flex-start; */
+    /* justify-content: space-evenly; */
+}
+
+.tabItem {
+    cursor: pointer;
+    margin-right: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.tabItem p {
+    color: var(--main-lightgray2-color) ;
+}
+
+.tabItemNumber {
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    /* display: flex; or inline-flex */
+  /* align-items: center;  */
+  /* justify-content: center; */
+    background-color: var(--main-lightgray2-color) ;
+    color : white;
+    text-align: center;
+}
+
+.form {
+    /* margin-top: 100px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50vw;
+    height: 100%;
+    justify-content: flex-start;
+}
+
+.tabsContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.previewWrapper {
+    /* margin-top: 100px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50vw;
+    height: 100%;
+    /* height: 100%; */
+    justify-content: flex-start;
+}

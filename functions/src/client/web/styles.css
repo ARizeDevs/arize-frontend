@@ -1,0 +1,158 @@
+:root {
+    --main-purple-color : #721AA6;
+    --main-pink-color : #FF0079;
+    --main-blue-color : #0078FF;
+    --main-black-color : #141323;
+    --main-error-color : #ff4242;
+    --main-gray-color : #707070;
+    --main-red-color : #FF595E;
+    --main-deactive-color: #C2C2C2;
+    --main-yellow-color : #FFD166;
+    --main-lightgray-color : rgba(112,112,112,.05);
+    --main-lightgray2-color : rgba(112,112,112,.5);
+}
+.box {
+    padding: 10px;
+}
+.img-preview {
+    overflow: hidden;
+}
+
+.horizontal-menu *{
+    outline: none !important;
+}
+
+.ReactCrop__drag-handle::after {
+    border-radius: 50% !important;
+    border-color: var(--main-blue-color) !important;
+    background-color: white !important;
+    width: 20px !important;
+    height: 20px !important;
+}
+
+
+.ReactCrop .ord-sw {
+    margin-bottom: -10px !important;
+    margin-left: -10px !important;
+}
+.ReactCrop .ord-s {
+    margin-bottom: -10px !important;
+    margin-left: -10px !important;
+}
+.ReactCrop .ord-se {
+    margin-bottom: -10px !important;
+    margin-right: -10px !important;
+}
+.ReactCrop .ord-e {
+    margin-top: -10px !important;
+    margin-right: -10px !important;
+}
+.ReactCrop .ord-ne {
+    margin-top: -10px !important;
+    margin-right: -10px !important;
+}
+.ReactCrop .ord-n {
+    margin-top: -10px !important;
+    margin-left: -10px !important;
+}
+.ReactCrop .ord-nw {
+    margin-top: -10px !important;
+    margin-left: -10px !important;
+}
+.ReactCrop .ord-w {
+    margin-top: -10px !important;
+    margin-left: -10px !important;
+}
+
+
+.react-datepicker__input-container  {
+    position: relative !important;
+    display: inline-block !important;
+    width: 100% !important;
+    border-radius: 20px !important;
+    height: 50px !important;
+    display: flex !important;
+  }
+  
+  .react-datepicker__input-container input {
+      border : none !important;
+      padding: 0px !important;
+      margin-left: 10px !important;
+      outline: none !important;
+  }
+  
+  .react-datepicker-wrapper {
+    border-radius: 20px !important;
+    height: 50px !important;
+
+    display: inline-block !important;
+    padding: 0 !important;
+    border: 0 !important;
+    margin-left: 10px;
+    width: 100% !important;
+  }   
+
+@font-face {
+    font-family: muliFont;
+    src: url(/fonts/Muli.ttf);
+}
+
+html, body {
+    margin: 0;
+    height: 100%;
+    font-family: muliFont;
+}
+body {
+    margin: 0px;
+}
+
+body p {
+    margin: 0;
+}
+
+body a {
+    text-decoration: none;
+    color : var(--main-blue-color)
+}
+
+body h6,h5,h4,h3,h2,h1 {
+    margin: 0;
+}
+
+.lock_svg_test {
+    fill:blue
+}
+
+.error-message {
+    color : var(--main-error-color);
+    margin-top: 10px;
+    text-align-last: center;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.PrivateValueLabel-circle-10 {
+    background: linear-gradient(-135deg,#FF0079, #FF6D56) !important;
+}
+
+/* .Dropdown-menu {
+    background-color: white !important;
+    z-index: 1000 !important;
+    position: absolute;
+    width: 80%;
+    border: solid 1px;
+}
+
+.Dropdown-option {
+    background-color: white !important;
+    cursor:  pointer !important;
+    border-bottom: solid 1px 50%;
+} */

@@ -1,0 +1,17 @@
+.root {
+    /* height: 20px; */
+    border-radius: 17px;
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin: 5px;
+    text-align: center;
+    background-color: var(--main-blue-color);
+    color:white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* line-height: 20px; */
+}

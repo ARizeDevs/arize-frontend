@@ -1,0 +1,118 @@
+.root {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,50%);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes rotateCube {
+    0% { transform: rotate(0deg); }
+    75% { transform: rotate(360deg); }
+    100% { transform: rotate(720deg); }
+}
+
+@keyframes cube2anim {
+    0% { transform: translateY(0px) rotate(0deg); }
+    75% { transform: translateY(-10px) rotate(360deg); }
+    100% { transform: translateY(0px) rotate(720deg); }
+}
+
+@keyframes cube5anim {
+    0% { transform: translateX(0px) rotate(0deg); }
+    75% { transform: translateX(10px) rotate(360deg); }
+    100% { transform: translateX(0px) rotate(720deg); }
+}
+
+@keyframes cube6anim {
+    0% { transform: translateX(0px) rotate(0deg); }
+    75% { transform: translateX(-10px) rotate(360deg); }
+    100% { transform: translateX(0px) rotate(720deg); }
+}
+
+@keyframes cube7anim {
+    0% { transform: translateY(0px) rotate(0deg); }
+    75% { transform: translateY(10px) rotate(360deg); }
+    100% { transform: translateY(0px) rotate(720deg); }
+}
+
+.root h4 {
+    color : white;
+    opacity: 100%;
+}
+
+.rootCube {
+    position: relative;
+    background-color: antiquewhite;
+    right: 20px;
+    bottom: 100px;
+    /* left: 20px; */
+    /* width: 100px; */
+    /* height: 100px; */
+}
+
+.cube1 {
+    position: absolute;
+    top : 5px;
+    animation: rotateCube 4s ease-in-out infinite;
+}
+
+.cube2 {
+    position: absolute;
+    top : -20px;
+    animation: cube2anim 4s ease-in-out infinite;
+
+}
+
+.cube3 {
+    position: absolute;
+    right: -20px;
+    top : 15px;
+    animation: rotateCube 4s ease-in-out infinite;
+
+
+}
+
+.cube4 {
+    position: absolute;
+    left: 20px;
+    top : 15px;
+    animation: rotateCube 4s ease-in-out infinite;
+
+}
+
+.cube5 {
+    position: absolute;
+    top: 0px;
+    left: 20px;
+    top : -10px;
+    animation: cube5anim 4s ease-in-out infinite;
+
+}
+
+.cube6 {
+    position: absolute;
+    top : -10px;
+    right: -20px;
+    animation: cube6anim 4s ease-in-out infinite;
+
+}
+
+.cube7 {
+    position: absolute;
+    top : 25px;
+    animation: cube7anim 4s ease-in-out infinite;
+
+}
+
+.cube8 {
+    position: absolute;
+    top: 0px;
+    animation: rotateCube 4s ease-in-out infinite;
+
+}
+

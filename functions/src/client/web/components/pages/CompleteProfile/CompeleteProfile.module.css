@@ -1,0 +1,73 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+.bodyContainer {
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* margin: auto; */
+    flex: 1 1;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-evenly; */
+    flex-direction: column;
+    width: 70%;
+    margin: auto;
+    /* position: relative; */
+    overflow-y: auto;
+}
+
+.fieldsContainer {
+    width: 90%;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.accountTypeItemsContainer {
+    align-items: center;
+    /* margin-top: 50px; */
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.accountTypeButtonContainer {
+    width: 20%;
+    margin-bottom: 40px;
+}
+
+.accoutnTypeCard {
+    width: 30%;
+}
+.borderedBTN {
+    background-color: white !important;
+    border: 1px solid var(--main-blue-color) !important;
+    color : var(--main-blue-color) !important
+}
+
+.accountTypeContainer {
+    justify-content:space-between;
+    flex-grow:1;
+    width:90%;
+    align-items: center;
+}
+
+.accountTypeMessage {
+}
+
+.pageContainer {
+    justify-content:center;
+    flex-grow:1;
+    width:100%;
+    align-items:center;
+}
+
+.accountTypeMessageContainer {
+    flex-grow:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}

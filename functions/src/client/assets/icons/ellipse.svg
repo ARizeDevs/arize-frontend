@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="213" height="213" viewBox="0 0 213 213">
+  <defs>
+    <radialGradient id="radial-gradient" cx="0.609" cy="0.25" r="1.084" gradientTransform="matrix(-0.603, 0.798, -0.798, -0.603, 1.175, -0.086)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ffc1a1"/>
+      <stop offset="0.389" stop-color="#ff8d53"/>
+      <stop offset="1" stop-color="#ff1dac"/>
+      <stop offset="1"/>
+    </radialGradient>
+    <filter id="Ellipse_4098" x="0" y="0" width="213" height="213" filterUnits="userSpaceOnUse">
+      <feOffset dy="25" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="17.5" result="blur"/>
+      <feFlood flood-color="#ff3897" flood-opacity="0.302"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Ellipse_4098)">
+    <circle id="Ellipse_4098-2" data-name="Ellipse 4098" cx="54" cy="54" r="54" transform="translate(52.5 27.5)" fill="url(#radial-gradient)"/>
+  </g>
+</svg>

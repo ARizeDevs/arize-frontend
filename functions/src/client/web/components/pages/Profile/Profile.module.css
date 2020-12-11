@@ -1,0 +1,84 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+.bodyContainer {
+    /* height: 92vh; */
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    flex: 1 1 auto;
+    /* display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    flex-direction: column; */
+    overflow-y: auto;
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* align-items: flex-start; */
+    /* justify-content: space-evenly; */
+}
+
+.profileContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.profileSections {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 40%;
+}
+
+.lightColor {
+    color : var(--main-lightgray2-color);
+}
+
+.editProfileBTN {
+    border: 1px solid !important;
+    background-color: white !important;
+    color : black;
+    box-shadow: none ;
+}
+
+.shadowedBox {
+    /* background-color: red; */
+    box-shadow: -3px 20px 30px 1px rgba(0,0,0,0.2);
+    border-radius: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.profilePostsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.rowContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.verticalDivider {
+    height: 1px;
+    background-color: var(--main-lightgray2-color);
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

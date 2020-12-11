@@ -1,0 +1,64 @@
+.root {
+    height:100vh;
+    width:100vw;
+    background-image: url('/images/auth-background.png');
+    background-size: 100% 100%;
+    overflow: auto;
+    position: relative;
+}
+
+.loginForm {
+    position: absolute;
+    top: 5vh;
+    bottom: 5vh;
+    right: 5vw;
+    width: 30vw;
+    background-color: white;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: auto;
+}
+
+@media screen and (max-height: 800px) {
+    .loginForm {
+        bottom: unset;
+        width:40vw;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .loginForm {
+        width:90vw;
+    }
+}
+
+.loginRegisterButtonContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.loginRegisterButtonContainer a {
+    margin-left: 50px;
+}
+
+
+.loginButtonContainer {
+    width: 90%;
+}
+
+.inputsContainer {
+    width: 90%;
+}
+
+
+.providerIconContainer {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}

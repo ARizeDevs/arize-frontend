@@ -1,0 +1,67 @@
+.myArBtn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    background: none;
+    border: none;
+    outline: none;
+    background-color: #f6f6f6;
+    padding: 40px;
+    height: 50px;
+    width: 100px;
+    border-radius: 50px;
+    box-shadow: -5px 11px 50px -24px rgba(0,0,0,0.75);
+    position: absolute;
+    left: 50%;
+    bottom: 10%;
+    transform: translate(-50%, 0%);
+
+    padding: 0;
+    background: var(--main-blue-color);
+    color: white;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    box-shadow: 0px 20px 40px -15px var(--main-blue-color);
+    cursor: pointer;
+}
+​
+.myArBtn h3 {
+    color : #388fe5;
+    margin-left: 20px;
+    white-space: nowrap;
+}
+
+@media only screen and (max-width : 1000px) {
+    
+    .myArBtn img {
+        width: 60px !important;
+    }
+​
+    .myArBtn h3 {
+        font-size: large !important;
+    }
+}
+
+@media only screen and (max-width : 640px) {
+    
+    .myArBtn img {
+        width: 50px !important;
+    }
+​
+    .myArBtn h3 {
+        font-size: medium !important;
+    }
+}
+
+@media only screen and (max-width : 450px) {
+    
+    .myArBtn img {
+        width: 40px !important;
+    }
+​
+    .myArBtn h3 {
+        font-size: small !important;
+    }
+}
