@@ -47,6 +47,7 @@ const EditProfile = () => {
                             const userData = user.data.data.data
                             console.log(userData)
                             setName(userData.name)
+                            setLocation(userData.location);
                             setSurname(userData.surname)
                             setUsername(userData.username)
                             setBirthday(moment(userData.birthday))
@@ -153,7 +154,7 @@ const EditProfile = () => {
             <span className={'error-message'}>{generalError}</span>
             <div className={styles.buttonsContainer}>
                 <div className={styles.btn}>
-                    <SolidButton colorTheme="#000000" onClick={() => {console.log('save changes')}}  ><h3>Cancel</h3></SolidButton>
+                    <SolidButton colorTheme="#000000" onClick={() => router.push("/profile")}  ><h3>Cancel</h3></SolidButton>
                 </div>
                 &nbsp;
                 <div className={styles.btn}>

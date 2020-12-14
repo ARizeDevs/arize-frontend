@@ -7,7 +7,7 @@ import SolidButton from '../../common/buttons/SolidButton'
 import Modal from 'react-modal'
 import Navbar from '../../common/Navbar'
 import PostScrollList from '../../common/PostScrollList'
-import RoundImage from '../../common/RoundImage'
+// import RoundImage from '../../common/RoundImage'
 import ModelViewer from '../ModelViewer'
 
 import EmailIcon from '../../../../assets/icons/email2.svg'
@@ -27,7 +27,7 @@ const Post = (props : IProps) => {
 
     const { post, relatedPosts } = props
 
-    const [ profileImageSrc, setProfileImageSrc ] = useState('')
+    // const [ profileImageSrc, setProfileImageSrc ] = useState('')
     const [ glbURL, setGLBUrl] = useState('')
     const [ usdzURL, setUSDZUrl ] = useState('')
     const [ backGroundImage, setBackgrounImage ] = useState('')
@@ -36,9 +36,9 @@ const Post = (props : IProps) => {
     const [ qrModalOpen, setQRModalOpen ] = useState(false)
 
     useEffect(() => {
-        if(post.author && post.author.profilePicURL) {
-            getDirectURL(post.author.profilePicURL).then((url) => setProfileImageSrc(url))
-        }
+        // if(post.author && post.author.profilePicURL) {
+        //     getDirectURL(post.author.profilePicURL).then((url) => setProfileImageSrc(url))
+        // }
         getDirectURL(post.glbFileURL).then((url) => setGLBUrl(url)).catch((error) => '')
         getDirectURL(post.usdzFileURL).then((url) => setUSDZUrl(url)).catch((error) => '')
         getDirectURL(post.imageURL).then((url) => setPoster(url)).catch((error) => '')
@@ -70,7 +70,7 @@ const Post = (props : IProps) => {
                     <div className={styles.row} style={{width:'100%',justifyContent:'space-between'}}>
                         <div className={styles.row}>
                             <div style={{width:'40px',height:'40px'}}>
-                                <RoundImage imageSrc={profileImageSrc} unchangeable />
+                                {/* <RoundImage imageSrc={profileImageSrc} unchangeable /> */}
                             </div>&nbsp;
                             <div className={styles.column}>
                                 <h3>{post.author.username}</h3>

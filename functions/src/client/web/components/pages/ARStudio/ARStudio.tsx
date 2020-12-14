@@ -104,7 +104,7 @@ const ARStudio = (props : IProps) => {
             let result = null
             if(isEdit) {
                 let id = postID
-                if(typeof postID === typeof [])
+                if(postID && typeof postID === typeof [])
                 {
                     id = postID[0]
                 }
