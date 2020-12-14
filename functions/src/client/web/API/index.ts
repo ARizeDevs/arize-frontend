@@ -72,7 +72,7 @@ export const savePost = async (title : string, description : string, tags : stri
     }
 }
 
-export const editPost = async (title : string, description : string, tags : string[] ,
+export const editPost = async (id : string, title : string, description : string, tags : string[] ,
     imageBase64Encoded : string | null,
     actionBUttonTextColor : string, actionButtonColor : string, actionButtonLink : string, actionButtonText : string,
     actionInfoBackgroundColor : string , hasShadow : boolean | null, autoPlay : boolean | null,
@@ -119,18 +119,18 @@ export const editPost = async (title : string, description : string, tags : stri
         if(contentFile) {
             result = await axios({
                 method: "PUT",
-                url: postServerRoute,
+                url: `${postServerRoute}/${id}`,
                 data: formData,
                 headers: {
                   'Content-Type': 'multipart/form-data; boundary=${form._boundary}'
                 }
-              })
+            })
         } else {
             result = await axios({
                 method: "PUT",
-                url: postServerRoute,
+                url: `${postServerRoute}/${id}`,
                 data: formData
-              })
+            })
         }
         
         if(result.status === 200 || result.status === 201) {

@@ -102,7 +102,13 @@ const ARStudio = (props : IProps) => {
         try {
             let result = null
             if(isEdit) {
-                result = await editPost(title,description,tags,
+                let id = postID
+                if(typeof postID === typeof [])
+                {
+                    id = postID[0]
+                }
+                // @ts-ignore
+                result = await editPost(postID,title,description,tags,
                     imageSrcChanged?imageSrc:null,
                     actionBUttonTextColor, actionButtonColor, actionButtonLink, actionButtonText,
                     actionInfoBackgroundColor,
