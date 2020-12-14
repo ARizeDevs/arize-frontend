@@ -130,10 +130,10 @@ const Post = (props : IProps) => {
                 >
                     <div className={styles.column} style={{width:'100%',justifyContent:'space-evenly',height:'100%',paddingLeft:'50px'}} >
                         <div className={styles.row}>
-                            <h3>Embed link : </h3>&nbsp;<a href={`localhost:3000/model-viewer/${post.id}`}>{`localhost:3000/model-viewer/${post.id}`}</a>
+                            <h3>Embed link : </h3>&nbsp;<a href={`https://arizear.app/model-viewer/${post.id}`}>{`https://arizear.app/model-viewer/${post.id}`}</a>
                         </div>
                         <div className={styles.row}>
-                            <h3>link : </h3>&nbsp;<a href={`localhost:3000/post/${post.id}`}>{`localhost:3000/post/${post.id}`}</a>
+                            <h3>link : </h3>&nbsp;<a href={`https://arizear.app/post/${post.id}`}>{`https://arizear.app/post/${post.id}`}</a>
                         </div>
                     </div>
             </Modal>
@@ -147,7 +147,7 @@ const Post = (props : IProps) => {
                 >
                     <div className={styles.column} style={{width:'100%',justifyContent:'center',alignItems:'center',height:'100%'}} >
                         <div style={{width:'100%',paddingLeft:'30px'}}><button onClick={() => setQRModalOpen(false)} style={{border:'none',backgroundColor:'var(--main-blue-color)',color:'white',borderRadius:'50%',width:'30px',height:'30px',outline:'none',cursor:'pointer'}}>X</button></div>
-                        <QRCode value={`localhost:3000/model-viewer/${post.id}`} />
+                        <QRCode value={`https://arizear.app/model-viewer/${post.id}`} />
                         <br></br>
                         <p className={styles.grayColor}>Scan to see AR</p>
                     </div>

@@ -22,7 +22,7 @@ export async function  getServerSideProps (context : any) {
 
     const result = await getPost(id , true)
     const relatedPosts = await getRelatedPosts(id)
-    console.log(relatedPosts.data)
+    
     return {
       props: { post : result.data.data.data , relatedPosts:relatedPosts.data.data  },
     }
