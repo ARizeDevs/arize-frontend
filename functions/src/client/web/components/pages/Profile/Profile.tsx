@@ -37,6 +37,7 @@ const Profile = () => {
                         const user = await getUser(true)
                         if(user && user.data.data){
                             const userData = user.data.data.data
+                            console.log(userData)
                             setName(userData.name)
                             setSurname(userData.surname)
                             setLocation(userData.location)
