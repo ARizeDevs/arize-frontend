@@ -67,7 +67,7 @@ const ARStudio = (props : IProps) => {
                         setActionBUttonTextColor(postData.actionBUttonTextColor)
                         setActionButtonColor(postData.actionButtonColor)
                         setActionButtonLink(postData.actionButtonLink)
-                        setActionButtonText(postData.setActionButtonText)
+                        setActionButtonText(postData.actionButtonText)
                         setActionInfoBackgroundColor(postData.actionInfoBackgroundColor)
                         firebase.storage().ref(postData.glbFileURL).getDownloadURL().then((url) => setContentFile(url))
                         if(postData.backGroundImage) firebase.storage().ref(postData.backGroundImage).getDownloadURL().then((url) => setPostBackgroundImageBase64(url))
