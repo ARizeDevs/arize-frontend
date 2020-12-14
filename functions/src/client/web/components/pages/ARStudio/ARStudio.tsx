@@ -108,7 +108,7 @@ const ARStudio = (props : IProps) => {
                     id = postID[0]
                 }
                 // @ts-ignore
-                result = await editPost(postID,title,description,tags,
+                result = await editPost(id,title,description,tags,
                     imageSrcChanged?imageSrc:null,
                     actionBUttonTextColor, actionButtonColor, actionButtonLink, actionButtonText,
                     actionInfoBackgroundColor,

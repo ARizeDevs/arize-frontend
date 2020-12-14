@@ -39,10 +39,10 @@ const Post = (props : IProps) => {
         if(post.author && post.author.profilePicURL) {
             getDirectURL(post.author.profilePicURL).then((url) => setProfileImageSrc(url))
         }
-        getDirectURL(post.glbFileURL).then((url) => setGLBUrl(url))
-        getDirectURL(post.usdzFileURL).then((url) => setUSDZUrl(url))
-        getDirectURL(post.imageURL).then((url) => setPoster(url))
-        if(post.backGroundImage) getDirectURL(post.backGroundImage).then((url) => setBackgrounImage(url))
+        getDirectURL(post.glbFileURL).then((url) => setGLBUrl(url)).catch((error) => '')
+        getDirectURL(post.usdzFileURL).then((url) => setUSDZUrl(url)).catch((error) => '')
+        getDirectURL(post.imageURL).then((url) => setPoster(url)).catch((error) => '')
+        if(post.backGroundImage) getDirectURL(post.backGroundImage).then((url) => setBackgrounImage(url)).catch((error) => '')
 
     })
 
