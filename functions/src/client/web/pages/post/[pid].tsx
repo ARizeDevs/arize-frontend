@@ -1,11 +1,18 @@
 import React from 'react'
 import Head from 'next/head'
+import ErrorPage from 'next/error'
+import fetch from 'node-fetch'
 
 import Post from '../../components/pages/Post'
-import {getPost, getRelatedPosts} from '../../API'
+// import {getPost, getRelatedPosts} from '../../API'
+import { baseURL } from '../../config/api'
 
 
 const post = ({ post, relatedPosts } : { post : any, relatedPosts : any }) => {
+    if (!post ) {
+        return <ErrorPage statusCode={404} />
+    }
+    
     return (
     <>
         <Head>
@@ -19,12 +26,26 @@ const post = ({ post, relatedPosts } : { post : any, relatedPosts : any }) => {
 
 export async function  getServerSideProps (context : any) {
     const id = context.params.pid
+    const res = context.res
 
-    const result = await getPost(id , true)
-    const relatedPosts = await getRelatedPosts(id)
-    
-    return {
-      props: { post : result.data.data.data , relatedPosts:relatedPosts.data.data  },
+    try {
+        const result =await fetch(`${baseURL}/post/${id}?author=true`)
+        const relatedPosts =  await fetch(`${baseURL}/post/${id}/related`)
+        
+        const jsonResult = await result.json()
+        const jsonRelatedPosts = await relatedPosts.json()
+        console.log('----------')
+        console.log('----------')
+        console.log(jsonRelatedPosts.data)
+        
+        return {
+          props: { post : jsonResult.data.data , relatedPosts:jsonRelatedPosts.data?jsonRelatedPosts.data:[]  },
+        }
+    } catch (error) {
+        res.statusCode = 404
+        return {
+            props : {}
+        }
     }
 }
 

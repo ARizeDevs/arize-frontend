@@ -1,6 +1,7 @@
 import React , { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
+
 import firebase from '../../../config/firebase'
 import Navbar from '../../common/Navbar'
 import Preview from '../../common/Preview'
@@ -53,7 +54,7 @@ const ARStudio = (props : IProps) => {
             const getInitData = async () => {
                 try {
                     let id = postID
-                    if(typeof postID === typeof [])
+                    if(postID && typeof postID === typeof [])
                     {
                         id = postID[0]
                     }
