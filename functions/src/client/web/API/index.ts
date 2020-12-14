@@ -54,7 +54,7 @@ export const savePost = async (title : string, description : string, tags : stri
             url: postServerRoute,
             data: formData,
             headers: {
-              'Content-Type': 'multipart/form-data; boundary=${form._boundary}'
+              'Content-Type': 'multipart/form-data'
             }
           })
         
@@ -122,7 +122,7 @@ export const editPost = async (id : string, title : string, description : string
                 url: `${postServerRoute}/${id}`,
                 data: formData,
                 headers: {
-                  'Content-Type': 'multipart/form-data; boundary=${form._boundary}'
+                  'Content-Type': 'multipart/form-data'
                 }
             })
         } else {
