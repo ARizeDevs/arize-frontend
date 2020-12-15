@@ -12,6 +12,7 @@ import styles from './Profile.module.css'
 import RemainingSlots from '../../common/RemainingSlots'
 import ProfileInsights from '../../common/ProfileInsights'
 import PostsList from '../../common/PostsList'
+import Loading from '../../common/Loading'
 
 const Profile = () => {
     const router = useRouter()
@@ -28,11 +29,12 @@ const Profile = () => {
     const [ tdViews, setTDViews ] = useState(0)
     const [ clicks, setClicks ] = useState(0)
     const [ totalShares, setTotalShares ] = useState(0)
+    const [ fetchingData, setFetchingData] = useState(true)
 
     useEffect(() => {
         const getInitData = async () => {
-            try {
-                firebase.auth().onAuthStateChanged(async function(user) {
+            firebase.auth().onAuthStateChanged(async function(user) {
+                try {
                     if(user) {
                         const user = await getUser(true)
                         if(user && user.data.data){
@@ -75,10 +77,12 @@ const Profile = () => {
                             if(userData.bio) setBio(userData.bio)
                         }
                     }
-                })
-            } catch(error) {
-
-            }
+                } catch(error) {
+    
+                } finally {
+                    setFetchingData(false)
+                }
+            })
         }
 
         getInitData()
@@ -144,6 +148,7 @@ const Profile = () => {
                 </div>
                 </div>
             </div>
+            {fetchingData?<Loading text='Loading ...' />:null}
         </div>
     )
 }

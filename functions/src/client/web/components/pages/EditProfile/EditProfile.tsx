@@ -15,6 +15,7 @@ import firebase from '../../../config/firebase'
 
 import styles from './EditProfile.module.css'
 import { editUser, getUser } from '../../../API/user'
+import MultiLineInput from '../../common/inputs/MultiLineInput'
 
 const EditProfile = () => {
     const router = useRouter()
@@ -22,6 +23,7 @@ const EditProfile = () => {
     const [ imageChanged, setImageChanged ] = useState(false)
     const [ imageSrc, setImageSrc ] = useState(undefined)
     const [ submiting, setSubmiting ] = useState(false)
+    const [ fetchingData, setFetchingData ] = useState(true)
     const [ generalError, setGeneralError ] = useState(false)
     const [ name, setName ] = useState('')
     const [ surname, setSurname ] = useState('')
@@ -39,8 +41,8 @@ const EditProfile = () => {
 
     useEffect(() => {
         const getInitData = async () => {
-            try {
-                firebase.auth().onAuthStateChanged(async function(user) {
+            firebase.auth().onAuthStateChanged(async function(user) {
+                try {
                     if(user) {
                         const user = await getUser(false)
                         if(user && user.data.data){
@@ -68,10 +70,12 @@ const EditProfile = () => {
                             setVatNumber(userData.vatNumber)
                         }
                     }
-                })
-            } catch(error) {
-
-            }
+                } catch(error) {
+    
+                } finally {
+                    setFetchingData(false)
+                }
+            })
         }
 
         getInitData()
@@ -136,7 +140,8 @@ const EditProfile = () => {
                     <Input required text='Name' type='text' value={name} onChange={(e:any) => setName(e.target.value)}/>
                     <Input required text='Surname' type='text' value={surname} onChange={(e:any) => setSurname(e.target.value)}/>
                     <Input required text='Username' type='text' value={username} onChange={(e:any) => setUsername(e.target.value)}/>
-                    <Input required text='Email' type='text' value={email} onChange={(e:any) => setEmail(e.target.value)}/>
+                    <MultiLineInput required={false} text='Bio' value={bio} onChange={(e:any) => setBio(e.target.value)}  />
+                    <Input disabled required text='Email' type='text' value={email} onChange={(e:any) => setEmail(email)}/>
                     <DatePicker value={birthday} onChange={(date:any) => setBirthday(date)} />
                     <GenderDropdown onSelect={setGender} selected={gender} />
                     <CountryPicker value={location} onChange={(val : string) => setLocation(val)} />
@@ -161,6 +166,7 @@ const EditProfile = () => {
                     <SolidButton onClick={onEditSubmit}  ><h3>Save Changes</h3></SolidButton>
                 </div>
             </div>
+            {fetchingData?<Loading text='Loading ...' />:null}
             {submiting?<Loading text={'editing your profile ...'} />:null}
         </div>
     )

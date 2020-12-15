@@ -13,7 +13,16 @@ const arstudio = ({ post } : { post:any}) => {
     const [ poster, setPoster ] = useState('')
 
     useEffect(() => {
-        getDirectURL(post.glbFileURL).then((url) => setGLBUrl(url))
+        getDirectURL(post.glbFileURL).then((url) => 
+            fetch(url,{mode:"cors"})
+            .then(res => res.blob())
+            .then(blob => {
+                let glb = url
+                const file = new File([blob], 'test.glb', {type:'model/gltf-binary'});
+                if( typeof window !== "undefined") glb = window.URL.createObjectURL(file)
+                setGLBUrl(glb)
+            })
+        )
         getDirectURL(post.usdzFileURL).then((url) => setUSDZUrl(url))
         getDirectURL(post.imageURL).then((url) => setPoster(url))
         if(post.backGroundImage) getDirectURL(post.backGroundImage).then((url) => setBackgrounImage(url))
@@ -21,6 +30,8 @@ const arstudio = ({ post } : { post:any}) => {
     
     return (<>
         <Head>
+            <link rel="shortcut icon" href="/images/favicon.png" />
+            <title>Model Viewer</title>
             <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
             <script noModule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
         </Head>

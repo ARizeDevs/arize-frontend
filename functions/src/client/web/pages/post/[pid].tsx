@@ -16,6 +16,8 @@ const post = ({ post, relatedPosts } : { post : any, relatedPosts : any }) => {
     return (
     <>
         <Head>
+            <link rel="shortcut icon" href="/images/favicon.png" />
+            <title>{post.title}</title>
             <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
             <script noModule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
         </Head>
@@ -29,19 +31,17 @@ export async function  getServerSideProps (context : any) {
     const res = context.res
 
     try {
-        const result =await fetch(`${baseURL}/post/${id}?author=true`)
+        const result = await fetch(`${baseURL}/post/${id}?author=true`)
         const relatedPosts =  await fetch(`${baseURL}/post/${id}/related`)
         
         const jsonResult = await result.json()
         const jsonRelatedPosts = await relatedPosts.json()
-        console.log('----------')
-        console.log('----------')
-        console.log(jsonRelatedPosts.data)
         
         return {
           props: { post : jsonResult.data.data , relatedPosts:jsonRelatedPosts.data?jsonRelatedPosts.data:[]  },
         }
     } catch (error) {
+        console.log(error)
         res.statusCode = 404
         return {
             props : {}

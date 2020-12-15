@@ -7,7 +7,6 @@ import SolidButton from '../../common/buttons/SolidButton'
 import Modal from 'react-modal'
 import Navbar from '../../common/Navbar'
 import PostScrollList from '../../common/PostScrollList'
-// import RoundImage from '../../common/RoundImage'
 import ModelViewer from '../ModelViewer'
 
 import EmailIcon from '../../../../assets/icons/email2.svg'
@@ -27,7 +26,7 @@ const Post = (props : IProps) => {
 
     const { post, relatedPosts } = props
 
-    // const [ profileImageSrc, setProfileImageSrc ] = useState('')
+    const [ profileImageSrc, setProfileImageSrc ] = useState('')
     const [ glbURL, setGLBUrl] = useState('')
     const [ usdzURL, setUSDZUrl ] = useState('')
     const [ backGroundImage, setBackgrounImage ] = useState('')
@@ -36,9 +35,9 @@ const Post = (props : IProps) => {
     const [ qrModalOpen, setQRModalOpen ] = useState(false)
 
     useEffect(() => {
-        // if(post.author && post.author.profilePicURL) {
-        //     getDirectURL(post.author.profilePicURL).then((url) => setProfileImageSrc(url))
-        // }
+        if(post.author && post.author.profilePicURL) {
+            getDirectURL(post.author.profilePicURL).then((url) => setProfileImageSrc(url))
+        }
         getDirectURL(post.glbFileURL).then((url) => setGLBUrl(url)).catch((error) => '')
         getDirectURL(post.usdzFileURL).then((url) => setUSDZUrl(url)).catch((error) => '')
         getDirectURL(post.imageURL).then((url) => setPoster(url)).catch((error) => '')
@@ -70,7 +69,7 @@ const Post = (props : IProps) => {
                     <div className={styles.row} style={{width:'100%',justifyContent:'space-between'}}>
                         <div className={styles.row}>
                             <div style={{width:'40px',height:'40px'}}>
-                                {/* <RoundImage imageSrc={profileImageSrc} unchangeable /> */}
+                                <img style={{width: '100%',height: '100%',borderRadius: '50%'}} src={profileImageSrc} />
                             </div>&nbsp;
                             <div className={styles.column}>
                                 <h3>{post.author.username}</h3>
@@ -100,7 +99,7 @@ const Post = (props : IProps) => {
                         </div>
                         <div className={styles.column} style={{width:'30%',marginRight : '20px'}}>
                             <div style={{width:'100%',marginBottom : '10px'}}>
-                                <SolidButton onClick={() => router.push(post.actionButtonLink)} styleClass={styles.btn} colorTheme={post.actionBUttonTextColor} ><h3 style={{color:post.actionBUttonTextColor}}>{post.actionButtonText}</h3></SolidButton>
+                                <SolidButton onClick={() => router.push(post.actionButtonLink)} styleClass={styles.btn} colorTheme={post.actionButtonColor} ><h3 style={{color:post.actionBUttonTextColor}}>{post.actionButtonText}</h3></SolidButton>
                             </div>
                             <div style={{width:'100%',marginBottom : '10px'}}>
                                 <SolidButton onClick={() => setQRModalOpen(true)}  ><h3>AR View</h3></SolidButton>

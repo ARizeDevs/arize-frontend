@@ -11,6 +11,7 @@ import { savePost, getPost, editPost } from '../../../API'
 import styles from './ARStudio.module.css'
 import ARStudioProgress from '../../common/ARStudioProgress'
 import ARStudioCustomize from '../../common/ARStudioCustomize'
+import Loading from '../../common/Loading'
 
 interface IProps {
     isEdit? : boolean,
@@ -24,6 +25,7 @@ const ARStudio = (props : IProps) => {
     const router = useRouter()
 
     const [ submiting , setSubmiting ] = useState(false)
+    const [ fetchingData, setFetchingData ] = useState(true)
     const [ generalError , setGeneralError ] = useState('')
 
     const [ page, setPage ] = useState(1)
@@ -75,7 +77,8 @@ const ARStudio = (props : IProps) => {
                         if(!postData.backGroundImage) setHasBackground(false)
                     }
                 } catch (error) {
-
+                } finally {
+                    setFetchingData(false)
                 }
             }
             getInitData()
@@ -141,7 +144,7 @@ const ARStudio = (props : IProps) => {
     return (<div className={styles.root}>
         <Navbar />
         <div className={styles.bodyContainer}>
-        {!submiting ?
+        {/* {!submiting ? */}
             <>
                 <div className={styles.form}>
                     {page===1?<ARStudioPostDetail
@@ -200,12 +203,14 @@ const ARStudio = (props : IProps) => {
                     />
                 </div> 
             </>
-            :
+            {/* :
             <ARStudioProgress
                 title={'ARize is processing your data ...'}
                 description={uploadStatus}
                 progress={0}
-            />}
+            />} */}
+            {isEdit && fetchingData ? <Loading text='Loading ...' />:null}
+            {submiting ? <Loading text='Saving your new post ... '/>:null}
         </div>   
     </div>)
 }
