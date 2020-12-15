@@ -44,6 +44,10 @@ const ImageInput = (props : IProps) => {
         }
     } 
 
+    console.log('000000000000000')
+    console.log(modalOpen)
+    console.log(imageSrc)
+
     return <div className={styles.root}>
             <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
                 <p>{text}</p>
@@ -87,7 +91,8 @@ const ImageInput = (props : IProps) => {
 
                     </img>
                 </div>}
-                <CropperModal onCroppingFinished={(newImage : string) => setImageSrc(newImage)} imageSrc={imageSrc} onImageChange={setImageSrc} modalOpen={modalOpen} onRequestClose={() => setModalOpen(false)} />
+                {/* @ts-ignore */}
+                <CropperModal onFinished={(newImage : string) => setImageSrc(newImage)} imageSrc={imageSrc} onImageChange={onImageChange} modalOpen={modalOpen} onRequestClose={() => setModalOpen(false)} />
                 </>
             :null}
         </div>

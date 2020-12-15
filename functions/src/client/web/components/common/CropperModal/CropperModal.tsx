@@ -98,8 +98,40 @@ const CropperModal = (props : IProps) => {
     const onLanscapeClick = () =>  setCrop({...crop, width: 50, height: 50, x: 25, y: 25 ,  unit : '%' ,})
 
     const onFinished = () => {
-        getCroppedImg(imageSrc , crop, transform)
-        .then((base64Image : any) => {
+        // getCroppedImg(imageSrc , crop, transform)
+        // .then((base64Image : any) => {
+        //     onCroppingFinished(base64Image)
+        //     onRequestClose()
+        // })
+
+        new Promise(async (resolve , reject) => {
+            const canvas = document.createElement('canvas');
+            canvas.width = crop.width;
+            canvas.height = crop.height;
+
+            const image = document.createElement('img')
+            image.src = imageSrc
+            image.onload = () => {
+                const ctx = canvas.getContext('2d');
+                
+                const scaleX = image.naturalWidth / image.width;
+                const scaleY = image.naturalHeight / image.height;
+                ctx.drawImage(
+                    image,
+                    crop.x * scaleX,
+                    crop.y * scaleY,
+                    crop.width * scaleX,
+                    crop.height * scaleY,
+                    0,
+                    0,
+                    crop.width,
+                    crop.height,
+                )
+    
+                const base64Image = canvas.toDataURL('image/jpeg')
+                resolve(base64Image)
+            }
+        }).then((base64Image) => {
             onCroppingFinished(base64Image)
             onRequestClose()
         })
@@ -140,7 +172,7 @@ const CropperModal = (props : IProps) => {
                     <ReactCrop imageStyle={{transform : transformStyle}} className={styles.cropper} keepSelection src={imageSrc} crop={crop} onChange={newCrop => setCrop(newCrop)} />;
                 </div>
                 <div className={styles.footer}>
-                    <div className={styles.footerSubContainer}>
+                    {/* <div className={styles.footerSubContainer}>
                         <div onClick={onScaleXClick} className={styles.options}>
                             <FlipVIcon />
                         </div>
@@ -156,7 +188,7 @@ const CropperModal = (props : IProps) => {
                         <div onClick={onLanscapeClick} className={styles.options}>
                             <LandscapeIcon />   
                         </div>
-                    </div>
+                    </div> */}
                     <div className={styles.footerSubContainer}>
                         <div style={{width:'200px'}}>
                             {/* @ts-ignore */}
@@ -183,7 +215,6 @@ const getCroppedImg = (image : any, crop : any, transform : string[]) => {
     return new Promise(async (resolve , reject) => {
 
         try {
-
             const imageComputedStyle = getComputedStyle(document.getElementsByClassName( 'ReactCrop__image' )[0] , null)
             let maxWidth  = imageComputedStyle.getPropertyValue('width')
             let maxHeight = imageComputedStyle.getPropertyValue('height')
