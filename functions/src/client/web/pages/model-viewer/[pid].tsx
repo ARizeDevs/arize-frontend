@@ -13,31 +13,21 @@ const arstudio = ({ post } : { post:any}) => {
     const [ poster, setPoster ] = useState('')
 
     useEffect(() => {
-        getDirectURL(post.glbFileURL).then((url) => 
-            fetch(url,{mode:"cors"})
-            .then(res => res.blob())
-            .then(blob => {
-                let glb : string = url
-                const file = new File([blob], 'test.glb', {type:'model/gltf-binary'});
-                if( typeof window !== "undefined") glb = window.URL.createObjectURL(file)
-                console.log(glb);
-                setGLBUrl(glb)
-            })
-        )
-        getDirectURL(post.usdzFileURL).then((url) => setUSDZUrl(url))
-        getDirectURL(post.imageURL).then((url) => setPoster(url))
-        if(post.backGroundImage) getDirectURL(post.backGroundImage).then((url) => setBackgrounImage(url))
+        getDirectURL(post.glbFileURL).then((url) => setGLBUrl(url)).catch(() => '' )
+        getDirectURL(post.usdzFileURL).then((url) => setUSDZUrl(url)).catch(() => '' )
+        getDirectURL(post.imageURL).then((url) => setPoster(url)).catch(() => '' )
+        if(post.backGroundImage) getDirectURL(post.backGroundImage).then((url) => setBackgrounImage(url)).catch(() => '' )
     },[])
     
     return (<>
         <Head>
             <link rel="shortcut icon" href="/images/favicon.png" />
             <title>Model Viewer</title>
-            <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+            <script type="module" src="https://unpkg.com/@google/model-viewer@1.1.0/dist/model-viewer.js"></script>
             <script noModule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
         </Head>
         <div style={{width:'100vw',height:'100vh'}}>
-            <ModelViewer  
+            <ModelViewer
                 usdzURL={usdzURL} 
                 glbURL={glbURL} 
                 poster={poster}
