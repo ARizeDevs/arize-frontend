@@ -9,7 +9,7 @@ import ARStudioPostDetail from '../../common/ARStudioPostDetail'
 import { savePost, getPost, editPost } from '../../../API'
 
 import styles from './ARStudio.module.css'
-import ARStudioProgress from '../../common/ARStudioProgress'
+// import ARStudioProgress from '../../common/ARStudioProgress'
 import ARStudioCustomize from '../../common/ARStudioCustomize'
 import Loading from '../../common/Loading'
 
@@ -52,6 +52,7 @@ const ARStudio = (props : IProps) => {
     const [ postBackgroundImageBase64, setPostBackgroundImageBase64] = useState('')
 
     useEffect(() => {
+        console.log(uploadStatus);
         if(isEdit && postID) {
             const getInitData = async () => {
                 try {

@@ -17,16 +17,17 @@ const arstudio = ({ post } : { post:any}) => {
             fetch(url,{mode:"cors"})
             .then(res => res.blob())
             .then(blob => {
-                let glb = url
+                let glb : string = url
                 const file = new File([blob], 'test.glb', {type:'model/gltf-binary'});
                 if( typeof window !== "undefined") glb = window.URL.createObjectURL(file)
+                console.log(glb);
                 setGLBUrl(glb)
             })
         )
         getDirectURL(post.usdzFileURL).then((url) => setUSDZUrl(url))
         getDirectURL(post.imageURL).then((url) => setPoster(url))
         if(post.backGroundImage) getDirectURL(post.backGroundImage).then((url) => setBackgrounImage(url))
-    })
+    },[])
     
     return (<>
         <Head>
