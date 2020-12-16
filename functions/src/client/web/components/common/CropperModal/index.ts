@@ -1,3 +1,3 @@
-import CropperModal from './text'
+import CropperModal from './text2'
 
 export default CropperModal

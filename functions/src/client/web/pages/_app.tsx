@@ -3,7 +3,8 @@ import Modal from 'react-modal';
 
 import ErrorBoundary from '../components/common/ErrorBoundary'
 import '../styles.css'
-import 'react-image-crop/dist/ReactCrop.css'
+import 'cropperjs/dist/cropper.css';
+// import 'react-image-crop/dist/ReactCrop.css'
 
 Modal.setAppElement('#__next')
 

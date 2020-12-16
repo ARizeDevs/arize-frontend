@@ -44,10 +44,6 @@ const ImageInput = (props : IProps) => {
         }
     } 
 
-    console.log('000000000000000')
-    console.log(modalOpen)
-    console.log(imageSrc)
-
     return <div className={styles.root}>
             <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
                 <p>{text}</p>
@@ -65,13 +61,13 @@ const ImageInput = (props : IProps) => {
                 <>
                 {imageSrc === '' && typeof window !== "undefined" ? 
                 <div className={styles.imagePickerButton}>
-                    {extensions?<ImagePicker
+                {extensions?<ImagePicker
                         extensions={extensions}
                         dims={{width : '100%' , height : '100%'}}
                         onChange={onImageChange}
                         onError={(errMsg : any) => {console.log(errMsg)}}
                     >
-                        <div onClick={() => setModalOpen(true)}  style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
+                        <div onClick={() => setModalOpen(true)}  style={{width:'100%',height:'100%',display:'flex',justifyContent:'center',alignItems:'center'}}>
 
                             <ImageUploadLogo />
                         </div>

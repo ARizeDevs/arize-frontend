@@ -36,6 +36,7 @@ class ReactCropperModal extends PureComponent {
   };
 
   onCropComplete = crop => {
+      console.log('comp')
     this.makeClientCrop(crop);
   };
 
@@ -61,7 +62,15 @@ class ReactCropperModal extends PureComponent {
     canvas.width = crop.width;
     canvas.height = crop.height;
     const ctx = canvas.getContext('2d');
-
+    console.log('======================')
+    console.log(image.naturalWidth)
+    console.log(image.naturalHeight)
+    console.log(image.width)
+    console.log(image.height)
+    console.log(crop)
+    console.log(scaleX)
+    console.log(scaleY)
+    console.log('=======================')
     ctx.drawImage(
       image,
       crop.x * scaleX,
@@ -85,6 +94,14 @@ class ReactCropperModal extends PureComponent {
       }
   }
 
+  handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+        this.props.onFinished(this.state.croppedImageUrl);
+        this.props.onRequestClose()
+    }
+  }
+
+
   render() {
     const { crop, croppedImageUrl, src } = this.state;
     const { modalOpen, onRequestClose, onFinished, onImageChange } = this.props
@@ -96,11 +113,11 @@ class ReactCropperModal extends PureComponent {
                 overlayClassName={styles.overlay}
                 contentLabel="Example Modal"
                 >
-            <div className={styles.root}>
+            <div className={styles.root} onKeyDown={this.handleKeyDown}>
                 <div className={styles.header}>
                     <div onClick={onRequestClose} className={styles.closeBTN}>X</div>
                 </div>
-                <div className={styles.body}>
+                <div className={styles.body} >
                 {src && (
                     <ReactCrop
                         src={src}
