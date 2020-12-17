@@ -10,19 +10,22 @@ interface IProps {
     buttonColor : string,
     buttonTextColor : string,
     infoBackgrounColor : string,
-    link : string
+    link : string,
+    infoText : string
 }
 
 const Banner = (props : IProps) => {
     const router = useRouter()
 
-    const { buttonColor, link, buttonText,buttonTextColor, infoBackgrounColor, } = props
+    const { buttonColor, infoText, link, buttonText,buttonTextColor, infoBackgrounColor, } = props
 
     return (
         <div className={styles.root} style={{backgroundColor:infoBackgrounColor}}>
-            <p><small>some text</small></p>
-            <div style={{width:'100px'}}>
-                <SolidButton onClick={() => router.push(link)} colorTheme={buttonColor} ><h3 style={{color:buttonTextColor}}>{buttonText}</h3></SolidButton>
+            <div style={{width:"70%",display:'flex'}}>
+                <small >{infoText}</small>
+            </div>
+            <div style={{width:'30%'}}>
+                <SolidButton onClick={() => router.push(link)} colorTheme={buttonColor} ><p style={{color:buttonTextColor}}>{buttonText}</p></SolidButton>
             </div>
         </div>
     )

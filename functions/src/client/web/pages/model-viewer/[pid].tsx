@@ -28,6 +28,8 @@ const arstudio = ({ post } : { post:any}) => {
         </Head>
         <div style={{width:'100vw',height:'100vh'}}>
             <ModelViewer
+                actionButtonInfoText={post.actionButtonInfoText}
+                id={post.id}
                 usdzURL={usdzURL} 
                 glbURL={glbURL} 
                 poster={poster}

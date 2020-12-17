@@ -6,14 +6,17 @@ import MomentUtils from "@date-io/moment";
 
 import styles from './DatePicker.module.css'
 import { TextFieldProps } from '@material-ui/core/TextField';
+import Message from '../../Message';
+import { IMessageTypes } from '../../Message/Message';
 
 interface IProps {
     value : any,
-    onChange : (date : any) => void
+    onChange : (date : any) => void,
+    error? : string
 }
 
 const DatePickerInput = ( props : IProps ) => {
-    const { value, onChange } = props
+    const { value, onChange, error } = props
 
     const [ active, setActive ] = useState(false)
     const onFocus = () => setActive(true)
@@ -36,7 +39,7 @@ const DatePickerInput = ( props : IProps ) => {
         <MuiPickersUtilsProvider utils={MomentUtils}>
 
             <div className={styles.container + ' flex-column'}>
-                <p className={styles.label}>Day of Birth*</p>
+                <p className={`${styles.label} ${error?styles.error:''}`}>Day of Birth*</p>
                 <div className={`${styles.secondContainer} flex-row ${active?styles.secondContainerActive:''}`}>
                     <DatePicker
                         className={'naked'}
@@ -52,6 +55,7 @@ const DatePickerInput = ( props : IProps ) => {
                         onBlur={onBlur}
                     />
                 </div>
+                {error?<Message text={error} type={IMessageTypes.ERROR} />:null}
             </div>
         </MuiPickersUtilsProvider>
         

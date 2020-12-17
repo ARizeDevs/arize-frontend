@@ -5,13 +5,15 @@ import Input from '../Input'
 
 interface IProps {
     value:string,
-    onChange:Function
+    onChange:Function,
+    error? : string,
+    maxInputLength? : number
 }
 
 const EmailInput = (props : IProps) => {
     return (
         <>
-            <Input {...props} required type={'email'} text='Email' LeftIcon={EmailIcon} />
+            <Input  {...props} required type={'email'} text='Email' LeftIcon={EmailIcon} />
         </>
     )
 }

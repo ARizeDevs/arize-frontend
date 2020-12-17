@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.errorText {
+    color : var(--main-red-color)
+}
+
+.successText {
+    color : var(--main-green-color)
+}

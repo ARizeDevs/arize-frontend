@@ -5,6 +5,7 @@ import Banner from '../components/pages/Banner'
 
 
 const banner = ({ query } : { query : any}) => <Banner 
+    infoText={query.infoText}
     buttonColor={query.buttonColor} 
     buttonText={query.buttonText}
     buttonTextColor={query.buttonTextColor}

@@ -39,7 +39,7 @@ const PostCardMenuItem = ({ Icon, text, action } : { Icon : any , text : string,
             <div style={{marginLeft:'10px',marginRight:'10px'}}>
                 <Icon fill='var(--main-lightgray2-color)'/>
             </div>
-            <p>{text}</p>
+            <p><small>{text}</small></p>
         </div>
     )
 }

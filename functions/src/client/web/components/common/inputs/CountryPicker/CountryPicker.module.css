@@ -12,6 +12,10 @@
     background-color: var(--main-lightgray-color);
 }
 
+.secondContainerError {
+    color : var(--main-red-color)
+}
+
 .secondContainerActive {
     border-color : var(--main-blue-color);
     color : var(--main-blue-color);
@@ -43,4 +47,8 @@
 .icon img {
     border-radius: 40%;
 
+}
+
+.error {
+    color : var(--main-red-color)
 }

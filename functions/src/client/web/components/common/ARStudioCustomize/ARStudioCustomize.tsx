@@ -29,38 +29,46 @@ interface IProps {
     setAutoPlay : (value : boolean) => void,
     onFinish : () => void,
     onBack : () => void,
-    error : string,
+    error : {[key : string] : string},
     buttonText : string ,
     backButtonText : string,
+    hasCallToAction : boolean,
+    setHasCallToAction : (value : boolean) => void,
+    actionButtonInfoText : string,
+    setActionButtonInfoText : (value : string) => void
 }
 
 const ARStudioPostDetail = (props : IProps) => {
-    const { autoPlay, hasShadow, setAutoPlay, setHasShadow, hasBackground, setHasBackground, buttonText, actionInfoBackgroundColor, setActionInfoBackgroundColor, backButtonText, onFinish , postBackgroundImageBase64, setPostBackgroundImageBase64, actionBUttonTextColor ,actionButtonColor, actionButtonLink, actionButtonText, onBack, setActionBUttonTextColor, setActionButtonColor, setActionButtonLink, setActionButtonText  } = props
+    const { error, actionButtonInfoText, setActionButtonInfoText, hasCallToAction, setHasCallToAction, autoPlay, hasShadow, setAutoPlay, setHasShadow, hasBackground, setHasBackground, buttonText, actionInfoBackgroundColor, setActionInfoBackgroundColor, backButtonText, onFinish , postBackgroundImageBase64, setPostBackgroundImageBase64, actionBUttonTextColor ,actionButtonColor, actionButtonLink, actionButtonText, onBack, setActionBUttonTextColor, setActionButtonColor, setActionButtonLink, setActionButtonText  } = props
 
     return (
         <div className={styles.root}>
             <div className={styles.inputWrapper}>
-                <Input required text="Action button link"  type="text" value={actionButtonLink} onChange={(e : any) => setActionButtonLink(e.target.value)} />
-                <br></br>
-                <div style={{width:'100%',display:'flex',flexDirection:'row'}}>
-                    <Input required text="Action button Text"  type="text" value={actionButtonText} onChange={(e : any) => setActionButtonText(e.target.value)} />
-                    &nbsp;&nbsp;
-                    <ColorPicker color={actionBUttonTextColor} setColor={setActionBUttonTextColor} text='Text Color' />
-                </div>
-                <br></br>
+                <Toggle active={hasCallToAction} setActive={setHasCallToAction} text='Set Call To Action' />
+                {hasCallToAction?
+                <>
+                    <Input error={error.actionButtonLink} maxInputLength={500} required text="Action button link"  type="text" value={actionButtonLink} onChange={setActionButtonLink} />
+                    <Input error={error.actionButtonInfoText} maxInputLength={100} required text="Action button info text"  type="text" value={actionButtonInfoText} onChange={setActionButtonInfoText} />
+                    <br></br>
+                    <div style={{width:'100%',display:'flex',flexDirection:'row'}}>
+                        <Input error={error.actionButtonText} maxInputLength={13} required text="Action button Text"  type="text" value={actionButtonText} onChange={setActionButtonText} />
+                        &nbsp;&nbsp;
+                        <ColorPicker color={actionBUttonTextColor} setColor={setActionBUttonTextColor} text='Text Color' />
+                    </div>
+                    <br></br>
 
-                <ColorPicker color={actionButtonColor} setColor={setActionButtonColor} text='Action Button Color' />
-                <br></br>
-                <ColorPicker color={actionInfoBackgroundColor} setColor={setActionInfoBackgroundColor} text='Info Area Backgroun Color' />
-                <br></br>
+                    <ColorPicker color={actionButtonColor} setColor={setActionButtonColor} text='Action Button Color' />
+                    <br></br>
+                    <ColorPicker color={actionInfoBackgroundColor} setColor={setActionInfoBackgroundColor} text='Info Area Backgroun Color' />
+                    <br></br>
 
-                <Toggle  active={hasShadow} setActive={setHasShadow} text="Shadow" />
-                <Toggle  active={autoPlay} setActive={setAutoPlay} text="Autoplay" />
-                <br></br>
-                
+                    <Toggle  active={hasShadow} setActive={setHasShadow} text="Shadow" />
+                    <Toggle  active={autoPlay} setActive={setAutoPlay} text="Autoplay" />
+                    <br></br>
+                </>:null}                
                 <div className={styles.contentImageContainer}>
                     <div className={styles.imageInputContainer}>
-                        <ImageInput toggle={hasBackground} setToggle={setHasBackground} setImageSrc={setPostBackgroundImageBase64}  imageSrc={postBackgroundImageBase64} text='Skybox*' extensions={['hdr','jpeg','jpg']}/>
+                        <ImageInput error={error.postBackgroundImageBase64} toggle={hasBackground} setToggle={setHasBackground} setImageSrc={setPostBackgroundImageBase64}  imageSrc={postBackgroundImageBase64} text='Skybox*' extensions={['hdr','jpeg','jpg']}/>
                     </div>
                 </div>
             </div>

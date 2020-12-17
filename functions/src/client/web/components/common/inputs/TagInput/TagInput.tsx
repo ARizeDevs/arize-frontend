@@ -6,11 +6,13 @@ import Input from '../Input'
 
 interface IProps {
    tags : string[],
-   onTagsChanged : (tags : string[]) => void
+   onTagsChanged : (tags : string[]) => void,
+   error? : string,
+   maxInputLength? : number
 }
 
 const TagInput = (props : IProps) => {
-    const { tags, onTagsChanged } = props
+    const { tags, onTagsChanged, error, maxInputLength } = props
     const [ value, setValue ] = useState('')
 
     const handleKeyDown = (e : any) => {
@@ -25,7 +27,7 @@ const TagInput = (props : IProps) => {
 
     return (
         <>
-            <Input onKeyDown={handleKeyDown} value={value} onChange={(e : any) => setValue(e.target.value)} required type='text' text='Post Tags' />
+            <Input maxInputLength={maxInputLength} error={error} onKeyDown={handleKeyDown} value={value} onChange={setValue} required type='text' text='Post Tags' />
             <TagList tags={tags} onCloseClick={handleCloseTag} />
         </>
     )

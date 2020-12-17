@@ -1,0 +1,31 @@
+.qrModal {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background-color: white;
+    border-radius: 40px;
+    outline: none;
+}
+
+.overlay {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--main-lightgray2-color);
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.grayColor {
+    color : var(--main-lightgray2-color)
+}

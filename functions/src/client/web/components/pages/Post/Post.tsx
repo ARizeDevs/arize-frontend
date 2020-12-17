@@ -1,5 +1,4 @@
 import React , { useState, useEffect} from 'react'
-import QRCode from 'qrcode.react'
 
 import { getDirectURL } from '../../../config/firebase'
 import SolidButton from '../../common/buttons/SolidButton'
@@ -8,6 +7,7 @@ import Modal from 'react-modal'
 import Navbar from '../../common/Navbar'
 import PostScrollList from '../../common/PostScrollList'
 import ModelViewer from '../ModelViewer'
+import QRModal from '../../common/QRModal'
 
 import EmailIcon from '../../../../assets/icons/email2.svg'
 import WebsiteIcon from '../../../../assets/icons/website.svg'
@@ -52,9 +52,11 @@ const Post = (props : IProps) => {
                 <br></br>
                 <div className={styles.modelViewer}>
                     <ModelViewer  
+                        actionButtonInfoText={post.actionButtonInfoText}
                         usdzURL={usdzURL} 
                         glbURL={glbURL} 
                         poster={poster}
+                        id={post.id}
                         autoPlay={post.autoPlay}
                         background={backGroundImage} 
                         actionButtonText={post.actionButtonText}
@@ -136,21 +138,12 @@ const Post = (props : IProps) => {
                         </div>
                     </div>
             </Modal>
-            <Modal
+            <QRModal 
                 isOpen={qrModalOpen}
-                // onAfterOpen={afterOpenModal}
                 onRequestClose={() => setQRModalOpen(false)}
-                className={styles.qrModal}
-                overlayClassName={styles.overlay}
-                contentLabel="Example Modal"
-                >
-                    <div className={styles.column} style={{width:'100%',justifyContent:'center',alignItems:'center',height:'100%'}} >
-                        <div style={{width:'100%',paddingLeft:'30px'}}><button onClick={() => setQRModalOpen(false)} style={{border:'none',backgroundColor:'var(--main-blue-color)',color:'white',borderRadius:'50%',width:'30px',height:'30px',outline:'none',cursor:'pointer'}}>X</button></div>
-                        <QRCode value={`https://arizear.app/model-viewer/${post.id}`} />
-                        <br></br>
-                        <p className={styles.grayColor}>Scan to see AR</p>
-                    </div>
-            </Modal>
+                text='Scan to see AR'
+                url={`https://arizear.app/model-viewer/${post.id}`}
+            />
         </div>
     )
 }

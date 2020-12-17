@@ -6,14 +6,17 @@ import { getCode } from 'country-list';
 import CountryPickerModal from '../CountryPickerModal'
 
 import styles from './CountryPicker.module.css'
+import Message from '../../Message';
+import { IMessageTypes } from '../../Message/Message';
 
 interface IProps {
     value : string,
     onChange : (val : string) => void,
+    error? : string
 }
 
 const CountryPicker = (props : IProps) => {
-    const { value, onChange } = props
+    const { value, onChange, error } = props
     const [ modalOpen, setModalOpen ] = useState(false)
     const [ active, setActive ] = useState(false)
     const code : string | undefined  = getCode(value)
@@ -27,8 +30,8 @@ const CountryPicker = (props : IProps) => {
 
     return (
         <div  className={styles.container + ' flex-column'}>
-            <p className={styles.label}>Location</p>
-            <div onClick={() => setModalOpen(true)} onFocus={onFocus} onBlur={onBlur} className={`${styles.secondContainer} flex-row ${active?styles.secondContainerActive:''}`}>
+            <p className={`${styles.label} ${error?styles.error:''}`}>Location</p>
+            <div onClick={() => setModalOpen(true)} onFocus={onFocus} onBlur={onBlur} className={`${styles.secondContainer} flex-row ${error?styles.secondContainerError:(active?styles.secondContainerActive:'')}`}>
                 <div  className={styles.icon}>
                     {code ?<ReactCountryFlag 
                         countryCode={code}
@@ -42,6 +45,7 @@ const CountryPicker = (props : IProps) => {
 
                 <div className={styles.countryPicker + ' flex-column'}  ><p>{value}</p></div>
             </div>
+            {error?<Message text={error} type={IMessageTypes.ERROR} />:null}
             {modalOpen?<CountryPickerModal onClose={onModalClose} />:null}
         </div>
     )

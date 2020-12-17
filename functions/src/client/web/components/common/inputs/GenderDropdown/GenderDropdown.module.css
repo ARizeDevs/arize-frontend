@@ -61,3 +61,7 @@
     top : 20px !important;
     right : 15px !important;
 }
+
+.error {
+    color : var(--main-red-color)
+}

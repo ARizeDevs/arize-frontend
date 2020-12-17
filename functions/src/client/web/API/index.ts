@@ -25,6 +25,8 @@ export const savePost = async (title : string, description : string, tags : stri
     imageBase64Encoded : string,
     actionBUttonTextColor : string, actionButtonColor : string, actionButtonLink : string, actionButtonText : string,
     actionInfoBackgroundColor : string , hasShadow : boolean, autoPlay : boolean,
+    actionButtonInfoText : string,
+    hasCallToAction : boolean,
     postBackgroundImageBase64 : string,
     contentFile : any,
        setStatus : (status : string) => void) => {
@@ -35,16 +37,20 @@ export const savePost = async (title : string, description : string, tags : stri
         const formData = new FormData();
 
         formData.append('title',title)
-        if(hasShadow) formData.append('hasShadow','hasShadow')
-        if(autoPlay) formData.append('autoPlay','autoPlay')
         formData.append('description',description)
         formData.append('tags',tags.join(','))
-        formData.append('actionBUttonTextColor',actionBUttonTextColor)
-        formData.append('actionButtonColor',actionButtonColor)
-        formData.append('actionButtonLink',actionButtonLink)
-        formData.append('actionButtonText',actionButtonText)
+        if(hasCallToAction) {
+            formData.append('hasCallToAction','hasCallToAction')
+            formData.append('actionBUttonTextColor',actionBUttonTextColor)
+            formData.append('actionButtonColor',actionButtonColor)
+            formData.append('actionButtonLink',actionButtonLink)
+            formData.append('actionButtonText',actionButtonText)
+            formData.append('actionInfoBackgroundColor',actionInfoBackgroundColor)
+            formData.append('actionButtonInfoText',actionButtonInfoText)
+            if(hasShadow) formData.append('hasShadow','hasShadow')
+            if(autoPlay) formData.append('autoPlay','autoPlay')
+        }
         formData.append('postImageBase64',imageBase64Encoded)
-        formData.append('actionInfoBackgroundColor',actionInfoBackgroundColor)
         formData.append('postBackgroundImageBase64',postBackgroundImageBase64)
         formData.append('tokenId',tokenId)
         formData.append('file',contentFile)
@@ -76,6 +82,8 @@ export const editPost = async (id : string, title : string, description : string
     imageBase64Encoded : string | null,
     actionBUttonTextColor : string, actionButtonColor : string, actionButtonLink : string, actionButtonText : string,
     actionInfoBackgroundColor : string , hasShadow : boolean | null, autoPlay : boolean | null,
+    actionButtonInfoText : string,
+    hasCallToAction : boolean,
     postBackgroundImageBase64 : string | null,
     contentFile : any,
        setStatus : (status : string) => void) => {
@@ -102,11 +110,15 @@ export const editPost = async (id : string, title : string, description : string
                 formData.append('hasShadow','false')
             }
         }
+        if(hasCallToAction) {
+            formData.append('hasCallToAction','true')
+        }
         formData.append('description',description)
         formData.append('tags',tags.join(','))
         formData.append('actionBUttonTextColor',actionBUttonTextColor)
         formData.append('actionButtonColor',actionButtonColor)
         formData.append('actionButtonLink',actionButtonLink)
+        formData.append('actionButtonInfoText',actionButtonInfoText)
         formData.append('actionButtonText',actionButtonText)
         if(imageBase64Encoded) formData.append('postImageBase64',imageBase64Encoded)
         formData.append('actionInfoBackgroundColor',actionInfoBackgroundColor)

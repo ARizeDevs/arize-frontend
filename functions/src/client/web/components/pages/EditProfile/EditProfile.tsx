@@ -38,6 +38,15 @@ const EditProfile = () => {
     const [ whyToUse, setWhyToUse ] = useState('')
     const [ websiteURL, setWebsiteURL ] = useState('')
     const [ vatNumber, setVatNumber ] = useState('')
+    const [ error, setError ] = useState({})
+
+    const validateAndSet = (fn : (arg : any) => void, validate : (arg : any) => any) => {
+        return (value : any) => {
+            fn(value)
+            const result = validate(value)
+            setError({...error,...result})
+        }
+    }
 
     useEffect(() => {
         const getInitData = async () => {
@@ -47,7 +56,6 @@ const EditProfile = () => {
                         const user = await getUser(false)
                         if(user && user.data.data){
                             const userData = user.data.data.data
-                            console.log(userData)
                             setName(userData.name)
                             setLocation(userData.location);
                             setSurname(userData.surname)

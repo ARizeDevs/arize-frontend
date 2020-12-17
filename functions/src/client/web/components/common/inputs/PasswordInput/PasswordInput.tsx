@@ -15,7 +15,9 @@ interface IProps {
     onChange:Function,
     onEyeClick:Function,
     eyeOn:boolean,
-    confirm?:boolean 
+    confirm?:boolean,
+    error? : string,
+    maxInputLength? : number
 }
 
 const PasswordInput = (props: IProps = { confirm:false, value : '', onChange:()=>{}, onEyeClick:()=>{}, eyeOn:false }) => {

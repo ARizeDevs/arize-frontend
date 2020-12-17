@@ -1,17 +1,20 @@
 import React , { useEffect, useState } from 'react'
 import { ChromePicker } from 'react-color';
 import SolidButton from '../../buttons/SolidButton';
+import Message from '../../Message';
+import { IMessageTypes } from '../../Message/Message';
 
 import styles from './ColorPicker.module.css'
 
 interface IProps {
     color : string ,
     setColor : ( hexColor : string ) => void ,
-    text : string
+    text : string,
+    error? : string
 }
 
 const ColorPicker = (props : IProps) => {
-    const { color, setColor, text } = props
+    const { color, setColor, text, error } = props
     const [ tempColor, setTempColor ] = useState('')
     const [ isOpen, setIsOpen ] = useState(false)
 
@@ -25,9 +28,10 @@ const ColorPicker = (props : IProps) => {
     return (
         <div className={styles.root}>
             <div className={styles.textAndResultContainer}>
-                <p>{text}</p>
-                <div onClick={() => {setIsOpen(true);setTempColor(color);}} className={styles.colorItemWrapper} style={{backgroundColor:color}}>
+                <p className={`${error?styles.error:''}`}>{text}</p>
+                <div onClick={() => {setIsOpen(true);setTempColor(color);}} className={`${styles.colorItemWrapper} ${error?styles.colorItemWrapperError:''}`} style={{backgroundColor:color}}>
                 </div>
+                {error?<Message type={IMessageTypes.ERROR} text={error} />:null}
             </div>
             {isOpen?<div style={{left:0,right:0,top:0,bottom:0,position:'fixed',zIndex: 100,display:'flex',alignItems:'center',justifyContent:'center'}}>
                 <div className={styles.modal} >

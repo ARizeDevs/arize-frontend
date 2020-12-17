@@ -7,6 +7,12 @@ import Navbar from '../../common/Navbar'
 import Preview from '../../common/Preview'
 import ARStudioPostDetail from '../../common/ARStudioPostDetail'
 import { savePost, getPost, editPost } from '../../../API'
+import { contentFileValidator, imageSrcValidator, tagsValidator,
+     titleValidator, validatePostDetail, actionBUttonTextColorValidator,
+    actionButtonColorValidator, actionButtonInfoTextValidator,
+    actionButtonLinkValidator, actionButtonTextValidator,
+    actionInfoBackgroundColorValidator, postBackgroundImageBase64Validator,
+    validateCustomizationDetail, } from './validators'
 
 import styles from './ARStudio.module.css'
 // import ARStudioProgress from '../../common/ARStudioProgress'
@@ -40,19 +46,29 @@ const ARStudio = (props : IProps) => {
     const [ tags , setTags ] = useState(['3DModel'])
     const [ contentFile , setContentFile ] = useState(null)
     // const [ uploadProgress, setUplaodProgress ] = useState(0)
+    const [ hasCallToAction, setHasCallToAction ] = useState(false)
     const [ uploadStatus, setUploadStatus ] = useState('')
-    const [ actionBUttonTextColor, setActionBUttonTextColor] = useState('')
-    const [ actionButtonColor, setActionButtonColor] = useState('')
+    const [ actionBUttonTextColor, setActionBUttonTextColor] = useState('#FFFFFF')
+    const [ actionButtonColor, setActionButtonColor] = useState('#FF6F48')
+    const [ actionButtonInfoText, setActionButtonInfoText ] = useState('')
     const [ actionButtonLink, setActionButtonLink] = useState('')
     const [ actionButtonText, setActionButtonText] = useState('')
     const [ hasShadow, setHasShadow ] = useState(false)
     const [ autoPlay, setAutoPlay ] = useState(false) 
     const [ hasBackground, setHasBackground ] = useState(true)
-    const [ actionInfoBackgroundColor, setActionInfoBackgroundColor] = useState('')
+    const [ actionInfoBackgroundColor, setActionInfoBackgroundColor] = useState('#141323')
     const [ postBackgroundImageBase64, setPostBackgroundImageBase64] = useState('')
+    const [ error, setError ] = useState({})
+
+    const validateAndSet = (fn : (arg : any) => void, validate : (arg : any) => any) => {
+        return (value : any) => {
+            fn(value)
+            const result = validate(value)
+            setError({...error,...result})
+        }
+    }
 
     useEffect(() => {
-        console.log(uploadStatus);
         if(isEdit && postID) {
             const getInitData = async () => {
                 try {
@@ -72,6 +88,9 @@ const ARStudio = (props : IProps) => {
                         setActionButtonColor(postData.actionButtonColor)
                         setActionButtonLink(postData.actionButtonLink)
                         setActionButtonText(postData.actionButtonText)
+                        setAutoPlay(postData.autoPlay)
+                        setHasShadow(postData.hasShadow)
+                        setActionButtonInfoText(postData.actionButtonInfoText)
                         setActionInfoBackgroundColor(postData.actionInfoBackgroundColor)
                         firebase.storage().ref(postData.glbFileURL).getDownloadURL().then((url) => setContentFile(url))
                         if(postData.backGroundImage) firebase.storage().ref(postData.backGroundImage).getDownloadURL().then((url) => setPostBackgroundImageBase64(url))
@@ -87,21 +106,42 @@ const ARStudio = (props : IProps) => {
     } , [isEdit,postID])
 
     const onPostDetailFinish = () => {
-        if(title && imageSrc && description && tags && contentFile) {
-            setPage(2)
-        } else {
-            setGeneralError('Pleas fill all required fiels!')
-        }
+        const errorResult = validatePostDetail(title, tags, imageSrc, contentFile)
+        setError(errorResult)
+        
+        let anyError = false
+        Object.values(errorResult).forEach((value) => {
+            if(value) anyError = true
+        })
+            
+        if(!anyError) setPage(2)
     }
-    const onCustomizeBackButtonClicked = () => setPage(1)
 
+    const onCustomizeBackButtonClicked = () => setPage(1)
+    
     const onPostCreationFinished = async () => {
         if(submiting) return
 
-        if(!(actionBUttonTextColor && actionButtonColor && actionButtonLink && actionButtonText)) {
-            setGeneralError('Please fill all required fields!')
-            return
-        }
+        const errorResult = validateCustomizationDetail(
+            hasCallToAction,
+            actionButtonLink,
+            actionButtonText,
+            actionBUttonTextColor,
+            actionButtonColor,
+            actionButtonInfoText,
+            actionInfoBackgroundColor,
+            hasBackground,
+            postBackgroundImageBase64
+        )
+
+        setError(errorResult)
+        
+        let anyError = false
+        Object.values(errorResult).forEach((value) => {
+            if(value) anyError = true
+        })
+        if(anyError) return
+
 
         setSubmiting(true)
         try {
@@ -118,6 +158,8 @@ const ARStudio = (props : IProps) => {
                     actionBUttonTextColor, actionButtonColor, actionButtonLink, actionButtonText,
                     actionInfoBackgroundColor,
                     hasShadow, autoPlay,
+                    actionButtonInfoText,
+                    hasCallToAction,
                     backGroundImageChanged?postBackgroundImageBase64:null, 
                     contentFileChanged?contentFile:null,
                     setUploadStatus)
@@ -126,6 +168,8 @@ const ARStudio = (props : IProps) => {
                     actionBUttonTextColor, actionButtonColor, actionButtonLink, actionButtonText,
                     actionInfoBackgroundColor,
                     hasShadow, autoPlay,
+                    actionButtonInfoText,
+                    hasCallToAction,
                     postBackgroundImageBase64, contentFile,setUploadStatus)
 
             }
@@ -149,21 +193,25 @@ const ARStudio = (props : IProps) => {
             <>
                 <div className={styles.form}>
                     {page===1?<ARStudioPostDetail
-                            error={generalError}
+                            error={error}
                             imageSrc={imageSrc}
-                            setImageSrc={(image : string) => {setImageSrc(image);setImageSrcChanged(true)}}
+                            setImageSrc={validateAndSet((image : string) => {setImageSrc(image);setImageSrcChanged(true)},imageSrcValidator)}
                             contentFile={contentFile}
-                            setContentFile={(contentFile : any) => {setContentFile(contentFile);setContentFileChanged(true)}}
+                            setContentFile={validateAndSet((contentFile : any) => {setContentFile(contentFile);setContentFileChanged(true)}, contentFileValidator)}
                             description={description}
                             setDescription={setDescription}
                             tags={tags}
-                            setTags={setTags}
+                            setTags={validateAndSet(setTags, tagsValidator)}
                             title={title}
-                            setTitle={setTitle}
+                            setTitle={validateAndSet(setTitle, titleValidator)}
                             onFinish={onPostDetailFinish}
                             buttonText='Next'
                         />:null}
                     {page===2?<ARStudioCustomize
+                            hasCallToAction={hasCallToAction}
+                            setHasCallToAction={setHasCallToAction }
+                            actionButtonInfoText={actionButtonInfoText}
+                            setActionButtonInfoText={validateAndSet(setActionButtonInfoText, actionButtonInfoTextValidator)}
                             autoPlay={autoPlay}
                             setAutoPlay={setAutoPlay}
                             hasShadow={hasShadow}
@@ -171,26 +219,27 @@ const ARStudio = (props : IProps) => {
                             hasBackground={hasBackground}
                             setHasBackground={setHasBackground}
                             actionInfoBackgroundColor={actionInfoBackgroundColor}
-                            setActionInfoBackgroundColor={setActionInfoBackgroundColor}
+                            setActionInfoBackgroundColor={validateAndSet(setActionInfoBackgroundColor, actionInfoBackgroundColorValidator)}
                             actionBUttonTextColor={actionBUttonTextColor}
                             actionButtonColor={actionButtonColor}
                             actionButtonLink={actionButtonLink}
                             actionButtonText={actionButtonText}
-                            setActionBUttonTextColor={setActionBUttonTextColor}
-                            setActionButtonColor={setActionButtonColor}
-                            setActionButtonLink={setActionButtonLink}
-                            setActionButtonText={setActionButtonText}
+                            setActionBUttonTextColor={validateAndSet(setActionBUttonTextColor, actionBUttonTextColorValidator)}
+                            setActionButtonColor={validateAndSet(setActionButtonColor, actionButtonColorValidator)}
+                            setActionButtonLink={validateAndSet(setActionButtonLink, actionButtonLinkValidator)}
+                            setActionButtonText={validateAndSet(setActionButtonText, actionButtonTextValidator)}
                             backButtonText='back'
                             buttonText={isEdit?'Save changes':'Create AR'}
-                            error={generalError}
+                            error={error}
                             onBack={onCustomizeBackButtonClicked}
                             onFinish={onPostCreationFinished}
                             postBackgroundImageBase64={postBackgroundImageBase64}
-                            setPostBackgroundImageBase64={(src : string) => {setPostBackgroundImageBase64(src);setBackgroundImageChanged(true)}}
+                            setPostBackgroundImageBase64={validateAndSet((src : string) => {setPostBackgroundImageBase64(src);setBackgroundImageChanged(true)},postBackgroundImageBase64Validator)}
                             />:null}
                 </div>
                 <div className={styles.previewWrapper}>
                     <Preview
+                        id={''}
                         autoPlay={autoPlay}
                         backgrounImage={hasBackground?postBackgroundImageBase64:''}
                         buttonColor={actionButtonColor}
@@ -199,6 +248,7 @@ const ARStudio = (props : IProps) => {
                         contentFile={contentFile}
                         hasShadow={hasShadow}
                         infoBackgroundColor={actionInfoBackgroundColor}
+                        infoText={actionButtonInfoText}
                         link={actionButtonLink}
                         poster={imageSrc}
                     />

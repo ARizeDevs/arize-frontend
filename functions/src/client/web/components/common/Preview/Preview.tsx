@@ -6,6 +6,7 @@ import ModelViewer from '../../pages/ModelViewer'
 import styles from './Preview.module.css'
 
 interface IProps {
+    id : string,
     buttonText : string,
     buttonColor : string,
     buttonTextColor : string,
@@ -13,6 +14,7 @@ interface IProps {
     infoBackgroundColor : string,
     hasShadow : boolean,
     autoPlay : boolean,
+    infoText : string,
     poster : string,
     contentFile : any,
     backgrounImage : string,
@@ -20,12 +22,14 @@ interface IProps {
 
 const Preview = (props : IProps) => {
     const {
-        // autoPlay,
+        autoPlay,
         backgrounImage,
         buttonColor,
         buttonText,
         buttonTextColor,
         contentFile,
+        id,
+        infoText,
         // hasShadow,
         poster,
         infoBackgroundColor,
@@ -34,21 +38,21 @@ const Preview = (props : IProps) => {
 
     const [isAndroid , setIsAndroid] = useState(false)
 
-    console.log('---------')
-    console.log(contentFile)
     const renderInnerPreview = () => {
         return (
         <>
             <div style={{display:'flex',flexDirection:'column',width:'100%',height:'100%',alignItems:'center',justifyContent:'center'}}>
                 <div style={{width:'90%',height:'95%'}}>
                     <ModelViewer 
-                        autoPlay={true}
+                        id={id}
+                        autoPlay={autoPlay}
                         glbURL={typeof window !== "undefined" && contentFile ?  (typeof contentFile !== "string"? window.URL.createObjectURL(contentFile) : contentFile ):''}
                         actionButtonColor={buttonColor}
                         actionButtonInfoBackgroundColor={infoBackgroundColor}
                         actionButtonLink={link}
                         actionButtonText={buttonText}
                         actionButtonTextColor={buttonTextColor}
+                        actionButtonInfoText={infoText}
                         background={backgrounImage}
                         poster={poster}
                         usdzURL={''}
@@ -57,6 +61,7 @@ const Preview = (props : IProps) => {
                 {!isAndroid?
                     <div style={{position:'absolute',bottom:'7%',width:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}>
                         <Banner 
+                            infoText={infoText}                        
                             buttonColor={buttonColor}
                             buttonText={buttonText}
                             buttonTextColor={buttonTextColor}

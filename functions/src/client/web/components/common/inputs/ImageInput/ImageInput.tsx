@@ -9,6 +9,8 @@ import ImageUploadLogo from '../../../../../assets/icons/image upload.svg'
 
 import styles from './ImageInput.module.css'
 import { Switch } from '@material-ui/core'
+import Message from '../../Message'
+import { IMessageTypes } from '../../Message/Message'
 
 
 
@@ -18,11 +20,12 @@ interface IProps {
     imageSrc : string,
     setImageSrc : (image : string) => void,
     toggle? : boolean,
-    setToggle? : (value : boolean) => void
+    setToggle? : (value : boolean) => void,
+    error? : string
 }
 
 const ImageInput = (props : IProps) => {
-    const { toggle, setToggle, text, extensions, imageSrc, setImageSrc } = props
+    const { toggle, error, setToggle, text, extensions, imageSrc, setImageSrc } = props
 
     const [ modalOpen , setModalOpen ] = useState(false)
 
@@ -46,7 +49,7 @@ const ImageInput = (props : IProps) => {
 
     return <div className={styles.root}>
             <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
-                <p>{text}</p>
+                <p className={error?styles.error:''}>{text}</p>
                 {toggle !== undefined?<Switch
                     checked={toggle}
                     // @ts-ignore
@@ -60,7 +63,7 @@ const ImageInput = (props : IProps) => {
             {toggle === undefined || toggle ?
                 <>
                 {imageSrc === '' && typeof window !== "undefined" ? 
-                <div className={styles.imagePickerButton}>
+                <div className={`${styles.imagePickerButton} ${error?styles.imagePickerButtonError:''}`}>
                 {extensions?<ImagePicker
                         extensions={extensions}
                         dims={{width : '100%' , height : '100%'}}
@@ -82,11 +85,12 @@ const ImageInput = (props : IProps) => {
                         </div>
                     </ImagePicker>} 
                 </div> :
-                <div className={styles.imagePickerButton}>
+                <div className={`${styles.imagePickerButton} ${error?styles.imagePickerButtonError:''}`}>
                     <img onClick={() => setModalOpen(true)} src={imageSrc} className={styles.image}>
 
                     </img>
                 </div>}
+                {error?<Message type={IMessageTypes.ERROR} text={error} />:null}
                 {/* @ts-ignore */}
                 <CropperModal onFinished={(newImage : string) => setImageSrc(newImage)} imageSrc={imageSrc} onImageChange={onImageChange} modalOpen={modalOpen} onRequestClose={() => setModalOpen(false)} />
                 </>

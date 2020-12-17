@@ -1,5 +1,7 @@
 import React from 'react'
 import Select  from 'react-select';
+import Message from '../../Message';
+import { IMessageTypes } from '../../Message/Message';
 
 import styles from './GenderDropdown.module.css'
 
@@ -21,10 +23,11 @@ const customStyles = {
 interface IProps {
     selected : any,
     onSelect : (arg:any) => void,
+    error? : string
 }
 
 const GenderDropdown = (props : IProps) => {
-    const { onSelect, selected } = props
+    const { onSelect, selected, error } = props
 
     const options = [
         { value: 'Female', label: 'Female' },
@@ -34,8 +37,9 @@ const GenderDropdown = (props : IProps) => {
       
     return (
         <div  className={styles.container + ' flex-column'}>
-            <p className={styles.label}>Gender</p>
+            <p className={`${styles.label} ${error?styles.error:''}`}>Gender</p>
             <Select styles={customStyles} value={selected} onChange={(value) => onSelect(value)} options={options} />
+            {error?<Message text={error} type={IMessageTypes.ERROR} />:null}
         </div>
     )
 }

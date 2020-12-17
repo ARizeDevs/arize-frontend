@@ -32,6 +32,10 @@
         background-color: var(--main-lightgray-color);
 }
 
+.colorItemWrapperError {
+    border-color: var(--main-red-color)
+}
+
 .modal {
     padding: 20px;
     margin: auto;
@@ -39,4 +43,8 @@
     border: 1px solid rgba(0, 0, 0, 0.294);
     border-radius: 10px;
     background-color: white ;
+}
+
+.error {
+    color : var(--main-red-color)
 }

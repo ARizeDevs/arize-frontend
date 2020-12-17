@@ -36,6 +36,14 @@
     border-color : var(--main-blue-color)
 }
 
+.secondContainerError {
+    border-color : var(--main-red-color)
+}
+
+.error {
+    color : var(--main-red-color)
+}
+
 .iconLeft {
     margin-left : 10px;
 }
