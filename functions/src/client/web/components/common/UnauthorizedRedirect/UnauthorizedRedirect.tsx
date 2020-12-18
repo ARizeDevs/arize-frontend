@@ -26,7 +26,7 @@ const UnauthorizedRedirect = (props : IProps) => {
             } else {
                 if(user.uid) {
                     console.log(user.uid)
-
+                    console.log('email verified',user.emailVerified)
                     const userData : any = await db.collection('users').doc(user.uid).get()
                         console.log(userData.data())
                         if(userData.exists) {

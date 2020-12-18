@@ -52,13 +52,13 @@ export const genderValidator = (gender  : {value:string,label:string}) => {
     return error
 }
 
-export const editProfileValidator = (
+export const personalInfoValidator = (
     name : string,
     surname : string,
     username : string,
     birthday : any,
     location : string,
-    gender : { value : string, label : string }
+    gender : { value : string, label : string },
 ) => {
     return {
         ...nameValidator(name),

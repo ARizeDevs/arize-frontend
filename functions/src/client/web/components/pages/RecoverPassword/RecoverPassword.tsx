@@ -69,8 +69,8 @@ const ForgetPassword = (props : IProp) => {
                         <br></br>
 
                         <div style={{width:'50%'}}>
-                            <PasswordInput eyeOn={!showPassword}onEyeClick={() => { setShowPassword(!showPassword)}}  value={password} onChange={(e : any) => setPassword(e.target.value)} />
-                            <PasswordInput confirm eyeOn={!showPassword}onEyeClick={() => { setShowPassword(!showPassword)}}  value={confirmPassword} onChange={(e : any) => setConfirmPassword(e.target.value)} />
+                            <PasswordInput eyeOn={!showPassword}onEyeClick={() => { setShowPassword(!showPassword)}}  value={password} onChange={setPassword} />
+                            <PasswordInput confirm eyeOn={!showPassword}onEyeClick={() => { setShowPassword(!showPassword)}}  value={confirmPassword} onChange={setConfirmPassword} />
 
                             <SolidButton onClick={changePassword} ><h3>Save New Password</h3></SolidButton>
                             <p style={{color:'red'}}>{error}</p>

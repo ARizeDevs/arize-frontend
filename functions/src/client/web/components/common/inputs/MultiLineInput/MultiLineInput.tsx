@@ -28,10 +28,12 @@ const MultiLineInput = (props : IProps) => {
     const onBlur = () => setActive(false)
 
     const onInputChanged = (e : any) => {
-        if(maxInputLength) {
-            if(maxInputLength > e.target.value.length) onChange(e.target.value)
-        } else {
-            onChange(e.target.value)
+        if(onChange) {
+            if(maxInputLength) {
+                if(maxInputLength > e.target.value.length) onChange(e.target.value)
+            } else {
+                onChange(e.target.value)
+            }
         }
     }
 

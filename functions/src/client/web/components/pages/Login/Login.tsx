@@ -130,8 +130,8 @@ const Login = () => {
                 </div>
                 <br></br>
                 <div className={styles.inputsContainer}>
-                    <EmailInput value={email} onChange={(e:any) => {setEmail(e.target.value)}}/>
-                    <PasswordInput eyeOn={eyeOn} onEyeClick={() => { setEyeOn(!eyeOn)}} value={password} onChange={(e:any) => setPassword(e.target.value)}/>
+                    <EmailInput value={email} onChange={setEmail}/>
+                    <PasswordInput eyeOn={eyeOn} onEyeClick={() => { setEyeOn(!eyeOn)}} value={password} onChange={setPassword}/>
                     <Link href='/forget-password'><a><h4 style={{textAlignLast:'end' , fontWeight : 'normal'}}>Forgot Password?</h4></a></Link>
                 </div>
                 <br></br>

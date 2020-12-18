@@ -32,10 +32,12 @@ const Input = (props : IProps) => {
     const labelText = `${text}${required?'*':''}`
 
     const onInputChanged = (e : any) => {
-        if(maxInputLength) {
-            if(maxInputLength > e.target.value.length) onChange(e.target.value)
-        } else {
-            onChange(e.target.value)
+        if(onChange){
+            if(maxInputLength) {
+                if(maxInputLength > e.target.value.length) onChange(e.target.value)
+            } else {
+                onChange(e.target.value)
+            }
         }
     }
 

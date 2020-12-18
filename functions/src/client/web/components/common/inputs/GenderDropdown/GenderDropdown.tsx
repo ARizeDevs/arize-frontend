@@ -35,6 +35,10 @@ const GenderDropdown = (props : IProps) => {
         { value: 'Other', label: 'Other' }
     ]
       
+    console.log('10329031204821')
+    console.log(error);
+    console.log(selected)
+    
     return (
         <div  className={styles.container + ' flex-column'}>
             <p className={`${styles.label} ${error?styles.error:''}`}>Gender</p>

@@ -20,24 +20,31 @@ const action = () => {
             // @ts-ignore
             setOOBCode(code)
         }
+
+        console.log('-------------action-------------')
+        console.log('mode : ' , mode)
+        console.log('oobcode : ' , oobCode)
         switch (mode) {
             case 'resetPassword':
                 setMode(1)
                 break;
-            case 'verfigyEmail':
-                const auth = firebase.auth();
+            case 'verifyEmail':
 
+                const auth = firebase.auth();
+                
+            if(oobCode) {
                 auth.applyActionCode(oobCode)
                 .then(() => {
                     setMode(2)
                 }).catch(e => {
                     router.push('/login')
                 })
+            }
                 break;
             default:
                 break;
         }
-    })
+    } )
 
     return (
         <>

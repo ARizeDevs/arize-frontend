@@ -10,6 +10,8 @@ import GenderDropdown from '../../common/inputs/GenderDropdown'
 import CountryPicker from '../../common/inputs/CountryPicker'
 import Loading from '../../common/Loading'
 import RoundImage from '../../common/RoundImage'
+import { birthdayValidator, editProfileValidator, genderValidator, 
+    locationValidator, nameValidator, surnameValidator, usernameValidator, } from './validators'
 
 import firebase from '../../../config/firebase'
 
@@ -38,7 +40,7 @@ const EditProfile = () => {
     const [ whyToUse, setWhyToUse ] = useState('')
     const [ websiteURL, setWebsiteURL ] = useState('')
     const [ vatNumber, setVatNumber ] = useState('')
-    const [ error, setError ] = useState({})
+    const [ error, setError ] = useState({} as {[key : string] : string})
 
     const validateAndSet = (fn : (arg : any) => void, validate : (arg : any) => any) => {
         return (value : any) => {
@@ -91,6 +93,23 @@ const EditProfile = () => {
 
     const onEditSubmit = async () => {
         setSubmiting(true)
+
+        const errorResult = editProfileValidator(
+            name,
+            surname,
+            username,
+            birthday,
+            location,
+            gender
+        )
+
+        setError(errorResult)
+        
+        let anyError = false
+        Object.values(errorResult).forEach((value) => {
+            if(value) anyError = true
+        })
+        if(anyError) return
 
         let updatedFields = {
             name,
@@ -145,14 +164,14 @@ const EditProfile = () => {
                     </div>
                     <br></br>
                     <br></br>
-                    <Input required text='Name' type='text' value={name} onChange={(e:any) => setName(e.target.value)}/>
-                    <Input required text='Surname' type='text' value={surname} onChange={(e:any) => setSurname(e.target.value)}/>
-                    <Input required text='Username' type='text' value={username} onChange={(e:any) => setUsername(e.target.value)}/>
-                    <MultiLineInput required={false} text='Bio' value={bio} onChange={(e:any) => setBio(e.target.value)}  />
-                    <Input disabled required text='Email' type='text' value={email} onChange={(e:any) => setEmail(email)}/>
-                    <DatePicker value={birthday} onChange={(date:any) => setBirthday(date)} />
-                    <GenderDropdown onSelect={setGender} selected={gender} />
-                    <CountryPicker value={location} onChange={(val : string) => setLocation(val)} />
+                    <Input error={error.name} maxInputLength={30} required text='Name' type='text' value={name} onChange={validateAndSet(setName,nameValidator)}/>
+                    <Input error={error.surname} maxInputLength={30} required text='Surname' type='text' value={surname} onChange={validateAndSet(setSurname,surnameValidator)}/>
+                    <Input error={error.username} maxInputLength={30}  required text='Username' type='text' value={username} onChange={validateAndSet(setUsername, usernameValidator)}/>
+                    <MultiLineInput maxInputLength={200} required={false} text='Bio' value={bio} onChange={(e:any) => setBio(e.target.value)}  />
+                    <Input disabled required text='Email' type='text' value={email} onChange={setEmail}/>
+                    <DatePicker error={error.birthday} value={birthday} onChange={validateAndSet(setBirthday,birthdayValidator)} />
+                    <GenderDropdown error={error.gender} onSelect={validateAndSet(setGender, genderValidator)} selected={gender} />
+                    <CountryPicker error={error.location} value={location} onChange={validateAndSet(setLocation, locationValidator)} />
                     <div style={{ display:'flex',flexDirection:'row' }}>
                         <Input required text='Business Name' type='text' value={businessName} onChange={(e:any) => setBusinessName(e.target.value)}/>
                         &nbsp;

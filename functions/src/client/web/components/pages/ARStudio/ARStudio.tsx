@@ -32,7 +32,7 @@ const ARStudio = (props : IProps) => {
 
     const [ submiting , setSubmiting ] = useState(false)
     const [ fetchingData, setFetchingData ] = useState(true)
-    const [ generalError , setGeneralError ] = useState('')
+    // const [ generalError , setGeneralError ] = useState('')
 
     const [ page, setPage ] = useState(1)
     const [ imageSrc , setImageSrc ] = useState('')
@@ -47,7 +47,7 @@ const ARStudio = (props : IProps) => {
     const [ contentFile , setContentFile ] = useState(null)
     // const [ uploadProgress, setUplaodProgress ] = useState(0)
     const [ hasCallToAction, setHasCallToAction ] = useState(false)
-    const [ uploadStatus, setUploadStatus ] = useState('')
+    // const [ uploadStatus, setUploadStatus ] = useState('')
     const [ actionBUttonTextColor, setActionBUttonTextColor] = useState('#FFFFFF')
     const [ actionButtonColor, setActionButtonColor] = useState('#FF6F48')
     const [ actionButtonInfoText, setActionButtonInfoText ] = useState('')
@@ -162,7 +162,7 @@ const ARStudio = (props : IProps) => {
                     hasCallToAction,
                     backGroundImageChanged?postBackgroundImageBase64:null, 
                     contentFileChanged?contentFile:null,
-                    setUploadStatus)
+                    (status : string) => '')
             } else {
                 result = await savePost(title,description,tags,imageSrc,
                     actionBUttonTextColor, actionButtonColor, actionButtonLink, actionButtonText,
@@ -170,7 +170,7 @@ const ARStudio = (props : IProps) => {
                     hasShadow, autoPlay,
                     actionButtonInfoText,
                     hasCallToAction,
-                    postBackgroundImageBase64, contentFile,setUploadStatus)
+                    postBackgroundImageBase64, contentFile, (status : string) => '')
 
             }
             setSubmiting(false)
@@ -178,10 +178,10 @@ const ARStudio = (props : IProps) => {
             {
                 router.push('/profile')
             } else {
-                setGeneralError(result.error?result.error:'')
+                // setGeneralError(result.error?result.error:'')
             } 
         } catch(error) {
-                setGeneralError(error)
+                // setGeneralError(error)
                 setSubmiting(false)
         }
     }

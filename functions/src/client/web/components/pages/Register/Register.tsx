@@ -11,11 +11,12 @@ import AuthBackground from '../../common/AuthBackground'
 // import axios from '../../../config/api'
 import { registerUser } from '../../../API/user'
 import firebase from '../../../config/firebase'
+import { confirmPasswordValidator, emailValidator, passwordValidator, registerValidator, } from './validators'
 
 import styles from './Register.module.css'
 import Loading from '../../common/Loading'
 
-const Login = () => {
+const Register = () => {
     const router = useRouter()
     
     const [ submiting, setSubmiting ] = useState(false)
@@ -24,6 +25,15 @@ const Login = () => {
     const [ confirmPassword , setConfirmPassword ] = useState('')
     const [ email , setEmail ] = useState('')
     const [ generalError, setGeneralError ] = useState('')
+    const [ error, setError ] = useState({} as {[key : string] : string})
+
+    const validateAndSet = (fn : (arg : any) => void, validate : (arg : any) => any) => {
+        return (value : any) => {
+            fn(value)
+            const result = validate(value)
+            setError({...error,...result})
+        }
+    }
 
     useEffect(() => {
         firebase.auth().signOut()
@@ -68,6 +78,20 @@ const Login = () => {
 
     const onSubmit = async () => {
         if(submiting) return
+
+        const errorResult = registerValidator(
+            email,
+            password,
+            confirmPassword
+        )
+
+        setError(errorResult)
+        
+        let anyError = false
+        Object.values(errorResult).forEach((value) => {
+            if(value) anyError = true
+        })
+        if(anyError) return
 
         if(password !== confirmPassword) {
             setGeneralError('password and confirm password doesnt match')
@@ -133,9 +157,9 @@ const Login = () => {
                 </div>
                 <br></br>
                 <div className={styles.inputsContainer}>
-                    <EmailInput value={email} onChange={(e:any) => {setEmail(e.target.value)}}/>
-                    <PasswordInput eyeOn={eyeOn} onEyeClick={() => { setEyeOn(!eyeOn)}} value={password} onChange={(e:any) => setPassword(e.target.value)}/>
-                    <PasswordInput confirm eyeOn={eyeOn} onEyeClick={() => { setEyeOn(!eyeOn)}} value={confirmPassword} onChange={(e:any) => setConfirmPassword(e.target.value)}/>
+                    <EmailInput error={error.email} maxInputLength={100} value={email} onChange={validateAndSet(setEmail, emailValidator)}/>
+                    <PasswordInput error={error.password} maxInputLength={40} eyeOn={eyeOn} onEyeClick={() => { setEyeOn(!eyeOn)}} value={password} onChange={validateAndSet(setPassword, passwordValidator)}/>
+                    <PasswordInput error={error.confirmPassword} maxInputLength={40} confirm eyeOn={eyeOn} onEyeClick={() => { setEyeOn(!eyeOn)}} value={confirmPassword} onChange={validateAndSet(setConfirmPassword,confirmPasswordValidator(password))}/>
                     <Link href='/forget-password'><a><h4 style={{textAlignLast:'end' , fontWeight : 'normal'}}>Forgot Password?</h4></a></Link>
                 </div>
                 <br></br>
@@ -152,4 +176,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Register

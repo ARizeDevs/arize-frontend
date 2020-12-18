@@ -1,4 +1,4 @@
-import React , { useState } from 'react'
+import React from 'react'
 import { FilePicker } from 'react-file-picker'
 
 import VideoUploadLogo from '../../../../../assets/icons/video-upload.svg'

@@ -29,7 +29,7 @@ interface IPost { status: string,arViews : [] , tdViews : [] , shares : [] ,imag
 
 const SearchBar = ({ text, setText } : { text : string, setText : (text : string) => void }) => {
     return (
-        <Input required={false} text={''} type='text' LeftIcon={SearchIcon} onChange={(e : any) => setText(e.target.value)} value={text} />
+        <Input required={false} text={''} type='text' LeftIcon={SearchIcon} onChange={setText} value={text} />
     )
 }
 

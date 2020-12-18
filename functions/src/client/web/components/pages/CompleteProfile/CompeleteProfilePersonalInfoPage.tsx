@@ -25,7 +25,7 @@ interface IProps {
     setBirthday:(birthday:any) => void,
     setGender:(gender:{value:string,label:string}) => void,
     setLocation:(location:string) => void,
-    error : string
+    error : {[key : string] : string}
 }
 
 const CompeleteProfilePersonalInfoPage = ( props : IProps ) => {
@@ -53,22 +53,21 @@ const CompeleteProfilePersonalInfoPage = ( props : IProps ) => {
         <div className={styles.fieldsContainer + ' flex-column'}>
             <div >
                 <div style={{ display:'flex',flexDirection:'row' }}>
-                    <Input required text='Name' type='text' value={name} onChange={(e:any) => setName(e.target.value)}/>
+                    <Input error={error.name} maxInputLength={30} required text='Name' type='text' value={name} onChange={setName}/>
                     &nbsp;
                     &nbsp;
-                    <Input required text='Surname' type='text' value={surname} onChange={(e:any) => setSurname(e.target.value)}/>
+                    <Input error={error.surname} maxInputLength={30} required text='Surname' type='text' value={surname} onChange={setSurname}/>
                 </div>
-                <Input required text='Username' type='text' value={username} onChange={(e:any) => setUsername(e.target.value)}/>
+                <Input error={error.username} maxInputLength={30} required text='Username' type='text' value={username} onChange={setUsername}/>
                 <MultiLineInput required={false} text='Bio' onChange={(e : any) => setBio(e.target.value)} value={bio}/>
                 <div style={{ display:'flex',flexDirection:'row' }}>
-                    <DatePicker value={birthday} onChange={(date:any) => setBirthday(date)} />
+                    <DatePicker error={error.birthday} value={birthday} onChange={setBirthday} />
                     &nbsp;
                     &nbsp;
-                    <GenderDropdown onSelect={setGender} selected />
+                    <GenderDropdown error={error.gender} onSelect={setGender} selected={gender} />
                 </div>
-                <CountryPicker value={location} onChange={(val : string) => setLocation(val)} />
+                <CountryPicker error={error.location} value={location} onChange={setLocation} />
             </div>
-            <span className={'error-message'}>{error}</span>
             
             <div style={{ width : '100%' , display: 'flex',justifyContent : 'flex-end',flexDirection:'row' }}>
                 <div className={styles.accountTypeButtonContainer}>

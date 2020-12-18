@@ -7,6 +7,7 @@ import Loading from '../../common/Loading'
 import CompeleteProfilePersonalInfoPage from './CompeleteProfilePersonalInfoPage'
 import CompleteProfileBusinessPage from './CompleteProfileBusinessPage'
 import CompeleteProfileFinalPage from './CompeleteProfileFinalPage'
+import { birthdayValidator, personalInfoValidator, genderValidator, locationValidator, nameValidator, surnameValidator, usernameValidator, } from './validators'
 
 import styles from './CompeleteProfile.module.css'
 import MultiPageFormNavbar from '../../common/MultiPageFormNavbar'
@@ -30,6 +31,15 @@ const CompleteProfile = () => {
     const [ bio, setBio ] = useState('')
     const [ websiteURL, setWebsiteURL ] = useState('')
     const [ vatNumber, setVatNumber ] = useState('')
+    const [ error, setError ] = useState({} as {[key : string] : string})
+
+    const validateAndSet = (fn : (arg : any) => void, validate : (arg : any) => any) => {
+        return (value : any) => {
+            fn(value)
+            const result = validate(value)
+            setError({...error,...result})
+        }
+    }
 
     const onEditFinish = async () => {
         if(submiting) return
@@ -65,52 +75,48 @@ const CompleteProfile = () => {
         }
     }
 
-    const validatePersonalData = () => {
-        if(!name || name === '') return 'please fill all required fields'
-        if(!surname || surname === '') return 'please fill all required fields'
-        if(!username || username === '') return 'please fill all required fields'
-        if(!birthday) return 'please fill all required fields'
-        if(!gender ) return 'please fill all required fields'
-        if(!location || location === '') return 'please fill all required fields'
-        return null
-    }
-
-    const validateBusinessData = () => {
-        if(!businessName || businessName === '') return 'please fill all required fields'
-        if(!businessType || businessType === '') return 'please fill all required fields'
-        if(!websiteURL || websiteURL === '') return 'please fill all required fields'
-        return null
-    }
-
     const stepsData = [
         {
             title:'Some Personal Info',
             description:'Please Let us Know you!',
             
             renderContent: () => <CompeleteProfilePersonalInfoPage
-                error={generalError} 
+                error={error} 
                 onNextClick={(accountData : any) => {
-                    const error = validatePersonalData()
-                    if(error) {
-                        setGeneralError(error)
-                    }else {
-                        setStep(step+1)
-                        setGeneralError('')
-                    }}}
+                    const errorResult = personalInfoValidator(
+                        name,
+                        surname,
+                        username,
+                        birthday,
+                        location,
+                        gender,
+                    )
+            
+                    setError(errorResult)
+                    
+                    let anyError = false
+                    Object.values(errorResult).forEach((value) => {
+                        if(value) anyError = true
+                    })
+                    if(anyError) return
+
+                   
+                    setStep(step+1)
+                }}
                 name={name}
                 bio={bio}
                 setBio={setBio}
-                setName={setName}
+                setName={validateAndSet(setName,nameValidator)}
                 surname={surname}
-                setSurname={setSurname}
+                setSurname={validateAndSet(setSurname,surnameValidator)}
                 username={username}
-                setUsername={setUsername}
+                setUsername={validateAndSet(setUsername,usernameValidator)}
                 birthday={birthday}
-                setBirthday={setBirthday}
+                setBirthday={validateAndSet(setBirthday,birthdayValidator)}
                 gender={gender}
-                setGender={setGender}
+                setGender={validateAndSet(setGender,genderValidator)}
                 location={location}
-                setLocation={setLocation}
+                setLocation={validateAndSet(setLocation,locationValidator)}
             />
         },
         {
@@ -126,13 +132,7 @@ const CompleteProfile = () => {
                     setStep(step+1)
                 }}
                 onNextClick={() => {
-                    const error = validateBusinessData()
-                    if(error) {
-                        setGeneralError(error)
-                    } else {
-                        setStep(step+1)
-                        setGeneralError('')
-                    }
+                    setStep(step+1)
                 }}
                 vatNumber={vatNumber}
                 setVATNumber={setVatNumber}
