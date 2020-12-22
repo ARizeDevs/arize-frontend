@@ -35,9 +35,7 @@ const AuthFooter = (props : IProps) => {
                         {facebookActive?<FacebookIcon />:<FacebookActiveIcon />}
                     </span>
                 </div>
-                <div style={{width:'100%',marginTop:'16px'}}>
-                    <p>By signing up via Facebook or Apple you agree to the <Link href='/info/terms'><a>Terms</a></Link> & <Link href='/info/privacy-policy'><a>Privacy Policy</a></Link></p>
-                </div>
+               
         </div>
     )
 }

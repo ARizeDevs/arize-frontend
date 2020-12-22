@@ -112,12 +112,11 @@ const Login = () => {
         <div className={styles.root}>
             <AuthBackground />
             <div className={styles.loginForm}>
-                <div style={{margin:'40px'}}>
+                <div style={{margin:'40px',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'space-between',height:'100%'}}>
                     <div className={styles.loginRegisterButtonContainer}>
                         <Link href={'/register'}><a><h2 style={{color:'var(--main-deactive-color'}}>Register</h2></a></Link>
                         <Link href={'/login'}><a><h2 >Login</h2></a></Link>
                     </div>
-                    <br></br>
                     <div className={styles.inputsContainer}>
                         <EmailInput value={email} onChange={setEmail}/>
                         <PasswordInput eyeOn={eyeOn} onEyeClick={() => { setEyeOn(!eyeOn)}} value={password} onChange={setPassword}/>
@@ -129,14 +128,14 @@ const Login = () => {
                             </Link>
                         </div>
                     </div>
-                    <br></br>
                     <div className={styles.loginButtonContainer}>
                         <SolidButton onClick={onSubmit} ><h3>Login</h3></SolidButton>
                         <span className={'error-message'}>{generalError}</span>
                     </div>
-                    <br></br>
                     <AuthFooter onAppleClick={onAppleClick} onFacebookClick={onFacebookClick}/>
-                    <br></br>
+                    <div style={{width:'100%',marginBottom:'40px'}}>
+                        <p>By signing up via Facebook or Apple you agree to the <Link href='/info/terms'><a>Terms</a></Link> & <Link href='/info/privacy-policy'><a>Privacy Policy</a></Link></p>
+                    </div>
                 </div>
             </div>
             {submiting ? <Loading text='Loging in..' /> : null}
