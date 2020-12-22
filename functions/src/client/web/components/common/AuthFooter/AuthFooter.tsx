@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 
 import AppleIcon from '../../../../assets/icons/apple.svg'
 import FacebookIcon from '../../../../assets/icons/facebook.svg'
+import AppleActiveIcon from '../../../../assets/icons/apple-active.svg'
+import FacebookActiveIcon from '../../../../assets/icons/facebook-active.svg'
 
 import styles from './AuthFooter.module.css'
 
@@ -14,6 +16,9 @@ interface IProps {
 const AuthFooter = (props : IProps) => {
     const { onFacebookClick, onAppleClick} = props
 
+    const [ appleActive, setAppleActive ] = useState(false)
+    const [ facebookActive, setFacebookActive ] = useState(false)
+
     return (
         <div className={styles.footerContainer + ' flex-column'}>
                 <div className={styles.dividerContainer}>
@@ -23,14 +28,14 @@ const AuthFooter = (props : IProps) => {
                 </div>
                 <br></br>
                 <div className='flex-row'>
-                    <span className={styles.providerContainer} onClick={onFacebookClick}>
-                        <FacebookIcon />&nbsp;
+                    <span onMouseEnter={() => setAppleActive(true)} onMouseLeave={() => setAppleActive(false)} className={styles.providerContainer} onClick={onAppleClick}>
+                        {appleActive?<AppleIcon />:<AppleActiveIcon />}&nbsp;
                     </span>
-                    <span className={styles.providerContainer} onClick={onAppleClick}>
-                        <AppleIcon />
+                    <span onMouseEnter={() => setFacebookActive(true)} onMouseLeave={() => setFacebookActive(false)} className={styles.providerContainer} onClick={onFacebookClick}>
+                        {facebookActive?<FacebookIcon />:<FacebookActiveIcon />}
                     </span>
                 </div>
-                <div style={{width:'90%'}}>
+                <div style={{width:'100%',marginTop:'16px'}}>
                     <p>By signing up via Facebook or Apple you agree to the <Link href='/info/terms'><a>Terms</a></Link> & <Link href='/info/privacy-policy'><a>Privacy Policy</a></Link></p>
                 </div>
         </div>

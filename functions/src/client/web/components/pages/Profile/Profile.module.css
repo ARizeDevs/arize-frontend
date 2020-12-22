@@ -43,10 +43,10 @@
 }
 
 .editProfileBTN {
-    border: 1px solid !important;
-    background-color: white !important;
-    color : black;
-    box-shadow: none ;
+    border: 1px solid black !important;
+    /* background-color: white !important; */
+    /* color : black; */
+    /* box-shadow: none ; */
 }
 
 .shadowedBox {

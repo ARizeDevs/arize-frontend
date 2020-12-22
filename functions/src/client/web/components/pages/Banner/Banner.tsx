@@ -3,13 +3,17 @@ import { useRouter } from 'next/router'
 
 import SolidButton from '../../common/buttons/SolidButton'
 
+import GlobeIcon from '../../../../assets/icons/globe.svg'
+
 import styles from './Banner.module.css'
 
 interface IProps {
+    isAndroid : boolean,
     buttonText : string,
     buttonColor : string,
     buttonTextColor : string,
     infoBackgrounColor : string,
+    postTitle : string,
     link : string,
     infoText : string
 }
@@ -17,7 +21,20 @@ interface IProps {
 const Banner = (props : IProps) => {
     const router = useRouter()
 
-    const { buttonColor, infoText, link, buttonText,buttonTextColor, infoBackgrounColor, } = props
+    const { isAndroid, postTitle, buttonColor, infoText, link, buttonText,buttonTextColor, infoBackgrounColor, } = props
+
+    if(isAndroid) {
+        return (
+            <div className={styles.root} style={{backgroundColor:'white',width:'80%'}}>
+                <div style={{width:"70%",display:'flex'}}>
+                    <small >{postTitle}</small>
+                </div>
+                <div style={{width:'35%'}}>
+                    <SolidButton height='30px' onClick={() => router.push(link)} colorTheme={'blue'} ><div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly',width:'100%'}}><GlobeIcon /><p style={{color:'white'}}>visit</p></div></SolidButton>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className={styles.root} style={{backgroundColor:infoBackgrounColor}}>

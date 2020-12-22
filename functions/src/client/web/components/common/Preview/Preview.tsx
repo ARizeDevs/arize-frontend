@@ -16,8 +16,10 @@ interface IProps {
     autoPlay : boolean,
     infoText : string,
     poster : string,
+    postTitle : string,
     contentFile : any,
     backgrounImage : string,
+    hasCallToAction : boolean
 }
 
 const Preview = (props : IProps) => {
@@ -30,10 +32,12 @@ const Preview = (props : IProps) => {
         contentFile,
         id,
         infoText,
+        postTitle,
         // hasShadow,
         poster,
         infoBackgroundColor,
         link,
+        hasCallToAction
     } = props
 
     const [isAndroid , setIsAndroid] = useState(false)
@@ -43,7 +47,8 @@ const Preview = (props : IProps) => {
         <>
             <div style={{display:'flex',flexDirection:'column',width:'100%',height:'100%',alignItems:'center',justifyContent:'center'}}>
                 <div style={{width:'90%',height:'95%'}}>
-                    <ModelViewer 
+                    <ModelViewer
+                        showQR={false}
                         id={id}
                         autoPlay={autoPlay}
                         glbURL={typeof window !== "undefined" && contentFile ?  (typeof contentFile !== "string"? window.URL.createObjectURL(contentFile) : contentFile ):''}
@@ -58,9 +63,11 @@ const Preview = (props : IProps) => {
                         usdzURL={''}
                     />
                 </div>
-                {!isAndroid?
+                { hasCallToAction?
                     <div style={{position:'absolute',bottom:'7%',width:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}>
-                        <Banner 
+                        <Banner
+                            postTitle={postTitle}
+                            isAndroid={isAndroid}
                             infoText={infoText}                        
                             buttonColor={buttonColor}
                             buttonText={buttonText}

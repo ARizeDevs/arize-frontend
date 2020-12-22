@@ -13,6 +13,8 @@ import RoundImage from '../../common/RoundImage'
 import { birthdayValidator, editProfileValidator, genderValidator, 
     locationValidator, nameValidator, surnameValidator, usernameValidator, } from './validators'
 
+import PenIcon from '../../../../assets/icons/pen.svg'
+
 import firebase from '../../../config/firebase'
 
 import styles from './EditProfile.module.css'
@@ -64,7 +66,7 @@ const EditProfile = () => {
                             setUsername(userData.username)
                             setBirthday(moment(userData.birthday))
                             const g = userData.gender
-                            const gValue = g.charAt(0).toUpperCase() + g.slice(1)
+                            const gValue = g.charAt(0).toUpperCase() + g.toLowerCase().slice(1)
                             setGender({value:gValue,label:gValue})
                             setEmail(userData.email)
                             if(userData.profilePicURL) {
@@ -168,7 +170,8 @@ const EditProfile = () => {
                     <Input error={error.surname} maxInputLength={30} required text='Surname' type='text' value={surname} onChange={validateAndSet(setSurname,surnameValidator)}/>
                     <Input error={error.username} maxInputLength={30}  required text='Username' type='text' value={username} onChange={validateAndSet(setUsername, usernameValidator)}/>
                     <MultiLineInput maxInputLength={200} required={false} text='Bio' value={bio} onChange={(e:any) => setBio(e.target.value)}  />
-                    <Input disabled required text='Email' type='text' value={email} onChange={setEmail}/>
+                    <Input disabled required text='Email' type='text' value={email} onChange={setEmail}  RightIcon={PenIcon} onRightIconClick={() => router.push('/change-email')}/>
+                    <Input disabled required text='Password' type='password' value={'123456789'} onChange={() => ''} RightIcon={PenIcon} onRightIconClick={() => router.push('/forget-password')}/>
                     <DatePicker error={error.birthday} value={birthday} onChange={validateAndSet(setBirthday,birthdayValidator)} />
                     <GenderDropdown error={error.gender} onSelect={validateAndSet(setGender, genderValidator)} selected={gender} />
                     <CountryPicker error={error.location} value={location} onChange={validateAndSet(setLocation, locationValidator)} />

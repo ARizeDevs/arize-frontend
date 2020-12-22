@@ -9,7 +9,7 @@ import SolidButton from '../../common/buttons/SolidButton'
 import AuthBackground from '../../common/AuthBackground'
 
 // import axios from '../../../config/api'
-import { registerUser } from '../../../API/user'
+import { checkProfile, registerUser } from '../../../API/user'
 import firebase from '../../../config/firebase'
 import { confirmPasswordValidator, emailValidator, passwordValidator, registerValidator, } from './validators'
 
@@ -46,12 +46,14 @@ const Register = () => {
             if (user) {
                 try {
                     setSubmiting(true)
-                    const result = await registerUser(user.email as string, user.uid, '')
-                    setSubmiting(false)
-        
-                    if (result.status === 200 || result.status === 201) {
+                    
+                    const checkProfileResult = await checkProfile(user.uid,user.email)
+                    if(checkProfileResult.data.data.data.profileComplete) {
+                        router.push('/profile')
+                    } else {
                         router.push('/complete-profile')
                     }
+                    setSubmiting(false)
                 } catch(error) {
                     setSubmiting(false)
                     if(error && error.response && error.response.data && error.response.data.error){
@@ -150,26 +152,33 @@ const Register = () => {
         <div className={styles.root}>
             <AuthBackground />
             <div className={styles.loginForm}>
-                <br></br>
-                <div className={styles.loginRegisterButtonContainer}>
-                    <Link href={'/register'}><a><h2>Register</h2></a></Link>
-                    <Link href={'/login'}><a><h2 style={{color:'var(--main-deactive-color'}}>Login</h2></a></Link>
+                <div style={{margin:'40px'}}>
+                    <div className={styles.loginRegisterButtonContainer}>
+                        <Link href={'/register'}><a><h2>Register</h2></a></Link>
+                        <Link href={'/login'}><a><h2 style={{color:'var(--main-deactive-color'}}>Login</h2></a></Link>
+                    </div>
+                    <br></br>
+                    <div className={styles.inputsContainer}>
+                        <EmailInput error={error.email} maxInputLength={100} value={email} onChange={validateAndSet(setEmail, emailValidator)}/>
+                        <PasswordInput error={error.password} maxInputLength={40} eyeOn={eyeOn} onEyeClick={() => { setEyeOn(!eyeOn)}} value={password} onChange={validateAndSet(setPassword, passwordValidator)}/>
+                        <PasswordInput error={error.confirmPassword} maxInputLength={40} confirm eyeOn={eyeOn} onEyeClick={() => { setEyeOn(!eyeOn)}} value={confirmPassword} onChange={validateAndSet(setConfirmPassword,confirmPasswordValidator(password))}/>
+                        <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'flex-end'}}>
+                            <Link href='/forget-password'>
+                                <a style={{textAlignLast:'end' , fontWeight : 'normal', marginTop:'16px'}}>
+                                    Forgot Password?
+                                </a>
+                            </Link>
+                        </div>    
+                    </div>
+                    <br></br>
+                    <div className={styles.loginButtonContainer}>
+                        <SolidButton onClick={onSubmit} ><h3>Register</h3></SolidButton>
+                        <span className={'error-message'}>{generalError}</span>
+                    </div>
+                    <br></br>
+                    <AuthFooter onAppleClick={onAppleClick} onFacebookClick={onFacebookClick}/>
+                    <br></br>
                 </div>
-                <br></br>
-                <div className={styles.inputsContainer}>
-                    <EmailInput error={error.email} maxInputLength={100} value={email} onChange={validateAndSet(setEmail, emailValidator)}/>
-                    <PasswordInput error={error.password} maxInputLength={40} eyeOn={eyeOn} onEyeClick={() => { setEyeOn(!eyeOn)}} value={password} onChange={validateAndSet(setPassword, passwordValidator)}/>
-                    <PasswordInput error={error.confirmPassword} maxInputLength={40} confirm eyeOn={eyeOn} onEyeClick={() => { setEyeOn(!eyeOn)}} value={confirmPassword} onChange={validateAndSet(setConfirmPassword,confirmPasswordValidator(password))}/>
-                    <Link href='/forget-password'><a><h4 style={{textAlignLast:'end' , fontWeight : 'normal'}}>Forgot Password?</h4></a></Link>
-                </div>
-                <br></br>
-                <div className={styles.loginButtonContainer}>
-                    <SolidButton onClick={onSubmit} ><h3>Register</h3></SolidButton>
-                    <span className={'error-message'}>{generalError}</span>
-                </div>
-                <br></br>
-                <AuthFooter onAppleClick={onAppleClick} onFacebookClick={onFacebookClick}/>
-                <br></br>
             </div>
             {submiting ? <Loading text='Signing up..' /> : null}
         </div>

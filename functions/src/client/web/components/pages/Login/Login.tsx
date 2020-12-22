@@ -8,11 +8,11 @@ import AuthFooter from '../../common/AuthFooter'
 import SolidButton from '../../common/buttons/SolidButton'
 import AuthBackground from '../../common/AuthBackground'
 
-import firebase, { db } from '../../../config/firebase'
-import axios from '../../../config/api'
+import firebase from '../../../config/firebase'
 
 import styles from './Login.module.css'
 import Loading from '../../common/Loading'
+import { checkProfile } from '../../../API/user'
 
 const Login = () => {
     const router = useRouter()
@@ -22,22 +22,6 @@ const Login = () => {
     const [ password , setPassword ] = useState('')
     const [ email , setEmail ] = useState('')
     const [ generalError, setGeneralError ] = useState('')
-
-    const checkIfProfileIsUpdated = async (uid : string, onFinish : () => void) => {
-        const userData: any = await db.collection('users').doc(uid).get()
-        if(userData.exists) {
-            if (!userData.data().name) {
-                router.push('/complete-profile')
-                onFinish()
-            }else {
-                router.push('/profile')
-                onFinish()
-            }
-        } else {
-            router.push('/login')
-            onFinish()
-        }
-    }
 
     useEffect(() => {
         firebase.auth().signOut()
@@ -50,14 +34,14 @@ const Login = () => {
             if (user) {
                 try {
                     setSubmiting(true)
-                    const result = await axios.post('/users',{
-                        email : user.email,
-                        uid : user.uid
-                    })
-        
-                    if (result.status === 200 || result.status === 201) {
-                        await checkIfProfileIsUpdated(user.uid, () => setSubmiting(false))
+                   
+                    const checkProfileResult = await checkProfile(user.uid,user.email)
+                    if(checkProfileResult.data.data.data.profileComplete) {
+                        router.push('/profile')
+                    } else {
+                        router.push('/complete-profile')
                     }
+                    setSubmiting(false)
                 } catch(error) {
                     setSubmiting(false)
         
@@ -90,17 +74,22 @@ const Login = () => {
 
             const result = await firebase.auth().signInWithEmailAndPassword(email, password)
             if(result && result.user) {
-                await checkIfProfileIsUpdated(result.user.uid, () => setSubmiting(false))
+                const checkProfileResult = await checkProfile(result.user.uid, result.user.email)
+                if(checkProfileResult.data.data.data.profileComplete) {
+                    router.push('/profile')
+                    setSubmiting(false)
+                } else {
+                    router.push('/complete-profile')
+                    setSubmiting(false)
+                }
             } else {
                 setSubmiting(false)
             }
-
         } catch(error) {
             console.log(error)
             setGeneralError(error.message)
             setSubmiting(false)
         }
-
     }
 
     const onFacebookClick = () => { 
@@ -123,25 +112,32 @@ const Login = () => {
         <div className={styles.root}>
             <AuthBackground />
             <div className={styles.loginForm}>
-                <br></br>
-                <div className={styles.loginRegisterButtonContainer}>
-                    <Link href={'/register'}><a><h2 style={{color:'var(--main-deactive-color'}}>Register</h2></a></Link>
-                    <Link href={'/login'}><a><h2 >Login</h2></a></Link>
+                <div style={{margin:'40px'}}>
+                    <div className={styles.loginRegisterButtonContainer}>
+                        <Link href={'/register'}><a><h2 style={{color:'var(--main-deactive-color'}}>Register</h2></a></Link>
+                        <Link href={'/login'}><a><h2 >Login</h2></a></Link>
+                    </div>
+                    <br></br>
+                    <div className={styles.inputsContainer}>
+                        <EmailInput value={email} onChange={setEmail}/>
+                        <PasswordInput eyeOn={eyeOn} onEyeClick={() => { setEyeOn(!eyeOn)}} value={password} onChange={setPassword}/>
+                        <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'flex-end'}}>
+                            <Link href='/forget-password'>
+                                <a style={{textAlignLast:'end' , fontWeight : 'normal', marginTop:'16px'}}>
+                                    Forgot Password?
+                                </a>
+                            </Link>
+                        </div>
+                    </div>
+                    <br></br>
+                    <div className={styles.loginButtonContainer}>
+                        <SolidButton onClick={onSubmit} ><h3>Login</h3></SolidButton>
+                        <span className={'error-message'}>{generalError}</span>
+                    </div>
+                    <br></br>
+                    <AuthFooter onAppleClick={onAppleClick} onFacebookClick={onFacebookClick}/>
+                    <br></br>
                 </div>
-                <br></br>
-                <div className={styles.inputsContainer}>
-                    <EmailInput value={email} onChange={setEmail}/>
-                    <PasswordInput eyeOn={eyeOn} onEyeClick={() => { setEyeOn(!eyeOn)}} value={password} onChange={setPassword}/>
-                    <Link href='/forget-password'><a><h4 style={{textAlignLast:'end' , fontWeight : 'normal'}}>Forgot Password?</h4></a></Link>
-                </div>
-                <br></br>
-                <div className={styles.loginButtonContainer}>
-                    <SolidButton onClick={onSubmit} ><h3>Login</h3></SolidButton>
-                    <span className={'error-message'}>{generalError}</span>
-                </div>
-                <br></br>
-                <AuthFooter onAppleClick={onAppleClick} onFacebookClick={onFacebookClick}/>
-                <br></br>
             </div>
             {submiting ? <Loading text='Loging in..' /> : null}
         </div>

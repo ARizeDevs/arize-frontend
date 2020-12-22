@@ -20,19 +20,20 @@ interface IProps {
     poster : string,
     autoPlay : boolean,
     actionButtonInfoText : string,
+    showQR : boolean
 }
 
 const getUSZFileFullURL = (actionButtonBackgroundColor : string, actionButtonColor : string,
     actionButtonInfoColor : string, actionButtonLink : string, actionButtonText : string, actionButtonInfoText : string) => {
 
-    return `https://localhost:3000/banner?link=${actionButtonLink}&buttonText=${actionButtonText}&buttonColor=${actionButtonBackgroundColor}&buttonTextColor=${actionButtonColor}&infoBackgrounColor=${actionButtonInfoColor}&infoText=${actionButtonInfoText}`
+    return `https://arizear.app/banner?link=${actionButtonLink}&buttonText=${actionButtonText}&buttonColor=${actionButtonBackgroundColor}&buttonTextColor=${actionButtonColor}&infoBackgrounColor=${actionButtonInfoColor}&infoText=${actionButtonInfoText}`
 }
 
 const ModelViewer = (props : IProps) => {
     const { glbURL, background, usdzURL,
             actionButtonInfoBackgroundColor, actionButtonColor,
             actionButtonLink, actionButtonText, actionButtonTextColor,
-            poster, autoPlay, id, actionButtonInfoText } = props
+            poster, autoPlay, id, actionButtonInfoText, showQR } = props
 
     const [ qrModalOpen, setQRModalOpen ] = useState(false)
     const [ isMobile, setIsMobile ] = useState(false)
@@ -70,7 +71,7 @@ const ModelViewer = (props : IProps) => {
                     <div style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}><ARViewIcon /><h3>View AR</h3></div>
                 </button>
             </model-viewer>
-            {!isMobile && id ? <button onClick={() => setQRModalOpen(true)} className={styles.myArBtn} >
+            {!isMobile && id && showQR ? <button onClick={() => setQRModalOpen(true)} className={styles.myArBtn} >
                 <div style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}><ARViewIcon /><h3>View AR</h3></div>
             </button> : null}
             <QRModal 

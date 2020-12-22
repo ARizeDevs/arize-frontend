@@ -239,7 +239,9 @@ const ARStudio = (props : IProps) => {
                 </div>
                 <div className={styles.previewWrapper}>
                     <Preview
+                        hasCallToAction={hasCallToAction}
                         id={''}
+                        postTitle={title}
                         autoPlay={autoPlay}
                         backgrounImage={hasBackground?postBackgroundImageBase64:''}
                         buttonColor={actionButtonColor}

@@ -106,7 +106,7 @@ const Profile = () => {
                         <small className={styles.lightColor}>{location}</small>
                         <p>{bio}</p>
                         <br></br>
-                        <div style={{width : '100px'}}><SolidButton styleClass={styles.editProfileBTN} onClick={() => router.push('/edit-profile')} ><h3>Edit Profile</h3></SolidButton></div>
+                        <div style={{width : '100px'}}><SolidButton styleClass={styles.editProfileBTN} colorTheme='white' onClick={() => router.push('/edit-profile')} ><h3 style={{color : 'black'}}>Edit Profile</h3></SolidButton></div>
                     </div>
                     <div className={styles.profileSections}>
                         <div className={styles.shadowedBox}>

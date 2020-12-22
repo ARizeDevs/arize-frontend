@@ -12,7 +12,7 @@ const SolidButton = (props : IProps) => {
 
     if (colorTheme) {
         style = {
-            boxShadow: `0px 20px 40px -15px ${colorTheme}`,
+            color:`${colorTheme}`,
             background: colorTheme
         }
         if ( width ) style.width = width
@@ -21,7 +21,7 @@ const SolidButton = (props : IProps) => {
     }
 
     return (
-        <button onClick={onClick} className={styles.btn + newClass} style={style} >{children}</button>
+        <button onClick={onClick} className={styles.btn + newClass} style={style} ><div style={{color:'white'}}>{children}</div></button>
     )
 }
 

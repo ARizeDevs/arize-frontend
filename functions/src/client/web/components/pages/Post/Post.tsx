@@ -51,7 +51,8 @@ const Post = (props : IProps) => {
             <div className={styles.bodyContainer}>
                 <br></br>
                 <div className={styles.modelViewer}>
-                    <ModelViewer  
+                    <ModelViewer
+                        showQR={false}
                         actionButtonInfoText={post.actionButtonInfoText}
                         usdzURL={usdzURL} 
                         glbURL={glbURL} 

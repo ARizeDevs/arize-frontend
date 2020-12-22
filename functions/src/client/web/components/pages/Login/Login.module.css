@@ -9,18 +9,28 @@
 
 .loginForm {
     position: absolute;
-    top: 5vh;
-    bottom: 5vh;
-    right: 5vw;
+    top: 4vh;
+    bottom: 4vh;
+    right: 4vw;
     width: 30vw;
     background-color: white;
-    border-radius: 50px;
+    border-radius: 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     overflow: auto;
 }
+
+.loginForm::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .loginForm {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 
 @media screen and (max-height: 800px) {
     .loginForm {
@@ -44,16 +54,16 @@
 }
 
 .loginRegisterButtonContainer a {
-    margin-left: 50px;
+    margin-right: 40px;
 }
 
 
 .loginButtonContainer {
-    width: 90%;
+    width: 100%;
 }
 
 .inputsContainer {
-    width: 90%;
+    width: 100%;
 }
 
 

@@ -157,3 +157,17 @@ body h6,h5,h4,h3,h2,h1 {
     cursor:  pointer !important;
     border-bottom: solid 1px 50%;
 } */
+
+body *::-webkit-scrollbar {
+    width: 6px;               /* width of the entire scrollbar */
+}
+  
+body *::-webkit-scrollbar-track {
+    background: var(--main-lightgray-color);        /* color of the tracking area */
+}
+  
+body *::-webkit-scrollbar-thumb {
+    background-color: var(--main-lightgray2-color); ;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid var(--main-lightgray-color); ;  /* creates padding around scroll thumb */
+}
