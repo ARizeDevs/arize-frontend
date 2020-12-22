@@ -34,7 +34,7 @@
 
 @media screen and (max-height: 800px) {
     .loginForm {
-        bottom: unset;
+        /* bottom: unset; */
         width:40vw;
     }
 }
