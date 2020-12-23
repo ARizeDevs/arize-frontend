@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Link from 'next/link'
 
 import AppleIcon from '../../../../assets/icons/apple.svg'
 import FacebookIcon from '../../../../assets/icons/facebook.svg'

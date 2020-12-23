@@ -11,6 +11,8 @@ const banner = ({ query } : { query : any}) => <Banner
     buttonTextColor={query.buttonTextColor}
     infoBackgrounColor={query.infoBackgrounColor}
     link={query.link}
+    isAndroid={false}
+    postTitle=''
     />
 
 

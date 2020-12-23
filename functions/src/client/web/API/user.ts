@@ -29,6 +29,6 @@ export const getUser = async (getPosts : boolean) => {
     return axios.get(`${userServerRoute}/${uid}${getPosts?'?posts=true':''}` )
 }
 
-export const checkProfile = async (uid : string, email : string) => {
+export const checkProfile = async (uid : string | null, email : string | null) => {
     return axios.post(`${userServerRoute}/check-profile`, { email, uid })
 }

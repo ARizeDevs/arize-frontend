@@ -174,7 +174,7 @@ const Register = () => {
                         <span className={'error-message'}>{generalError}</span>
                     </div>
                     <AuthFooter onAppleClick={onAppleClick} onFacebookClick={onFacebookClick}/>
-                    <div style={{width:'100%',marginBottom:'40px'}}>
+                    <div style={{width:'100%',marginBottom:'10px'}}>
                         <p>By signing up via Facebook or Apple you agree to the <Link href='/info/terms'><a>Terms</a></Link> & <Link href='/info/privacy-policy'><a>Privacy Policy</a></Link></p>
                     </div>
                 </div>
