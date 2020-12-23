@@ -48,7 +48,7 @@ const Register = () => {
                     setSubmiting(true)
                     
                     const checkProfileResult = await checkProfile(user.uid,user.email)
-                    if(checkProfileResult.data.data.data.profileComplete) {
+                    if(checkProfileResult.data.data.profileComplete) {
                         router.push('/profile')
                     } else {
                         router.push('/complete-profile')
@@ -174,7 +174,7 @@ const Register = () => {
                         <span className={'error-message'}>{generalError}</span>
                     </div>
                     <AuthFooter onAppleClick={onAppleClick} onFacebookClick={onFacebookClick}/>
-                    <div style={{width:'100%',marginBottom:'10px'}}>
+                    <div style={{width:'100%',marginBottom:'30px'}}>
                         <p>By signing up via Facebook or Apple you agree to the <Link href='/info/terms'><a>Terms</a></Link> & <Link href='/info/privacy-policy'><a>Privacy Policy</a></Link></p>
                     </div>
                 </div>

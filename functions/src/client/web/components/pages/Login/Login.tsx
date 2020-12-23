@@ -75,7 +75,7 @@ const Login = () => {
             const result = await firebase.auth().signInWithEmailAndPassword(email, password)
             if(result && result.user) {
                 const checkProfileResult = await checkProfile(result.user.uid, result.user.email)
-                if(checkProfileResult.data.data.data.profileComplete) {
+                if(checkProfileResult.data.data.profileComplete) {
                     router.push('/profile')
                     setSubmiting(false)
                 } else {
@@ -133,7 +133,7 @@ const Login = () => {
                         <span className={'error-message'}>{generalError}</span>
                     </div>
                     <AuthFooter onAppleClick={onAppleClick} onFacebookClick={onFacebookClick}/>
-                    <div style={{width:'100%',marginBottom:'10px'}}>
+                    <div style={{width:'100%',marginBottom:'30px'}}>
                         <p>By signing up via Facebook or Apple you agree to the <Link href='/info/terms'><a>Terms</a></Link> & <Link href='/info/privacy-policy'><a>Privacy Policy</a></Link></p>
                     </div>
                 </div>
