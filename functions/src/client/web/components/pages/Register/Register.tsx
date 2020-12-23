@@ -48,7 +48,9 @@ const Register = () => {
                     setSubmiting(true)
 
                     const checkProfileResult = await checkProfile(user.uid,user.email)
-                    firebase.auth().signInWithCredential(result.credential)
+                    if(result.credential) {
+                        await firebase.auth().signInWithCredential(result.credential)
+                    }
                     if(checkProfileResult.data.data.profileComplete) {
                         router.push('/profile')
                     } else {
