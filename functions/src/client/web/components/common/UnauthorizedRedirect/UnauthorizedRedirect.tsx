@@ -1,50 +1,36 @@
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import firebase, { db } from '../../../config/firebase'
+import firebase from '../../../config/firebase'
+import { checkProfile } from '../../../API/user'
 
 
 interface IProps {
     children : any,
-    onlyBusiness? : boolean,
-    onlyBusinessReroute? : string ,
-    onlyIndividual? : boolean,
-    onlyIndividualReroute? : string
 }
 
 const UnauthorizedRedirect = (props : IProps) => {
 
-    const { children, onlyBusiness, onlyBusinessReroute, onlyIndividual, onlyIndividualReroute } = props
+    const { children } = props
 
     const router  = useRouter()
 
     useEffect(() => {
         const unsubscribe = firebase.auth().onAuthStateChanged(async function(user) {
+            console.log('redirect') 
+            console.log(user);
+            console.log('--------');
+            
             if(!user) {
                 router.push('/login')
             } else {
                 if(user.uid) {
-                    const userData : any = await db.collection('users').doc(user.uid).get()
-                        if(userData.exists) {
-                            if (!userData.data().name) {
-                                router.push('/complete-profile')
-                            } else {
-                                if(onlyBusiness) {
-                                    if(userData.data().type !== 'BUSINESS') {
-                                            router.push(onlyBusinessReroute as string)
-                                    }
-                                } else {
-                                    if(onlyIndividual) {
-                                        if(userData.data().type !== 'INDIVIDUAL') {
-                                            router.push(onlyIndividualReroute as string)
-                                        }   
-                                    }
-                                }
-                            } 
-                        } else {
-                            router.push('/login')
-                        }
-                    // }).catch((error) => console.log(error))
+                    const checkProfileResult = await checkProfile(user.uid,user.email)
+                    if(checkProfileResult.data.data.profileComplete) {
+                        router.push('/profile')
+                    } else {
+                        router.push('/complete-profile')
+                    }
                 } else {
                     router.push('/login')
                 }

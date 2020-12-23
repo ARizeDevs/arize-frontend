@@ -61,7 +61,7 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
     const router = useRouter()
 
     const [ deleting, setDeleting ] = useState(false)
-    const [ deletingMessage, setDeletingMessage ] = useState('')
+    // const [ deletingMessage, setDeletingMessage ] = useState('')
     const [ menuOpen, setMenuOpen ] = useState(false)
 
     const processing = status === 'PROCESSING'
@@ -79,7 +79,7 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
             router.reload()
         } catch(error) {
             console.log(error)
-            setDeletingMessage('something went wrong')
+            // setDeletingMessage('something went wrong')
         } finally {
             setDeleting(false)
         }

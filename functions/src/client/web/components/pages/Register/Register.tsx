@@ -46,7 +46,7 @@ const Register = () => {
             if (user) {
                 try {
                     setSubmiting(true)
-                    
+
                     const checkProfileResult = await checkProfile(user.uid,user.email)
                     if(checkProfileResult.data.data.profileComplete) {
                         router.push('/profile')
@@ -55,6 +55,8 @@ const Register = () => {
                     }
                     setSubmiting(false)
                 } catch(error) {
+                    console.log(error);
+                    
                     setSubmiting(false)
                     if(error && error.response && error.response.data && error.response.data.error){
                         if (error.response.data.error.message && error.response.data.error.message.length < 30){

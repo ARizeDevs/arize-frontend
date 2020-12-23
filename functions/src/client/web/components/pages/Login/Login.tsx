@@ -34,9 +34,9 @@ const Login = () => {
             if (user) {
                 try {
                     setSubmiting(true)
-                   
+
                     const checkProfileResult = await checkProfile(user.uid,user.email)
-                    if(checkProfileResult.data.data.data.profileComplete) {
+                    if(checkProfileResult.data.data.profileComplete) {
                         router.push('/profile')
                     } else {
                         router.push('/complete-profile')
@@ -44,7 +44,7 @@ const Login = () => {
                     setSubmiting(false)
                 } catch(error) {
                     setSubmiting(false)
-        
+                    console.log(error)
                     if(error && error.response && error.response.data && error.response.data.error){
                         if (error.response.data.error.message && error.response.data.error.message.length < 30){
                             setGeneralError(error.response.data.error.message)
