@@ -103,7 +103,6 @@ const Register = () => {
         try {
             setSubmiting(true)
             const result = await registerUser(email, '', password)
-            console.log(result)
             await firebase.auth().signInWithEmailAndPassword(email,password)
             if(firebase.auth().currentUser) {
                 await (firebase.auth().currentUser as any).sendEmailVerification()

@@ -31,7 +31,6 @@ const CropperModal = (props) => {
 
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels)
-    console.log(croppedArea, croppedAreaPixels)
     window.localStorage.setItem(
       'croppedAreaPixels',
       JSON.stringify(croppedAreaPixels)

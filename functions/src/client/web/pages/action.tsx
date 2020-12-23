@@ -21,9 +21,6 @@ const action = () => {
             setOOBCode(code)
         }
 
-        console.log('-------------action-------------')
-        console.log('mode : ' , mode)
-        console.log('oobcode : ' , oobCode)
         switch (mode) {
             case 'resetPassword':
                 setMode(1)

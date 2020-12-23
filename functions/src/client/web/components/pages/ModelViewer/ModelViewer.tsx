@@ -40,7 +40,6 @@ const ModelViewer = (props : IProps) => {
 
     useEffect(() => {
         const mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-        console.log(mobile)
         setIsMobile(mobile)
     }, [])
 

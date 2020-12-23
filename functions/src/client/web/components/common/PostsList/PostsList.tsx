@@ -82,13 +82,11 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
             setDeletingMessage('something went wrong')
         } finally {
             setDeleting(false)
-            console.log(deletingMessage)
         }
     }
 
     useEffect(() => {
         firebase.storage().ref(imageURL).getDownloadURL().then((url : string) => {
-            console.log(url)
             setImage(url)
         })
     } , [imageURL]) 
@@ -171,7 +169,6 @@ const PostsList = (props : IProps) => {
     const { searchText, setSearchText, list } = props
 
     const filteredList = list.filter((item) => item.title.indexOf(searchText) !== -1)
-    console.log(filteredList)
 
     return (
         <div className={styles.root}>

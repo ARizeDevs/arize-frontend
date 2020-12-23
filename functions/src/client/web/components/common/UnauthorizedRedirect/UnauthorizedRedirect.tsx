@@ -20,17 +20,12 @@ const UnauthorizedRedirect = (props : IProps) => {
 
     useEffect(() => {
         const unsubscribe = firebase.auth().onAuthStateChanged(async function(user) {
-            console.log(user)
             if(!user) {
                 router.push('/login')
             } else {
                 if(user.uid) {
-                    console.log(user.uid)
-                    console.log('email verified',user.emailVerified)
                     const userData : any = await db.collection('users').doc(user.uid).get()
-                        console.log(userData.data())
                         if(userData.exists) {
-                            console.log(userData.exist)
                             if (!userData.data().name) {
                                 router.push('/complete-profile')
                             } else {
