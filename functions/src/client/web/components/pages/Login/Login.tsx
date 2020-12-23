@@ -34,8 +34,8 @@ const Login = () => {
             if (user) {
                 try {
                     setSubmiting(true)
-
                     const checkProfileResult = await checkProfile(user.uid,user.email)
+                    await firebase.auth().signInWithCredential(result.credential)
                     if(checkProfileResult.data.data.profileComplete) {
                         router.push('/profile')
                     } else {
