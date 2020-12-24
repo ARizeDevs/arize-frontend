@@ -10,7 +10,7 @@ import { getUserID } from '../../../API/utils'
 import { copyToClipBoard } from '../../../helpers/copyToClipBoard'
 
 interface IProps {
-    imageSrc : string,
+    imageSrc? : string,
 }
 
 const ProfileMenu = (props : IProps) => {

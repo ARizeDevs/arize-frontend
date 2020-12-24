@@ -19,7 +19,7 @@ import { copyToClipBoard } from '../../../helpers/copyToClipBoard'
 import { getUserID } from '../../../API/utils'
 
 interface IProps {
-    id? : string
+    id? : string | null
 }
 
 const Profile = (props : IProps) => {
@@ -45,7 +45,7 @@ const Profile = (props : IProps) => {
 
     const scrollObject = useRef(null);
 
-    const onScroll = (scrollY) => {
+    const onScroll = (scrollY : any) => {
         if(scrollY !== 0) {
             setShowGoToTop(true)
         } else {
@@ -55,7 +55,10 @@ const Profile = (props : IProps) => {
 
     const onGoToTopClick = () => {
         if(scrollObject) {
-            scrollObject.current.scrollTo({top: 0, behavior: 'smooth'})
+            if(scrollObject.current) {
+                // @ts-ignore
+                scrollObject.current.scrollTo({top: 0, behavior: 'smooth'})
+            }
         }
     }
 
