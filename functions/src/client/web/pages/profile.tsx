@@ -11,7 +11,7 @@ const profile = () => (
             <title>Profile</title>
         </Head>
         <UnauthorizedRedirect>
-            <Profile />        
+            <Profile id={null} />        
         </UnauthorizedRedirect>
     </>
 )

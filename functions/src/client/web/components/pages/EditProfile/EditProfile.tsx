@@ -57,7 +57,7 @@ const EditProfile = () => {
             firebase.auth().onAuthStateChanged(async function(user) {
                 try {
                     if(user) {
-                        const user = await getUser(false)
+                        const user = await getUser(false,null)
                         if(user && user.data.data){
                             const userData = user.data.data.data
                             setName(userData.name)
@@ -94,8 +94,8 @@ const EditProfile = () => {
     }, [])
 
     const onEditSubmit = async () => {
-        setSubmiting(true)
-
+        console.log('sumbimitting');
+        
         const errorResult = editProfileValidator(
             name,
             surname,
@@ -111,7 +111,13 @@ const EditProfile = () => {
         Object.values(errorResult).forEach((value) => {
             if(value) anyError = true
         })
+        console.log(errorResult);
+        console.log(anyError)
+        
+        
         if(anyError) return
+        
+        setSubmiting(true)
 
         let updatedFields = {
             name,
@@ -128,7 +134,7 @@ const EditProfile = () => {
             vatNumber
         }
 
-    try {
+        try {
 
             let base64Image = null
             if(imageChanged) {
@@ -151,7 +157,7 @@ const EditProfile = () => {
 
     return (
         <div className={styles.root}>
-            <Navbar />
+            <Navbar imageSrc={imageSrc} />
             <div className={styles.bodyContainer}>
                 <div style={{ width:'90%' }}>
                     <div style={{width : "90px" , height:'90px'}}>
@@ -169,7 +175,7 @@ const EditProfile = () => {
                     <Input error={error.name} maxInputLength={30} required text='Name' type='text' value={name} onChange={validateAndSet(setName,nameValidator)}/>
                     <Input error={error.surname} maxInputLength={30} required text='Surname' type='text' value={surname} onChange={validateAndSet(setSurname,surnameValidator)}/>
                     <Input error={error.username} maxInputLength={30}  required text='Username' type='text' value={username} onChange={validateAndSet(setUsername, usernameValidator)}/>
-                    <MultiLineInput maxInputLength={200} required={false} text='Bio' value={bio} onChange={(e:any) => setBio(e.target.value)}  />
+                    <MultiLineInput maxInputLength={200} required={false} text='Bio' value={bio} onChange={setBio}  />
                     <Input disabled required text='Email' type='text' value={email} onChange={setEmail}  RightIcon={PenIcon} onRightIconClick={() => router.push('/change-email')}/>
                     <Input disabled required text='Password' type='password' value={'123456789'} onChange={() => ''} RightIcon={PenIcon} onRightIconClick={() => router.push('/forget-password')}/>
                     <DatePicker error={error.birthday} value={birthday} onChange={validateAndSet(setBirthday,birthdayValidator)} />
@@ -188,11 +194,11 @@ const EditProfile = () => {
             </div>
             <span className={'error-message'}>{generalError}</span>
             <div className={styles.buttonsContainer}>
-                <div className={styles.btn}>
+                <div className={styles.btn} style={{width:'100px'}}>
                     <SolidButton colorTheme="#000000" onClick={() => router.push("/profile")}  ><h3>Cancel</h3></SolidButton>
                 </div>
                 &nbsp;
-                <div className={styles.btn}>
+                <div className={styles.btn} style={{width:'160px'}}>
                     <SolidButton onClick={onEditSubmit}  ><h3>Save Changes</h3></SolidButton>
                 </div>
             </div>

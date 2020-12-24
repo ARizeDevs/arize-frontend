@@ -1,5 +1,5 @@
 import firebase from 'firebase'
-import React , { useEffect, useState } from 'react'
+import React , { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 
 import { getUser } from '../../../API/user'
@@ -13,13 +13,24 @@ import RemainingSlots from '../../common/RemainingSlots'
 import ProfileInsights from '../../common/ProfileInsights'
 import PostsList from '../../common/PostsList'
 import Loading from '../../common/Loading'
+import ScrollToTop from '../../common/ScrollToTop'
+import TipBox from '../../common/TipBox'
+import { copyToClipBoard } from '../../../helpers/copyToClipBoard'
+import { getUserID } from '../../../API/utils'
 
-const Profile = () => {
+interface IProps {
+    id? : string
+}
+
+const Profile = (props : IProps) => {
+    const { id } = props
+
     const router = useRouter()
     const [ searchText, setSearchText ] = useState('')
     
     const [ imageSrc, setImageSrc ] = useState('')
     const [ name, setName ] = useState('')
+    const [ username, setUsername ] = useState('')
     const [ surname, setSurname ] = useState('')
     const [ location, setLocation ] = useState('')
     const [ posts, setPosts ] = useState([])
@@ -30,50 +41,70 @@ const Profile = () => {
     const [ clicks, setClicks ] = useState(0)
     const [ totalShares, setTotalShares ] = useState(0)
     const [ fetchingData, setFetchingData] = useState(true)
+    const [ showGoToTop, setShowGoToTop ] = useState(false)
+
+    const scrollObject = useRef(null);
+
+    const onScroll = (scrollY) => {
+        if(scrollY !== 0) {
+            setShowGoToTop(true)
+        } else {
+            setShowGoToTop(false)
+        }
+    }
+
+    const onGoToTopClick = () => {
+        if(scrollObject) {
+            scrollObject.current.scrollTo({top: 0, behavior: 'smooth'})
+        }
+    }
 
     useEffect(() => {
         const getInitData = async () => {
             firebase.auth().onAuthStateChanged(async function(user) {
                 try {
                     if(user) {
-                        const user = await getUser(true)
-                        if(user && user.data.data){
-                            const userData = user.data.data.data
-                            setName(userData.name)
-                            setSurname(userData.surname)
-                            setLocation(userData.location)
-                            if(userData.profilePicURL) {
-                                firebase.storage().ref(userData.profilePicURL).getDownloadURL().then((url : any) => {
-                                    setImageSrc(url)
-                                })
+                        if(id === null || id) {
+                            const user = await getUser(true,id)
+                            if(user && user.data.data){
+                                const userData = user.data.data.data
+                                setName(userData.name)
+                                setUsername(userData.username)
+                                setSurname(userData.surname)
+                                setLocation(userData.location)
+                                if(userData.profilePicURL) {
+                                    firebase.storage().ref(userData.profilePicURL).getDownloadURL().then((url : any) => {
+                                        setImageSrc(url)
+                                    })
+                                }
+                                if(userData.posts) {
+                                    setPosts(userData.posts)
+                                    let arViews = 0
+                                    let tdViews = 0
+                                    let shares = 0
+                                    let c = 0
+                                    userData.posts.forEach((p : any) => {
+                                        if(p.arViews) {
+                                            arViews += p.arViews.length
+                                        }
+                                        if(p.tdViews) {
+                                            tdViews += p.tdViews.length
+                                        }
+                                        if(p.shares) {
+                                            shares += p.shares.length
+                                        }
+                                        if(p.clicks) {
+                                            c += p.clicks.length
+                                        }
+                                    })
+                                    setTotalShares(shares)
+                                    setARViews(arViews)
+                                    setTDViews(tdViews)
+                                    setClicks(c)
+                                }
+                                setMaxSlots(userData.maxSlots)
+                                if(userData.bio) setBio(userData.bio)
                             }
-                            if(userData.posts) {
-                                setPosts(userData.posts)
-                                let arViews = 0
-                                let tdViews = 0
-                                let shares = 0
-                                let c = 0
-                                userData.posts.forEach((p : any) => {
-                                    if(p.arViews) {
-                                        arViews += p.arViews.length
-                                    }
-                                    if(p.tdViews) {
-                                        tdViews += p.tdViews.length
-                                    }
-                                    if(p.shares) {
-                                        shares += p.shares.length
-                                    }
-                                    if(p.clicks) {
-                                        c += p.clicks.length
-                                    }
-                                })
-                                setTotalShares(shares)
-                                setARViews(arViews)
-                                setTDViews(tdViews)
-                                setClicks(c)
-                            }
-                            setMaxSlots(userData.maxSlots)
-                            if(userData.bio) setBio(userData.bio)
                         }
                     }
                 } catch(error) {
@@ -85,50 +116,76 @@ const Profile = () => {
         }
 
         getInitData()
-    }, [])
+    }, [id])
 
+
+    const onShareProflie = () => {
+        let userID = id
+        if(!userID) {
+            userID = getUserID()
+        }
+
+        const shareURL = `https://arizear.app/profile/${userID}`
+
+        copyToClipBoard(shareURL)
+    }
 
     return (
         <div className={styles.root}>
-            <Navbar />
-            <div className={styles.bodyContainer}>
-                <div style={{width:'90%'}}>
+            <Navbar imageSrc={imageSrc} />
+            {/* @ts-ignore */}
+            <div ref={scrollObject} className={styles.bodyContainer} onScroll={(e) => onScroll(e.target.scrollTop)}>
+                {showGoToTop?<ScrollToTop onClick={onGoToTopClick} />:null}
+                <div style={{width:'70%',marginLeft:'auto',marginRight:'auto'}}>
                 <div className={styles.profileContainer}>
                     <div className={styles.profileSections}>
-                        <div style={{width : "90px" , height:'90px'}}>
-                            <RoundImage
-                                imageSrc={imageSrc}
-                                unchangeable
-                            />
+                        <div className={styles.row}>
+                            <div style={{width : "90px" , height:'90px', marginRight:'20px'}}>
+                                <RoundImage
+                                    imageSrc={imageSrc}
+                                    unchangeable
+                                />
+                            </div>
+                            <div className={styles.row}>
+                                <div style={{width : '140px',marginRight : '10px'}}>
+                                    <SolidButton styleClass={styles.editProfileBTN} colorTheme='white' onClick={() => router.push('/edit-profile')} ><h3 style={{color : 'black'}}>Edit Profile</h3></SolidButton>
+                                </div>
+                                <div style={{width : '140px'}}>
+                                    <SolidButton styleClass={styles.shareProfileBTN} colorTheme='white' 
+                                        onClick={onShareProflie} 
+                                    >
+                                        <h3 style={{color : 'var(--main-blue-color)'}}>Share Profile</h3>
+                                    </SolidButton>
+                                </div>
+                            </div>
                         </div>
-                        <h1>{`${name} ${surname}`}</h1>
-                        <small className={styles.lightColor}>{location}</small>
-                        <p>{bio}</p>
+                        <h1 style={{fontWeight:'bolder'}}>{`${name} ${surname}`}</h1>
+                        <small className={styles.lightColor}>{id?location:username}</small>
+                        <div style={{width:'70%'}}>
+                            <p>{bio}</p>
+                        </div>
                         <br></br>
-                        <div style={{width : '100px'}}><SolidButton styleClass={styles.editProfileBTN} colorTheme='white' onClick={() => router.push('/edit-profile')} ><h3 style={{color : 'black'}}>Edit Profile</h3></SolidButton></div>
+                        <TipBox 
+                            style={{width : '300px',height:'100px'}}
+                            title='Daily Tip'
+                            description='Some usefull tip in the future'
+                            imageSrc='/images/tip.png'
+                        />
                     </div>
                     <div className={styles.profileSections}>
                         <div className={styles.shadowedBox}>
-                            <div style={{width : '80%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'flex-start'}}>
-                                <br></br>
                                 <RemainingSlots maxSlots={maxSlots} usedSlots={posts.length} />
                                 <br></br>
                                 <SolidButton colorTheme={'black'} onClick={() => console.log('ok')}  ><h3>Buy More AR Slots</h3></SolidButton>
-                                <br></br>
-                            </div>
                         </div>
                             <br></br>
                             <div className={styles.shadowedBox}>
-                                <div style={{width:'80%'}}>
-                                    <br></br>
                                     <ProfileInsights 
                                         arViews={arViews}
                                         shares={totalShares}
                                         tdViews={tdViews}
                                         clicks={clicks}
                                     />
-                                    <br></br>
-                                </div>
                             </div>
                     </div>
                 </div>
@@ -136,11 +193,12 @@ const Profile = () => {
                 <div className={styles.profilePostsContainer}>
                     <div className={styles.rowContainer} style={{width:'100%'}}>
                         <div className={styles.rowContainer} style={{justifyContent:'flex-start'}}>
-                            <p className={styles.lightColor}>My Posts</p>
+                            <p className={styles.lightColor}>My Posts ( {posts.length} posts )</p>
                         </div>
-                        <div style={{width:'100px'}}>
+
+                        {posts.length !== 0 ?<div style={{width:'140px'}}>
                             <SolidButton onClick={() => router.push('/arstudio')} ><h3>Create AR</h3></SolidButton>
-                        </div>
+                        </div>:null}
                     </div>  
                     <div className={styles.verticalDivider}></div>
                     <PostsList list={posts} searchText={searchText} setSearchText={setSearchText} />

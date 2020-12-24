@@ -5,9 +5,16 @@
     height: 100vh;
 }
 
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
 .bodyContainer {
     /* height: 92vh; */
-    width: 90%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     flex: 1 1 auto;
@@ -35,12 +42,13 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    width: 40%;
+    width: 50%;
 }
 
 .lightColor {
     color : var(--main-lightgray2-color);
 }
+
 
 .editProfileBTN {
     border: 1px solid black !important;
@@ -49,12 +57,22 @@
     /* box-shadow: none ; */
 }
 
+.shareProfileBTN {
+    border: 1px solid var(--main-blue-color) !important;
+    /* background-color: white !important; */
+    /* color : black; */
+    /* box-shadow: none ; */
+}
+
+
 .shadowedBox {
     /* background-color: red; */
-    box-shadow: -3px 20px 30px 1px rgba(0,0,0,0.2);
-    border-radius: 50px;
+    box-shadow: -3px 10px 20px 1px rgba(0,0,0,0.1);
+    border-radius: 16px;
     width: 100%;
     display: flex;
+    padding: 30px;
+    box-sizing: border-box;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;

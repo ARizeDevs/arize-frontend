@@ -31,7 +31,7 @@ const ForgetPassword = () => {
 
     return (
         <div className={styles.root}>
-            <Navbar />
+            <Navbar noMenu />
             <div className={styles.bodyContainer}>
                 {page===1?
                     <div className={styles.column} style={{width:'50%'}}>

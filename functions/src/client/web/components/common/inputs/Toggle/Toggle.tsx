@@ -12,7 +12,7 @@ const Toggle = (props : IProps) => {
 
      return (
         <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
-            <p>{text}</p>
+            <p style={{fontWeight:'bold'}}>{text}</p>
                 <Switch
                     checked={active}
                     onChange={(event) => setActive(event.target.checked)}

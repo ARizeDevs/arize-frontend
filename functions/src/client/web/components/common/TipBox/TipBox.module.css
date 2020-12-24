@@ -1,0 +1,26 @@
+.shadowedBox {
+    box-shadow: -3px 10px 20px 1px rgba(0,0,0,0.1);
+    border-radius: 16px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.mediaContainer {
+    width: 40%;
+    border-radius: 16px 0px 0px 16px ;
+    height: 100%;
+    background-size: 100% 100% !important;
+}
+
+.textContainer {
+    box-sizing: border-box;
+    padding: 10px;
+    width: 60%;
+    border-radius: 0px 16px 16px 0px ;
+    height: 100%;
+}

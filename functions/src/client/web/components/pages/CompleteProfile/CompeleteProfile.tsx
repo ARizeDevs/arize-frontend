@@ -158,7 +158,7 @@ const CompleteProfile = () => {
 
     return (
         <div className={styles.root}>
-            <Navbar />
+            <Navbar noMenu />
             <div className={styles.bodyContainer}>
                 <MultiPageFormNavbar  
                     activeIndex={step} 

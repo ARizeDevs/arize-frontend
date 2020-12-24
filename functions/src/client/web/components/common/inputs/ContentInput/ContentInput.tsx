@@ -39,7 +39,7 @@ const ContentInput = (props : IProps) => {
     } 
 
     return <div className={styles.root}>
-            <p className={error?styles.error:''}>{text}</p>
+            <p style={{fontWeight:'bold'}} className={error?styles.error:''}>{text}</p>
             {typeof window !== "undefined" ? 
             <div className={`${styles.imagePickerButton} ${error?styles.imagePickerButtonError:(fileChoosingSuccess?styles.imagePickerButtonSuccess:'')}`}>
                 

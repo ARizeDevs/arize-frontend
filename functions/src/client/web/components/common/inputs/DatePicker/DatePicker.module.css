@@ -32,6 +32,7 @@
 
 .label{
     padding-left: 5px;
+    font-weight: bold;
 }
 
 .countryPicker {

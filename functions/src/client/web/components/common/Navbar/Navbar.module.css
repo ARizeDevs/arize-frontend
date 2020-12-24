@@ -10,9 +10,12 @@
     /* width: 100%; */
     padding-left: 15%;
     padding-right: 15%;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    /* padding-top: 20px; */
+    /* padding-bottom: 20px; */
     height: 8vh;
+    /* box-sizing: border-box; */
+    padding-top: 10px;
+    padding-bottom: 40px;
 }
 
 .subContainer {

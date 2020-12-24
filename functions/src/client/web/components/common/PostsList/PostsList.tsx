@@ -14,6 +14,7 @@ import TDViewIcon from '../../../../assets/icons/3dViewIcon.svg'
 import PenIcon from '../../../../assets/icons/pen2.svg'
 import TrashIcon from '../../../../assets/icons/trash-alt.svg'
 import ChartIcon from '../../../../assets/icons/chart-line.svg'
+import EmptyStateIcon from '../../../../assets/banners/Empty state.svg'
 
 import styles from './PostsList.module.css'
 import { deletePost } from '../../../API'
@@ -29,7 +30,9 @@ interface IPost { status: string,arViews : [] , tdViews : [] , shares : [] ,imag
 
 const SearchBar = ({ text, setText } : { text : string, setText : (text : string) => void }) => {
     return (
-        <Input required={false} text={''} type='text' LeftIcon={SearchIcon} onChange={setText} value={text} />
+        <div style={{width:'100%',position:'sticky',top:'0px',zIndex:100}}>
+            <Input required={false} text={''} type='text' LeftIcon={SearchIcon} onChange={setText} value={text} />
+        </div>
     )
 }
 
@@ -165,6 +168,22 @@ const Posts = (props : {list:IPost[]}) => {
     )
 }
 
+const EmptyList = () => {
+    const router = useRouter()
+
+    return(
+        <div className={styles.column}>
+            <EmptyStateIcon />
+            <br></br>
+            <h4>You have not posted any ar content yet :(</h4>
+            <br></br>
+            <div style={{width:'140px',marginBottom:'100px'}}>
+                <SolidButton onClick={() => router.push('/arstudio')}  ><h3>Get Started</h3></SolidButton>
+            </div>
+        </div>
+    )
+}
+
 const PostsList = (props : IProps) => {
     const { searchText, setSearchText, list } = props
 
@@ -172,9 +191,11 @@ const PostsList = (props : IProps) => {
 
     return (
         <div className={styles.root}>
-            <SearchBar text={searchText} setText={setSearchText} />
+            <SearchBar text={searchText} setText={setSearchText}  />
             <br></br>
-            <Posts list={filteredList} />
+            {list.length === 0 ? 
+            <EmptyList />
+            :<Posts list={filteredList} />}
         </div>
     )
 }

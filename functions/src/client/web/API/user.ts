@@ -23,10 +23,14 @@ export const editUser = async (updatedFields : {} , base64Image? : string) => {
     return axios.put(userServerRoute, data)
 }
 
-export const getUser = async (getPosts : boolean) => {
-    const uid = getUserID()
+export const getUser = async (getPosts : boolean,id : string|null) => {
+    if(id) {
+        return axios.get(`${userServerRoute}/${id}${getPosts?'?posts=true':''}` )
+    } else {
+        const uid = getUserID()
+        return axios.get(`${userServerRoute}/${uid}${getPosts?'?posts=true':''}` )
+    }
     
-    return axios.get(`${userServerRoute}/${uid}${getPosts?'?posts=true':''}` )
 }
 
 export const checkProfile = async (uid : string | null, email : string | null) => {

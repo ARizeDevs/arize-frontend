@@ -27,7 +27,7 @@ const UnauthorizedRedirect = (props : IProps) => {
                 if(user.uid) {
                     const checkProfileResult = await checkProfile(user.uid,user.email)
                     if(checkProfileResult.data.data.profileComplete) {
-                        router.push('/profile')
+                        // router.push('/profile')
                     } else {
                         router.push('/complete-profile')
                     }

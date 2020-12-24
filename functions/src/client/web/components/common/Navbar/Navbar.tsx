@@ -9,6 +9,12 @@ import BellIcon from '../../../../assets/icons/bell.svg'
 
 import styles from './Navbar.module.css'
 import SolidButton from '../buttons/SolidButton'
+import ProfileMenu from '../ProfileMenu'
+
+interface IProps {
+    imageSrc? : string
+    noMenu? : boolean
+}
 
 const rightItems = [
     {
@@ -21,7 +27,8 @@ const rightItems = [
     },
 ]
 
-const Navbar = () => {
+const Navbar = (props : IProps) => {
+    const { imageSrc, noMenu } = props
 
     const [isARStudio,setIsARStudio] = useState(false)
     const [ isPublicRoute, setPublicRoute ] = useState(false)
@@ -52,7 +59,7 @@ const Navbar = () => {
     const renderedRightItems = rightItems.map(({ Icon, href }, index) => {
         return  <Link key={index} href={href}>
                 <a className={styles.navbarLeftItems} >
-                    <div style={{width:'20px',marginRight:'10px'}}>
+                    <div style={{width:'16px',marginRight:'10px'}}>
                         {/* @ts-ignore */}
                         <Icon fill={'black'} />
                     </div>
@@ -70,7 +77,10 @@ const Navbar = () => {
                 {isPublicRoute?null:
                     <>
                         {renderedRightItems}
-                        {!isARStudio? <div style={{width:'100px',marginLeft:'30px'}}>
+                        
+                        {noMenu?null:<ProfileMenu imageSrc={imageSrc} />}
+
+                        {!isARStudio? <div style={{width:'140px',marginLeft:'30px'}}>
                             <SolidButton onClick={() => router.push('/arstudio')} ><h3>Create AR</h3></SolidButton>
                         </div> : null }
                     </>    

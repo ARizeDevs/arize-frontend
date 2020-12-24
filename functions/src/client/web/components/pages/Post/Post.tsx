@@ -47,7 +47,7 @@ const Post = (props : IProps) => {
 
     return (
         <div className={styles.root}>
-            <Navbar />
+            <Navbar noMenu />
             <div className={styles.bodyContainer}>
                 <br></br>
                 <div className={styles.modelViewer}>

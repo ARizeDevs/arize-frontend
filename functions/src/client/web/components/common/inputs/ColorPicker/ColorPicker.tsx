@@ -28,7 +28,7 @@ const ColorPicker = (props : IProps) => {
     return (
         <div className={styles.root}>
             <div className={styles.textAndResultContainer}>
-                <p className={`${error?styles.error:''}`}>{text}</p>
+                <p style={{fontWeight:'bold'}} className={`${error?styles.error:''}`}>{text}</p>
                 <div onClick={() => {setIsOpen(true);setTempColor(color);}} className={`${styles.colorItemWrapper} ${error?styles.colorItemWrapperError:''}`} style={{backgroundColor:color}}>
                 </div>
                 {error?<Message type={IMessageTypes.ERROR} text={error} />:null}
