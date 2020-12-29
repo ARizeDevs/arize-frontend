@@ -30,6 +30,8 @@ export async function  getServerSideProps (context : any) {
     const id = context.params.pid
     const res = context.res
 
+    console.log('-----------')
+
     try {
         const result = await fetch(`${baseURL}/post/${id}?author=true`)
         const relatedPosts =  await fetch(`${baseURL}/post/${id}/related`)
