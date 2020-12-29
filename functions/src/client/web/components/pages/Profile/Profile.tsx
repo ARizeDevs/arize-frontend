@@ -17,8 +17,6 @@ import ScrollToTop from '../../common/ScrollToTop'
 import TipBox from '../../common/TipBox'
 import { copyToClipBoard } from '../../../helpers/copyToClipBoard'
 import { getUserID } from '../../../API/utils'
-import Message from '../../common/Message'
-import { IMessageTypes } from '../../common/Message/Message'
 
 interface IProps {
     id? : string | null
