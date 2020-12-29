@@ -30,7 +30,7 @@ const RoundImage = (props : IProps) => {
 
     return  typeof window !== "undefined" ? 
             <ImagePicker
-                extensions={['jpg','jpeg','.png']}
+                extensions={['jpg','jpeg','png']}
                 maxSize={10}
                 dims={{width : '100%' , height : '100%'}}
                 onChange={onImageChanged}

@@ -200,9 +200,9 @@ const Profile = (props : IProps) => {
                             <p className={styles.lightColor}>My Posts ( {posts.length} posts )</p>
                         </div>
 
-                        {posts.length !== 0 ?<div style={{width:'140px'}}>
+                        {/* {posts.length !== 0 ?<div style={{width:'140px'}}>
                             <SolidButton onClick={() => router.push('/arstudio')} ><h3>Create AR</h3></SolidButton>
-                        </div>:null}
+                        </div>:null} */}
                     </div>  
                     <div className={styles.verticalDivider}></div>
                     <PostsList list={posts} searchText={searchText} setSearchText={setSearchText} />

@@ -93,15 +93,10 @@
     width: 100% !important;
   }   
 
-@font-face {
-    font-family: muliFont;
-    src: url(/fonts/Muli.ttf);
-}
-
 html, body {
     margin: 0;
     height: 100%;
-    font-family: muliFont;
+    font-family: Muli;
 }
 body {
     margin: 0px;
