@@ -10,7 +10,13 @@
     border-radius: 20px;
     align-items: center;
     background-color: var(--main-lightgray-color);
+    transition: .3s;
 }
+
+.secondContainer:hover {
+    color: var(--main-blue-color);
+}
+
 .input {
     flex-grow:1;
     outline: none;

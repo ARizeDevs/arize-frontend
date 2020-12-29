@@ -9,7 +9,7 @@
     --main-red-color : #FF595E;
     --main-deactive-color: #C2C2C2;
     --main-yellow-color : #FFD166;
-    --main-lightgray-color : rgba(234,234,234);
+    --main-lightgray-color : #f6f6f6;
     --main-lightgray2-color : rgba(112,112,112,.5);
 }
 .box {
@@ -159,15 +159,15 @@ body h6,h5,h4,h3,h2,h1 {
 } */
 
 body *::-webkit-scrollbar {
-    width: 6px;               /* width of the entire scrollbar */
+    width: 10px;
 }
   
 body *::-webkit-scrollbar-track {
-    background: var(--main-lightgray-color);        /* color of the tracking area */
+    background: var(--main-lightgray-color);
 }
   
 body *::-webkit-scrollbar-thumb {
-    background-color: var(--main-lightgray2-color); ;    /* color of the scroll thumb */
-    border-radius: 20px;       /* roundness of the scroll thumb */
-    border: 3px solid var(--main-lightgray-color); ;  /* creates padding around scroll thumb */
+    background-color: var(--main-lightgray2-color);
+    border-radius: 20px;
+    border: 3px solid var(--main-lightgray-color);
 }

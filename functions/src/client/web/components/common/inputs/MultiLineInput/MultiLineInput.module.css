@@ -8,6 +8,7 @@
     font-weight : normal;
     margin-left: 10px;
     margin-right: 10px;
+    font-family: muliFont;
     background-color: var(--main-lightgray-color);
     /* color : var(--main-lightgray2-color); */
 }
@@ -30,6 +31,10 @@
     border-radius: 20px;
     align-items: center;
     background-color: var(--main-lightgray-color);
+}
+
+.secondContainer:hover {
+    border-color: var(--main-blue-color);
 }
 
 .secondContainerActive {

@@ -35,16 +35,16 @@
 
 .accountTypeButtonContainer {
     width: 20%;
-    margin-bottom: 40px;
+    /* margin-bottom: 40px; */
 }
 
 .accoutnTypeCard {
     width: 30%;
 }
 .borderedBTN {
-    background-color: white !important;
+    /* background-color: white !important; */
     border: 1px solid var(--main-blue-color) !important;
-    color : var(--main-blue-color) !important
+    /* color : var(--main-blue-color) !important */
 }
 
 .accountTypeContainer {

@@ -22,6 +22,11 @@
 
     margin-top: 20px;
     background-color: var(--main-lightgray-color);
+    transition: .3s;
+}
+
+.imagePickerButton:hover {
+    border: 1px solid var(--main-blue-color);
 }
 
 .imagePickerButtonError {

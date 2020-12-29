@@ -66,6 +66,7 @@ const ImageInput = (props : IProps) => {
                 <div className={`${styles.imagePickerButton} ${error?styles.imagePickerButtonError:''}`}>
                 {extensions?<ImagePicker
                         extensions={extensions}
+                        maxSize={10}
                         dims={{width : '100%' , height : '100%'}}
                         onChange={onImageChange}
                         onError={(errMsg : any) => {console.log(errMsg)}}
@@ -77,6 +78,7 @@ const ImageInput = (props : IProps) => {
                     </ImagePicker>:<ImagePicker
                         dims={{width : '100%' , height : '100%'}}
                         onChange={onImageChange}
+                        maxSize={10}
                         onError={(errMsg : any) => {console.log(errMsg)}}
                     >
                         <div onClick={() => setModalOpen(true)}  style={{display:'flex',justifyContent:'center',alignItems:'center'}}>

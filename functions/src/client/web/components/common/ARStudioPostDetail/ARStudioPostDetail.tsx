@@ -31,9 +31,9 @@ const ARStudioPostDetail = (props : IProps) => {
     return (
         <div className={styles.root}>
             <div className={styles.inputWrapper}>
-                <Input error={error.title} maxInputLength={50} required text="Post Title"  type="text" value={title} onChange={setTitle} />
-                <MultiLineInput maxInputLength={200} required={false} text="Post Description" value={description} onChange={setDescription} />
-                <TagInput maxInputLength={30} error={error.tags} tags={tags} onTagsChanged={(tags : string[]) => setTags(tags)} />
+                <Input placeholder='title...' error={error.title} maxInputLength={50} required text="Post Title"  type="text" value={title} onChange={setTitle} />
+                <MultiLineInput placeholder='description...' maxInputLength={200} required={false} text="Post Description" value={description} onChange={setDescription} />
+                <TagInput placeholder='tag...' maxInputLength={30} error={error.tags} tags={tags} onTagsChanged={(tags : string[]) => setTags(tags)} />
                 <div className={styles.contentImageContainer}>
                     <div className={styles.imageInputContainer}>
                         <ImageInput error={error.imageSrc} setImageSrc={setImageSrc}  imageSrc={imageSrc} text='Thumbnail*' extensions={['jpg','jpeg']} />

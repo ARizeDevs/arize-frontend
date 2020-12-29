@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ShareIcon from '../../../../assets/icons/share.svg'
+import ShareIcon from '../../../../assets/icons/share16.svg'
 import ClickIcon from '../../../../assets/icons/click.svg'
 import ARViewsIcon from '../../../../assets/icons/ar-views.svg'
 import SelectionIcon from '../../../../assets/icons/selection.svg'

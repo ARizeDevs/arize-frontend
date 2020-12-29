@@ -17,6 +17,8 @@ import ScrollToTop from '../../common/ScrollToTop'
 import TipBox from '../../common/TipBox'
 import { copyToClipBoard } from '../../../helpers/copyToClipBoard'
 import { getUserID } from '../../../API/utils'
+import Message from '../../common/Message'
+import { IMessageTypes } from '../../common/Message/Message'
 
 interface IProps {
     id? : string | null
@@ -150,32 +152,33 @@ const Profile = (props : IProps) => {
                                 />
                             </div>
                             <div className={styles.row}>
-                                <div style={{width : '140px',marginRight : '10px'}}>
-                                    <SolidButton styleClass={styles.editProfileBTN} colorTheme='white' onClick={() => router.push('/edit-profile')} ><h3 style={{color : 'black'}}>Edit Profile</h3></SolidButton>
+                                <div style={{width : '110px',marginRight : '10px'}}>
+                                    <SolidButton styleClass={styles.editProfileBTN} colorTheme='white' onClick={() => router.push('/edit-profile')} ><h4 style={{color : 'black'}}>Edit Profile</h4></SolidButton>
                                 </div>
-                                <div style={{width : '140px'}}>
+                                <div className={styles.shareProfile} style={{width : '110px'}}>
                                     <SolidButton styleClass={styles.shareProfileBTN} colorTheme='white' 
                                         onClick={onShareProflie} 
                                     >
-                                        <h3 style={{color : 'var(--main-blue-color)'}}>Share Profile</h3>
+                                        <h4 style={{color : 'var(--main-blue-color)'}}>Share Profile</h4>
                                     </SolidButton>
                                 </div>
                             </div>
                         </div>
-                        <h1 style={{fontWeight:'bolder'}}>{`${name} ${surname}`}</h1>
+                        <h1 className={styles.name}>{`${name} ${surname}`}</h1>
                         <small className={styles.lightColor}>{id?location:username}</small>
+                        <br></br>
                         <div style={{width:'70%'}}>
                             <p>{bio}</p>
                         </div>
                         <br></br>
                         <TipBox 
-                            style={{width : '300px',height:'100px'}}
+                            style={{width : '350px',height:'120px'}}
                             title='Daily Tip'
                             description='Some usefull tip in the future'
                             imageSrc='/images/tip.png'
                         />
                     </div>
-                    <div className={styles.profileSections}>
+                    <div className={styles.profileSections} style={{width:'35%'}}>
                         <div className={styles.shadowedBox}>
                                 <RemainingSlots maxSlots={maxSlots} usedSlots={posts.length} />
                                 <br></br>

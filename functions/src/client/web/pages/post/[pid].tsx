@@ -1,16 +1,16 @@
 import React from 'react'
 import Head from 'next/head'
-import ErrorPage from 'next/error'
 import fetch from 'node-fetch'
 
 import Post from '../../components/pages/Post'
 // import {getPost, getRelatedPosts} from '../../API'
 import { baseURL } from '../../config/api'
+import FourOhFour from '../../components/pages/FourOhFour'
 
 
 const post = ({ post, relatedPosts } : { post : any, relatedPosts : any }) => {
     if (!post ) {
-        return <ErrorPage statusCode={404} />
+        return <FourOhFour />
     }
     
     return (

@@ -28,7 +28,7 @@ const EditProfile = () => {
     const [ imageSrc, setImageSrc ] = useState(undefined)
     const [ submiting, setSubmiting ] = useState(false)
     const [ fetchingData, setFetchingData ] = useState(true)
-    const [ generalError, setGeneralError ] = useState(false)
+    // const [ generalError, setGeneralError ] = useState(false)
     const [ name, setName ] = useState('')
     const [ surname, setSurname ] = useState('')
     const [ username, setUsername ] = useState('')
@@ -94,7 +94,6 @@ const EditProfile = () => {
     }, [])
 
     const onEditSubmit = async () => {
-        console.log('sumbimitting');
         
         const errorResult = editProfileValidator(
             name,
@@ -111,8 +110,6 @@ const EditProfile = () => {
         Object.values(errorResult).forEach((value) => {
             if(value) anyError = true
         })
-        console.log(errorResult);
-        console.log(anyError)
         
         
         if(anyError) return
@@ -150,7 +147,7 @@ const EditProfile = () => {
             }
         } catch(error) {
             setSubmiting(false)
-            setGeneralError(error)
+            // setGeneralError(error)
             console.log(error)
         }
     }
@@ -172,27 +169,27 @@ const EditProfile = () => {
                     </div>
                     <br></br>
                     <br></br>
-                    <Input error={error.name} maxInputLength={30} required text='Name' type='text' value={name} onChange={validateAndSet(setName,nameValidator)}/>
-                    <Input error={error.surname} maxInputLength={30} required text='Surname' type='text' value={surname} onChange={validateAndSet(setSurname,surnameValidator)}/>
-                    <Input error={error.username} maxInputLength={30}  required text='Username' type='text' value={username} onChange={validateAndSet(setUsername, usernameValidator)}/>
-                    <MultiLineInput maxInputLength={200} required={false} text='Bio' value={bio} onChange={setBio}  />
-                    <Input disabled required text='Email' type='text' value={email} onChange={setEmail}  RightIcon={PenIcon} onRightIconClick={() => router.push('/change-email')}/>
-                    <Input disabled required text='Password' type='password' value={'123456789'} onChange={() => ''} RightIcon={PenIcon} onRightIconClick={() => router.push('/forget-password')}/>
+                    <Input placeholder='name...' error={error.name} maxInputLength={30} required text='Name' type='text' value={name} onChange={validateAndSet(setName,nameValidator)}/>
+                    <Input placeholder='surname...' error={error.surname} maxInputLength={30} required text='Surname' type='text' value={surname} onChange={validateAndSet(setSurname,surnameValidator)}/>
+                    <Input placeholder='username...' error={error.username} maxInputLength={30}  required text='Username' type='text' value={username} onChange={validateAndSet(setUsername, usernameValidator)}/>
+                    <MultiLineInput placeholder='Some bio about you...' maxInputLength={200} required={false} text='Bio' value={bio} onChange={setBio}  />
+                    <Input placeholder='example@mail.com' disabled required text='Email' type='text' value={email} onChange={setEmail}  RightIcon={PenIcon} onRightIconClick={() => router.push('/change-email')}/>
+                    <Input placeholder='************' disabled required text='Password' type='password' value={'123456789'} onChange={() => ''} RightIcon={PenIcon} onRightIconClick={() => router.push('/forget-password')}/>
                     <DatePicker error={error.birthday} value={birthday} onChange={validateAndSet(setBirthday,birthdayValidator)} />
                     <GenderDropdown error={error.gender} onSelect={validateAndSet(setGender, genderValidator)} selected={gender} />
                     <CountryPicker error={error.location} value={location} onChange={validateAndSet(setLocation, locationValidator)} />
                     <div style={{ display:'flex',flexDirection:'row' }}>
-                        <Input required text='Business Name' type='text' value={businessName} onChange={(e:any) => setBusinessName(e.target.value)}/>
+                        <Input placeholder='Business name' required text='Business Name' type='text' value={businessName} onChange={(e:any) => setBusinessName(e.target.value)}/>
                         &nbsp;
                         &nbsp;
-                        <Input required text='Business Type' type='text' value={businessType} onChange={(e:any) => setBusinessType(e.target.value)}/>
+                        <Input placeholder='Business type' required text='Business Type' type='text' value={businessType} onChange={(e:any) => setBusinessType(e.target.value)}/>
                     </div>
-                    <Input required={false} text='Why Do You Want To Use ARize?' type='text' value={whyToUse} onChange={(e:any) => setWhyToUse(e.target.value)}/>
-                    <Input required text='Business Website URL' type='text' value={websiteURL} onChange={(e:any) => setWebsiteURL(e.target.value)}/>
-                    <Input required text='VAT Number' type='text' value={vatNumber} onChange={(e:any) => setVatNumber(e.target.value)}/>
+                    <Input placeholder='Describe a little bit...' required={false} text='Why Do You Want To Use ARize?' type='text' value={whyToUse} onChange={(e:any) => setWhyToUse(e.target.value)}/>
+                    <Input placeholder='https://example.com' required text='Business Website URL' type='text' value={websiteURL} onChange={(e:any) => setWebsiteURL(e.target.value)}/>
+                    <Input placeholder='...' required text='VAT Number' type='text' value={vatNumber} onChange={(e:any) => setVatNumber(e.target.value)}/>
                 </div>
             </div>
-            <span className={'error-message'}>{generalError}</span>
+            {/* <span className={'error-message'}>{generalError}</span> */}
             <div className={styles.buttonsContainer}>
                 <div className={styles.btn} style={{width:'100px'}}>
                     <SolidButton colorTheme="#000000" onClick={() => router.push("/profile")}  ><h3>Cancel</h3></SolidButton>

@@ -59,7 +59,7 @@ const Navbar = (props : IProps) => {
     const renderedRightItems = rightItems.map(({ Icon, href }, index) => {
         return  <Link key={index} href={href}>
                 <a className={styles.navbarLeftItems} >
-                    <div style={{width:'16px',marginRight:'10px'}}>
+                    <div style={{width:'16px',marginRight:'24px'}}>
                         {/* @ts-ignore */}
                         <Icon fill={'black'} />
                     </div>
@@ -80,7 +80,7 @@ const Navbar = (props : IProps) => {
                         
                         {noMenu?null:<ProfileMenu imageSrc={imageSrc} />}
 
-                        {!isARStudio? <div style={{width:'140px',marginLeft:'30px'}}>
+                        {!isARStudio? <div style={{width:'140px',marginLeft:'24px'}}>
                             <SolidButton onClick={() => router.push('/arstudio')} ><h3>Create AR</h3></SolidButton>
                         </div> : null }
                     </>    

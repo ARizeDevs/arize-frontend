@@ -8,11 +8,12 @@ interface IProps {
    tags : string[],
    onTagsChanged : (tags : string[]) => void,
    error? : string,
-   maxInputLength? : number
+   maxInputLength? : number,
+   placeholder? : string
 }
 
 const TagInput = (props : IProps) => {
-    const { tags, onTagsChanged, error, maxInputLength } = props
+    const { tags, onTagsChanged, placeholder, error, maxInputLength } = props
     const [ value, setValue ] = useState('')
 
     const handleKeyDown = (e : any) => {
@@ -27,7 +28,7 @@ const TagInput = (props : IProps) => {
 
     return (
         <>
-            <Input maxInputLength={maxInputLength} error={error} onKeyDown={handleKeyDown} value={value} onChange={setValue} required type='text' text='Post Tags' />
+            <Input placeholder={placeholder} maxInputLength={maxInputLength} error={error} onKeyDown={handleKeyDown} value={value} onChange={setValue} required type='text' text='Post Tags' />
             <TagList tags={tags} onCloseClick={handleCloseTag} />
         </>
     )

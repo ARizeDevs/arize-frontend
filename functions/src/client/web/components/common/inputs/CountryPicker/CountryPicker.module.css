@@ -10,6 +10,11 @@
     border-radius: 20px;
     align-items: center;
     background-color: var(--main-lightgray-color);
+    transition: .3s;
+}
+
+.secondContainer:hover {
+    border-color: var(--main-blue-color);
 }
 
 .secondContainerError {

@@ -25,7 +25,7 @@ const PasswordInput = (props: IProps = { confirm:false, value : '', onChange:()=
     
     return (
         <>
-            <Input {...props} required type={eyeOn?'password':'text'} text={confirm?'Confirm Password':'Password'} LeftIcon={LockIconComponent} RightIcon={eyeOn?EyeSlashIcon:EyeIcon} onRightIconClick={onEyeClick}/>
+            <Input placeholder='*********' {...props} required type={eyeOn?'password':'text'} text={confirm?'Confirm Password':'Password'} LeftIcon={LockIconComponent} RightIcon={eyeOn?EyeSlashIcon:EyeIcon} onRightIconClick={onEyeClick}/>
         </>
     )
 }

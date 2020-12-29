@@ -47,11 +47,11 @@ const ARStudioPostDetail = (props : IProps) => {
                 <Toggle active={hasCallToAction} setActive={setHasCallToAction} text='Set Call To Action' />
                 {hasCallToAction?
                 <>
-                    <Input error={error.actionButtonLink} maxInputLength={500} required text="Action button link"  type="text" value={actionButtonLink} onChange={setActionButtonLink} />
-                    <Input error={error.actionButtonInfoText} maxInputLength={100} required text="Action button info text"  type="text" value={actionButtonInfoText} onChange={setActionButtonInfoText} />
+                    <Input placeholder='https://example.com/...' error={error.actionButtonLink} maxInputLength={500} required text="Action button link"  type="text" value={actionButtonLink} onChange={setActionButtonLink} />
+                    <Input placeholder='some info...' error={error.actionButtonInfoText} maxInputLength={100} required text="Action button info text"  type="text" value={actionButtonInfoText} onChange={setActionButtonInfoText} />
                     <br></br>
                     <div style={{width:'100%',display:'flex',flexDirection:'row'}}>
-                        <Input error={error.actionButtonText} maxInputLength={13} required text="Action button Text"  type="text" value={actionButtonText} onChange={setActionButtonText} />
+                        <Input placeholder='some text...' error={error.actionButtonText} maxInputLength={13} required text="Action button Text"  type="text" value={actionButtonText} onChange={setActionButtonText} />
                         &nbsp;&nbsp;
                         <ColorPicker color={actionBUttonTextColor} setColor={setActionBUttonTextColor} text='Text Color' />
                     </div>

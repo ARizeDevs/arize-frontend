@@ -53,13 +53,13 @@ const CompeleteProfilePersonalInfoPage = ( props : IProps ) => {
         <div className={styles.fieldsContainer + ' flex-column'}>
             <div >
                 <div style={{ display:'flex',flexDirection:'row' }}>
-                    <Input error={error.name} maxInputLength={30} required text='Name' type='text' value={name} onChange={setName}/>
+                    <Input placeholder='John' error={error.name} maxInputLength={30} required text='Name' type='text' value={name} onChange={setName}/>
                     &nbsp;
                     &nbsp;
-                    <Input error={error.surname} maxInputLength={30} required text='Surname' type='text' value={surname} onChange={setSurname}/>
+                    <Input placeholder='Doe' error={error.surname} maxInputLength={30} required text='Surname' type='text' value={surname} onChange={setSurname}/>
                 </div>
-                <Input error={error.username} maxInputLength={30} required text='Username' type='text' value={username} onChange={setUsername}/>
-                <MultiLineInput required={false} text='Bio' onChange={setBio} value={bio}/>
+                <Input placeholder='myusername' error={error.username} maxInputLength={30} required text='Username' type='text' value={username} onChange={setUsername}/>
+                <MultiLineInput placeholder='some bio about me...' required={false} text='Bio' onChange={setBio} value={bio}/>
                 <div style={{ display:'flex',flexDirection:'row' }}>
                     <DatePicker error={error.birthday} value={birthday} onChange={setBirthday} />
                     &nbsp;

@@ -84,6 +84,7 @@
     align-items: center;
     justify-content: flex-start;
     width: 100%;
+    margin-top: 70px;
 }
 
 .rowContainer {
@@ -99,4 +100,9 @@
     width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.name {
+    font-weight: 900;
+    font-size: 350%;
 }

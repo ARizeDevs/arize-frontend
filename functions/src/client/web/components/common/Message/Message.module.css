@@ -12,3 +12,7 @@
 .successText {
     color : var(--main-green-color)
 }
+
+.infoText {
+    color : black
+}
