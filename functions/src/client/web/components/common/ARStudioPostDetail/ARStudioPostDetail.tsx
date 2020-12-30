@@ -36,7 +36,7 @@ const ARStudioPostDetail = (props : IProps) => {
                 <TagInput placeholder='tag...' maxInputLength={30} error={error.tags} tags={tags} onTagsChanged={(tags : string[]) => setTags(tags)} />
                 <div className={styles.contentImageContainer}>
                     <div className={styles.imageInputContainer}>
-                        <ImageInput error={error.imageSrc} setImageSrc={setImageSrc}  imageSrc={imageSrc} text='Thumbnail*' extensions={['jpg','jpeg']} />
+                        <ImageInput error={error.imageSrc} setImageSrc={setImageSrc}  imageSrc={imageSrc} text='Thumbnail*' extensions={['jpg','jpeg','png']} />
                     </div>
                     <div className={styles.imageInputContainer}>
                         <ContentInput error={error.contentFile} file={contentFile} setFile={setContentFile}  text='GLB / GLTF *' />

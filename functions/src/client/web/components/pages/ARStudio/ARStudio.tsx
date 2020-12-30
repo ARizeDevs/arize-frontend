@@ -2,7 +2,7 @@ import React , { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 
-import firebase from '../../../config/firebase'
+import firebase, { getDirectURL } from '../../../config/firebase'
 import Navbar from '../../common/Navbar'
 import Preview from '../../common/Preview'
 import ARStudioPostDetail from '../../common/ARStudioPostDetail'
@@ -18,6 +18,7 @@ import styles from './ARStudio.module.css'
 // import ARStudioProgress from '../../common/ARStudioProgress'
 import ARStudioCustomize from '../../common/ARStudioCustomize'
 import Loading from '../../common/Loading'
+import { getUser } from '../../../API/user'
 
 interface IProps {
     isEdit? : boolean,
@@ -60,6 +61,8 @@ const ARStudio = (props : IProps) => {
     const [ postBackgroundImageBase64, setPostBackgroundImageBase64] = useState('')
     const [ error, setError ] = useState({})
 
+    const [ profilePicSrc, setProfilePicSrc ] = useState('')
+
     const validateAndSet = (fn : (arg : any) => void, validate : (arg : any) => any) => {
         return (value : any) => {
             fn(value)
@@ -69,15 +72,29 @@ const ARStudio = (props : IProps) => {
     }
 
     useEffect(() => {
-        if(isEdit && postID) {
-            const getInitData = async () => {
+        const getInitData = async () => {
+            try {
+                const user = await getUser(false, null)
+                if(user && user.data.data){
+                    const userData = user.data.data
+                    if(userData.profilePicURL) {
+                        getDirectURL(userData.profilePicURL).then((url : string) => {
+                            setProfilePicSrc(url)
+                        })
+                    }
+                }
+            } catch(error : any) {
+                console.log(error)
+            }
+
+            if(isEdit && postID) {
                 try {
                     let id = postID
                     if(postID && typeof postID === typeof [])
                     {
                         id = postID[0]
                     }
-                    const post = await getPost(id as string, false)
+                    const post = await getPost(id as string, true)
                     if(post && post.data.data){
                         const postData = post.data.data.data
                         setTitle(postData.title)
@@ -95,14 +112,15 @@ const ARStudio = (props : IProps) => {
                         firebase.storage().ref(postData.glbFileURL).getDownloadURL().then((url) => setContentFile(url))
                         if(postData.backGroundImage) firebase.storage().ref(postData.backGroundImage).getDownloadURL().then((url) => setPostBackgroundImageBase64(url))
                         if(!postData.backGroundImage) setHasBackground(false)
+                        
                     }
                 } catch (error) {
                 } finally {
                     setFetchingData(false)
                 }
             }
-            getInitData()
         }
+        getInitData()
     } , [isEdit,postID])
 
     const onPostDetailFinish = () => {
@@ -187,7 +205,7 @@ const ARStudio = (props : IProps) => {
     }
 
     return (<div className={styles.root}>
-        <Navbar />
+        <Navbar imageSrc={profilePicSrc} />
         <div className={styles.bodyContainer}>
         {/* {!submiting ? */}
             <>

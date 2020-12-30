@@ -15,7 +15,7 @@ interface IProps {
     clicks : number,
 }
 
-const Circle = ({Icon} : {Icon : any}) => {
+const Circle = ({Icon,tip} : {Icon : any, tip : string}) => {
     return (
         <>
             <div className={styles.circle}>
@@ -24,7 +24,7 @@ const Circle = ({Icon} : {Icon : any}) => {
                 </div>
                 <div className={styles.toolTip}>
                     <div className={styles.textPart}>
-                        <p>some tips</p>
+                        <p>{tip}</p>
                     </div>
                     <div className={styles.tailPart}></div>
                 </div>
@@ -33,10 +33,10 @@ const Circle = ({Icon} : {Icon : any}) => {
     )
 }
 
-const Item = ({ value, Icon } : {value : any , Icon : any}) => {
+const Item = ({ value, Icon, tip } : {value : any , Icon : any, tip : string}) => {
     return (
         <div style={{marginRight:'20px',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'flex-start'}}>
-            <Circle Icon={Icon} />
+            <Circle tip={tip} Icon={Icon} />
             <p>{value}</p>
         </div>
     )
@@ -55,11 +55,11 @@ const ProfileInsights = (props : IProps) => {
             <h3>Insights</h3>
             <br></br>
             <div style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly',flexWrap:'wrap'}}>
-                <Item Icon={TDViewsIcon} value={tdViews} />
-                <Item Icon={ShareIcon} value={shares} />
-                <Item Icon={ARViewsIcon} value={arViews} />
-                <Item Icon={ClickIcon} value={clicks} />
-                <Item Icon={SelectionIcon} value={conversion} />
+                <Item tip='3D Views' Icon={TDViewsIcon} value={tdViews} />
+                <Item tip='Shares' Icon={ShareIcon} value={shares} />
+                <Item tip='AR Views' Icon={ARViewsIcon} value={arViews} />
+                <Item tip='Clicks' Icon={ClickIcon} value={clicks} />
+                <Item tip='Conversion' Icon={SelectionIcon} value={conversion} />
             </div>
         </div>)
 }

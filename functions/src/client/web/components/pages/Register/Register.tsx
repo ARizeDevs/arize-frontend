@@ -125,7 +125,6 @@ const Register = () => {
                 }else {
                     if (error.response.data.error.code && error.response.data.error.code.length < 20) {
                         setGeneralError(error.response.data.error.code)
-
                     } else {
                         setGeneralError('something went wrong')
                     }
@@ -136,7 +135,7 @@ const Register = () => {
         }
     }
 
-    const onFacebookClick = () => { 
+    const onFacebookClick = () => {
         const provider = new firebase.auth.FacebookAuthProvider()
         firebase.auth().signInWithRedirect(provider)
         .catch((error) => {

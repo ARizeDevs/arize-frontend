@@ -76,6 +76,10 @@ const Login = () => {
 
             const result = await firebase.auth().signInWithEmailAndPassword(email, password)
             if(result && result.user) {
+                if(!result.user.emailVerified) {
+                    await result.user.sendEmailVerification()
+                }
+
                 const checkProfileResult = await checkProfile(result.user.uid, result.user.email)
                 if(checkProfileResult.data.data.profileComplete) {
                     router.push('/profile')

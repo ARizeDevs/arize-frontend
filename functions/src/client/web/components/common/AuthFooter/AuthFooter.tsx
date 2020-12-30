@@ -20,13 +20,13 @@ const AuthFooter = (props : IProps) => {
 
     return (
         <div className={styles.footerContainer + ' flex-column'}>
-                <div className={styles.dividerContainer}>
+                <div className={styles.dividerContainer} style={{display:'none'}}>
                     <div className={styles.verticalDivider}></div>
                     Or
                     <div className={styles.verticalDivider}></div>
                 </div>
                 <br></br>
-                <div className='flex-row'>
+                <div className='flex-row' style={{display:'none'}}>
                     <span onMouseEnter={() => setAppleActive(true)} onMouseLeave={() => setAppleActive(false)} className={styles.providerContainer} onClick={onAppleClick}>
                         {appleActive?<AppleIcon />:<AppleActiveIcon />}&nbsp;
                     </span>

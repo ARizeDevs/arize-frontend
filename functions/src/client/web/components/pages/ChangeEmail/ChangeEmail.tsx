@@ -59,8 +59,8 @@ const ChangeEmail = () => {
                         <br></br>
 
                         <div style={{width:'50%'}}>
-                            <EmailInput value={currentEmail} onChange={setCurrentEmail} />
-                            <EmailInput value={newEmail} onChange={setNewEmail} />
+                            <EmailInput text='Current Email*' value={currentEmail} onChange={setCurrentEmail} />
+                            <EmailInput text='New Email*' value={newEmail} onChange={setNewEmail} />
 
                             <SolidButton onClick={changeEmail} ><h3>Change Email</h3></SolidButton>
                             {error?<Message text={error} type={IMessageTypes.ERROR} />:null}

@@ -39,7 +39,8 @@
 .closeBTN {
     cursor: pointer;
     margin-right: 30px;
-    font-size: xx-large;
+    width: 30px;
+    height: 30px;
 }
 
 .footer {

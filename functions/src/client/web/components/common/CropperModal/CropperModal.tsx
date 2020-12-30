@@ -5,8 +5,11 @@ import Cropper from 'react-easy-crop'
 import Modal from 'react-modal';
 import { ImagePicker } from 'react-file-picker'
 
+
 import getCroppedImg from './CropImage'
 import SolidButton from '../buttons/SolidButton'
+
+import CrossIcon from '../../../../assets/icons/cross.svg'
 
 import styles from './CropperModal.module.css'
 
@@ -49,7 +52,9 @@ const CropperModal = (props) => {
     >
         <div className={styles.root} >
             <div className={styles.header}>
-                <div onClick={onRequestClose} className={styles.closeBTN}>X</div>
+                <div onClick={onRequestClose} className={styles.closeBTN}>
+                  <CrossIcon />
+                </div>
             </div>
             <div className={styles.body} >
                 <Cropper

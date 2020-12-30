@@ -7,13 +7,14 @@ interface IProps {
     value:string,
     onChange:Function,
     error? : string,
-    maxInputLength? : number
+    maxInputLength? : number,
+    text? : string
 }
 
 const EmailInput = (props : IProps) => {
     return (
         <>
-            <Input placeholder='example@mail.com'  {...props} required type={'email'} text='Email' LeftIcon={EmailIcon} />
+            <Input placeholder='example@mail.com'  {...props} required type={'email'} text={props.text?props.text:'Email'} LeftIcon={EmailIcon} />
         </>
     )
 }
