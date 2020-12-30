@@ -17,11 +17,19 @@ interface IProps {
 
 const Circle = ({Icon} : {Icon : any}) => {
     return (
-        <div className={styles.circle}>
-            <div style={{width:'24px',height:'24px'}}>
-                <Icon />
+        <>
+            <div className={styles.circle}>
+                <div style={{width:'24px',height:'24px'}}>
+                    <Icon />
+                </div>
+                <div className={styles.toolTip}>
+                    <div className={styles.textPart}>
+                        <p>some tips</p>
+                    </div>
+                    <div className={styles.tailPart}></div>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 
@@ -47,9 +55,9 @@ const ProfileInsights = (props : IProps) => {
             <h3>Insights</h3>
             <br></br>
             <div style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly',flexWrap:'wrap'}}>
+                <Item Icon={TDViewsIcon} value={tdViews} />
                 <Item Icon={ShareIcon} value={shares} />
                 <Item Icon={ARViewsIcon} value={arViews} />
-                <Item Icon={TDViewsIcon} value={tdViews} />
                 <Item Icon={ClickIcon} value={clicks} />
                 <Item Icon={SelectionIcon} value={conversion} />
             </div>

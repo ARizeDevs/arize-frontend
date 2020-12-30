@@ -1,5 +1,3 @@
-import Toast, {ToastContainer} from './Toast'
+import Toast from './Toast'
 
-
-export {ToastContainer}
 export default Toast

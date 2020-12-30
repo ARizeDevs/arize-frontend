@@ -24,10 +24,4 @@ const Toast = (props : any) => {
     )
 }
 
-export const ToastContainer = ({ children, ...props }) => {
-    return (
-        <div></div>
-    )
-}
-
 export default Toast 
