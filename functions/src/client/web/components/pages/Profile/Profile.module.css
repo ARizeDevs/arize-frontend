@@ -51,14 +51,14 @@
 
 
 .editProfileBTN {
-    border: 1px solid black !important;
+    border: 2px solid black !important;
     /* background-color: white !important; */
     /* color : black; */
     /* box-shadow: none ; */
 }
 
 .shareProfileBTN {
-    border: 1px solid var(--main-blue-color) !important;
+    border: 2px solid var(--main-blue-color) !important;
     /* background-color: white !important; */
     /* color : black; */
     /* box-shadow: none ; */

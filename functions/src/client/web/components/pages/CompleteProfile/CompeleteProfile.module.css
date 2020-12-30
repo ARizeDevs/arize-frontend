@@ -43,7 +43,7 @@
 }
 .borderedBTN {
     /* background-color: white !important; */
-    border: 1px solid var(--main-blue-color) !important;
+    border: 2px solid var(--main-blue-color) !important;
     /* color : var(--main-blue-color) !important */
 }
 

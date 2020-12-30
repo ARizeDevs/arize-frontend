@@ -1,0 +1,34 @@
+.shadowedBox {
+    box-shadow: -3px 10px 20px 1px rgba(0,0,0,0.1);
+    border-radius: 16px;
+    /* width: %; */
+    height: 50px;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 2px solid black;
+    background-color: white;
+    margin: 20px;
+    padding: 20px;
+    z-index: 100;
+}
+
+.fadein {
+    animation: fadein 1s ease-in-out;
+}
+
+.fadeout {
+    animation: fadeout 1s ease-in-out;
+}
+
+@keyframes fadein{
+    from  { opacity: 0; }
+    to  { opacity: 1; }
+}
+
+@keyframes fadeout{
+    from  { opacity: 1; }
+    to  { opacity: 0; }
+}

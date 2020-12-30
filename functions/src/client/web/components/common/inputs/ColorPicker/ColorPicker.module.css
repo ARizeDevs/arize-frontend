@@ -24,7 +24,7 @@
 .colorItemWrapper {
         width : 100%;
         color : rgba(112, 112, 112, .05);
-        border: solid 1px;
+        border: solid 2px;
         border-color: black;
         height: 50px;
         border-radius: 20px;
@@ -45,7 +45,7 @@
     padding: 20px;
     margin: auto;
     /* width: 50%; */
-    border: 1px solid rgba(0, 0, 0, 0.294);
+    border: 2px solid rgba(0, 0, 0, 0.294);
     border-radius: 10px;
     background-color: white ;
 }

@@ -21,7 +21,7 @@ const ForgetPassword = () => {
 
     const recoverPassword = () => {
         const auth = firebase.auth();
-
+        
         auth.sendPasswordResetEmail(email).then(function() {
             setPage(2)    
         }).catch(() => {

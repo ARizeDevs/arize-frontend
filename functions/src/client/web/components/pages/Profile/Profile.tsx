@@ -1,6 +1,7 @@
 import firebase from 'firebase'
 import React , { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
+import { useToasts } from 'react-toast-notifications'
 
 import { getUser } from '../../../API/user'
 import SolidButton from '../../common/buttons/SolidButton'
@@ -24,6 +25,7 @@ interface IProps {
 
 const Profile = (props : IProps) => {
     const { id } = props
+    const { addToast } = useToasts()
 
     const router = useRouter()
     const [ searchText, setSearchText ] = useState('')
@@ -68,9 +70,14 @@ const Profile = (props : IProps) => {
                 try {
                     if(user) {
                         if(id === null || id) {
+                            console.log('00000000000000000')
+                            console.log(id)
                             const user = await getUser(true,id)
+                            console.log(user)
+                            console.log(user.data.data)
                             if(user && user.data.data){
-                                const userData = user.data.data.data
+                                console.log('fucking here')
+                                const userData = user.data.data
                                 setName(userData.name)
                                 setUsername(userData.username)
                                 setSurname(userData.surname)
@@ -111,7 +118,7 @@ const Profile = (props : IProps) => {
                         }
                     }
                 } catch(error) {
-    
+                    console.log(error)
                 } finally {
                     setFetchingData(false)
                 }
@@ -131,6 +138,9 @@ const Profile = (props : IProps) => {
         const shareURL = `https://arizear.app/profile/${userID}`
 
         copyToClipBoard(shareURL)
+
+
+        addToast('url copied',{ appearance : 'info' })
     }
 
     return (

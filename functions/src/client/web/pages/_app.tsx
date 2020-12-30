@@ -1,5 +1,8 @@
 import React from 'react'
 import Modal from 'react-modal';
+import { ToastProvider } from 'react-toast-notifications'
+
+import Toast from '../components/common/Toast'
 
 import ErrorBoundary from '../components/common/ErrorBoundary'
 import '../styles.css'
@@ -15,7 +18,10 @@ const  MyApp = ({ Component, pageProps } : { Component:any, pageProps:any}) =>
             <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Muli" />
         </Head>
         <ErrorBoundary>
-            <Component {...pageProps} />
+            {/* @ts-ignore */}
+            <ToastProvider  transitionDuration={900} autoDismiss autoDismissTimeout={3000} components={{ Toast }}>
+                <Component {...pageProps} />
+            </ToastProvider>
         </ErrorBoundary>
     </>)
 

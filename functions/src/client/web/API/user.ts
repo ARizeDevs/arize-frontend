@@ -4,6 +4,11 @@ import { getTokenID, getUserID } from './utils'
 
 const userServerRoute = '/user'
 
+export const changeEmailAPI = async (newEmail : string) => {
+    const tokenId = await getTokenID()
+    return axios.put(`${userServerRoute}/change-email`, { newEmail, tokenId })
+}
+
 export const registerUser = (email : string , uid : string , password : string) => {
     if(password) {
         return axios.post(userServerRoute, { email, password })

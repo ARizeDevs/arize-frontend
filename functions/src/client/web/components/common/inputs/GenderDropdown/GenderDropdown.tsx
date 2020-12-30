@@ -11,12 +11,17 @@ const customStyles = {
         height : '50px',
         borderRadius:'20px'
       }),
+      valueContainer :  (provided : any, state : any) => ({
+        ...provided,
+        marginLeft:'16px',
+        padding:'0px'
+      }),
     control : (provided : any, state : any) => ({
         ...provided,
         height : '50px',
         borderRadius:'20px',
         backgroundColor : 'var(--main-lightgray-color)',
-        border:'1px solid black'
+        border:'2px solid black'
       }),
 }
 

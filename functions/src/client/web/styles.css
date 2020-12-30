@@ -166,3 +166,19 @@ body *::-webkit-scrollbar-thumb {
     border-radius: 20px;
     border: 3px solid var(--main-lightgray-color);
 }
+
+.css-1jgv6z-ToastContainer {
+    bottom: 0 !important;
+    left: 50% !important;
+    top: unset !important;
+    right: unset !important;
+    transform: translate(-50%, 0%);
+}
+
+.css-mrh2d-ToastContainer {
+    bottom: 0 !important;
+    left: 50% !important;
+    top: unset !important;
+    right: unset !important;
+    transform: translate(-50%, 0%);
+}

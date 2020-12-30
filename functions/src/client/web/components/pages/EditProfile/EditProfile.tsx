@@ -59,7 +59,7 @@ const EditProfile = () => {
                     if(user) {
                         const user = await getUser(false,null)
                         if(user && user.data.data){
-                            const userData = user.data.data.data
+                            const userData = user.data.data
                             setName(userData.name)
                             setLocation(userData.location);
                             setSurname(userData.surname)

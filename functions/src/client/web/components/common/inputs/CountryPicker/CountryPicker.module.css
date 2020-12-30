@@ -5,7 +5,7 @@
 
 .secondContainer {
     width : 100%;
-    border: solid 1px;
+    border: solid 2px;
     height: 50px;
     border-radius: 20px;
     align-items: center;
@@ -42,12 +42,12 @@
     /* font-size: 15px; */
     /* font-weight : normal; */
     /* width: 80%; */
-    margin-right: 10px;
+    margin-right: 16px;
 }
 
 .icon {
-    margin-right : 10px;
-    margin-left : 10px;
+    margin-right : 16px;
+    margin-left : 16px;
 }
 
 .icon img {

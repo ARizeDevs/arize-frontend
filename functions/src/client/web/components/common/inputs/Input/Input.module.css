@@ -6,8 +6,8 @@
     height:80%;
     font-size: 15px;
     font-weight : normal;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 16px;
+    margin-right: 16px;
     background-color: transparent;
     /* color : var(--main-lightgray2-color); */
 }
@@ -24,7 +24,7 @@
 .secondContainer {
     width : 100%;
     color : rgba(112, 112, 112, .05);
-    border: solid 1px;
+    border: solid 2px;
     border-color: transparent;
     height: 50px;
     border-radius: 20px;
