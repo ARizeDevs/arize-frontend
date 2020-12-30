@@ -172,8 +172,10 @@ const Profile = (props : IProps) => {
                                 </div>
                             </div>
                         </div>
+                        <br></br>
+                        <br></br>
                         <h1 className={styles.name}>{`${name} ${surname}`}</h1>
-                        <small className={styles.lightColor}>{id?location:username}</small>
+                        <p className={styles.lightColor}>{id?location:username}</p>
                         <br></br>
                         <div style={{width:'70%'}}>
                             <p>{bio}</p>

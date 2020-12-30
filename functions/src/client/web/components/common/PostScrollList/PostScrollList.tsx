@@ -3,6 +3,9 @@ import React, { Component, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import ScrollMenu from "react-horizontal-scrolling-menu";
 
+import LeftIcon from '../../../../assets/icons/angle-left.svg'
+import RightIcon from '../../../../assets/icons/angle-right.svg'
+
 import styles from "./PostScrollList.module.css";
 import { getDirectURL } from "../../../config/firebase";
 
@@ -28,7 +31,7 @@ export const Menu = list =>
   });
 
 const Arrow = ({ text, className }) => {
-  return <div className={className}>{text}</div>;
+  return <div className={className}>{text === '<'?<LeftIcon /> : <RightIcon />}</div>;
 };
 
 Arrow.propTypes = {

@@ -19,6 +19,7 @@ import EmptyStateIcon from '../../../../assets/banners/Empty state.svg'
 import styles from './PostsList.module.css'
 import { deletePost } from '../../../API'
 import Loading from '../Loading'
+import QRModal from '../QRModal'
 
 interface IProps {
     searchText : string,
@@ -30,7 +31,7 @@ interface IPost { status: string,arViews : [] , tdViews : [] , shares : [] ,imag
 
 const SearchBar = ({ text, setText } : { text : string, setText : (text : string) => void }) => {
     return (
-        <div style={{width:'100%',position:'sticky',top:'0px',zIndex:100}}>
+        <div style={{width:'100%',position:'sticky',top:'0px',zIndex:1}}>
             <Input required={false} text={''} type='text' LeftIcon={SearchIcon} onChange={setText} value={text} />
         </div>
     )
@@ -47,20 +48,28 @@ const PostCardMenuItem = ({ Icon, text, action } : { Icon : any , text : string,
     )
 }
 
-const PostCardMenu = ({ onEdit, onView, onInsights, onDelete } : { onEdit : ()=>void, onView : ()=>void, onInsights : ()=>void, onDelete : () => void}) => {
+const PostCardMenu = ({ onEdit, onView, onInsights, onDelete, onCloseRequest } : { onEdit : ()=>void, onView : ()=>void, onInsights : ()=>void, onDelete : () => void, onCloseRequest : () => void}) => {
 
     return (
-        <div className={styles.postCardMenu}>
-            <PostCardMenuItem Icon={EyeIcon} text='View Post' action={onView} />
-            <PostCardMenuItem Icon={PenIcon} text='Edit' action={onEdit} />
-            <PostCardMenuItem Icon={ChartIcon} text='Insights' action={onInsights} />
-            <PostCardMenuItem Icon={TrashIcon} text='Delete' action={onDelete} />
-        </div>
+        <>
+            <div onSeeked={() => console.log('dsa')} onClick={() => onCloseRequest()} style={{width:'100vw',height:'100vh',color:'black',opacity:'.3',position:'fixed',left:'0',top:'0',zIndex:3}}>
+
+            </div>
+            <div className={styles.postCardMenu}>
+                <PostCardMenuItem Icon={EyeIcon} text='View Post' action={onView} />
+                <PostCardMenuItem Icon={PenIcon} text='Edit' action={onEdit} />
+                <PostCardMenuItem Icon={ChartIcon} text='Insights' action={onInsights} />
+                <PostCardMenuItem Icon={TrashIcon} text='Delete' action={onDelete} />
+            </div>
+        </>
     )
 }
 
 const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPost) => {
     const [ image, setImage ] = useState('')
+
+    const [ qrModalOpen, setQRModalOpen ] = useState(false)
+
     const router = useRouter()
 
     const [ deleting, setDeleting ] = useState(false)
@@ -98,8 +107,10 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
         <div style={{width:'20vw',display:'flex',flexDirection:'column',margin:'auto',position:'relative'}}>
             <img className={styles.postItem} src={image} />
             {processing?<div className={styles.postItem} style={{position:'absolute',backgroundColor:'black',opacity:.6,zIndex:20,display:'flex',alignItems:'center',justifyContent:'center'}}><h3 style={{color:'white'}} >Processing ...</h3></div>:null}
-            <div className={styles.editPost} onClick={() => setMenuOpen(!menuOpen)}><DotIcon /></div>
-            {menuOpen?<PostCardMenu onEdit={onEdit} onDelete={onDelete} onInsights={onInsights} onView={onView}  />:null}
+            <div className={styles.editPost} onClick={() => setMenuOpen(!menuOpen)}>
+                <DotIcon />
+            </div>
+            {menuOpen?<PostCardMenu onCloseRequest={() => setMenuOpen(false)} onEdit={onEdit} onDelete={onDelete} onInsights={onInsights} onView={onView}  />:null}
             <div style={{flexWrap:'wrap',marginTop:'10px',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
                 <div style={{display:'flex',flexWrap:'wrap',flexDirection:'row'}}>
                     <div style={{width : '20px',height : '20px'}}>
@@ -119,17 +130,24 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
                 </div>
                 &nbsp;&nbsp;
                 <div style={{display:'flex',flexDirection:'row',flexWrap:'wrap'}}>
-                    <div style={{width:'60px',marginRight:'10px'}}>
+                    <div style={{width:'100px',marginRight:'10px'}}>
                         <SolidButton colorTheme='black' onClick={() => {if(!processing)router.push(`/post/${id}`)}} ><div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}><TDViewIcon /><h3>3D</h3></div></SolidButton>
                     </div>
-                    <div style={{width:'60px'}}>
-                        <SolidButton onClick={() => {if(!processing)router.push(`/post/${id}`)}} ><div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}><ARViewIcon /><h3>AR</h3></div></SolidButton>
+                    <div style={{width:'100px'}}>
+                        <SolidButton onClick={() => setQRModalOpen(true)} ><div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}><ARViewIcon /><h3>AR</h3></div></SolidButton>
                     </div>
                 </div>
             </div>
 
             {deleting?<Loading text='deleting post ...' />:null}
+            <QRModal 
+                isOpen={qrModalOpen}
+                onRequestClose={() => setQRModalOpen(false)}
+                text='Scan to see AR'
+                url={`https://arizear.app/model-viewer/${id}`}
+            />
         </div>
+        
     )
 }
 
@@ -152,6 +170,7 @@ const PostsColumn = (props : {list:IPost[]}) => {
         for (i=0,j=props.list.length; i<j; i+=chunk) {
             results.push(<PostsRow  list={props.list.slice(i,i+chunk)} />)
         }
+        
 
         return results
     }

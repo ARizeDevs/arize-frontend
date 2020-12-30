@@ -3,7 +3,7 @@
     width: 250px;
     height: 250px;
     background-color: white;
-    border-radius: 40px;
+    border-radius: 16px;
     outline: none;
 }
 
@@ -17,6 +17,7 @@
     right: 0;
     bottom: 0;
     background-color: var(--main-lightgray2-color);
+    z-index: 3;
 }
 
 .column {

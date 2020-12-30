@@ -26,15 +26,14 @@ const QRModal = (props : IProps) => {
             contentLabel="Example Modal"
         >
             <div className={styles.column} style={{width:'100%',justifyContent:'center',alignItems:'center',height:'100%'}} >
-                <div style={{width:'100%',paddingLeft:'30px'}}>
-                    <button onClick={onRequestClose} style={{border:'none',backgroundColor:'var(--main-blue-color)',color:'white',borderRadius:'50%',width:'30px',height:'30px',outline:'none',cursor:'pointer'}}>
-                        {/* @ts-ignore */}
-                        <CrossIcon fill='white' />
-                    </button>
+                <div style={{width:'100%',paddingRight:'30px',display:'flex',flexDirection:'row',justifyContent:'flex-end'}}>
+                        <div onClick={onRequestClose} style={{width:'30px',cursor:'pointer'}}>
+                            <CrossIcon />
+                        </div>
                     </div>
                 <QRCode value={url} />
                 <br></br>
-                <p className={styles.grayColor}>{text}</p>
+                <p>{text}</p>
             </div>
         </Modal>
     )

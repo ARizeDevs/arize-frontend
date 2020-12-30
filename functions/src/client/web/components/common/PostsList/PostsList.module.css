@@ -14,14 +14,13 @@
 
 .editPost {
     cursor: pointer;
-    width:3vw;
-    height:1vw;
+    width:24px;
     position:absolute;
     right:1vw;
     top:1vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
 }
 
 .postCardMenu {
@@ -29,6 +28,7 @@
     right:1vw;
     top:2vw;
     width:12vw;
+    z-index: 5;
     background:white;
     display: flex;
     flex-direction: column;

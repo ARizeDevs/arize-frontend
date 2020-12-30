@@ -72,3 +72,7 @@
     height: 50px;
     border-radius: 50%;
 }
+
+.loginButtonContainer span {
+    margin-top: 8px;
+}

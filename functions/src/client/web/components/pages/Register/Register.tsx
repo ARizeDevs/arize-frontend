@@ -164,13 +164,13 @@ const Register = () => {
                         <EmailInput error={error.email} maxInputLength={100} value={email} onChange={validateAndSet(setEmail, emailValidator)}/>
                         <PasswordInput error={error.password} maxInputLength={40} eyeOn={eyeOn} onEyeClick={() => { setEyeOn(!eyeOn)}} value={password} onChange={validateAndSet(setPassword, passwordValidator)}/>
                         <PasswordInput error={error.confirmPassword} maxInputLength={40} confirm eyeOn={eyeOn} onEyeClick={() => { setEyeOn(!eyeOn)}} value={confirmPassword} onChange={validateAndSet(setConfirmPassword,confirmPasswordValidator(password))}/>
-                        <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'flex-end'}}>
+                        {/* <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'flex-end'}}>
                             <Link href='/forget-password'>
                                 <a style={{textAlignLast:'end' , fontWeight : 'normal', marginTop:'16px'}}>
                                     Forgot Password?
                                 </a>
                             </Link>
-                        </div>    
+                        </div>     */}
                     </div>
                     <div className={styles.loginButtonContainer}>
                         <SolidButton onClick={onSubmit} ><h3>Register</h3></SolidButton>
