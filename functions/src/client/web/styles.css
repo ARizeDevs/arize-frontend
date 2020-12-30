@@ -167,15 +167,7 @@ body *::-webkit-scrollbar-thumb {
     border: 3px solid var(--main-lightgray-color);
 }
 
-.css-1jgv6z-ToastContainer {
-    bottom: 0 !important;
-    left: 50% !important;
-    top: unset !important;
-    right: unset !important;
-    transform: translate(-50%, 0%);
-}
-
-.css-mrh2d-ToastContainer {
+.react-toast-notifications__container {
     bottom: 0 !important;
     left: 50% !important;
     top: unset !important;
