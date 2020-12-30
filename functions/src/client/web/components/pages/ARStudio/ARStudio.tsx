@@ -83,7 +83,7 @@ const ARStudio = (props : IProps) => {
                         })
                     }
                 }
-            } catch(error : any) {
+            } catch(error) {
                 console.log(error)
             }
 
