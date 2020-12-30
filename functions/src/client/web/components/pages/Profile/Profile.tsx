@@ -15,7 +15,7 @@ import ProfileInsights from '../../common/ProfileInsights'
 import PostsList from '../../common/PostsList'
 import Loading from '../../common/Loading'
 import ScrollToTop from '../../common/ScrollToTop'
-import TipBox from '../../common/TipBox'
+// import TipBox from '../../common/TipBox'
 import { copyToClipBoard } from '../../../helpers/copyToClipBoard'
 import { getUserID } from '../../../API/utils'
 
@@ -179,12 +179,12 @@ const Profile = (props : IProps) => {
                             <p>{bio}</p>
                         </div>
                         <br></br>
-                        <TipBox 
+                        {/* <TipBox 
                             style={{width : '350px',height:'120px'}}
                             title='Daily Tip'
                             description='Some usefull tip in the future'
                             imageSrc='/images/tip.png'
-                        />
+                        /> */}
                     </div>
                     <div className={styles.profileSections} style={{width:'35%'}}>
                         <div className={styles.shadowedBox}>
