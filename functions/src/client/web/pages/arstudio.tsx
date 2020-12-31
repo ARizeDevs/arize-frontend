@@ -12,9 +12,9 @@ const arstudio = () => (
             <script type="module" src="https://unpkg.com/@google/model-viewer@1.1.0/dist/model-viewer.js"></script>
             <script noModule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
         </Head>
-        {/* <UnauthorizedRedirect> */}
+        <UnauthorizedRedirect>
             <ARStudio />
-        {/* </UnauthorizedRedirect> */}
+        </UnauthorizedRedirect>
     </>
 )
 

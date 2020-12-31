@@ -25,7 +25,7 @@ interface IProps {
 }
 
 const getUSZFileFullURL = (actionButtonBackgroundColor : string, actionButtonColor : string,
-    actionButtonInfoColor : string, actionButtonLink : string, actionButtonText : string, actionButtonInfoText : string) => {
+    actionButtonInfoColor : string, actionButtonLink : string, actionButtonText : string, actionButtonInfoText : string, actionButtonInfoTextColor : string) => {
 
     return `https://arizear.app/banner?link=${actionButtonLink}&buttonText=${actionButtonText}&buttonColor=${actionButtonBackgroundColor}&buttonTextColor=${actionButtonColor}&infoBackgrounColor=${actionButtonInfoColor}&infoText=${actionButtonInfoText}&infoTextColor=${actionButtonInfoTextColor}`
 }
@@ -33,7 +33,7 @@ const getUSZFileFullURL = (actionButtonBackgroundColor : string, actionButtonCol
 const ModelViewer = (props : IProps) => {
     const { glbURL, background, usdzURL,
             actionButtonInfoBackgroundColor, actionButtonColor,
-            actionButtonLink, actionButtonText, actionButtonTextColor,
+            actionButtonLink, actionButtonText, actionButtonTextColor, actionButtonInfoTextColor,
             poster, autoPlay, id, actionButtonInfoText, showQR } = props
 
     const [ qrModalOpen, setQRModalOpen ] = useState(false)
@@ -44,7 +44,7 @@ const ModelViewer = (props : IProps) => {
         setIsMobile(mobile)
     }, [])
 
-    const compoundUSDZUrl = getUSZFileFullURL(actionButtonColor , actionButtonTextColor, actionButtonInfoBackgroundColor, actionButtonLink, actionButtonText, actionButtonInfoText)
+    const compoundUSDZUrl = getUSZFileFullURL(actionButtonColor , actionButtonTextColor, actionButtonInfoBackgroundColor, actionButtonLink, actionButtonText, actionButtonInfoText, actionButtonInfoTextColor)
 
     const fullUSDZUrl = `${usdzURL}#custom=${compoundUSDZUrl}`
 

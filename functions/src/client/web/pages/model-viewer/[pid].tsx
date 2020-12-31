@@ -37,6 +37,7 @@ const arstudio = ({ post } : { post:any}) => {
                 autoPlay={post.autoPlay}
                 background={backGroundImage} 
                 actionButtonText={post.actionButtonText}
+                actionButtonInfoTextColor={post.actionButtonInfoTextColor}
                 actionButtonInfoBackgroundColor={post.actionInfoBackgroundColor}
                 actionButtonLink={post.actionButtonLink}
                 actionButtonColor={post.actionButtonColor}

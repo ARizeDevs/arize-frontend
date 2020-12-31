@@ -23,7 +23,7 @@ const NotificationCard = (props : IProps) => {
                     <ArizeLog />}
                 <div style={{marginLeft:'16px'}}>
                     <p>{text}</p>
-                    <small>{date.toDateString()}</small>
+                    <small>{date?date.toDateString():''}</small>
                 </div>
             </div>
             <div style={{cursor:'pointer'}}>
