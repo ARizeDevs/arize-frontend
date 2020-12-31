@@ -32,7 +32,7 @@ export const getUser = async (getPosts : boolean,id : string|null) => {
     if(id) {
         return axios.get(`${userServerRoute}/${id}${getPosts?'?posts=true':''}` )
     } else {
-        const uid = getUserID()
+        const uid = await getUserID()
         return axios.get(`${userServerRoute}/${uid}${getPosts?'?posts=true':''}` )
     }
     

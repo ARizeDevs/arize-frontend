@@ -17,11 +17,12 @@ interface IProps {
     removeBorder? : boolean,
     onKeyDown? : (e : any) => void,
     error? : string,
-    maxInputLength? : number
+    maxInputLength? : number,
+    rows? : number
 }
 
 const MultiLineInput = (props : IProps) => {
-    const { error, maxInputLength, text, required, LeftIcon, RightIcon, onLeftIconClick, onRightIconClick, onChange, value, placeholder, removeBorder, onKeyDown } = props
+    const { error, rows, maxInputLength, text, required, LeftIcon, RightIcon, onLeftIconClick, onRightIconClick, onChange, value, placeholder, removeBorder, onKeyDown } = props
     const [ active, setActive ] = useState(false)
 
     const onFocus = () => setActive(true)
@@ -44,7 +45,7 @@ const MultiLineInput = (props : IProps) => {
             <p className={`${styles.label} ${error?styles.error:''}`}>{labelText}</p>
             <div className={`${styles.secondContainer} flex-row ${error?styles.secondContainerError:(active?styles.secondContainerActive:'')} ${removeBorder?styles.removeBorder:''}`} >
                 {LeftIcon?<LeftIcon onClick={onLeftIconClick?onLeftIconClick:null} className={styles.iconLeft} fill={active?'var(--main-blue-color)':'var(--main-lightgray2-color)'} />:null}
-                <textarea rows={5} onKeyDown={onKeyDown} placeholder={placeholder?placeholder:''} onChange={onInputChanged} value={value} onFocus={onFocus} onBlur={onBlur} className={styles.input}/>
+                <textarea rows={rows?rows:5} onKeyDown={onKeyDown} placeholder={placeholder?placeholder:''} onChange={onInputChanged} value={value} onFocus={onFocus} onBlur={onBlur} className={styles.input}/>
                 {RightIcon?<RightIcon onClick={onRightIconClick?onRightIconClick:null} className={styles.iconRight} fill={active?'var(--main-blue-color)':'var(--main-black-color)'} />:null}
             </div>
             {error?<Message text={error} type={IMessageTypes.ERROR} />:null}

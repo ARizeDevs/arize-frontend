@@ -1,0 +1,36 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+.bodyContainer {
+    width: 70%;
+    margin-left: auto;
+    margin-top: 30px;
+
+    margin-right: auto;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin: 0 !important;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 !important;
+}

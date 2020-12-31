@@ -1,7 +1,7 @@
 .root {
     width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
     justify-content: flex-start;
 }
@@ -58,4 +58,66 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+}
+
+.share {
+    cursor:pointer;
+    width : 20px;
+    height : 20px;
+}
+
+.share:hover * {
+    fill: var(--main-blue-color);
+}
+
+.view {
+    width : 20px;
+    height : 20px;
+}
+
+@keyframes fadein {
+    from { opacity: 0;}
+    to { opacity: 1;}
+}
+
+.view:hover .viewToolTip {
+    display: flex;
+}
+
+.viewToolTip {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    /* background-color: white; */
+    align-items: center;
+    justify-content: flex-start;
+    transform: translate(-45%,-150%);
+    animation: fadein .3s ease-in-out;
+}
+
+.textPart {
+    height: 50px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding: 16px;
+    box-shadow: -3px 10px 20px 1px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.textPart * {
+    fill : var(--main-lightgray2-color);
+    color : var(--main-lightgray2-color);
+}
+
+.tailPart {
+    width: 0; 
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    margin-left: auto;
+    margin-right: auto;
+    
+    border-top: 8px solid white;
 }

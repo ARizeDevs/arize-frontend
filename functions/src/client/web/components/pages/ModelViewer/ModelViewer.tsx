@@ -20,13 +20,14 @@ interface IProps {
     poster : string,
     autoPlay : boolean,
     actionButtonInfoText : string,
+    actionButtonInfoTextColor : string,
     showQR : boolean
 }
 
 const getUSZFileFullURL = (actionButtonBackgroundColor : string, actionButtonColor : string,
     actionButtonInfoColor : string, actionButtonLink : string, actionButtonText : string, actionButtonInfoText : string) => {
 
-    return `https://arizear.app/banner?link=${actionButtonLink}&buttonText=${actionButtonText}&buttonColor=${actionButtonBackgroundColor}&buttonTextColor=${actionButtonColor}&infoBackgrounColor=${actionButtonInfoColor}&infoText=${actionButtonInfoText}`
+    return `https://arizear.app/banner?link=${actionButtonLink}&buttonText=${actionButtonText}&buttonColor=${actionButtonBackgroundColor}&buttonTextColor=${actionButtonColor}&infoBackgrounColor=${actionButtonInfoColor}&infoText=${actionButtonInfoText}&infoTextColor=${actionButtonInfoTextColor}`
 }
 
 const ModelViewer = (props : IProps) => {

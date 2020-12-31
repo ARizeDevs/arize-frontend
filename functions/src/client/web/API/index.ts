@@ -26,6 +26,7 @@ export const savePost = async (title : string, description : string, tags : stri
     actionBUttonTextColor : string, actionButtonColor : string, actionButtonLink : string, actionButtonText : string,
     actionInfoBackgroundColor : string , hasShadow : boolean, autoPlay : boolean,
     actionButtonInfoText : string,
+    actionButtonInfoTextColor : string,
     hasCallToAction : boolean,
     postBackgroundImageBase64 : string,
     contentFile : any,
@@ -47,9 +48,10 @@ export const savePost = async (title : string, description : string, tags : stri
             formData.append('actionButtonText',actionButtonText)
             formData.append('actionInfoBackgroundColor',actionInfoBackgroundColor)
             formData.append('actionButtonInfoText',actionButtonInfoText)
-            if(hasShadow) formData.append('hasShadow','hasShadow')
-            if(autoPlay) formData.append('autoPlay','autoPlay')
+            formData.append('actionButtonInfoTextColor',actionButtonInfoTextColor)
         }
+        if(autoPlay) formData.append('autoPlay','autoPlay')
+        if(hasShadow) formData.append('hasShadow','hasShadow')
         formData.append('postImageBase64',imageBase64Encoded)
         formData.append('postBackgroundImageBase64',postBackgroundImageBase64)
         formData.append('tokenId',tokenId)
@@ -83,6 +85,7 @@ export const editPost = async (id : string, title : string, description : string
     actionBUttonTextColor : string, actionButtonColor : string, actionButtonLink : string, actionButtonText : string,
     actionInfoBackgroundColor : string , hasShadow : boolean | null, autoPlay : boolean | null,
     actionButtonInfoText : string,
+    actionButtonInfoTextColor : string,
     hasCallToAction : boolean,
     postBackgroundImageBase64 : string | null,
     contentFile : any,
@@ -119,6 +122,7 @@ export const editPost = async (id : string, title : string, description : string
         formData.append('actionButtonColor',actionButtonColor)
         formData.append('actionButtonLink',actionButtonLink)
         formData.append('actionButtonInfoText',actionButtonInfoText)
+        formData.append('actionButtonInfoTextColor',actionButtonInfoTextColor)
         formData.append('actionButtonText',actionButtonText)
         if(imageBase64Encoded) formData.append('postImageBase64',imageBase64Encoded)
         formData.append('actionInfoBackgroundColor',actionInfoBackgroundColor)

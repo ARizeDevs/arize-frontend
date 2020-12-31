@@ -7,6 +7,8 @@
 
 .bodyContainer {
     padding: 40px;
+    margin-top: 30px;
+
     height: 92vh;
     /* flex: 1 1; */
     display: flex;

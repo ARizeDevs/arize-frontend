@@ -7,6 +7,7 @@
 
 .bodyContainer {
     /* padding: 40px; */
+    margin-top: 30px;
     width: 70%;
     margin-left: 15%;
     flex: 1 1 auto;
@@ -73,5 +74,5 @@
     height: 100%;
     /* height: 100%; */
     justify-content: flex-end;
-    padding-right: 50px;
+    /* padding-right: 50px; */
 }

@@ -11,6 +11,7 @@
   }
 
 .bodyContainer {
+    margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
     flex: 1 1 auto;

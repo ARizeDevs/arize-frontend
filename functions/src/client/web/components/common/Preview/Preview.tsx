@@ -19,7 +19,8 @@ interface IProps {
     postTitle : string,
     contentFile : any,
     backgrounImage : string,
-    hasCallToAction : boolean
+    hasCallToAction : boolean,
+    infoTextColor : string
 }
 
 const Preview = (props : IProps) => {
@@ -30,6 +31,7 @@ const Preview = (props : IProps) => {
         buttonText,
         buttonTextColor,
         contentFile,
+        infoTextColor,
         id,
         infoText,
         postTitle,
@@ -58,6 +60,7 @@ const Preview = (props : IProps) => {
                         actionButtonText={buttonText}
                         actionButtonTextColor={buttonTextColor}
                         actionButtonInfoText={infoText}
+                        actionButtonInfoTextColor={infoTextColor}
                         background={backgrounImage}
                         poster={poster}
                         usdzURL={''}
@@ -68,7 +71,8 @@ const Preview = (props : IProps) => {
                         <Banner
                             postTitle={postTitle}
                             isAndroid={isAndroid}
-                            infoText={infoText}                        
+                            infoText={infoText}
+                            infoTextColor={infoTextColor}                       
                             buttonColor={buttonColor}
                             buttonText={buttonText}
                             buttonTextColor={buttonTextColor}
@@ -92,9 +96,9 @@ const Preview = (props : IProps) => {
     return (
         <div className={styles.root}>
             <div className={styles.title}>
-                <h3>Preview in: </h3>&nbsp;&nbsp;
-                <p onClick={() => setIsAndroid(false)} style={{color : !isAndroid ? 'var(--main-blue-color)' : 'var(--main-lightgray2-color)' }}>IOS</p>&nbsp;&nbsp;
-                <p onClick={() => setIsAndroid(true)} style={{color : isAndroid ? 'var(--main-blue-color)' : 'var(--main-lightgray2-color)' }}>Android</p>
+                <h4>Preview in: </h4>&nbsp;&nbsp;
+                <p onClick={() => setIsAndroid(false)} style={{color : !isAndroid ? 'var(--main-blue-color)' : 'var(--main-lightgray2-color)',fontSize:'13px'}}>IOS</p>&nbsp;&nbsp;
+                <p onClick={() => setIsAndroid(true)} style={{color : isAndroid ? 'var(--main-blue-color)' : 'var(--main-lightgray2-color)',fontSize:'13px'}}>Android</p>
             </div>
             {isAndroid ? 
                 <div className={styles.device} style={{background : 'url(/images/android-phone.png)'}}>

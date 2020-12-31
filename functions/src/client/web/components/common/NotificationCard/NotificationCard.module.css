@@ -1,0 +1,16 @@
+.root {
+    height: 100px;
+    width: 100%;
+    border-radius: 16px;
+    background-color: var(--main-lightgray-color);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 16px;
+}
+
+.root small {
+    color: var(--main-lightgray2-color);
+}

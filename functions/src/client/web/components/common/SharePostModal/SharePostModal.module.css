@@ -1,0 +1,59 @@
+
+.shareModal {
+    position: absolute;
+    top: 30vh;
+    left: 20vw;
+    right: 20vw;
+    bottom: 30vh;
+    background-color: white;
+    border-radius: 40px;
+    outline: none;
+    z-index: 10;
+}
+
+.overlay {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--main-lightgray2-color);
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height : 100%;
+    justify-content: flex-start;
+}
+
+
+.row {
+    display: flex;
+    width : 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.tab {
+    color: var(--main-lightgray2-color);
+    margin-right: 70px;
+    cursor: pointer;
+}
+
+.tabActive {
+    color: var(--main-blue-color)
+}
+
+.divider {
+    height: 1px;
+    width: 100%;
+    background-color: var(--main-lightgray2-color);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

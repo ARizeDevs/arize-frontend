@@ -129,10 +129,10 @@ const Profile = (props : IProps) => {
     }, [id])
 
 
-    const onShareProflie = () => {
-        let userID = id
+    const onShareProflie = async () => {
+        let userID : any = id
         if(!userID) {
-            userID = getUserID()
+            userID = await getUserID()
         }
 
         const shareURL = `https://arizear.app/profile/${userID}`

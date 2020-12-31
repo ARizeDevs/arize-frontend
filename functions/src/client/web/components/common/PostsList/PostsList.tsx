@@ -11,15 +11,19 @@ import EyeIcon from '../../../../assets/icons/eye.svg'
 import ShareIcon from '../../../../assets/icons/share.svg'
 import ARViewIcon from '../../../../assets/icons/arViewIcon.svg'
 import TDViewIcon from '../../../../assets/icons/3dViewIcon.svg'
+import ARViewsIcon from '../../../../assets/icons/ar-views.svg'
+import TDViewsIcon from '../../../../assets/icons/3d-views.svg'
 import PenIcon from '../../../../assets/icons/pen2.svg'
 import TrashIcon from '../../../../assets/icons/trash-alt.svg'
 import ChartIcon from '../../../../assets/icons/chart-line.svg'
 import EmptyStateIcon from '../../../../assets/banners/Empty state.svg'
+import EmptySearchIcon from '../../../../assets/banners/File searching.svg'
 
 import styles from './PostsList.module.css'
 import { deletePost } from '../../../API'
 import Loading from '../Loading'
 import QRModal from '../QRModal'
+import SharePostModal from '../SharePostModal'
 
 interface IProps {
     searchText : string,
@@ -31,7 +35,7 @@ interface IPost { status: string,arViews : [] , tdViews : [] , shares : [] ,imag
 
 const SearchBar = ({ text, setText } : { text : string, setText : (text : string) => void }) => {
     return (
-        <div style={{width:'100%',position:'sticky',top:'0px',zIndex:1}}>
+        <div style={{width:'100%',position:'sticky',top:'0px'}}>
             <Input required={false} text={''} type='text' LeftIcon={SearchIcon} onChange={setText} value={text} />
         </div>
     )
@@ -66,6 +70,8 @@ const PostCardMenu = ({ onEdit, onView, onInsights, onDelete, onCloseRequest } :
 }
 
 const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPost) => {
+    console.log('ar , ', arViews)
+
     const [ image, setImage ] = useState('')
 
     const [ qrModalOpen, setQRModalOpen ] = useState(false)
@@ -75,6 +81,7 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
     const [ deleting, setDeleting ] = useState(false)
     // const [ deletingMessage, setDeletingMessage ] = useState('')
     const [ menuOpen, setMenuOpen ] = useState(false)
+    const [ shareModalOpen, setShareModalOpen ] = useState(false)
 
     const processing = status === 'PROCESSING'
 
@@ -113,17 +120,28 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
             {menuOpen?<PostCardMenu onCloseRequest={() => setMenuOpen(false)} onEdit={onEdit} onDelete={onDelete} onInsights={onInsights} onView={onView}  />:null}
             <div style={{flexWrap:'wrap',marginTop:'10px',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
                 <div style={{display:'flex',flexWrap:'wrap',flexDirection:'row'}}>
-                    <div style={{width : '20px',height : '20px'}}>
+                    <div className={styles.view}>
                         {/* @ts-ignore */}
                         <EyeIcon fill='var(--main-lightgray2-color)'/>
+                        <div className={styles.viewToolTip}>
+                            <div className={styles.textPart}>
+                                <ARViewsIcon />&nbsp;&nbsp;
+                                <p>{arViews?arViews.length:0}</p>&nbsp;
+                                <div style={{height:'90%',width:'1px',backgroundColor:'var(--main-lightgray2-color'}}></div>&nbsp;
+                                <TDViewsIcon />&nbsp;&nbsp;
+                                <p>{tdViews?tdViews.length:0}</p>
+                            </div>
+                            <div className={styles.tailPart}></div>
+                        </div>
                     </div>
                     &nbsp;
                     <small style={{color : 'var(--main-lightgray2-color)'}}>{tdViews?tdViews.length:0}</small>
                     &nbsp;
                     &nbsp;
-                    <div style={{width : '20px',height : '20px'}}>
+                    <div onClick={() => setShareModalOpen(true)} className={styles.share}>
                         {/* @ts-ignore */}
                         <ShareIcon fill='var(--main-lightgray2-color)'/>
+                        
                     </div>
                     &nbsp;
                     <small style={{color : 'var(--main-lightgray2-color)'}}>{shares?shares.length:0}</small>
@@ -140,6 +158,11 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
             </div>
 
             {deleting?<Loading text='deleting post ...' />:null}
+            <SharePostModal 
+                modalOpen={shareModalOpen}
+                onCloseRequest={() => setShareModalOpen(false)}
+                postID={id}
+            />
             <QRModal 
                 isOpen={qrModalOpen}
                 onRequestClose={() => setQRModalOpen(false)}
@@ -203,6 +226,18 @@ const EmptyList = () => {
     )
 }
 
+const NoSearchResultList = () => {
+    return(
+        <div className={styles.column}>
+            <h2>No Results :(</h2>
+            <br></br>
+            <p>Check your spelling or search something else!</p>
+            <br></br>
+            <EmptySearchIcon />
+        </div>
+    )
+}
+
 const PostsList = (props : IProps) => {
     const { searchText, setSearchText, list } = props
 
@@ -210,11 +245,15 @@ const PostsList = (props : IProps) => {
 
     return (
         <div className={styles.root}>
-            <SearchBar text={searchText} setText={setSearchText}  />
+            {
+                list.length === 0 ? 
+                <EmptyList />:
+                filteredList.length === 0 ?
+                <NoSearchResultList />:
+                <Posts list={filteredList} />
+            }
             <br></br>
-            {list.length === 0 ? 
-            <EmptyList />
-            :<Posts list={filteredList} />}
+            <SearchBar text={searchText} setText={setSearchText}  />
         </div>
     )
 }

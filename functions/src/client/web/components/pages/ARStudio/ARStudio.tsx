@@ -26,7 +26,9 @@ interface IProps {
 }
 
 const ARStudio = (props : IProps) => {
+    // console.log(props)
 
+    // return (<div>salam</div>)
     const { isEdit, postID, } = props
 
     const router = useRouter()
@@ -52,6 +54,7 @@ const ARStudio = (props : IProps) => {
     const [ actionBUttonTextColor, setActionBUttonTextColor] = useState('#FFFFFF')
     const [ actionButtonColor, setActionButtonColor] = useState('#FF6F48')
     const [ actionButtonInfoText, setActionButtonInfoText ] = useState('')
+    const [ actionButtonInfoTextColor, setActionButtonInfoTextColor ] = useState('#FFFFFF')
     const [ actionButtonLink, setActionButtonLink] = useState('')
     const [ actionButtonText, setActionButtonText] = useState('')
     const [ hasShadow, setHasShadow ] = useState(false)
@@ -108,11 +111,11 @@ const ARStudio = (props : IProps) => {
                         setAutoPlay(postData.autoPlay)
                         setHasShadow(postData.hasShadow)
                         setActionButtonInfoText(postData.actionButtonInfoText)
+                        setActionButtonInfoTextColor(postData.actionButtonInfoTextColor)
                         setActionInfoBackgroundColor(postData.actionInfoBackgroundColor)
                         firebase.storage().ref(postData.glbFileURL).getDownloadURL().then((url) => setContentFile(url))
                         if(postData.backGroundImage) firebase.storage().ref(postData.backGroundImage).getDownloadURL().then((url) => setPostBackgroundImageBase64(url))
                         if(!postData.backGroundImage) setHasBackground(false)
-                        
                     }
                 } catch (error) {
                 } finally {
@@ -177,6 +180,7 @@ const ARStudio = (props : IProps) => {
                     actionInfoBackgroundColor,
                     hasShadow, autoPlay,
                     actionButtonInfoText,
+                    actionButtonInfoTextColor,
                     hasCallToAction,
                     backGroundImageChanged?postBackgroundImageBase64:null, 
                     contentFileChanged?contentFile:null,
@@ -187,6 +191,7 @@ const ARStudio = (props : IProps) => {
                     actionInfoBackgroundColor,
                     hasShadow, autoPlay,
                     actionButtonInfoText,
+                    actionButtonInfoTextColor,
                     hasCallToAction,
                     postBackgroundImageBase64, contentFile, (status : string) => '')
 
@@ -226,6 +231,8 @@ const ARStudio = (props : IProps) => {
                             buttonText='Next'
                         />:null}
                     {page===2?<ARStudioCustomize
+                            actionButtonInfoTextColor={actionButtonInfoTextColor}
+                            setActionButtonInfoTextColor={setActionButtonInfoTextColor}
                             hasCallToAction={hasCallToAction}
                             setHasCallToAction={setHasCallToAction }
                             actionButtonInfoText={actionButtonInfoText}
@@ -269,6 +276,7 @@ const ARStudio = (props : IProps) => {
                         hasShadow={hasShadow}
                         infoBackgroundColor={actionInfoBackgroundColor}
                         infoText={actionButtonInfoText}
+                        infoTextColor={actionButtonInfoTextColor}
                         link={actionButtonLink}
                         poster={imageSrc}
                     />

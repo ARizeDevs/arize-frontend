@@ -15,13 +15,14 @@ interface IProps {
     infoBackgrounColor : string,
     postTitle : string,
     link : string,
-    infoText : string
+    infoText : string,
+    infoTextColor : string
 }
 
 const Banner = (props : IProps) => {
     const router = useRouter()
 
-    const { isAndroid, postTitle, buttonColor, infoText, link, buttonText,buttonTextColor, infoBackgrounColor, } = props
+    const { isAndroid, infoTextColor, postTitle, buttonColor, infoText, link, buttonText,buttonTextColor, infoBackgrounColor, } = props
 
     if(isAndroid) {
         return (
@@ -38,8 +39,8 @@ const Banner = (props : IProps) => {
 
     return (
         <div className={styles.root} style={{backgroundColor:infoBackgrounColor}}>
-            <div style={{width:"70%",display:'flex'}}>
-                <small >{infoText}</small>
+            <div style={{width:"70%",height:'100%'}}>
+                <p style={{color:infoTextColor,height:'100%',fontSize:'13px',wordWrap: 'break-word',textOverflow: 'ellipsis',overflow:'hidden'}}>{infoText}</p>
             </div>
             <div style={{width:'30%'}}>
                 <SolidButton onClick={() => router.push(link)} colorTheme={buttonColor} ><p style={{color:buttonTextColor}}>{buttonText}</p></SolidButton>

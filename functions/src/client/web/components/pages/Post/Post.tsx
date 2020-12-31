@@ -3,7 +3,6 @@ import React , { useState, useEffect} from 'react'
 import { getDirectURL } from '../../../config/firebase'
 import SolidButton from '../../common/buttons/SolidButton'
 
-import Modal from 'react-modal'
 import Navbar from '../../common/Navbar'
 import PostScrollList from '../../common/PostScrollList'
 import ModelViewer from '../ModelViewer'
@@ -15,6 +14,7 @@ import ShareIcon from '../../../../assets/icons/share2.svg'
 
 import styles from './Post.module.css'
 import { useRouter } from 'next/router'
+import SharePostModal from '../../common/SharePostModal'
 
 interface IProps {
     post : any,
@@ -62,6 +62,7 @@ const Post = (props : IProps) => {
                         background={backGroundImage} 
                         actionButtonText={post.actionButtonText}
                         actionButtonInfoBackgroundColor={post.actionInfoBackgroundColor}
+                        actionButtonInfoTextColor={post.actionButtonInfoTextColor}
                         actionButtonLink={post.actionButtonLink}
                         actionButtonColor={post.actionButtonColor}
                         actionButtonTextColor={post.actionBUttonTextColor}
@@ -122,23 +123,11 @@ const Post = (props : IProps) => {
                     <br></br>
                 </div>
             </div>
-            <Modal
-                isOpen={shareModalOpen}
-                // onAfterOpen={afterOpenModal}
-                onRequestClose={() => setShareModalOpen(false)}
-                className={styles.shareModal}
-                overlayClassName={styles.overlay}
-                contentLabel="Example Modal"
-                >
-                    <div className={styles.column} style={{width:'100%',justifyContent:'space-evenly',height:'100%',paddingLeft:'50px'}} >
-                        <div className={styles.row}>
-                            <h3>Embed link : </h3>&nbsp;<a href={`https://arizear.app/model-viewer/${post.id}`}>{`https://arizear.app/model-viewer/${post.id}`}</a>
-                        </div>
-                        <div className={styles.row}>
-                            <h3>link : </h3>&nbsp;<a href={`https://arizear.app/post/${post.id}`}>{`https://arizear.app/post/${post.id}`}</a>
-                        </div>
-                    </div>
-            </Modal>
+            <SharePostModal 
+                modalOpen={shareModalOpen}
+                onCloseRequest={() => setShareModalOpen(false)}
+                postID={post.id}
+            />
             <QRModal 
                 isOpen={qrModalOpen}
                 onRequestClose={() => setQRModalOpen(false)}

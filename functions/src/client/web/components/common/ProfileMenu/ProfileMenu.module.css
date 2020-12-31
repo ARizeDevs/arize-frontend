@@ -4,7 +4,7 @@
     width: 180px;
     left: -90px;
     background-color: white;
-    padding: 20px;
+    padding: 15px;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
@@ -21,14 +21,18 @@
 
 .dropDownItem {
     width: 150px;
-    margin: 10px;
-    padding: 10px;
+    /* margin: 10px; */
+    padding: 15px;
     cursor: pointer;
     border-radius: 16px;
 }
 
 .dropDownItem:hover {
     background-color: var(--main-lightgray-color);
+}
+
+.dropDownItem p {
+    font-size: 13px;
 }
 
 .dropDown:hover .dropwDownContent  {

@@ -11,12 +11,18 @@ export const getTokenID = () => {
 }
 
 export const getUserID = () => {
-    const user = firebase.auth().currentUser
-
-    if (user) {
-        return user.uid
-    } else {
-        Router.push('/login')
-        return
-    }
+    return new Promise((resolve, reject) => {
+        firebase.auth().onAuthStateChanged(async function(user) {
+            try {
+                if(user) {
+                    resolve(user.uid)
+                } else {
+                    Router.push('/login')
+                    reject('no user')
+                }
+            } catch(error) {
+                reject('no user')
+            }
+        })
+    })
 }

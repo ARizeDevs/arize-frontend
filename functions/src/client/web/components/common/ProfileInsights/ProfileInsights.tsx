@@ -52,7 +52,7 @@ const ProfileInsights = (props : IProps) => {
 
     return (
         <div className={styles.root}>
-            <h3>Insights</h3>
+            <h4>Insights</h4>
             <br></br>
             <div style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly',flexWrap:'wrap'}}>
                 <Item tip='3D Views' Icon={TDViewsIcon} value={tdViews} />
