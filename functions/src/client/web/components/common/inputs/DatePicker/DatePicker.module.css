@@ -6,6 +6,8 @@
 .secondContainer {
     width : 100%;
     border: solid 2px;
+    border-color: transparent;
+    box-sizing: border-box;
     height: 50px;
     border-radius: 20px;
     align-items: center;
@@ -14,7 +16,7 @@
 }
 
 .secondContainer:hover {
-    color: var(--main-blue-color);
+    border-color: var(--main-blue-color);
 }
 
 .input {

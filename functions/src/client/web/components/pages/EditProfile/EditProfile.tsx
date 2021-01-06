@@ -182,6 +182,9 @@ const EditProfile = () => {
                         <Input placeholder='Business name' required text='Business Name' type='text' value={businessName} onChange={(e:any) => setBusinessName(e.target.value)}/>
                         &nbsp;
                         &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
                         <Input placeholder='Business type' required text='Business Type' type='text' value={businessType} onChange={(e:any) => setBusinessType(e.target.value)}/>
                     </div>
                     <Input placeholder='Describe a little bit...' required={false} text='Why Do You Want To Use ARize?' type='text' value={whyToUse} onChange={(e:any) => setWhyToUse(e.target.value)}/>

@@ -61,10 +61,10 @@ const SharePostModal = (props : IProps) => {
                     </div>
                 </div>
                 <div className={styles.row}>
-                    <div style={{width:'40%',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                    <div className={styles.banner} style={{width:'40%',display:'flex',alignItems:'center',justifyContent:'center'}}>
                         {isEmbedPage?<EmbedBanner /> : <ShareBanner />}
                     </div>
-                    <div className={styles.column} style={{width:'60%'}}>
+                    <div className={`${styles.column} ${styles.content}`} style={{width:'60%'}}>
                         <div className={styles.row}>
                             <h3 onClick={() => setIsEmbedPage(false)} className={`${styles.tab} ${!isEmbedPage?styles.tabActive:''}`}>Share</h3>
                             <h3 onClick={() => setIsEmbedPage(true)} className={`${styles.tab} ${isEmbedPage?styles.tabActive:''}`}>Embed</h3>

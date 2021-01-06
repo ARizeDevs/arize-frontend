@@ -8,11 +8,23 @@ import CropperModal from '../../CropperModal'
 import ImageUploadLogo from '../../../../../assets/icons/image upload.svg'
 
 import styles from './ImageInput.module.css'
-import { Switch } from '@material-ui/core'
+import { Switch, withStyles } from '@material-ui/core'
 import Message from '../../Message'
 import { IMessageTypes } from '../../Message/Message'
 
-
+const MySwitch = withStyles({
+    switchBase : {
+        color: '#0078FF',
+        '&$checked': {
+            color: '#0078FF',
+        },
+        '&$checked + $track': {
+            backgroundColor: '#0078FF',
+        },
+    },
+    checked: {},
+    track: {},
+})(Switch)
 
 interface IProps {
     text : string,
@@ -50,7 +62,7 @@ const ImageInput = (props : IProps) => {
     return <div className={styles.root}>
             <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
                 <p style={{fontWeight:'bold'}} className={error?styles.error:''}>{text}</p>
-                {toggle !== undefined?<Switch
+                {toggle !== undefined?<MySwitch
                     checked={toggle}
                     // @ts-ignore
                     onChange={(event) => setToggle(event.target.checked)}

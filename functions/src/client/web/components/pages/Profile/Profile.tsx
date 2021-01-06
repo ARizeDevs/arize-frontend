@@ -192,7 +192,7 @@ const Profile = (props : IProps) => {
                         <div className={styles.shadowedBox}>
                                 <RemainingSlots maxSlots={maxSlots} usedSlots={posts.length} />
                                 <br></br>
-                                <SolidButton colorTheme={'black'} onClick={() => console.log('ok')}  ><h3>Buy More AR Slots</h3></SolidButton>
+                                <SolidButton colorTheme={'black'} onClick={() => console.log('ok')}  ><h3>Upgrade</h3></SolidButton>
                         </div>
                             <br></br>
                             <div className={styles.shadowedBox}>

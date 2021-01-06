@@ -9,6 +9,7 @@ import styles from './ProfileMenu.module.css'
 import { getUserID } from '../../../API/utils'
 import { copyToClipBoard } from '../../../helpers/copyToClipBoard'
 import DefaultAvatar from '../../../../assets/icons/default avatar.svg'
+import { useToasts } from 'react-toast-notifications'
 
 interface IProps {
     imageSrc? : string,
@@ -16,17 +17,20 @@ interface IProps {
 
 const ProfileMenu = (props : IProps) => {
     const router = useRouter()
+    const { addToast } = useToasts()
 
     const { imageSrc } = props
 
     const onProfileClick = () => router.push('/profile')
     const onEditProfileClick = () => router.push('/edit-profile')
-    const onShareClick = () => {
-        const userID = getUserID()
+    const onShareClick = async () => {
+        const userID = await getUserID()
 
         const shareURL = `https://arizear.app/profile/${userID}`
 
         copyToClipBoard(shareURL)
+
+        addToast('url copied',{ appearance : 'info' })
     }
     const onLogoutClick = () => {
         firebase.auth().signOut()

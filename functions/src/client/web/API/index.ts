@@ -3,6 +3,28 @@ import { getTokenID } from './utils'
 
 const postServerRoute = '/post'
 
+
+export const sharePost = async (UUID : string, location : { lat : string, long : string }, postID : string) => {
+    return axios.post(`${postServerRoute}/${postID}/share`, {
+        UUID,
+        location
+    })
+}
+
+export const view3DPost = async (UUID : string, location : { lat : string, long : string }, postID : string) => {
+    return axios.post(`${postServerRoute}/${postID}/3dview`, {
+        UUID,
+        location
+    })
+}
+
+export const viewARPost = async (UUID : string, location : { lat : string, long : string }, postID : string) => {
+    return axios.post(`${postServerRoute}/${postID}/arview`, {
+        UUID,
+        location
+    })
+}
+
 export const deletePost = async (id : string ) => {
     const tokenId = await getTokenID()
 

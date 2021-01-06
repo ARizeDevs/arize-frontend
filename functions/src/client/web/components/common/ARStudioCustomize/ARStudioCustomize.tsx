@@ -4,6 +4,8 @@ import SolidButton from '../buttons/SolidButton'
 import Input from '../inputs/Input'
 import ImageInput from '../inputs/ImageInput'
 
+import ArrowLeftIcon from '../../../../assets/icons/arrow-left.svg'
+
 import styles from './ARStudioCustomize.module.css'
 import ColorPicker from '../inputs/ColorPicker'
 import Toggle from '../inputs/Toggle'
@@ -41,10 +43,19 @@ interface IProps {
 }
 
 const ARStudioPostDetail = (props : IProps) => {
-    const { error, actionButtonInfoTextColor, setActionButtonInfoTextColor, actionButtonInfoText, setActionButtonInfoText, hasCallToAction, setHasCallToAction, autoPlay, hasShadow, setAutoPlay, setHasShadow, hasBackground, setHasBackground, buttonText, actionInfoBackgroundColor, setActionInfoBackgroundColor, backButtonText, onFinish , postBackgroundImageBase64, setPostBackgroundImageBase64, actionBUttonTextColor ,actionButtonColor, actionButtonLink, actionButtonText, onBack, setActionBUttonTextColor, setActionButtonColor, setActionButtonLink, setActionButtonText  } = props
+    const { error, actionButtonInfoTextColor, setActionButtonInfoTextColor, actionButtonInfoText, setActionButtonInfoText, hasCallToAction, setHasCallToAction, autoPlay, hasShadow, setAutoPlay, setHasShadow, hasBackground, setHasBackground, buttonText, actionInfoBackgroundColor, setActionInfoBackgroundColor, onFinish , postBackgroundImageBase64, setPostBackgroundImageBase64, actionBUttonTextColor ,actionButtonColor, actionButtonLink, actionButtonText, onBack, setActionBUttonTextColor, setActionButtonColor, setActionButtonLink, setActionButtonText  } = props
 
     return (
         <div className={styles.root}>
+            <div style={{width:'100%',display:'flex'}}>
+                <div onClick={onBack} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start'}}>
+                    <div style={{width:'16px',marginRight:'8px'}}>
+                        {/* @ts-ignore */}
+                        <ArrowLeftIcon fill='black'/>
+                    </div>
+                    <h4>back</h4>
+                </div>
+            </div>
             <div className={styles.inputWrapper}>
                 <Toggle active={hasCallToAction} setActive={setHasCallToAction} text='Set Call To Action' />
                 {hasCallToAction?
@@ -53,13 +64,21 @@ const ARStudioPostDetail = (props : IProps) => {
                     
                     <div style={{width:'100%',display:'flex',flexDirection:'row'}}>
                         <Input placeholder='some info...' error={error.actionButtonInfoText} maxInputLength={100} required text="Action button info text"  type="text" value={actionButtonInfoText} onChange={setActionButtonInfoText} />
-                        &nbsp;&nbsp;
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
                         <ColorPicker color={actionButtonInfoTextColor} setColor={setActionButtonInfoTextColor} text='Info Text Color' />
                     </div>
                     <br></br>
                     <div style={{width:'100%',display:'flex',flexDirection:'row'}}>
                         <Input placeholder='some text...' error={error.actionButtonText} maxInputLength={13} required text="Action button Text"  type="text" value={actionButtonText} onChange={setActionButtonText} />
-                        &nbsp;&nbsp;
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
                         <ColorPicker color={actionBUttonTextColor} setColor={setActionBUttonTextColor} text='Text Color' />
                     </div>
                     <br></br>
@@ -75,17 +94,17 @@ const ARStudioPostDetail = (props : IProps) => {
                 <Toggle  active={autoPlay} setActive={setAutoPlay} text="Autoplay" />
                 <div className={styles.contentImageContainer}>
                     <div className={styles.imageInputContainer}>
-                        <ImageInput error={error.postBackgroundImageBase64} toggle={hasBackground} setToggle={setHasBackground} setImageSrc={setPostBackgroundImageBase64}  imageSrc={postBackgroundImageBase64} text='Skybox*' extensions={['hdr','jpeg','jpg']}/>
+                        <ImageInput error={error.postBackgroundImageBase64} toggle={hasBackground} setToggle={setHasBackground} setImageSrc={setPostBackgroundImageBase64}  imageSrc={postBackgroundImageBase64} text='Skybox*' extensions={['hdr','jpeg','jpg','png']}/>
                     </div>
                 </div>
             </div>
             <div style={{display:'flex' , width:'100%', flexDirection : 'row' , justifyContent : 'space-between'}}>
-                <div className={styles.buttonWrapper}>
+                {/* <div className={styles.buttonWrapper}>
                     <SolidButton onClick={onBack} ><h3>{backButtonText}</h3></SolidButton>
-                </div>
-                <div className={styles.buttonWrapper}>
-                    <SolidButton onClick={onFinish} ><h3>{buttonText}</h3></SolidButton>
-                </div>
+                </div> */}
+                {/* <div className={styles.buttonWrapper}> */}
+                <SolidButton onClick={onFinish} ><h3>{buttonText}</h3></SolidButton>
+                {/* </div> */}
             </div>
         </div>)
 }

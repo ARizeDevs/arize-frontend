@@ -15,6 +15,8 @@ import ShareIcon from '../../../../assets/icons/share2.svg'
 import styles from './Post.module.css'
 import { useRouter } from 'next/router'
 import SharePostModal from '../../common/SharePostModal'
+import { UDIDContext } from '../../common/UniqueDeviceIdDetector'
+import { sharePost } from '../../../API'
 
 interface IProps {
     post : any,
@@ -22,6 +24,7 @@ interface IProps {
 }
 
 const Post = (props : IProps) => {
+
     const router = useRouter()
 
     const { post, relatedPosts } = props
@@ -33,6 +36,7 @@ const Post = (props : IProps) => {
     const [ poster, setPoster ] = useState('')
     const [ shareModalOpen, setShareModalOpen ] = useState(false)
     const [ qrModalOpen, setQRModalOpen ] = useState(false)
+    const [ shareAdded, setShareAdded ] = useState(false)
 
     useEffect(() => {
         if(post.author && post.author.profilePicURL) {
@@ -89,10 +93,27 @@ const Post = (props : IProps) => {
                                 <EmailIcon />
                                 <p>&nbsp;</p>
                             </a>&nbsp;
-                            <div onClick={() => setShareModalOpen(true)} className={styles.icon + ' ' + styles.column} style={{alignItems:'center'}} >
-                                <ShareIcon />
-                                <p className={styles.grayColor} >{post.shares?post.shares.length:0}</p>
-                            </div>&nbsp;
+                            <UDIDContext.Consumer >
+                                {value => {
+                                    const addShare = async () => {
+                                        if(value.UDIDCTX && post.id) {
+                                            if(!shareAdded) {
+                                                // @ts-ignore
+                                                await sharePost(value.UDIDCTX,value.location, post.id)
+                                                setShareAdded(true)
+                                            }
+                                        }
+                                    }
+                                    
+                                    return (
+                                        <div onClick={() => {setShareModalOpen(true); addShare()}} className={styles.icon + ' ' + styles.column} style={{alignItems:'center'}} >
+                                            <ShareIcon />
+                                            <p className={styles.grayColor} >{post.shares?post.shares.length:0}</p>
+                                        </div>
+                                    )
+                                }}
+                            </UDIDContext.Consumer >
+                            &nbsp;
                         </div>
                     </div>
                     <div className={styles.divider}></div>

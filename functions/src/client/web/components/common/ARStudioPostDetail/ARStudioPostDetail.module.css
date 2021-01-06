@@ -22,9 +22,10 @@
 
 .inputWrapper {
     flex: 1 1 auto;
-    width: 90%;
-    padding-left: 10%;
-    padding-right: 10%;
+    width: 98%;
+    /* padding-left: 10%; */
+    /* padding-right: 10%; */
+    padding-right: 2%;
     height: 60vh;
     overflow-y: auto;
     overflow-x: hidden;

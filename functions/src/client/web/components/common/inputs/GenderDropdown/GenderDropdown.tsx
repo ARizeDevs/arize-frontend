@@ -9,7 +9,7 @@ const customStyles = {
     container  : (provided : any, state : any) => ({
         ...provided,
         height : '50px',
-        borderRadius:'20px'
+        borderRadius:'16px'
       }),
       valueContainer :  (provided : any, state : any) => ({
         ...provided,
@@ -21,7 +21,8 @@ const customStyles = {
         height : '50px',
         borderRadius:'20px',
         backgroundColor : 'var(--main-lightgray-color)',
-        border:'2px solid black'
+        border:'2px solid transparent'
+        // border : 'none'
       }),
 }
 

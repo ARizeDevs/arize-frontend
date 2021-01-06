@@ -17,12 +17,9 @@ const UnauthorizedRedirect = (props : IProps) => {
 
     useEffect(() => {
         const unsubscribe = firebase.auth().onAuthStateChanged(async function(user) {
-            console.log('redirect') 
-            console.log(user);
-            console.log('--------');
             
             if(!user) {
-                // router.push('/login')
+                router.push('/login')
             } else {
                 if(user.uid) {
                     const checkProfileResult = await checkProfile(user.uid,user.email)
@@ -32,7 +29,7 @@ const UnauthorizedRedirect = (props : IProps) => {
                         router.push('/complete-profile')
                     }
                 } else {
-                    // router.push('/login')
+                    router.push('/login')
                 }
             }
         });

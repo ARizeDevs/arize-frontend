@@ -20,10 +20,11 @@ import EmptyStateIcon from '../../../../assets/banners/Empty state.svg'
 import EmptySearchIcon from '../../../../assets/banners/File searching.svg'
 
 import styles from './PostsList.module.css'
-import { deletePost } from '../../../API'
+import { deletePost, sharePost } from '../../../API'
 import Loading from '../Loading'
 import QRModal from '../QRModal'
 import SharePostModal from '../SharePostModal'
+import { UDIDContext } from '../UniqueDeviceIdDetector'
 
 interface IProps {
     searchText : string,
@@ -82,6 +83,7 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
     // const [ deletingMessage, setDeletingMessage ] = useState('')
     const [ menuOpen, setMenuOpen ] = useState(false)
     const [ shareModalOpen, setShareModalOpen ] = useState(false)
+    const [ shareAdded, setShareAdded ] = useState(false)
 
     const processing = status === 'PROCESSING'
 
@@ -138,11 +140,26 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
                     <small style={{color : 'var(--main-lightgray2-color)'}}>{tdViews?tdViews.length:0}</small>
                     &nbsp;
                     &nbsp;
-                    <div onClick={() => setShareModalOpen(true)} className={styles.share}>
-                        {/* @ts-ignore */}
-                        <ShareIcon fill='var(--main-lightgray2-color)'/>
-                        
-                    </div>
+                    <UDIDContext.Consumer >
+                        {value => {
+                            const addShare = async () => {
+                                if(value.UDIDCTX && id) {
+                                    if(!shareAdded) {
+                                        // @ts-ignore
+                                        await sharePost(value.UDIDCTX,value.location, id)
+                                        setShareAdded(true)
+                                    }
+                                }
+                            }
+
+                            return (
+                                <div onClick={() => {setShareModalOpen(true);addShare()}} className={styles.share}>
+                                    {/* @ts-ignore */}
+                                    <ShareIcon fill='var(--main-lightgray2-color)'/>
+                                </div>
+                            )
+                        }}
+                    </UDIDContext.Consumer>
                     &nbsp;
                     <small style={{color : 'var(--main-lightgray2-color)'}}>{shares?shares.length:0}</small>
                 </div>

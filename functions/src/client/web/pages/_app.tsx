@@ -15,6 +15,7 @@ Modal.setAppElement('#__next')
 const  MyApp = ({ Component, pageProps } : { Component:any, pageProps:any}) => 
     (<>
         <Head>
+            <meta content="width=device-width, initial-scale=1" name="viewport" />
             <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Muli" />
         </Head>
         <ErrorBoundary>
