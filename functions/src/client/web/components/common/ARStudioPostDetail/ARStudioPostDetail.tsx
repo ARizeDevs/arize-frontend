@@ -40,7 +40,7 @@ const ARStudioPostDetail = (props : IProps) => {
                         <ImageInput error={error.imageSrc} setImageSrc={setImageSrc}  imageSrc={imageSrc} text='Thumbnail*' extensions={['jpg','jpeg','png']} />
                     </div>
                     <div className={styles.imageInputContainer}>
-                        <ContentInput error={error.contentFile} file={contentFile} setFile={setContentFile}  text='GLB / GLTF *' />
+                        <ContentInput error={error.contentFile} file={contentFile} setFile={setContentFile} extensions={['zip','glb']}  text='GLB / ZIP *' />
                     </div>
                 </div>
             </div>

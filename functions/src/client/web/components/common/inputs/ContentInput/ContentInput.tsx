@@ -70,7 +70,7 @@ const ContentInput = (props : IProps) => {
                 </FilePicker>}
             </div> : null }
             {error?<Message type={IMessageTypes.ERROR} text={error} />:null}
-            {!error && fileChoosingSuccess?<Message type={IMessageTypes.SUCCESS} text={'file choosed'} />:null}
+            {!error && fileChoosingSuccess?<Message type={IMessageTypes.SUCCESS} text={'File successfully uploaded!'} />:null}
         </div>
 }
 
