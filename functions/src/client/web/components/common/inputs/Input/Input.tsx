@@ -48,7 +48,7 @@ const Input = (props : IProps) => {
                 {LeftIcon?<LeftIcon onClick={onLeftIconClick?onLeftIconClick:null} className={styles.iconLeft} fill={active?'var(--main-blue-color)':'var(--main-lightgray2-color)'} />:null}
                 {disabled?
                     <input disabled onKeyDown={onKeyDown} placeholder={placeholder?placeholder:''} onChange={onInputChanged as any} value={value} type={type}  className={styles.input}/>
-                    :<input onKeyDown={onKeyDown} placeholder={placeholder?placeholder:''} onChange={onInputChanged as any} value={value} type={type}   className={styles.input}/>
+                    :<input onPaste={(e) => {}} onKeyDown={onKeyDown} placeholder={placeholder?placeholder:''} onChange={onInputChanged as any} value={value} type={type}   className={styles.input}/>
                 }
                 {RightIcon?<RightIcon onClick={onRightIconClick?onRightIconClick:null} className={styles.iconRight} fill={active?'var(--main-blue-color)':'var(--main-black-color)'} />:null}
             </div>

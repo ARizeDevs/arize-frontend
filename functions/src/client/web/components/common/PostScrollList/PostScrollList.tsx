@@ -31,7 +31,10 @@ export const Menu = list =>
   });
 
 const Arrow = ({ text, className }) => {
-  return <div className={className}>{text === '<'?<LeftIcon /> : <RightIcon />}</div>;
+  return <div className={className}>
+      <div style={{width:'30px'}}>
+        {text === '<'?<LeftIcon /> : <RightIcon />}
+      </div></div>;
 };
 
 Arrow.propTypes = {

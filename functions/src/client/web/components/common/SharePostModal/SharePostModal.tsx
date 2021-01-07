@@ -64,7 +64,7 @@ const SharePostModal = (props : IProps) => {
                     <div className={styles.banner} style={{width:'40%',display:'flex',alignItems:'center',justifyContent:'center'}}>
                         {isEmbedPage?<EmbedBanner /> : <ShareBanner />}
                     </div>
-                    <div className={`${styles.column} ${styles.content}`} style={{width:'60%'}}>
+                    <div className={`${styles.column} ${styles.content}`} style={{width:'50%'}}>
                         <div className={styles.row}>
                             <h3 onClick={() => setIsEmbedPage(false)} className={`${styles.tab} ${!isEmbedPage?styles.tabActive:''}`}>Share</h3>
                             <h3 onClick={() => setIsEmbedPage(true)} className={`${styles.tab} ${isEmbedPage?styles.tabActive:''}`}>Embed</h3>
@@ -73,7 +73,7 @@ const SharePostModal = (props : IProps) => {
                         <div className={styles.column} style={{justifyContent:'space-evenly',width:'100%',alignItems:'flex-start'}}>
                             {!isEmbedPage?<p>Copy the link to this page and share it with others. They will be able to open the 3D view with AR integration on iOS, Android and desktop with no app required.</p>
                             :<p>Copy the code snippet below and put it on your webpage or webshop. You can control the size of it by changing the "width" and "height" elements within the code.</p>}
-                            <div onClick={isEmbedPage?onEmbedClick:onShareClick} style={{width:'90%'}}>
+                            <div onClick={isEmbedPage?onEmbedClick:onShareClick} style={{width:'100%'}}>
                                 {isEmbedPage?
                                     <MultiLineInput rows={6} text='' required={false} value={embedText} onChange={() => {}} />
                                     :<Input type='text' text={''} required={false} value={shareURL} onChange={() => {}} />}

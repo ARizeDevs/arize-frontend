@@ -43,36 +43,36 @@ const Support = () => {
             <div className={styles.bodyContainer}>
                     <div className={styles.column} style={{width:'50%'}}>
                        <h2>Need Support?</h2>
+                       <br></br>
                        <p>We are here to help you further!<br></br>Please choose one of the support methods below:</p>
                        <br></br>
                        <br></br>
-                        <div className={styles.row} style={{width:'70%',justifyContent:'space-between'}}>
-                            <div className={styles.column} style={{width:'60px',height:'100px',alignItems:'center'}}>
+                        <div className={styles.row} style={{width:'50%',justifyContent:'space-between'}}>
+                            <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
                                 <FAQsIcon />
-                                <p>FAQs</p>
+                                <p style={{marginTop:'8px'}}>FAQs</p>
                             </div>
-                            <div className={styles.column} style={{width:'60px',height:'100px',alignItems:'center'}}>
+                            <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
                                 <TelegramIcon />
-                                <p>Telegram</p>
+                                <p style={{marginTop:'8px'}}>Telegram</p>
                             </div>
-                            <div className={styles.column} style={{width:'60px',height:'100px',alignItems:'center'}}>
+                            <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
                                 <CallIcon />
-                                <p>Call</p>
+                                <p style={{marginTop:'8px'}}>Call</p>
                             </div>
                         </div>
-                        <br></br>
-                        <div className={styles.row} style={{width:'70%',justifyContent:'space-between'}}>
-                            <div className={styles.column} style={{width:'60px',height:'100px',alignItems:'center'}}>
+                        <div className={styles.row} style={{width:'50%',justifyContent:'space-between'}}>
+                            <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
                                 <ChatIcon />
-                                <p>Chat</p>
+                                <p style={{marginTop:'8px'}}>Chat</p>
                             </div>
-                            <div className={styles.column} style={{width:'60px',height:'100px',alignItems:'center'}}>
+                            <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
                                 <EmailIcon />
-                                <p>Email</p>
+                                <p style={{marginTop:'8px'}}>Email</p>
                             </div>
-                            <div className={styles.column} style={{width:'60px',height:'100px',alignItems:'center'}}>
+                            <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
                                 <BugReportIcon />
-                                <p>Report a Bug</p>
+                                <p style={{marginTop:'8px'}}>Report a Bug</p>
                             </div>
                         </div>
                     </div>

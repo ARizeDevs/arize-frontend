@@ -4,7 +4,7 @@ import React , { useState, useEffect } from 'react'
 import QRModal from '../../common/QRModal'
 
 import ARViewIcon from '../../../../assets/icons/arViewIcon.svg'
-import ShareIcon from '../../../../assets/icons/share16.svg'
+import ShareIcon from '../../../../assets/icons/share.svg'
 
 import styles from './ModelViewer.module.css'
 import SharePostModal from '../../common/SharePostModal'
@@ -105,7 +105,9 @@ const ModelViewer = (props : IProps) => {
                 </button> : null}
                 {showShare ?
                     <button onClick={() => {setShareModalOpen(true);addShare()}} className={styles.shareBtn} >
-                        <ShareIcon />    
+                        <div style={{width:'16px',height:'16px'}}>
+                            <ShareIcon />    
+                        </div>
                     </button>:null
                 }
                 <QRModal 

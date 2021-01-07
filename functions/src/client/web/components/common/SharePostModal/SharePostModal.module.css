@@ -6,7 +6,7 @@
     right: 20vw;
     bottom: 30vh;
     background-color: white;
-    border-radius: 40px;
+    border-radius: 16px;
     outline: none;
     z-index: 10;
 }
@@ -42,7 +42,7 @@
 
 .tab {
     color: var(--main-lightgray2-color);
-    margin-right: 70px;
+    margin-right: 30px;
     cursor: pointer;
 }
 
