@@ -94,7 +94,7 @@ const ModelViewer = (props : IProps) => {
                     skybox-image={background?background:null}
                     title={title}
                     link={actionButtonLink}
-                    alt="Couldn't load the model" 
+                    alt={title}
                     ios-src={fullUSDZUrl}
                     poster={poster?poster:null}
                     style={{width: '100%', height: '100%'}}

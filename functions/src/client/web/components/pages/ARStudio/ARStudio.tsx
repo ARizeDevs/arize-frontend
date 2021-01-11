@@ -27,14 +27,12 @@ interface IProps {
 
 const ARStudio = (props : IProps) => {
 
-    // return (<div>salam</div>)
     const { isEdit, postID, } = props
 
     const router = useRouter()
 
     const [ submiting , setSubmiting ] = useState(false)
     const [ fetchingData, setFetchingData ] = useState(true)
-    // const [ generalError , setGeneralError ] = useState('')
 
     const [ page, setPage ] = useState(1)
     const [ imageSrc , setImageSrc ] = useState('')
@@ -47,9 +45,7 @@ const ARStudio = (props : IProps) => {
     const [ description , setDescription ] = useState('')
     const [ tags , setTags ] = useState(['3DModel'])
     const [ contentFile , setContentFile ] = useState(null)
-    // const [ uploadProgress, setUplaodProgress ] = useState(0)
     const [ hasCallToAction, setHasCallToAction ] = useState(false)
-    // const [ uploadStatus, setUploadStatus ] = useState('')
     const [ actionBUttonTextColor, setActionBUttonTextColor] = useState('#FFFFFF')
     const [ actionButtonColor, setActionButtonColor] = useState('#FF6F48')
     const [ actionButtonInfoText, setActionButtonInfoText ] = useState('')
@@ -108,6 +104,7 @@ const ARStudio = (props : IProps) => {
                         setActionButtonLink(postData.actionButtonLink)
                         setActionButtonText(postData.actionButtonText)
                         setAutoPlay(postData.autoPlay)
+                        setHasCallToAction(postData.hasCallToAction)
                         setHasShadow(postData.hasShadow)
                         setActionButtonInfoText(postData.actionButtonInfoText)
                         setActionButtonInfoTextColor(postData.actionButtonInfoTextColor)
