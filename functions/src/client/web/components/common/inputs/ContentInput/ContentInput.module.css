@@ -14,17 +14,19 @@
     height: 100%;
     border-radius: 20px;
     margin-bottom: 20px;
-    margin-top: 20px;
+    margin-top: 8px;
+    border: 2px solid transparent;
+    box-sizing: border-box;
     background-color: var(--main-lightgray-color);
     transition: .3s;
 }
 
 .imagePickerButton:hover {
-    border: 2px solid var(--main-blue-color);
+    border-color: var(--main-blue-color);
 }
 
 .imagePickerButtonError {
-    border: 2px solid var(--main-red-color);
+    border-color:var(--main-red-color);
 }
 
 .imagePickerButtonSuccess {

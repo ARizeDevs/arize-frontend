@@ -5,7 +5,7 @@ import { IMessageTypes } from '../../Message/Message'
 import styles from './Input.module.css'
 
 interface IProps {
-    text : string,
+    text? : string,
     required : boolean,
     LeftIcon? : any,
     RightIcon? : any,
@@ -43,12 +43,12 @@ const Input = (props : IProps) => {
 
     return (
         <div className={styles.container + ' flex-column'}>
-            <p className={`${styles.label} ${error?styles.error:''}`}>{labelText}</p>
+            {text?<p className={`${styles.label} ${error?styles.error:''}`}>{labelText}</p>:null}
             <div onFocus={onFocus} onBlur={onBlur} className={`${styles.secondContainer} flex-row ${error?styles.secondContainerError: (active?styles.secondContainerActive:'')} ${removeBorder?styles.removeBorder:''}`} >
                 {LeftIcon?<LeftIcon onClick={onLeftIconClick?onLeftIconClick:null} className={styles.iconLeft} fill={active?'var(--main-blue-color)':'var(--main-lightgray2-color)'} />:null}
                 {disabled?
                     <input disabled onKeyDown={onKeyDown} placeholder={placeholder?placeholder:''} onChange={onInputChanged as any} value={value} type={type}  className={styles.input}/>
-                    :<input onKeyDown={onKeyDown} placeholder={placeholder?placeholder:''} onChange={onInputChanged as any} value={value} type={type}   className={styles.input}/>
+                    :<input onPaste={(e) => {}} onKeyDown={onKeyDown} placeholder={placeholder?placeholder:''} onChange={onInputChanged as any} value={value} type={type}   className={styles.input}/>
                 }
                 {RightIcon?<RightIcon onClick={onRightIconClick?onRightIconClick:null} className={styles.iconRight} fill={active?'var(--main-blue-color)':'var(--main-black-color)'} />:null}
             </div>

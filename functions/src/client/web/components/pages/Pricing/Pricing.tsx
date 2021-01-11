@@ -1,6 +1,7 @@
-import { blue } from '@material-ui/core/colors'
+
+import { fontsize } from '*.jpg'
 import React from 'react'
-import { IProps } from '../../common/buttons/SolidButton/interface'
+
 import Navbar from '../../common/Navbar'
 
 import PlanType from '../../common/PlanType'
@@ -18,34 +19,65 @@ const Pricing = () => {
                 <div className={styles.plans}>
                    <PlanType
                         cardTitle='Free'
-                        details={['10 Products','3D Visualizer','Augmented reality','Sharabel link','Embeded Link','Analytics']}
+                        details={[
+                        '10 Products',
+                        '3D Visualizer',
+                        'Augmented reality',
+                        'Sharabel link',
+                        'Embeded Link',
+                        'Analytics'
+                        ]}
                     />
                 
                    <PlanType
-                        details={['60 Products','3D Visualizer','Augmented reality','Sharabel link','Embeded Link','Analytics','Custome Branding']}
+                        details={[
+                            '60 Products',
+                            '3D Visualizer',
+                            'Augmented reality',
+                            'Sharabel link',
+                            'Embeded Link',
+                            'Analytics',
+                            'Custome Branding'
+                        ]}
                         priceColor='#0078FF'
-                        border1='2px solid #FF6F48'
-                        priceMonthly='€45/month'
-                        priceYearly='€495/year'
+                        activeBorder='2px solid #FF6F48'
+                        priceMonthly={<div className={styles.monthly}><p style={{fontSize:24, fontWeight:900}}>€45</p><p style={{fontSize:22, fontWeight:500}}>/month</p></div>}
+                        priceYearly={<div className={styles.monthly}><p style={{fontSize:24, fontWeight:900}}>€495</p><p style={{fontSize:22, fontWeight:500}}>/year</p></div>}
                         titleColor='#FF6F48'
                         cardTitle='Starter'
                         buttonTitle='Upgrade to Starter'
                         buttonColor='#FF6F48'
                    />
                     <PlanType
-                        details={['200 Products','3D Visualizer','Augmented reality','Sharabel link','Embeded Link','Analytics','Custom Branding']}
+                        details={[
+                            '200 Products',
+                            '3D Visualizer',
+                            'Augmented reality',
+                            'Sharabel link',
+                            'Embeded Link',
+                            'Analytics',
+                            'Custom Branding'
+                        ]}
                         priceColor='#0078FF'
-                        priceMonthly='€124/month'
-                        priceYearly='€1,375/year'
+                        priceMonthly={<div className={styles.monthly}><p style={{fontSize:24, fontWeight:900}}>€124</p><p style={{fontSize:22, fontWeight:500}}>/month</p></div>}
+                        priceYearly={<div className={styles.monthly}><p style={{fontSize:24, fontWeight:900}}>€1,375</p><p style={{fontSize:22, fontWeight:500}}>/year</p></div>}
                         cardTitle='Pro'
                         buttonTitle='Upgrade to Pro'
                         buttonColor='#141323'
                    />
                     <PlanType
-                        details={['200+ Products','3D Visualizer','Augmented reality','Sharabel link','Embeded Link','Analytics','Custom Branding']}
+                        details={[
+                            '200+ Products',
+                            '3D Visualizer',
+                            'Augmented reality',
+                            'Sharabel link',
+                            'Embeded Link',
+                            'Analytics',
+                            'Custom Branding'
+                        ]}
                         cardTitle='Enterprise'
                         priceColor='#0078FF'
-                        priceMonthly='Contact Us'
+                        priceMonthly={<p style={{fontSize:24, fontWeight:900}}>Contact Us</p>}
                         buttonTitle='Contact Us'
                         buttonColor='#141323'
                     />

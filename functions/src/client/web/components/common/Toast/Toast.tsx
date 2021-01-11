@@ -11,9 +11,6 @@ import styles from './Toast.module.css'
 
 const Toast = (props : any) => {
     const { children } = props
-    // console.log('hrerjkahdsa')
-    // console.log(props)
-    console.log(props.transitionState)
 
     return (
         <div className={`${styles.shadowedBox} ${props.transitionState === 'entering' ? styles.fadein : ''} ${props.transitionState === 'exiting' ? styles.fadeout : ''}` }>

@@ -179,14 +179,17 @@ const EditProfile = () => {
                     <GenderDropdown error={error.gender} onSelect={validateAndSet(setGender, genderValidator)} selected={gender} />
                     <CountryPicker error={error.location} value={location} onChange={validateAndSet(setLocation, locationValidator)} />
                     <div style={{ display:'flex',flexDirection:'row' }}>
-                        <Input placeholder='Business name' required text='Business Name' type='text' value={businessName} onChange={(e:any) => setBusinessName(e.target.value)}/>
+                        <Input placeholder='Business name' required text='Business Name' type='text' value={businessName} onChange={setBusinessName}/>
                         &nbsp;
                         &nbsp;
-                        <Input placeholder='Business type' required text='Business Type' type='text' value={businessType} onChange={(e:any) => setBusinessType(e.target.value)}/>
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        <Input placeholder='Business type' required text='Business Type' type='text' value={businessType} onChange={setBusinessType}/>
                     </div>
-                    <Input placeholder='Describe a little bit...' required={false} text='Why Do You Want To Use ARize?' type='text' value={whyToUse} onChange={(e:any) => setWhyToUse(e.target.value)}/>
-                    <Input placeholder='https://example.com' required text='Business Website URL' type='text' value={websiteURL} onChange={(e:any) => setWebsiteURL(e.target.value)}/>
-                    <Input placeholder='...' required text='VAT Number' type='text' value={vatNumber} onChange={(e:any) => setVatNumber(e.target.value)}/>
+                    <Input placeholder='Describe a little bit...' required={false} text='Why Do You Want To Use ARize?' type='text' value={whyToUse} onChange={setWhyToUse}/>
+                    <Input placeholder='https://example.com' required text='Business Website URL' type='text' value={websiteURL} onChange={setWebsiteURL}/>
+                    <Input placeholder='...' required text='VAT Number' type='text' value={vatNumber} onChange={setVatNumber}/>
                 </div>
             </div>
             {/* <span className={'error-message'}>{generalError}</span> */}

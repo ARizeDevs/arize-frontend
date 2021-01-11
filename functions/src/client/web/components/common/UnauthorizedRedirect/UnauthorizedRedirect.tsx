@@ -17,9 +17,6 @@ const UnauthorizedRedirect = (props : IProps) => {
 
     useEffect(() => {
         const unsubscribe = firebase.auth().onAuthStateChanged(async function(user) {
-            console.log('redirect') 
-            console.log(user);
-            console.log('--------');
             
             if(!user) {
                router.push('/login')

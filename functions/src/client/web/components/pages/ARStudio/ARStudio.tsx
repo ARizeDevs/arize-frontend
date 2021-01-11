@@ -26,7 +26,6 @@ interface IProps {
 }
 
 const ARStudio = (props : IProps) => {
-    // console.log(props)
 
     // return (<div>salam</div>)
     const { isEdit, postID, } = props

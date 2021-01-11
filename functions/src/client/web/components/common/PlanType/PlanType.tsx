@@ -8,21 +8,21 @@ import { IMessageTypes } from '../Message/Message';
 import Message from '../Message'
 
 interface IProps {
-  buttonTitle:string;
-  border1:string;
-  buttonColor:string;
+  buttonTitle?:string;
+  activeBorder?:string;
+  buttonColor?:string;
   cardTitle:string;
-  priceMonthly:string;
-  titleColor:string;
-  priceYearly:string;
-  priceColor:string;
+  priceMonthly?:JSX.Element;
+  titleColor?:string;
+  priceYearly?:JSX.Element;
+  priceColor?:string;
   details:any;
-  nothing:boolean;
+  rightToggleLabel?:boolean;
 }
 
 
 const PlanType = (props : IProps) => {
-  const {buttonTitle,border1, buttonColor, cardTitle,titleColor,priceMonthly,priceYearly,priceColor, details} = props
+  const {buttonTitle,activeBorder, buttonColor, cardTitle,titleColor,priceMonthly,priceYearly,priceColor, details} = props
  const [value,setValue]= useState(false)
 
   return (
@@ -30,25 +30,25 @@ const PlanType = (props : IProps) => {
       <div className={styles.mostPopular}>
         {titleColor && <Message type={IMessageTypes.STARRED} text={'Most Popular'}/>}
       </div>
-     <div style={{border:border1}} className={styles.shadowedBox}>
+     <div style={{border:activeBorder}} className={styles.shadowedBox}>
     
-      <h1 style={{color:titleColor}} className={styles.tt}>
+      <h1 style={{color:titleColor}} className={styles.titleColor}>
         {cardTitle}
       </h1>
-      <div className={styles.col}>
-        <div className={styles.row}>
+      <div className={styles.choosePlan}>
+        
         {!priceMonthly && <Message type={IMessageTypes.SUCCESS} text={'Active Plan'}/>}
-        </div>
+        
         <h2 style={{color:priceColor}}>
           {value ? priceYearly : priceMonthly}
         </h2>
-        {priceYearly &&  <label className={styles.label1}>VAT not included!</label>}
+        {priceYearly &&  <label className={styles.priceLabel}>VAT not included!</label>}
         
-        {priceYearly &&  <Toggle active={value} posit='flex-start' color='primary' nothing={true} setActive={setValue} text = {value ? <label className={styles.label2}>Yearly (Get 1 month free)</label> : <label className={styles.label1}>Yearly (Get 1 month free)</label>} />}
-       
+        {priceYearly &&  <Toggle active={value} posit='flex-start' rightToggleLabel={true} setActive={setValue} text = {<label className={`${styles.priceLabel2} ${value ? styles.activePriceLabel : ''}`}>Yearly (Get 1 month free)</label>} />}
+        
       </div>
       <PlanDetails details={details}/>
-      {buttonTitle && <SolidButton styleClass={styles.SolidButton}
+      {buttonTitle && <SolidButton onClick={null} styleClass={styles.SolidButton}
         colorTheme={buttonColor}>
         {buttonTitle}
       </SolidButton>}

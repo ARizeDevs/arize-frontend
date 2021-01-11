@@ -55,8 +55,8 @@ const ProfileInsights = (props : IProps) => {
             <h4>Insights</h4>
             <br></br>
             <div style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly',flexWrap:'wrap'}}>
-                <Item tip='3D Views' Icon={TDViewsIcon} value={tdViews} />
                 <Item tip='Shares' Icon={ShareIcon} value={shares} />
+                <Item tip='3D Views' Icon={TDViewsIcon} value={tdViews} />
                 <Item tip='AR Views' Icon={ARViewsIcon} value={arViews} />
                 <Item tip='Clicks' Icon={ClickIcon} value={clicks} />
                 <Item tip='Conversion' Icon={SelectionIcon} value={conversion} />

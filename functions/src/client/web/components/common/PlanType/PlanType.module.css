@@ -15,30 +15,28 @@
 
 }
 
-.tt {
+.titleColor {
     margin-bottom: 16px;
     font-weight: 1000;
 }
-.label1 {
+.priceLabel {
     font-size: .7rem;
     font-weight: 700;
     color: #BEBDC2;
     margin-bottom: 16px;
 }
-
-.label2 {
+.priceLabel2 {
     font-size: .7rem;
     font-weight: 700;
+    margin:auto;
+    color: #BEBDC2;
+}
+
+.activePriceLabel {
     color: #0078FF;
-    margin-bottom: 16px;
 }
-.row {
-    flex-direction: row;
-    display: flex;
-    margin: 0;
-    justify-content: flex-start;
-}
-.col {
+
+.choosePlan {
     flex-direction:column;
     display: flex;
     height: 86px;

@@ -20,10 +20,11 @@ import EmptyStateIcon from '../../../../assets/banners/Empty state.svg'
 import EmptySearchIcon from '../../../../assets/banners/File searching.svg'
 
 import styles from './PostsList.module.css'
-import { deletePost } from '../../../API'
+import { deletePost, sharePost } from '../../../API'
 import Loading from '../Loading'
 import QRModal from '../QRModal'
 import SharePostModal from '../SharePostModal'
+import { UDIDContext } from '../UniqueDeviceIdDetector'
 
 interface IProps {
     searchText : string,
@@ -36,7 +37,7 @@ interface IPost { status: string,arViews : [] , tdViews : [] , shares : [] ,imag
 const SearchBar = ({ text, setText } : { text : string, setText : (text : string) => void }) => {
     return (
         <div style={{width:'100%',position:'sticky',top:'0px'}}>
-            <Input required={false} text={''} type='text' LeftIcon={SearchIcon} onChange={setText} value={text} />
+            <Input required={false} type='text' LeftIcon={SearchIcon} onChange={setText} value={text} />
         </div>
     )
 }
@@ -56,7 +57,7 @@ const PostCardMenu = ({ onEdit, onView, onInsights, onDelete, onCloseRequest } :
 
     return (
         <>
-            <div onSeeked={() => console.log('dsa')} onClick={() => onCloseRequest()} style={{width:'100vw',height:'100vh',color:'black',opacity:'.3',position:'fixed',left:'0',top:'0',zIndex:3}}>
+            <div onClick={() => onCloseRequest()} style={{width:'100vw',height:'100vh',color:'black',opacity:'.3',position:'fixed',left:'0',top:'0',zIndex:3}}>
 
             </div>
             <div className={styles.postCardMenu}>
@@ -70,7 +71,6 @@ const PostCardMenu = ({ onEdit, onView, onInsights, onDelete, onCloseRequest } :
 }
 
 const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPost) => {
-    console.log('ar , ', arViews)
 
     const [ image, setImage ] = useState('')
 
@@ -82,6 +82,7 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
     // const [ deletingMessage, setDeletingMessage ] = useState('')
     const [ menuOpen, setMenuOpen ] = useState(false)
     const [ shareModalOpen, setShareModalOpen ] = useState(false)
+    const [ shareAdded, setShareAdded ] = useState(false)
 
     const processing = status === 'PROCESSING'
 
@@ -113,7 +114,6 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
     return (
         <div style={{width:'20vw',display:'flex',flexDirection:'column',margin:'auto',position:'relative'}}>
             <img className={styles.postItem} src={image} />
-            {processing?<div className={styles.postItem} style={{position:'absolute',backgroundColor:'black',opacity:.6,zIndex:20,display:'flex',alignItems:'center',justifyContent:'center'}}><h3 style={{color:'white'}} >Processing ...</h3></div>:null}
             <div className={styles.editPost} onClick={() => setMenuOpen(!menuOpen)}>
                 <DotIcon />
             </div>
@@ -126,25 +126,40 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
                         <div className={styles.viewToolTip}>
                             <div className={styles.textPart}>
                                 <ARViewsIcon />&nbsp;&nbsp;
-                                <p>{arViews?arViews.length:0}</p>&nbsp;
+                                <p>{arViews?Object.keys(arViews).length:0}</p>&nbsp;
                                 <div style={{height:'90%',width:'1px',backgroundColor:'var(--main-lightgray2-color'}}></div>&nbsp;
                                 <TDViewsIcon />&nbsp;&nbsp;
-                                <p>{tdViews?tdViews.length:0}</p>
+                                <p>{tdViews?Object.keys(tdViews).length:0}</p>
                             </div>
                             <div className={styles.tailPart}></div>
                         </div>
                     </div>
                     &nbsp;
-                    <small style={{color : 'var(--main-lightgray2-color)'}}>{tdViews?tdViews.length:0}</small>
+                    <small style={{color : 'var(--main-lightgray2-color)'}}>{tdViews?Object.keys(tdViews).length:0}</small>
                     &nbsp;
                     &nbsp;
-                    <div onClick={() => setShareModalOpen(true)} className={styles.share}>
-                        {/* @ts-ignore */}
-                        <ShareIcon fill='var(--main-lightgray2-color)'/>
-                        
-                    </div>
+                    <UDIDContext.Consumer >
+                        {value => {
+                            const addShare = async () => {
+                                if(value.UDIDCTX && id) {
+                                    if(!shareAdded) {
+                                        // @ts-ignore
+                                        await sharePost(value.UDIDCTX,value.location, id)
+                                        setShareAdded(true)
+                                    }
+                                }
+                            }
+
+                            return (
+                                <div onClick={() => {setShareModalOpen(true);addShare()}} className={styles.share}>
+                                    {/* @ts-ignore */}
+                                    <ShareIcon fill='var(--main-lightgray2-color)'/>
+                                </div>
+                            )
+                        }}
+                    </UDIDContext.Consumer>
                     &nbsp;
-                    <small style={{color : 'var(--main-lightgray2-color)'}}>{shares?shares.length:0}</small>
+                    <small style={{color : 'var(--main-lightgray2-color)'}}>{shares?Object.keys(shares).length:0}</small>
                 </div>
                 &nbsp;&nbsp;
                 <div style={{display:'flex',flexDirection:'row',flexWrap:'wrap'}}>
@@ -169,6 +184,7 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
                 text='Scan to see AR'
                 url={`https://arizear.app/model-viewer/${id}`}
             />
+            {processing?<div className={styles.postItem} style={{position:'absolute',backgroundColor:'black',opacity:.6,display:'flex',alignItems:'center',justifyContent:'center'}}><h3 style={{color:'white'}} >Processing ...</h3></div>:null}
         </div>
         
     )

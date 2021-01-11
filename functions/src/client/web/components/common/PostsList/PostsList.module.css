@@ -88,7 +88,6 @@
     display: none;
     position: absolute;
     flex-direction: column;
-    /* background-color: white; */
     align-items: center;
     justify-content: flex-start;
     transform: translate(-45%,-150%);
@@ -98,6 +97,7 @@
 .textPart {
     height: 50px;
     border-radius: 8px;
+    background-color: white;
     box-sizing: border-box;
     padding: 16px;
     box-shadow: -3px 10px 20px 1px rgba(0,0,0,0.1);

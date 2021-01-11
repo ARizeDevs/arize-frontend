@@ -52,6 +52,7 @@ const Preview = (props : IProps) => {
                     <ModelViewer
                         showQR={false}
                         id={id}
+                        title={postTitle}
                         autoPlay={autoPlay}
                         glbURL={typeof window !== "undefined" && contentFile ?  (typeof contentFile !== "string"? window.URL.createObjectURL(contentFile) : contentFile ):''}
                         actionButtonColor={buttonColor}

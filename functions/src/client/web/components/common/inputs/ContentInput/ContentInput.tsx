@@ -1,4 +1,4 @@
-import React from 'react'
+import React , { useState } from 'react'
 import { FilePicker } from 'react-file-picker'
 
 import VideoUploadLogo from '../../../../../assets/icons/video-upload.svg'
@@ -22,15 +22,21 @@ interface IProps {
 const ContentInput = (props : IProps) => {
     const { text, extensions, setFile, error, file, fileNotChanged } = props
 
+    const [ localError, setLocalError ] = useState('')
+
     let fileChoosingSuccess = false
     
     if(file) {
         if(typeof file === 'string') {
             if(fileNotChanged) {
                 fileChoosingSuccess = true
+                if(localError)
+                    setLocalError('')
             }
         } else {
             fileChoosingSuccess = true
+            if(localError)
+                setLocalError('')
         }
     }
 
@@ -41,16 +47,16 @@ const ContentInput = (props : IProps) => {
     return <div className={styles.root}>
             <p style={{fontWeight:'bold'}} className={error?styles.error:''}>{text}</p>
             {typeof window !== "undefined" ? 
-            <div className={`${styles.imagePickerButton} ${error?styles.imagePickerButtonError:(fileChoosingSuccess?styles.imagePickerButtonSuccess:'')}`}>
+            <div className={`${styles.imagePickerButton} ${error || localError?styles.imagePickerButtonError:(fileChoosingSuccess?styles.imagePickerButtonSuccess:'')}`}>
                 
                 {extensions?<FilePicker 
                     maxSize={100}
                     extensions={extensions}
                     onChange={onContentChange}
-                    onError={(errMsg : any) => {console.log(errMsg)}}
+                    onError={(errMsg : any) => setLocalError('upload failed!')}
                 >
                     <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
-                        {!error && fileChoosingSuccess ? 
+                        {!error && !localError && fileChoosingSuccess ? 
                             <FileUploadedIcon />:
                             <VideoUploadLogo /> 
                         }
@@ -59,18 +65,20 @@ const ContentInput = (props : IProps) => {
                     maxSize={100}
                     // extensions={extensions}
                     onChange={onContentChange}
-                    onError={(errMsg : any) => {console.log('here')}}
+                    onError={(errMsg : any) => setLocalError('upload failed!')}
                 >
                     <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
-                        {!error && fileChoosingSuccess ? 
+                        {!error && !localError && fileChoosingSuccess ? 
                             <FileUploadedIcon />:
                             <VideoUploadLogo /> 
                         }
                     </div>
                 </FilePicker>}
             </div> : null }
-            {error?<Message type={IMessageTypes.ERROR} text={error} />:null}
-            {!error && fileChoosingSuccess?<Message type={IMessageTypes.SUCCESS} text={'file choosed'} />:null}
+            {error ?<Message type={IMessageTypes.ERROR} text={error} />:
+                localError ? <Message type={IMessageTypes.ERROR} text={localError} />:null
+            }
+            {!error && !localError && fileChoosingSuccess?<Message type={IMessageTypes.SUCCESS} text={'File successfully uploaded!'} />:null}
         </div>
 }
 

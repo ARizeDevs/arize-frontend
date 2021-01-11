@@ -70,13 +70,8 @@ const Profile = (props : IProps) => {
                 try {
                     if(user) {
                         if(id === null || id) {
-                            console.log('00000000000000000')
-                            console.log(id)
                             const user = await getUser(true,id)
-                            console.log(user)
-                            console.log(user.data.data)
                             if(user && user.data.data){
-                                console.log('fucking here')
                                 const userData = user.data.data
                                 setName(userData.name)
                                 setUsername(userData.username)
@@ -95,16 +90,16 @@ const Profile = (props : IProps) => {
                                     let c = 0
                                     userData.posts.forEach((p : any) => {
                                         if(p.arViews) {
-                                            arViews += p.arViews.length
+                                            arViews += Object.keys(p.arViews).length
                                         }
                                         if(p.tdViews) {
-                                            tdViews += p.tdViews.length
+                                            tdViews += Object.keys(p.tdViews).length
                                         }
                                         if(p.shares) {
-                                            shares += p.shares.length
+                                            shares += Object.keys(p.shares).length
                                         }
                                         if(p.clicks) {
-                                            c += p.clicks.length
+                                            c += Object.keys(p.clicks).length
                                         }
                                     })
                                     setTotalShares(shares)
@@ -192,7 +187,7 @@ const Profile = (props : IProps) => {
                         <div className={styles.shadowedBox}>
                                 <RemainingSlots maxSlots={maxSlots} usedSlots={posts.length} />
                                 <br></br>
-                                <SolidButton colorTheme={'black'} onClick={() => console.log('ok')}  ><h3>Buy More AR Slots</h3></SolidButton>
+                                <SolidButton colorTheme={'black'} onClick={() => console.log('ok')}  ><h3>Upgrade</h3></SolidButton>
                         </div>
                             <br></br>
                             <div className={styles.shadowedBox}>

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import ReactCountryFlag  from "react-country-flag"
 import { getCode } from 'country-list';
 
-import SolidButton from '../../buttons/SolidButton'
 import Input from '../../inputs/Input'
 
 import SearchInputIcon from '../../../../../assets/icons/search-input.svg'
@@ -27,7 +26,7 @@ const CountryPickerModal = (props : IProps) => {
 
         return (
             <React.Fragment key={item}>
-                <div onClick={() => setCountry(item)}  style={{backgroundColor:(item === country?'rgba(0,0,0,.1)':'white')}} className={styles.countryItem +  ' flex-row'} >
+                <div onClick={() => {setCountry(item);onClose(item)}}  style={{backgroundColor:(item === country?'rgba(0,0,0,.1)':'white')}} className={styles.countryItem +  ' flex-row'} >
                     <div  className={styles.icon}>
                         {code ?<ReactCountryFlag
                                 countryCode={code}
@@ -54,9 +53,9 @@ const CountryPickerModal = (props : IProps) => {
             <div className={styles.countryList}>
                 {rendredCountryList}
             </div>
-            <div className={styles.buttonContainer}>
-                <SolidButton onClick={() => onClose(country)} ><h3>Done</h3></SolidButton>
-            </div>
+            {/* <div className={styles.buttonContainer}>
+                <SolidButton onClick={() => } ><h3>Done</h3></SolidButton>
+            </div> */}
         </div>
     )
 }

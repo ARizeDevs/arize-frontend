@@ -26,7 +26,7 @@ const SketchfabViewer = (props : IProps) => {
           success: function onSuccess(api) {
             api.start();
             api.addEventListener('viewerready', () => {
-              console.log('Viewer is reaqdy');
+              console.log('Viewer is ready');
             });
           },
           error: function error() {

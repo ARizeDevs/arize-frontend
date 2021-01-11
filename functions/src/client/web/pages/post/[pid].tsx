@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Head from 'next/head'
 import fetch from 'node-fetch'
 
 import Post from '../../components/pages/Post'
-// import {getPost, getRelatedPosts} from '../../API'
 import { baseURL } from '../../config/api'
 import FourOhFour from '../../components/pages/FourOhFour'
+import { UDIDContext } from '../../components/common/UniqueDeviceIdDetector'
+import { view3DPost } from '../../API'
 
 
 const post = ({ post, relatedPosts } : { post : any, relatedPosts : any }) => {
+    const [ viewAdded, setViewAdded ] = useState(false)
+    
+    
     if (!post ) {
         return <FourOhFour />
     }
@@ -21,7 +25,22 @@ const post = ({ post, relatedPosts } : { post : any, relatedPosts : any }) => {
             <script type="module" src="https://unpkg.com/@google/model-viewer@1.1.0/dist/model-viewer.js"></script>
             <script noModule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
         </Head>
-        <Post post={post} relatedPosts={relatedPosts} />
+        <UDIDContext.Consumer >
+            {value => {
+                const addView = async () => {
+                    if(value.UDIDCTX && post.id) {
+                        if(!viewAdded) {
+                            // @ts-ignore
+                            await view3DPost(value.UDIDCTX,value.location, post.id)
+                            setViewAdded(true)
+                        }
+                    }
+                }
+
+                addView()
+                return <Post post={post} relatedPosts={relatedPosts} />
+            }}
+        </UDIDContext.Consumer >
     </>
     )
 }
@@ -29,8 +48,6 @@ const post = ({ post, relatedPosts } : { post : any, relatedPosts : any }) => {
 export async function  getServerSideProps (context : any) {
     const id = context.params.pid
     const res = context.res
-
-    console.log('-----------')
 
     try {
         const result = await fetch(`${baseURL}/post/${id}?author=true`)
