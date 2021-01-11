@@ -36,7 +36,7 @@ const arstudio = ({ post } : { post:any}) => {
                 <script type="module" src="https://unpkg.com/@google/model-viewer@1.1.0/dist/model-viewer.js"></script>
                 <script noModule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
             </Head>
-            <div style={{position:'absolute',left:'50px',top:'50px'}}>
+            <div style={{position:'absolute',left:'20px',top:'20px'}}>
                 <ARizeLogo />
             </div>
             <div style={{width:'100vw',height:'100vh'}}>
@@ -56,6 +56,7 @@ const arstudio = ({ post } : { post:any}) => {
 
                         return <ModelViewer
                             showQR={true}
+                            title={post.title}
                             showShare={true}
                             actionButtonInfoText={post.actionButtonInfoText}
                             id={post.id}

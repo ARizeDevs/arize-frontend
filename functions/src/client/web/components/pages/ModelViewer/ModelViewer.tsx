@@ -14,6 +14,7 @@ import { sharePost, viewARPost } from '../../../API'
 interface IProps {
     glbURL : string,
     usdzURL : string,
+    title : string,
     id : string,
     actionButtonText : string,
     actionButtonTextColor : string,
@@ -36,7 +37,7 @@ const getUSZFileFullURL = (actionButtonBackgroundColor : string, actionButtonCol
 }
 
 const ModelViewer = (props : IProps) => {
-    const { glbURL, background, usdzURL,
+    const { title, glbURL, background, usdzURL,
             actionButtonInfoBackgroundColor, actionButtonColor,
             actionButtonLink, actionButtonText, actionButtonTextColor, actionButtonInfoTextColor,
             poster, autoPlay, id, actionButtonInfoText, showQR, showShare } = props
@@ -91,17 +92,19 @@ const ModelViewer = (props : IProps) => {
                     shadow-intensity="0"
                     shadow-softness="0"
                     skybox-image={background?background:null}
+                    title={title}
+                    link={actionButtonLink}
                     alt="Couldn't load the model" 
                     ios-src={fullUSDZUrl}
                     poster={poster?poster:null}
                     style={{width: '100%', height: '100%'}}
                 >
                     <button slot="ar-button"  className={styles.myArBtn} >
-                        <div onClick={() => addARView()} style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}><ARViewIcon /><h3>View AR</h3></div>
+                        <div onClick={() => addARView()} style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}><ARViewIcon /><h3 style={{marginLeft:'10px'}}>View AR</h3></div>
                     </button>
                 </model-viewer>
                 {!isMobile && id && showQR ? <button onClick={() => setQRModalOpen(true)} className={styles.myArBtn} >
-                    <div style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}><ARViewIcon /><h3>View AR</h3></div>
+                    <div style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}><ARViewIcon /><h3 style={{marginLeft:'10px'}}>View AR</h3></div>
                 </button> : null}
                 {showShare ?
                     <button onClick={() => {setShareModalOpen(true);addShare()}} className={styles.shareBtn} >
