@@ -5,7 +5,7 @@ import fetch from 'node-fetch'
 import Post from '../../components/pages/Post'
 import { baseURL } from '../../config/api'
 import FourOhFour from '../../components/pages/FourOhFour'
-import UniqueDeviceIdDetector, { UDIDContext } from '../../components/common/UniqueDeviceIdDetector'
+import { UDIDContext } from '../../components/common/UniqueDeviceIdDetector'
 import { view3DPost } from '../../API'
 
 
@@ -18,7 +18,7 @@ const post = ({ post, relatedPosts } : { post : any, relatedPosts : any }) => {
     }
     
     return (
-    <UniqueDeviceIdDetector>
+    <>
         <Head>
             <link rel="shortcut icon" href="/images/favicon.png" />
             <title>{post.title}</title>
@@ -41,7 +41,7 @@ const post = ({ post, relatedPosts } : { post : any, relatedPosts : any }) => {
                 return <Post post={post} relatedPosts={relatedPosts} />
             }}
         </UDIDContext.Consumer >
-    </UniqueDeviceIdDetector>
+    </>
     )
 }
 

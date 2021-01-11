@@ -108,7 +108,7 @@ const Post = (props : IProps) => {
                                     return (
                                         <div onClick={() => {setShareModalOpen(true); addShare()}} className={styles.icon + ' ' + styles.column} style={{alignItems:'center'}} >
                                             <ShareIcon />
-                                            <p className={styles.grayColor} >{post.shares?post.shares.length:0}</p>
+                                            <p className={styles.grayColor} >{post.shares?Object.keys(post.shares).length:0}</p>
                                         </div>
                                     )
                                 }}
@@ -123,9 +123,9 @@ const Post = (props : IProps) => {
                             <p>{post.description}</p>
                         </div>
                         <div className={styles.column} style={{width:'30%',marginRight : '20px'}}>
-                            <div style={{width:'100%',marginBottom : '10px'}}>
+                            {post.hasCallToAction?<div style={{width:'100%',marginBottom : '10px'}}>
                                 <SolidButton onClick={() => router.push(post.actionButtonLink)} styleClass={styles.btn} colorTheme={post.actionButtonColor} ><h3 style={{color:post.actionBUttonTextColor}}>{post.actionButtonText}</h3></SolidButton>
-                            </div>
+                            </div>:null}
                             <div style={{width:'100%',marginBottom : '10px'}}>
                                 <SolidButton onClick={() => setQRModalOpen(true)}  ><h3>AR View</h3></SolidButton>
                             </div>

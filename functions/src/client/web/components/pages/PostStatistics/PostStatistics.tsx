@@ -35,7 +35,6 @@ const PostStatistics = (props : IProps ) => {
 
     // useEffect(() => {
     //     const getPost = async () => {
-    //         console.log(pid)
     //         if(pid) {
     //             try {
     //                 firebase.auth().onAuthStateChanged(async function(user) {

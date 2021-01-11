@@ -1,15 +1,20 @@
 import React , { useEffect, useState } from 'react'
 import Head from 'next/head'
 
-import ARizeLog from '../../../assets/icons/logo black new.svg'
+import ARizeLogo from '../../../assets/icons/logo black new.svg'
 
 import ModelViewer from '../../components/pages/ModelViewer'
 import { getPost, view3DPost } from '../../API'
 import { getDirectURL } from '../../config/firebase'
-import UniqueDeviceIdDetector, { UDIDContext } from '../../components/common/UniqueDeviceIdDetector'
+import { UDIDContext } from '../../components/common/UniqueDeviceIdDetector'
+import FourOhFour from '../../components/pages/FourOhFour'
 
 const arstudio = ({ post } : { post:any}) => {
     
+    if(!post) {
+        return <FourOhFour />
+    }
+
     const [ glbURL, setGLBUrl] = useState('')
     const [ usdzURL, setUSDZUrl ] = useState('')
     const [ backGroundImage, setBackgrounImage ] = useState('')
@@ -24,17 +29,17 @@ const arstudio = ({ post } : { post:any}) => {
     },[])
     
     return (
-        <UniqueDeviceIdDetector>
+        <>
             <Head>
                 <link rel="shortcut icon" href="/images/favicon.png" />
                 <title>Model Viewer</title>
                 <script type="module" src="https://unpkg.com/@google/model-viewer@1.1.0/dist/model-viewer.js"></script>
                 <script noModule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
             </Head>
-            <div style={{height:'10vh',width:'100vw',display:'flex',flexDirection:'row',alignItems:'center',paddingLeft:'50px'}}>
-                <ARizeLog />
+            <div style={{position:'absolute',left:'50px',top:'50px'}}>
+                <ARizeLogo />
             </div>
-            <div style={{width:'100vw',height:'90vh'}}>
+            <div style={{width:'100vw',height:'100vh'}}>
                 <UDIDContext.Consumer >
                     {value => {
                         const addView = async () => {
@@ -70,7 +75,7 @@ const arstudio = ({ post } : { post:any}) => {
                     }}
                 </UDIDContext.Consumer>
             </div>
-        </UniqueDeviceIdDetector>
+        </>
 )
 }
 
@@ -78,11 +83,19 @@ const arstudio = ({ post } : { post:any}) => {
 export async function  getServerSideProps (context : any) {
     const id = context.params.pid
 
-    const result = await getPost(id , false)
-
-    return {
-      props: { post : result.data.data.data  },
+    try {
+        const result = await getPost(id , false)
+        
+        return {
+          props: { post : result.data.data.data  },
+        }
+    } catch(error) {
+        console.log(error)
+        return {
+            props : {}
+        }
     }
+
 }
 
 export default arstudio
