@@ -9,9 +9,8 @@ import { UDIDContext } from '../../components/common/UniqueDeviceIdDetector'
 import { view3DPost } from '../../API'
 
 
-const post = ({ post, relatedPosts } : { post : any, relatedPosts : any }) => {
+const post = ({ post, relatedPosts } : { post : any, relatedPosts : any}) => {
     const [ viewAdded, setViewAdded ] = useState(false)
-    
     
     if (!post ) {
         return <FourOhFour />
@@ -52,6 +51,8 @@ const post = ({ post, relatedPosts } : { post : any, relatedPosts : any }) => {
 export async function  getServerSideProps (context : any) {
     const id = context.params.pid
     const res = context.res
+
+   
 
     try {
         const result = await fetch(`${baseURL}/post/${id}?author=true`)

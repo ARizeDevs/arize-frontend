@@ -21,10 +21,10 @@ const rightItems = [
         Icon : SupportIcon,
         href : '/support'
     },
-    {
-        Icon : BellIcon,
-        href : '/notifications'
-    },
+    // {
+    //     Icon : BellIcon,
+    //     href : '/notifications'
+    // },
 ]
 
 const Navbar = (props : IProps) => {
