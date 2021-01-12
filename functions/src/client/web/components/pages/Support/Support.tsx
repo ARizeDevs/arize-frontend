@@ -16,6 +16,7 @@ import { getUser } from '../../../API/user'
 const Support = () => {
 
     const [ imageSrc, setImageSrc ] = useState('')
+    const [ accountType, setAccountType ] = useState('')
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged(async function(user) {
@@ -29,6 +30,7 @@ const Support = () => {
                                 setImageSrc(url)
                             })
                         }
+                        setAccountType(userData.accountType)
                     }
                 }
             } catch (error) {
@@ -53,20 +55,6 @@ const Support = () => {
                                 <p style={{marginTop:'8px'}}>FAQs</p>
                             </div>
                             <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
-                                <TelegramIcon />
-                                <p style={{marginTop:'8px'}}>Telegram</p>
-                            </div>
-                            <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
-                                <CallIcon />
-                                <p style={{marginTop:'8px'}}>Call</p>
-                            </div>
-                        </div>
-                        <div className={styles.row} style={{width:'50%',justifyContent:'space-between'}}>
-                            <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
-                                <ChatIcon />
-                                <p style={{marginTop:'8px'}}>Chat</p>
-                            </div>
-                            <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
                                 <EmailIcon />
                                 <p style={{marginTop:'8px'}}>Email</p>
                             </div>
@@ -75,6 +63,21 @@ const Support = () => {
                                 <p style={{marginTop:'8px'}}>Report a Bug</p>
                             </div>
                         </div>
+                        {accountType && accountType!=='FREE'?
+                        <div className={styles.row} style={{width:'50%',justifyContent:'space-between'}}>
+                            <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
+                                <CallIcon />
+                                <p style={{marginTop:'8px'}}>Call</p>
+                            </div>
+                            <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
+                                <ChatIcon />
+                                <p style={{marginTop:'8px'}}>Chat</p>
+                            </div>
+                            <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
+                                <TelegramIcon />
+                                <p style={{marginTop:'8px'}}>Telegram</p>
+                            </div>
+                        </div>:null}
                     </div>
                 <SupportBanner />
             </div>

@@ -27,8 +27,9 @@ const Banner = (props : IProps) => {
     if(isAndroid) {
         return (
             <div className={styles.root} style={{backgroundColor:'white',width:'80%'}}>
-                <div style={{width:"70%",display:'flex'}}>
-                    <small >{postTitle}</small>
+                <div style={{height:'100%',width:"70%",display:'flex',flexDirection:'column'}}>
+                    <p style={{width:'100%',height:'30%',wordWrap: 'break-word',textOverflow: 'ellipsis',overflow:'hidden'}}>{postTitle}</p>
+                    <small style={{color:'var(--main-lightgray2-color)',width:'100%',height:'70%',wordWrap: 'break-word',textOverflow: 'ellipsis',overflow:'hidden'}}>{link}</small>
                 </div>
                 <div style={{width:'35%'}}>
                     <SolidButton height='30px' onClick={() => router.push(link)} colorTheme={'blue'} ><div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly',width:'100%'}}><GlobeIcon /><p style={{color:'white'}}>visit</p></div></SolidButton>
