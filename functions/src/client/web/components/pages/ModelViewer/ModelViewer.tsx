@@ -65,6 +65,7 @@ const ModelViewer = (props : IProps) => {
                     if(value.UDIDCTX && id) {
                         if(!shareAdded) {
                             try {
+                                // @ts-ignore
                                 await sharePost(value.UDIDCTX,value.location, id)
                                 setShareAdded(true)
                             } catch(error) {
@@ -78,6 +79,7 @@ const ModelViewer = (props : IProps) => {
                     if(value.UDIDCTX && id) {
                         if(!arViewAdded) {
                             try {
+                                // @ts-ignore
                                 await viewARPost(value.UDIDCTX,value.location, id)
                                 setArViewAdded(true)
                             } catch(error) {

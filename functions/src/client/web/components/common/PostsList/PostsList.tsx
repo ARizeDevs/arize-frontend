@@ -143,8 +143,8 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
                             const addShare = async () => {
                                 if(value.UDIDCTX && id) {
                                     if(!shareAdded) {
-                                        // @ts-ignore
                                         try {
+                                            // @ts-ignore
                                             await sharePost(value.UDIDCTX,value.location, id)
                                             setShareAdded(true)
                                         } catch(error ) {
