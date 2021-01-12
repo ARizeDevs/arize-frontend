@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import ARizeLogo from '../ARizeLogo'
 
 import SupportIcon from '../../../../assets/icons/support.svg'
-import BellIcon from '../../../../assets/icons/bell.svg'
+// import BellIcon from '../../../../assets/icons/bell.svg'
 
 import styles from './Navbar.module.css'
 import SolidButton from '../buttons/SolidButton'
