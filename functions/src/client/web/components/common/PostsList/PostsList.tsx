@@ -144,8 +144,12 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
                                 if(value.UDIDCTX && id) {
                                     if(!shareAdded) {
                                         // @ts-ignore
-                                        await sharePost(value.UDIDCTX,value.location, id)
-                                        setShareAdded(true)
+                                        try {
+                                            await sharePost(value.UDIDCTX,value.location, id)
+                                            setShareAdded(true)
+                                        } catch(error ) {
+                                            console.log(error)
+                                        }
                                     }
                                 }
                             }
@@ -159,7 +163,7 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
                         }}
                     </UDIDContext.Consumer>
                     &nbsp;
-                    <small style={{color : 'var(--main-lightgray2-color)'}}>{shares?Object.keys(shares).length:0}</small>
+                    <small style={{color : 'var(--main-lightgray2-color)'}}>{(shares?Object.keys(shares).length:0) +(shareAdded?1:0)}</small>
                 </div>
                 &nbsp;&nbsp;
                 <div style={{display:'flex',flexDirection:'row',flexWrap:'wrap'}}>

@@ -22,6 +22,9 @@ const DatePickerInput = ( props : IProps ) => {
     const onFocus = () => setActive(true)
     const onBlur = () => setActive(false)
 
+    const minDate = new Date()
+    minDate.setFullYear(minDate.getFullYear() - 13)
+
     const renderInput = (props: TextFieldProps): any => (
         <input
           type="text"
@@ -37,7 +40,6 @@ const DatePickerInput = ( props : IProps ) => {
 
     return (
         <MuiPickersUtilsProvider utils={MomentUtils}>
-
             <div className={styles.container + ' flex-column'}>
                 <p className={`${styles.label} ${error?styles.error:''}`}>Day of Birth*</p>
                 <div className={`${styles.secondContainer} flex-row ${active?styles.secondContainerActive:''}`}>
@@ -51,6 +53,7 @@ const DatePickerInput = ( props : IProps ) => {
                         value={value}
                         onChange={onChange}
                         TextFieldComponent={renderInput}
+                        maxDate={minDate}
                         onFocus={onFocus}
                         onBlur={onBlur}
                     />

@@ -64,8 +64,12 @@ const ModelViewer = (props : IProps) => {
                 const addShare = async () => {
                     if(value.UDIDCTX && id) {
                         if(!shareAdded) {
-                            await sharePost(value.UDIDCTX,value.location, id)
-                            setShareAdded(true)
+                            try {
+                                await sharePost(value.UDIDCTX,value.location, id)
+                                setShareAdded(true)
+                            } catch(error) {
+                                console.log(er)
+                            }
                         }
                     }
                 }
@@ -73,8 +77,12 @@ const ModelViewer = (props : IProps) => {
                 const addARView = async () => {
                     if(value.UDIDCTX && id) {
                         if(!arViewAdded) {
-                            await viewARPost(value.UDIDCTX,value.location, id)
-                            setArViewAdded(true)
+                            try {
+                                await viewARPost(value.UDIDCTX,value.location, id)
+                                setArViewAdded(true)
+                            } catch(error) {
+                                console.log(error)
+                            }
                         }
                     }
                 }

@@ -31,8 +31,12 @@ const post = ({ post, relatedPosts } : { post : any, relatedPosts : any }) => {
                     if(value.UDIDCTX && post.id) {
                         if(!viewAdded) {
                             // @ts-ignore
-                            await view3DPost(value.UDIDCTX,value.location, post.id)
-                            setViewAdded(true)
+                            try {
+                                await view3DPost(value.UDIDCTX,value.location, post.id)
+                                setViewAdded(true)
+                            } catch (error) {
+                                console.log(error)
+                            }
                         }
                     }
                 }

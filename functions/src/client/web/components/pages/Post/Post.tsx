@@ -101,8 +101,12 @@ const Post = (props : IProps) => {
                                         if(value.UDIDCTX && post.id) {
                                             if(!shareAdded) {
                                                 // @ts-ignore
-                                                await sharePost(value.UDIDCTX,value.location, post.id)
-                                                setShareAdded(true)
+                                                try {
+                                                    await sharePost(value.UDIDCTX,value.location, post.id)
+                                                    setShareAdded(true)
+                                                } catch(error) {
+                                                    console.log(error)
+                                                }
                                             }
                                         }
                                     }
