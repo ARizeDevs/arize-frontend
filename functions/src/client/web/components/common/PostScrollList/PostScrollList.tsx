@@ -8,8 +8,10 @@ import RightIcon from '../../../../assets/icons/angle-right.svg'
 
 import styles from "./PostScrollList.module.css";
 import { getDirectURL } from "../../../config/firebase";
+import { useRouter }  from 'next/router'
 
-const MenuItem = ({ url , title }) => {
+const MenuItem = ({ url , title, id }) => {
+  const router = useRouter()
 
   const [ imageSRC, setImageSRC ] = useState('')
 
@@ -17,17 +19,16 @@ const MenuItem = ({ url , title }) => {
     getDirectURL(url).then((src) => setImageSRC(src))
   } , [url])
 
-  return <div>
-        <img src={imageSRC} className={`${styles.menuItem}`} />
-        <h3>{title}</h3>
-      </div>;
+  return <div key={id}>
+          <img onClick={() => router.push(`/post/${id}`)} src={imageSRC} className={`${styles.menuItem}`} />
+        </div>;
 };
 
 export const Menu = list =>
   list.map(el => {
-    const { name, imageURL, title } = el;
+    const { name, imageURL, title, id } = el;
 
-    return <MenuItem url={imageURL} title={title} text={name} key={name} />;
+    return <MenuItem url={imageURL} id={id} title={title} text={name} key={id} />;
   });
 
 const Arrow = ({ text, className }) => {

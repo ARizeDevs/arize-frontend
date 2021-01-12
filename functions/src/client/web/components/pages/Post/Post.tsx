@@ -56,6 +56,7 @@ const Post = (props : IProps) => {
                 <br></br>
                 <div className={styles.modelViewer}>
                     <ModelViewer
+                        key={post.id}
                         showQR={false}
                         title={post.title}
                         actionButtonInfoText={post.actionButtonInfoText}
@@ -81,7 +82,7 @@ const Post = (props : IProps) => {
                                 <img style={{width: '100%',height: '100%',borderRadius: '50%'}} src={profileImageSrc} />
                             </div>&nbsp;
                             <div className={styles.column}>
-                                <h3>{post.author.username}</h3>
+                                <h3>{post.author.companyName?post.author.companyName:post.author.username}</h3>
                                 <p className={styles.grayColor}>{new Date(post.submissionDate).toDateString()}</p>
                             </div>
                         </div>
