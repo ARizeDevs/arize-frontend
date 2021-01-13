@@ -113,7 +113,7 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
 
     return (
         <div style={{width:'20vw',display:'flex',flexDirection:'column',margin:'auto',position:'relative'}}>
-            <img className={styles.postItem} src={image} />
+            <img onClick={() => {if(!processing)router.push(`/post/${id}`)}} className={styles.postItem} src={image} />
             <div className={styles.editPost} onClick={() => setMenuOpen(!menuOpen)}>
                 <DotIcon />
             </div>

@@ -68,7 +68,7 @@ const Preview = (props : IProps) => {
                     />
                 </div>
                 { hasCallToAction?
-                    <div style={{position:'absolute',bottom:'7%',width:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                    <div style={{position:'absolute',bottom:'2%',width:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}>
                         <Banner
                             postTitle={postTitle}
                             isAndroid={isAndroid}

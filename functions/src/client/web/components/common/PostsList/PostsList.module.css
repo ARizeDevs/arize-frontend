@@ -9,6 +9,7 @@
 .postItem {
     width: 20vw;
     height: 20vw;
+    cursor: pointer;
     border-radius: 20px;
 }
 
