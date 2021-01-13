@@ -3,6 +3,7 @@ import React from 'react'
 import ErrorTriangle from '../../../../assets/icons/error-triangle.svg'
 import SuccessSign from '../../../../assets/icons/success-sign.svg'
 import InfoIcon from '../../../../assets/icons/exclamation.svg'
+import StarredIcon from '../../../../assets/icons/starred.svg'
 
 import styles from './Message.module.css'
 
@@ -14,7 +15,8 @@ interface IProps {
 export enum IMessageTypes {
     ERROR = 'ERROR',
     SUCCESS = 'SUCCESS',
-    INFO = 'INFO'
+    INFO = 'INFO',
+    STARRED = 'STARRED'
 }
 
 const Message = (props : IProps) => {
@@ -25,6 +27,7 @@ const Message = (props : IProps) => {
             {type === IMessageTypes.ERROR? <ErrorTriangle />:null}
             {type === IMessageTypes.SUCCESS? <SuccessSign />:null}
             {type === IMessageTypes.INFO? <InfoIcon />:null}
+            {type === IMessageTypes.STARRED? <StarredIcon/>:null}
             &nbsp;&nbsp;
             <small 
                 className={
@@ -32,6 +35,8 @@ const Message = (props : IProps) => {
                     ${type === IMessageTypes.ERROR? styles.errorText : ' '}
                     ${type === IMessageTypes.SUCCESS? styles.successText : ' '}
                     ${type === IMessageTypes.INFO? styles.infoText : ' '}
+                    ${type === IMessageTypes.STARRED? styles.starredText : ' '}
+
                     `
                 }
             >

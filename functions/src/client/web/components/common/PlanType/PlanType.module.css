@@ -1,0 +1,55 @@
+.shadowedBox {
+    box-shadow: -3px 10px 20px 1px rgba(0,0,0,0.1);
+    border-radius: 16px;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    width:18rem;
+    justify-content: space-between;
+    height: fit-content;
+    padding: 16px;
+}
+.SolidButton {
+    width: auto;
+    margin-top: 16px;
+
+}
+
+.titleColor {
+    margin-bottom: 16px;
+    font-weight: 1000;
+}
+.priceLabel {
+    font-size: .7rem;
+    font-weight: 700;
+    color: #BEBDC2;
+    margin-bottom: 16px;
+}
+.priceLabel2 {
+    font-size: .7rem;
+    font-weight: 700;
+    margin:auto;
+    color: #BEBDC2;
+}
+
+.activePriceLabel {
+    color: #0078FF;
+}
+
+.choosePlan {
+    flex-direction:column;
+    display: flex;
+    height: 86px;
+}
+.mostPopular{
+    font-weight: 900;
+    height: 30px;
+    padding-left: 10px;
+    margin-top: 21px;
+}
+.colomnContainer {
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+    margin-right: 15px;
+}
