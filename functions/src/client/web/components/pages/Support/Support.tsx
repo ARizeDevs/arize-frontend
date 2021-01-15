@@ -7,7 +7,7 @@ import EmailIcon from '../../../../assets/icons/contact icons/email.svg'
 import CallIcon from '../../../../assets/icons/contact icons/Call.svg'
 import ChatIcon from '../../../../assets/icons/contact icons/Chat.svg'
 import FAQsIcon from '../../../../assets/icons/contact icons/FAQs.svg'
-import BugReportIcon from '../../../../assets/icons/contact icons/report bug.svg'
+import FeatureRequestIcon from '../../../../assets/icons/contact icons/Feature.svg'
 
 import styles from './Support.module.css'
 import firebase from 'firebase'
@@ -50,32 +50,32 @@ const Support = () => {
                        <br></br>
                        <br></br>
                         <div className={`${styles.row} ${styles.formContainer}`}>
-                            <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
+                            <div className={`${styles.column} ${styles.supportItem}`}>
                                 <FAQsIcon />
-                                <p style={{marginTop:'8px'}}>FAQs</p>
+                                <p className={styles.supportItemText}>FAQs</p>
                             </div>
-                            <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
+                            <div className={`${styles.column} ${styles.supportItem}`}>
                                 <EmailIcon />
-                                <p style={{marginTop:'8px'}}>Email</p>
+                                <p className={styles.supportItemText}>Email</p>
                             </div>
-                            <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
-                                <BugReportIcon />
-                                <p style={{marginTop:'8px'}}>Report a Bug</p>
+                            <div className={`${styles.column} ${styles.supportItem}`}>
+                                <FeatureRequestIcon />
+                                <p className={styles.supportItemText}>Request Feature</p>
                             </div>
                         </div>
                         {accountType && accountType!=='FREE'?
                         <div className={`${styles.row} ${styles.formContainer}`}>
-                            <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
+                            <div className={`${styles.column} ${styles.supportItem}`}>
                                 <CallIcon />
-                                <p style={{marginTop:'8px'}}>Call</p>
+                                <p className={styles.supportItemText}>Call</p>
                             </div>
-                            <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
+                            <div className={`${styles.column} ${styles.supportItem}`}>
                                 <ChatIcon />
-                                <p style={{marginTop:'8px'}}>Chat</p>
+                                <p className={styles.supportItemText}>Chat</p>
                             </div>
-                            <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
+                            <div className={`${styles.column} ${styles.supportItem}`}>
                                 <TelegramIcon />
-                                <p style={{marginTop:'8px'}}>Telegram</p>
+                                <p className={styles.supportItemText}>Telegram</p>
                             </div>
                         </div>:null}
                     </div>
