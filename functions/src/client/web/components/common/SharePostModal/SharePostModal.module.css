@@ -4,7 +4,7 @@
     top: 30vh;
     left: 20vw;
     right: 20vw;
-    bottom: 30vh;
+    /* bottom: 30vh; */
     background-color: white;
     border-radius: 16px;
     outline: none;
@@ -78,7 +78,7 @@
         top : 10vh;
         left : 10vw;
         right : 10vw;
-        bottom : 10vh;
+        /* bottom : 10vh; */
     }
 
     .content {

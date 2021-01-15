@@ -60,7 +60,7 @@ const PostsColumn = (props : {list:IPost[],windowWidth:number}) => {
             if( windowWidth < 800) {
                 chunk = 1
             }
-            for (i=props.list.length-4; i>0; i-=chunk) {
+            for (i=props.list.length; i>0; i-=chunk) {
                 results.push(<PostsRow  list={props.list.slice(Math.max(i-chunk,0),i)} chunk={chunk}/>)
             }
         }
