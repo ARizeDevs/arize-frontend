@@ -49,7 +49,7 @@ const Support = () => {
                        <p>We are here to help you further!<br></br>Please choose one of the support methods below:</p>
                        <br></br>
                        <br></br>
-                        <div className={`${styles.row} ${styles.formContainer}`} style={{justifyContent:'space-between'}}>
+                        <div className={`${styles.row} ${styles.formContainer}`}>
                             <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
                                 <FAQsIcon />
                                 <p style={{marginTop:'8px'}}>FAQs</p>
@@ -64,7 +64,7 @@ const Support = () => {
                             </div>
                         </div>
                         {accountType && accountType!=='FREE'?
-                        <div className={`${styles.row} ${styles.formContainer}`} style={{justifyContent:'space-between'}}>
+                        <div className={`${styles.row} ${styles.formContainer}`}>
                             <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
                                 <CallIcon />
                                 <p style={{marginTop:'8px'}}>Call</p>

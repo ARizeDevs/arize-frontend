@@ -60,11 +60,11 @@ const SharePostModal = (props : IProps) => {
                         <CrossIcon />
                     </div>
                 </div>
-                <div className={styles.row}>
-                    <div className={styles.banner} style={{width:'40%',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                <div className={styles.bodyContainer}>
+                    <div className={styles.banner}>
                         {isEmbedPage?<EmbedBanner /> : <ShareBanner />}
                     </div>
-                    <div className={`${styles.column} ${styles.content}`} style={{width:'50%'}}>
+                    <div className={`${styles.column} ${styles.content}`}>
                         <div className={styles.row}>
                             <h3 onClick={() => setIsEmbedPage(false)} className={`${styles.tab} ${!isEmbedPage?styles.tabActive:''}`}>Share</h3>
                             <h3 onClick={() => setIsEmbedPage(true)} className={`${styles.tab} ${isEmbedPage?styles.tabActive:''}`}>Embed</h3>

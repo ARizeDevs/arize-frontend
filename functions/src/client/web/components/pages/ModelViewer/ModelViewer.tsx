@@ -6,6 +6,7 @@ import QRModal from '../../common/QRModal'
 import ARViewIcon from '../../../../assets/icons/arViewIcon.svg'
 import ShareIcon from '../../../../assets/icons/share.svg'
 import FocusIcon from '../../../../assets/icons/focus.svg'
+import CompressIcon from '../../../../assets/icons/compress.svg'
 
 import styles from './ModelViewer.module.css'
 import SharePostModal from '../../common/SharePostModal'
@@ -29,7 +30,8 @@ interface IProps {
     actionButtonInfoTextColor : string,
     showQR : boolean,
     showShare? : boolean
-    onFullScreen? : () => void
+    onFullScreen? : () => void,
+    isFullScreen? : boolean
 }
 
 const getUSZFileFullURL = (actionButtonBackgroundColor : string, actionButtonColor : string,
@@ -42,7 +44,7 @@ const ModelViewer = (props : IProps) => {
     const { title, glbURL, background, usdzURL,
             actionButtonInfoBackgroundColor, actionButtonColor,
             actionButtonLink, actionButtonText, actionButtonTextColor, actionButtonInfoTextColor,
-            poster, autoPlay, id, actionButtonInfoText, showQR, showShare, onFullScreen } = props
+            poster, autoPlay, id, actionButtonInfoText, showQR, showShare, onFullScreen, isFullScreen } = props
 
     const [ qrModalOpen, setQRModalOpen ] = useState(false)
     const [ shareModalOpen, setShareModalOpen ] = useState(false)
@@ -126,10 +128,15 @@ const ModelViewer = (props : IProps) => {
                         </div>
                     </button>:null
                 }
-                {onFullScreen?
-                    <div onClick={onFullScreen} style={{cursor:'pointer',position:'absolute',right:'50px',bottom:'50px',width:'30px',height:'50px'}}>
-                        <FocusIcon />
-                    </div>:null}
+                {onFullScreen ?
+                    <div onClick={onFullScreen} style={{cursor:'pointer',position:'absolute',right:'25px',bottom:'25px',width:'20px',height:'20px'}}>
+                        {isFullScreen?
+                            <CompressIcon />
+                            :
+                            <FocusIcon />
+                        }
+                    </div>
+                :null}
                 <QRModal 
                     isOpen={qrModalOpen}
                     onRequestClose={() => setQRModalOpen(false)}

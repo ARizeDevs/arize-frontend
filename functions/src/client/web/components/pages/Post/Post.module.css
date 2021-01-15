@@ -11,7 +11,7 @@
   }
 
 .bodyContainer {
-    margin-top: 30px;
+    /* margin-top: 30px; */
     margin-left: auto;
     margin-right: auto;
     flex: 1 1 auto;
@@ -76,6 +76,10 @@
 @media screen and (max-width: 800px) {
     .bodyContainer {
         width: 100vw;
+    }
+
+    .pcARViewButton {
+        display: none;
     }
 
     .modelViewer {

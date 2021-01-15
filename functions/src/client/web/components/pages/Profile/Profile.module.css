@@ -16,10 +16,10 @@
     /* height: 92vh; */
     margin-top: 30px;
 
-    width: 70%;
-    margin-left: 15%;
-    margin-right: 15%;
-    padding: 1%;
+    width: 100%;
+    padding-left: 15%;
+    padding-right: 15%;
+    /* padding: 1%; */
     box-sizing: border-box;
     flex: 1 1 auto;
     /* display: flex;
@@ -116,9 +116,9 @@
 
 @media only screen and (max-width : 850px) {
     .bodyContainer {
-        width: 96% !important;
-        margin-left: 2% !important;
-        margin-right: 2% !important;
+        /* width: 96% !important; */
+        padding-left: 2% !important;
+        padding-right: 2% !important;
     }
     
     .profileContainer {

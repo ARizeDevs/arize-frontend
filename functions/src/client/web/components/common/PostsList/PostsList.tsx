@@ -29,14 +29,14 @@ const SearchBar = ({ text, setText } : { text : string, setText : (text : string
 
 const PostsRow = (props : {list : IPost[], chunk : number} ) => {
 
-    const itemWidth = (3 / props.chunk) * 30
+    const itemWidth = (3 / props.list.length) * 30
     const containerWidth = (props.list.length / props.chunk) * 100
 
     return (
         <div style={{marginBottom:'10px',width:`${containerWidth}%`,display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
             {props.list.map((item, index) => 
-                <div style={{width:`${itemWidth}%`,margin:'auto'}}>
-                    <PostCard key={item.id}  {...item} />
+                <div key={item.id} style={{width:`${itemWidth}%`,margin:'auto'}}>
+                    <PostCard {...item} />
                 </div>
             )}
         </div>
@@ -60,7 +60,7 @@ const PostsColumn = (props : {list:IPost[],windowWidth:number}) => {
             if( windowWidth < 800) {
                 chunk = 1
             }
-            for (i=props.list.length; i>0; i-=chunk) {
+            for (i=props.list.length-4; i>0; i-=chunk) {
                 results.push(<PostsRow  list={props.list.slice(Math.max(i-chunk,0),i)} chunk={chunk}/>)
             }
         }

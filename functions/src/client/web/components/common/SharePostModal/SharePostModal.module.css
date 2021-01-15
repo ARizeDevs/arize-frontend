@@ -23,6 +23,14 @@
     background-color: var(--main-lightgray2-color);
 }
 
+.bodyContainer {
+    display: flex;
+    width : 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
 .column {
     display: flex;
     flex-direction: column;
@@ -31,6 +39,13 @@
     justify-content: flex-start;
 }
 
+.content {
+    width : 50%
+}
+
+.banner {
+    width: 40%;
+}
 
 .row {
     display: flex;
@@ -56,4 +71,25 @@
     background-color: var(--main-lightgray2-color);
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+@media only screen and (max-width : 800px) {
+    .shareModal {
+        top : 10vh;
+        left : 10vw;
+        right : 10vw;
+        bottom : 10vh;
+    }
+
+    .content {
+        width: 90%;
+    }
+
+    .banner {
+        width: 80%;
+    }
+
+    .bodyContainer {
+        flex-direction: column;
+    }
 }
