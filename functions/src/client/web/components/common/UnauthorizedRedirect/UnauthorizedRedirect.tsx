@@ -19,7 +19,7 @@ const UnauthorizedRedirect = (props : IProps) => {
         const unsubscribe = firebase.auth().onAuthStateChanged(async function(user) {
             
             if(!user) {
-                router.push('/login')
+               router.push('/login')
             } else {
                 if(user.uid) {
                     const checkProfileResult = await checkProfile(user.uid,user.email)

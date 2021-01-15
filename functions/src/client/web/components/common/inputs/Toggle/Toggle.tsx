@@ -4,12 +4,15 @@ import React from 'react'
 interface IProps {
     active : boolean ,
     setActive : (active  :boolean) => void,
-    text : string
+    text : JSX.Element,
+    rightToggleLabel? : boolean,
+    posit? : string,
+  
 }
 
 const MySwitch = withStyles({
     switchBase : {
-        color: '#0078FF',
+        color: '#FFFFFF',
         '&$checked': {
             color: '#0078FF',
         },
@@ -22,17 +25,19 @@ const MySwitch = withStyles({
 })(Switch)
 
 const Toggle = (props : IProps) => {
-    const { active, setActive, text } = props
-
+    const { active, setActive, text, rightToggleLabel = false, posit='space-between'} = props
+    
      return (
-        <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
-            <p style={{fontWeight:'bold'}}>{text}</p>
+        <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:posit}}>
+            {!rightToggleLabel && <p style={{fontWeight:'bold', display:'flex'}}>{text}</p>}
                 <MySwitch
                     checked={active}
                     onChange={(event) => setActive(event.target.checked)}
                     name="checkedB"
                     inputProps={{ 'aria-label': 'primary checkbox' }}
                 />
+                {rightToggleLabel && <p style={{fontWeight:'bold' , display:'flex'}}>{text}</p>}
+
         </div>)
 }
 
