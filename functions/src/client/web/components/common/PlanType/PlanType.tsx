@@ -48,7 +48,7 @@ const PlanType = (props : IProps) => {
         
       </div>
       <PlanDetails details={details}/>
-      {buttonTitle && <SolidButton onClick={null} styleClass={styles.SolidButton}
+      {buttonTitle && <SolidButton onClick={() => ''} styleClass={styles.SolidButton}
         colorTheme={buttonColor}>
         {buttonTitle}
       </SolidButton>}

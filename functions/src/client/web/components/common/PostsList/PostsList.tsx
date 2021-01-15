@@ -47,7 +47,7 @@ const PostsColumn = (props : {list:IPost[],windowWidth:number}) => {
     const renderRows = () => {
         const { windowWidth } = props
         
-        let results = []
+        let results : any[] = []
 
         let i = 0
         let chunk = 3;

@@ -1,6 +1,7 @@
 
-import { fontsize } from '*.jpg'
-import React from 'react'
+import firebase from 'firebase'
+import React, { useEffect, useState } from 'react'
+import { getUser } from '../../../API/user'
 
 import Navbar from '../../common/Navbar'
 
@@ -8,9 +9,36 @@ import PlanType from '../../common/PlanType'
 import styles from './Pricing.module.css'
 
 const Pricing = () => {
+    const [ imageSrc, setImageSrc ] = useState('')
+
+    useEffect(() => {
+        const unsubscribe = firebase.auth().onAuthStateChanged(async function(user) {
+            try {
+                if(user) {
+                    const user = await getUser(false, null)
+                    if(user && user.data.data){
+                        const userData = user.data.data
+                        if(userData.profilePicURL) {
+                            firebase.storage().ref(userData.profilePicURL).getDownloadURL().then((url : any) => {
+                                setImageSrc(url)
+                            })
+                        }
+                    }
+                }
+            } catch (error) {
+
+            }
+        });
+
+        return () => {
+            unsubscribe()
+        }
+    }, [])
+
+
     return (
         <div className={styles.root}>
-            <Navbar></Navbar>
+            <Navbar imageSrc={imageSrc} />
             <div className={styles.bodyContainer}>
                 <div className={styles.title}>
                     <h2 style={{fontWeight:1000}}>Upgrade and thrive!</h2>

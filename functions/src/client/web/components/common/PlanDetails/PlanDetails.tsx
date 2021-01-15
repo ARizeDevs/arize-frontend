@@ -1,14 +1,18 @@
 import React from 'react'
 import styles from './PlanDetails.module.css'
 
-const PlanDetails = props => {
+interface IProps {
+    details : string[]
+}
+
+const PlanDetails = (props : IProps) => {
  
-    return <div className={styles.detailsContainer}>
-        {props.details.map((detail) => {
-        return <p className={styles.detailsItems}>{detail}</p>
-        }
-        )}
-    </div>
+    const { details } = props
+
+    return (
+        <div className={styles.detailsContainer}>
+            {details.map((detail) => <p className={styles.detailsItems}>{detail}</p>)}
+        </div>)
   }
   
   export default PlanDetails
