@@ -3,6 +3,10 @@ import React , { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { useToasts } from 'react-toast-notifications'
 
+
+import EmailIcon from '../../../../assets/icons/email3.svg'
+import WebsiteIcon from '../../../../assets/icons/website2.svg'
+
 import { getUser } from '../../../API/user'
 import SolidButton from '../../common/buttons/SolidButton'
 
@@ -34,8 +38,11 @@ const Profile = (props : IProps) => {
     const [ name, setName ] = useState('')
     const [ username, setUsername ] = useState('')
     const [ surname, setSurname ] = useState('')
+    const [ companyName, setCompanyName ] = useState('')
     const [ location, setLocation ] = useState('')
     const [ posts, setPosts ] = useState([])
+    const [ websiteURL, setWebsiteURL ] = useState('')
+    const [ email, setEmail ] = useState('')
     const [ maxSlots, setMaxSlots ] = useState(20)
     const [ bio, setBio ] = useState('')
     const [ arViews, setARViews ] = useState(0)
@@ -75,8 +82,11 @@ const Profile = (props : IProps) => {
                                 const userData = user.data.data
                                 setName(userData.name)
                                 setUsername(userData.username)
+                                setCompanyName(userData.companyName)
                                 setSurname(userData.surname)
                                 setLocation(userData.location)
+                                setWebsiteURL(userData.websiteURL)
+                                setEmail(userData.email)
                                 if(userData.profilePicURL) {
                                     firebase.storage().ref(userData.profilePicURL).getDownloadURL().then((url : any) => {
                                         setImageSrc(url)
@@ -144,7 +154,6 @@ const Profile = (props : IProps) => {
             {/* @ts-ignore */}
             <div ref={scrollObject} className={styles.bodyContainer} onScroll={(e) => onScroll(e.target.scrollTop)}>
                 {showGoToTop?<ScrollToTop onClick={onGoToTopClick} />:null}
-                <div style={{width:'70%',marginLeft:'auto',marginRight:'auto'}}>
                 <div className={styles.profileContainer}>
                     <div className={styles.profileSections}>
                         <div className={styles.row}>
@@ -154,9 +163,9 @@ const Profile = (props : IProps) => {
                                     unchangeable
                                 />
                             </div>
-                            <div className={styles.row}>
+                            {id === null ?<div className={styles.row}>
                                 <div style={{width : '110px',marginRight : '10px'}}>
-                                    <SolidButton styleClass={styles.editProfileBTN} colorTheme='white' onClick={() => router.push('/edit-profile')} ><h4 style={{color : 'black'}}>Edit Profile</h4></SolidButton>
+                                <SolidButton styleClass={styles.editProfileBTN} colorTheme='white' onClick={() => router.push('/edit-profile')} ><h4 style={{color : 'black'}}>Edit Profile</h4></SolidButton>
                                 </div>
                                 <div className={styles.shareProfile} style={{width : '110px'}}>
                                     <SolidButton styleClass={styles.shareProfileBTN} colorTheme='white' 
@@ -165,57 +174,81 @@ const Profile = (props : IProps) => {
                                         <h4 style={{color : 'var(--main-blue-color)'}}>Share Profile</h4>
                                     </SolidButton>
                                 </div>
-                            </div>
+                            </div>:null}
                         </div>
                         <br></br>
                         <br></br>
-                        <h1 className={styles.name}>{`${name} ${surname}`}</h1>
+                        <h1 className={styles.name}>{companyName?companyName:`${name} ${surname}`}</h1>
                         <p className={styles.lightColor}>{id?location:username}</p>
+                        <br></br>
+                        {id !== null ? <h4 style={{color : 'var(--main-blue-color)'}}>{posts.length} posts</h4> : null}
                         <br></br>
                         <div style={{width:'70%'}}>
                             <p>{bio}</p>
                         </div>
                         <br></br>
-                        {/* <TipBox 
-                            style={{width : '350px',height:'120px'}}
-                            title='Daily Tip'
-                            description='Some usefull tip in the future'
-                            imageSrc='/images/tip.png'
-                        /> */}
                     </div>
-                    <div className={styles.profileSections} style={{width:'35%'}}>
-                        <div className={styles.shadowedBox}>
-                                <RemainingSlots maxSlots={maxSlots} usedSlots={posts.length} />
+                    <div className={`${styles.profileSections} ${styles.statisticsSection}`}>
+                        
+                        {id === null ? 
+                            <>
+                                <div className={styles.shadowedBox}>
+                                    <RemainingSlots maxSlots={maxSlots} usedSlots={posts.length} />
+                                    <br></br>
+                                    <SolidButton colorTheme={'black'} onClick={() => console.log('ok')}  ><h3>Upgrade</h3></SolidButton>
+                                </div>
                                 <br></br>
-                                <SolidButton colorTheme={'black'} onClick={() => console.log('ok')}  ><h3>Upgrade</h3></SolidButton>
-                        </div>
-                            <br></br>
-                            <div className={styles.shadowedBox}>
+                                <div className={styles.shadowedBox}>
                                     <ProfileInsights 
                                         arViews={arViews}
                                         shares={totalShares}
                                         tdViews={tdViews}
                                         clicks={clicks}
                                     />
+                                </div>
+                            </>
+                        :   <div className={styles.row}>
+                                <div style={{width : '180px',marginRight : '10px'}}>
+                                    <SolidButton styleClass={styles.editProfileBTN} colorTheme='white' onClick={() => {websiteURL?router.push(websiteURL):''}} >
+                                        <div className={styles.row} style={{justifyContent:'center'}}>
+                                            <WebsiteIcon />
+                                            <h4 style={{color : 'black',marginLeft:'10px'}}>Visit Website</h4>
+                                        </div>
+                                    </SolidButton>
+                                </div>
+                                <div className={styles.shareProfile} style={{width : '110px'}}>
+                                    <SolidButton styleClass={styles.shareProfileBTN} colorTheme='white' 
+                                        onClick={() => {email?router.push(`mailto:${email}?subject = Feedback&body = Message`):''}} 
+                                    >
+                                        <div className={styles.row} style={{justifyContent:'center'}}>
+                                            <EmailIcon />
+                                            <h4 style={{color : 'var(--main-blue-color)',marginLeft:'10px'}}>Email</h4>
+                                        </div>
+                                    </SolidButton>
+                                </div>
                             </div>
+                        }
                     </div>
                 </div>
                 <br></br>
                 <div className={styles.profilePostsContainer}>
-                    <div className={styles.rowContainer} style={{width:'100%'}}>
-                        <div className={styles.rowContainer} style={{justifyContent:'flex-start'}}>
-                            <p className={styles.lightColor}>My Posts ( {posts.length} posts )</p>
-                        </div>
+                    {id === null ?
+                    <>
+                        <div className={styles.rowContainer} style={{width:'100%'}}>
+                            <div className={styles.rowContainer} style={{justifyContent:'flex-start'}}>
+                                <p className={styles.lightColor}>My Posts ( {posts.length} posts )</p>
+                            </div>
 
-                        {/* {posts.length !== 0 ?<div style={{width:'140px'}}>
-                            <SolidButton onClick={() => router.push('/arstudio')} ><h3>Create AR</h3></SolidButton>
-                        </div>:null} */}
-                    </div>  
-                    <div className={styles.verticalDivider}></div>
+                            {/* {posts.length !== 0 ?<div style={{width:'140px'}}>
+                                <SolidButton onClick={() => router.push('/arstudio')} ><h3>Create AR</h3></SolidButton>
+                            </div>:null} */}
+                        </div>  
+                        <div className={styles.verticalDivider}></div>
+                    </>
+                    : null}
                     <PostsList list={posts} searchText={searchText} setSearchText={setSearchText} />
                 </div>
                 </div>
-            </div>
             {fetchingData?<Loading text='Loading ...' />:null}
         </div>
     )

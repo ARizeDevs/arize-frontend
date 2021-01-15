@@ -25,7 +25,9 @@ const FourOhFour = () => {
         <div className={styles.root}>
             <Navbar  />
                 <div className={styles.bodyContainer}>
-                    <FOFBanner />
+                    <div className={styles.banner}>
+                        <FOFBanner />
+                    </div>
                     <p>This page could not be found!</p>
                     <div style={{width:'140px'}}>
                         <SolidButton onClick={() => router.push('/profile')} ><h3>Take Me Home</h3></SolidButton> 

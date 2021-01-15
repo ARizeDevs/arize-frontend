@@ -29,14 +29,13 @@ const CompleteProfileBusinessPage = (props : IProps) => {
     return (
         <div className={styles.fieldsContainer + ' flex-column'}>
             <div >
-                <div style={{ display:'flex',flexDirection:'row' }}>
-                    <Input placeholder='Business name' required text='Business Name' type='text' value={businessName} onChange={(e:any) => setBusinessName(e.target.value)}/>
-                    &nbsp;
-                    &nbsp;
-                    &nbsp;
-                    &nbsp;
-                    &nbsp;
-                    <Input placeholder='Business type' required text='Business Type' type='text' value={businessType} onChange={(e:any) => setBusinessType(e.target.value)}/>
+                <div style={{ display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
+                    <div style={{width:'49%'}}>
+                        <Input placeholder='Business name' required text='Business Name' type='text' value={businessName} onChange={(e:any) => setBusinessName(e.target.value)}/>
+                    </div>
+                    <div style={{width:'49%'}}>
+                        <Input placeholder='Business type' required text='Business Type' type='text' value={businessType} onChange={(e:any) => setBusinessType(e.target.value)}/>
+                    </div>
                 </div>
                 <Input placeholder='Describe a little bit...' required={false} text='Why Do You Want To Use ARize?' type='text' value={whyToUse} onChange={(e:any) => setWhyToUse(e.target.value)}/>
                 <Input placeholder='htpps://example.com' required text='Business Website URL' type='text' value={websiteURL} onChange={(e:any) => setWebsiteURL(e.target.value)}/>

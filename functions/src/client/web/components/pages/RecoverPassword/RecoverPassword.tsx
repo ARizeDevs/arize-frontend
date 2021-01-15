@@ -63,12 +63,12 @@ const ForgetPassword = (props : IProp) => {
             <Navbar noMenu  />
             <div className={styles.bodyContainer}>
                 {page===1?
-                    <div className={styles.column} style={{width:'50%'}}>
+                    <div className={`${styles.column} ${styles.section}`}>
                         <h2>Pick a New Password</h2>
                         <p>Type your new password and hit save.</p>
                         <br></br>
 
-                        <div style={{width:'50%'}}>
+                        <div className={styles.formContainer}>
                             <PasswordInput eyeOn={!showPassword}onEyeClick={() => { setShowPassword(!showPassword)}}  value={password} onChange={setPassword} />
                             <PasswordInput confirm eyeOn={!showPassword}onEyeClick={() => { setShowPassword(!showPassword)}}  value={confirmPassword} onChange={setConfirmPassword} />
 
@@ -76,7 +76,7 @@ const ForgetPassword = (props : IProp) => {
                             <p style={{color:'red'}}>{error}</p>
                         </div>
                     </div>:
-                    <div className={styles.column} style={{width:'50%'}}>
+                    <div className={`${styles.column} ${styles.section}`}>
                         <div className={styles.row}>
                             <CheckedIcon />
                             <div className={styles.column}>
@@ -85,7 +85,9 @@ const ForgetPassword = (props : IProp) => {
                             </div>
                         </div>
                     </div>}
-                {page === 1?<ForgotPasswordBanner />:<PasswordChangdBanner />}
+                <div className={styles.banner}>
+                    {page === 1?<ForgotPasswordBanner />:<PasswordChangdBanner />}
+                </div>
             </div>
         </div>
     )

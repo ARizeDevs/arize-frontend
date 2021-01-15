@@ -37,6 +37,7 @@ const Post = (props : IProps) => {
     const [ shareModalOpen, setShareModalOpen ] = useState(false)
     const [ qrModalOpen, setQRModalOpen ] = useState(false)
     const [ shareAdded, setShareAdded ] = useState(false)
+    const [ fullScreen, setFullScreen ] = useState(false)
 
     useEffect(() => {
         if(post.author && post.author.profilePicURL) {
@@ -49,13 +50,15 @@ const Post = (props : IProps) => {
 
     })
 
+    const onFullScreenClick = () => setFullScreen(!fullScreen)
+
     return (
         <div className={styles.root}>
-            <Navbar noMenu />
+            {!fullScreen?<Navbar noMenu />:null}
             <div className={styles.bodyContainer}>
-                <br></br>
-                <div className={styles.modelViewer}>
+                <div className={`${styles.modelViewer} ${fullScreen?styles.modelViewerFullScreen:''}`}>
                     <ModelViewer
+                        onFullScreen={onFullScreenClick}
                         key={post.id}
                         showQR={false}
                         title={post.title}

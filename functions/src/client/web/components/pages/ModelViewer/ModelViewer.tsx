@@ -5,6 +5,7 @@ import QRModal from '../../common/QRModal'
 
 import ARViewIcon from '../../../../assets/icons/arViewIcon.svg'
 import ShareIcon from '../../../../assets/icons/share.svg'
+import FocusIcon from '../../../../assets/icons/focus.svg'
 
 import styles from './ModelViewer.module.css'
 import SharePostModal from '../../common/SharePostModal'
@@ -28,6 +29,7 @@ interface IProps {
     actionButtonInfoTextColor : string,
     showQR : boolean,
     showShare? : boolean
+    onFullScreen? : () => void
 }
 
 const getUSZFileFullURL = (actionButtonBackgroundColor : string, actionButtonColor : string,
@@ -40,7 +42,7 @@ const ModelViewer = (props : IProps) => {
     const { title, glbURL, background, usdzURL,
             actionButtonInfoBackgroundColor, actionButtonColor,
             actionButtonLink, actionButtonText, actionButtonTextColor, actionButtonInfoTextColor,
-            poster, autoPlay, id, actionButtonInfoText, showQR, showShare } = props
+            poster, autoPlay, id, actionButtonInfoText, showQR, showShare, onFullScreen } = props
 
     const [ qrModalOpen, setQRModalOpen ] = useState(false)
     const [ shareModalOpen, setShareModalOpen ] = useState(false)
@@ -89,7 +91,8 @@ const ModelViewer = (props : IProps) => {
                     }
                 }
 
-            return (<>
+            return (<div style={{width:'100%',height:'100%',position:'relative'}}>
+
                 <model-viewer 
                     id="myviewer"
                     src={glbURL} 
@@ -123,6 +126,10 @@ const ModelViewer = (props : IProps) => {
                         </div>
                     </button>:null
                 }
+                {onFullScreen?
+                    <div onClick={onFullScreen} style={{cursor:'pointer',position:'absolute',right:'50px',bottom:'50px',width:'30px',height:'50px'}}>
+                        <FocusIcon />
+                    </div>:null}
                 <QRModal 
                     isOpen={qrModalOpen}
                     onRequestClose={() => setQRModalOpen(false)}
@@ -134,7 +141,7 @@ const ModelViewer = (props : IProps) => {
                     onCloseRequest={() => setShareModalOpen(false)}
                     postID={id}
                 />
-            </>)
+            </div>)
         }}
     </UDIDContext.Consumer>
     )

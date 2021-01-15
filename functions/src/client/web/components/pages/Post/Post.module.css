@@ -42,6 +42,10 @@
     outline: none !important;
 }
 
+.modelViewerFullScreen {
+    height: 100vh !important;
+}
+
 .row {
     display: flex;
     flex-direction: row;

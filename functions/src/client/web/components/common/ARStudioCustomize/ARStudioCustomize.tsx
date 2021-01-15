@@ -62,24 +62,22 @@ const ARStudioPostDetail = (props : IProps) => {
                 <>
                     <Input placeholder='https://example.com/...' error={error.actionButtonLink} maxInputLength={500} required text="Action button link"  type="text" value={actionButtonLink} onChange={setActionButtonLink} />
                     
-                    <div style={{width:'100%',display:'flex',flexDirection:'row'}}>
-                        <Input placeholder='some info...' error={error.actionButtonInfoText} maxInputLength={100} required text="Action button info text"  type="text" value={actionButtonInfoText} onChange={setActionButtonInfoText} />
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        <ColorPicker color={actionButtonInfoTextColor} setColor={setActionButtonInfoTextColor} text='Info Text Color' />
+                    <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
+                        <div style={{width:'49%'}}>
+                            <Input placeholder='some info...' error={error.actionButtonInfoText} maxInputLength={100} required text="Action button info text"  type="text" value={actionButtonInfoText} onChange={setActionButtonInfoText} />
+                        </div>
+                        <div style={{width:'49%'}}>
+                            <ColorPicker color={actionButtonInfoTextColor} setColor={setActionButtonInfoTextColor} text='Info Text Color' />
+                        </div>
                     </div>
                     <br></br>
-                    <div style={{width:'100%',display:'flex',flexDirection:'row'}}>
-                        <Input placeholder='some text...' error={error.actionButtonText} maxInputLength={13} required text="Action button Text"  type="text" value={actionButtonText} onChange={setActionButtonText} />
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        <ColorPicker color={actionBUttonTextColor} setColor={setActionBUttonTextColor} text='Text Color' />
+                    <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'space'}}>
+                        <div style={{width:'49%'}}>
+                            <Input placeholder='some text...' error={error.actionButtonText} maxInputLength={13} required text="Action button Text"  type="text" value={actionButtonText} onChange={setActionButtonText} />
+                        </div>
+                        <div style={{width:'49%'}}>
+                            <ColorPicker color={actionBUttonTextColor} setColor={setActionBUttonTextColor} text='Text Color' />
+                        </div>
                     </div>
                     <br></br>
 

@@ -33,7 +33,25 @@
     color : black
 }
 
+.arStudioButton {
+    width:140px;
+    margin-left:24px;
+}
+
 .navbarLeftItems:hover *{
     color : var(--main-blue-color);
     fill: var(--main-blue-color);
+}
+
+@media only screen and (max-width : 800px) {
+    .root {
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+}
+
+@media only screen and (max-width : 500px) {
+    .arStudioButton {
+        display: none;
+    }
 }

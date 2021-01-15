@@ -34,18 +34,18 @@ const ForgetPassword = () => {
             <Navbar noMenu />
             <div className={styles.bodyContainer}>
                 {page===1?
-                    <div className={styles.column} style={{width:'50%'}}>
+                    <div className={`${styles.column} ${styles.section}`}>
                         <h2>Recover Password</h2>
                         <p>Forgot your password?
                             Then cool down and type your email address retrieve it!</p>
                         <br></br>
-                        <div style={{width:'50%'}}>
+                        <div className={styles.formContainer}>
                             <EmailInput value={email} onChange={setEmail} />
                             <SolidButton onClick={recoverPassword} ><h3>Recover Password</h3></SolidButton>
                         </div>
                         <p style={{color:'red'}}>{error}</p>
                     </div>:
-                    <div className={styles.column} style={{width:'50%'}}>
+                    <div className={`${styles.column} ${styles.section}`}>
                         <div className={styles.row}>
                             <CheckedIcon />
                             <div className={styles.column}>
@@ -53,11 +53,13 @@ const ForgetPassword = () => {
                                 <p>We have sent a link to your email to recover your password</p>
                             </div>
                         </div>
-                        <div style={{width:'50%'}}>
+                        <div className={styles.formContainer}>
                             <SolidButton onClick={() => router.push('/login')} ><h3>Go to login</h3></SolidButton>
                         </div>
                     </div>}
-                {page === 1?<ForgotPasswordBanner />:<NewMessageBanner />}
+                <div className={styles.banner}>
+                    {page === 1?<ForgotPasswordBanner />:<NewMessageBanner />}
+                </div>
             </div>
         </div>
     )

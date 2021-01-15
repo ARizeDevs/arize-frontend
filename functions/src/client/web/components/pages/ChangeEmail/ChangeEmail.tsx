@@ -53,12 +53,12 @@ const ChangeEmail = () => {
             <Navbar noMenu  />
             <div className={styles.bodyContainer}>
                 {page===1?
-                    <div className={styles.column} style={{width:'50%'}}>
+                    <div className={`${styles.column} ${styles.section}`}>
                         <h2>Change Email</h2>
                         <p>Enter your current email and then your new email.</p>
                         <br></br>
 
-                        <div style={{width:'50%'}}>
+                        <div className={styles.formContainer}>
                             <EmailInput text='Current Email*' value={currentEmail} onChange={setCurrentEmail} />
                             <EmailInput text='New Email*' value={newEmail} onChange={setNewEmail} />
 
@@ -66,7 +66,7 @@ const ChangeEmail = () => {
                             {error?<Message text={error} type={IMessageTypes.ERROR} />:null}
                         </div>
                     </div>:
-                    <div className={styles.column} style={{width:'50%'}}>
+                    <div className={`${styles.column} ${styles.section}`}>
                         <div className={styles.row}>
                             <CheckedIcon />
                             <div className={styles.column}>
@@ -75,7 +75,9 @@ const ChangeEmail = () => {
                             </div>
                         </div>
                     </div>}
-                {page === 1?<EmailVerifyBanner />:<EmailVerifyCompleteBanner />}
+                <div className={styles.banner}>
+                    {page === 1?<EmailVerifyBanner />:<EmailVerifyCompleteBanner />}
+                </div>
             </div>
             {submiting ? <Loading text='Changing your email address...' />:null}
         </div>

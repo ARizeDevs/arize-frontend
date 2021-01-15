@@ -43,13 +43,13 @@ const Support = () => {
         <div className={styles.root}>
             <Navbar imageSrc={imageSrc} />
             <div className={styles.bodyContainer}>
-                    <div className={styles.column} style={{width:'50%'}}>
+                    <div className={`${styles.column} ${styles.section}`}>
                        <h2>Need Support?</h2>
                        <br></br>
                        <p>We are here to help you further!<br></br>Please choose one of the support methods below:</p>
                        <br></br>
                        <br></br>
-                        <div className={styles.row} style={{width:'50%',justifyContent:'space-between'}}>
+                        <div className={`${styles.row} ${styles.formContainer}`} style={{justifyContent:'space-between'}}>
                             <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
                                 <FAQsIcon />
                                 <p style={{marginTop:'8px'}}>FAQs</p>
@@ -64,7 +64,7 @@ const Support = () => {
                             </div>
                         </div>
                         {accountType && accountType!=='FREE'?
-                        <div className={styles.row} style={{width:'50%',justifyContent:'space-between'}}>
+                        <div className={`${styles.row} ${styles.formContainer}`} style={{justifyContent:'space-between'}}>
                             <div className={styles.column} style={{width:'60px',height:'120px',alignItems:'center'}}>
                                 <CallIcon />
                                 <p style={{marginTop:'8px'}}>Call</p>
@@ -79,7 +79,10 @@ const Support = () => {
                             </div>
                         </div>:null}
                     </div>
-                <SupportBanner />
+
+                <div className={styles.banner}>
+                    <SupportBanner />
+                </div>
             </div>
         </div>
     )

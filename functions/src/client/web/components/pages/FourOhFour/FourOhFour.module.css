@@ -32,3 +32,13 @@
     justify-content: flex-start;
     margin: 0 !important;
 }
+
+.banner {
+    width: 450px;
+}
+
+@media only screen and (max-width : 500px) {
+    .banner {
+        width: 350px;
+    }
+}

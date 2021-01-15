@@ -31,3 +31,17 @@
 .btn {
     width: 20%;
 }
+
+@media only screen and (max-width : 1000px) {
+    .bodyContainer {
+        width: 80%;
+    }
+}
+
+
+@media only screen and (max-width : 600px) {
+    .bodyContainer {
+        width: 96%;
+    }
+}
+

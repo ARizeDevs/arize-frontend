@@ -80,7 +80,8 @@ const Navbar = (props : IProps) => {
                         
                         {noMenu?null:<ProfileMenu imageSrc={imageSrc} />}
 
-                        {!isARStudio? <div style={{width:'140px',marginLeft:'24px'}}>
+                        {!isARStudio? 
+                        <div className={styles.arStudioButton}>
                             <SolidButton onClick={() => router.push('/arstudio')} ><h3>Create AR</h3></SolidButton>
                         </div> : null }
                     </>    
