@@ -17,7 +17,6 @@ import { useRouter } from 'next/router'
 import SharePostModal from '../../common/SharePostModal'
 import { UDIDContext } from '../../common/UniqueDeviceIdDetector'
 import { sharePost } from '../../../API'
-import { route } from 'next/dist/next-server/server/router'
 
 interface IProps {
     post : any,
