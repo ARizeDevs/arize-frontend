@@ -33,7 +33,7 @@ const PostsRow = (props : {list : IPost[], chunk : number} ) => {
     const containerWidth = (props.list.length / props.chunk) * 100
 
     return (
-        <div style={{marginBottom:'10px',width:`${containerWidth}%`,display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
+        <div style={{marginBottom:'10px',width:`${containerWidth}%`,display:'flex',flexDirection:'row-reverse',alignItems:'center',justifyContent:'flex-start'}}>
             {props.list.map((item, index) => 
                 <div key={item.id} style={{width:`${itemWidth}%`,margin:'auto'}}>
                     <PostCard {...item} />

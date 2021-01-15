@@ -60,9 +60,9 @@
         font-size: large !important;
     }
 
-    .shareBtn {
+    /* .shareBtn { */
         /* left: 65%; */
-    }
+    /* } */
 }
 
 @media only screen and (max-width : 640px) {
