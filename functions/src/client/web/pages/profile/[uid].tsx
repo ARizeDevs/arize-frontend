@@ -9,7 +9,7 @@ const profile = () => {
     const router = useRouter()
     const { uid } = router.query
     let id = uid
-  
+    
     return <>
         <Head>
             <link rel="shortcut icon" href="/images/favicon.png" />

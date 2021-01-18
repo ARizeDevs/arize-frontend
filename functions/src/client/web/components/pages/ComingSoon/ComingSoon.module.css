@@ -1,0 +1,51 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+.bodyContainer {
+    width: 100%;
+    padding-left: 15%;
+    padding-right: 15%;
+    box-sizing: border-box;
+
+    flex: 1 1 auto;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin: 0 !important;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 !important;
+}
+
+.banner {
+    width: 450px;
+}
+
+@media only screen and (max-width : 500px) {
+    .bodyContainer {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+
+    .banner {
+        width: 350px;
+    }
+}

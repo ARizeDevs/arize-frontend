@@ -1,6 +1,6 @@
 import Modal from 'react-modal'
 import { useToasts } from 'react-toast-notifications'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import CrossIcon from '../../../../assets/icons/cross.svg'
 import ShareBanner from '../../../../assets/banners/share banner.svg'
@@ -22,6 +22,7 @@ const SharePostModal = (props : IProps) => {
 
     const { addToast } = useToasts()
 
+    const [ isMobile, setIsMobile] = useState(true)
     const [ isEmbedPage , setIsEmbedPage ] = useState(false)
 
     const shareURL = `https://arizear.app/post/${postID}`
@@ -32,6 +33,26 @@ const SharePostModal = (props : IProps) => {
         height="100%"
         src="https://arizear.app/model-viewer/${postID}">
     </iframe>`
+
+    useEffect(() => {
+        const run = async () => {
+            const mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+            setIsMobile(mobile)
+    
+            if(mobile) {
+                try {
+                    await navigator.share({ title: "", url: shareURL });
+                    console.log("Data was shared successfully");
+                } catch (err) {
+                    console.error("Share failed:", err.message);
+                } finally {
+                    onCloseRequest()
+                }
+            }
+        }
+
+        run()
+    } , [])
 
     const onShareClick = () => {
         copyToClipBoard(shareURL)
@@ -47,7 +68,7 @@ const SharePostModal = (props : IProps) => {
 
 
     return(
-        <Modal
+        !isMobile?<Modal
             isOpen={modalOpen}
             onRequestClose={onCloseRequest}
             className={styles.shareModal}
@@ -82,7 +103,7 @@ const SharePostModal = (props : IProps) => {
                     </div>
                 </div>
             </div>
-        </Modal>
+        </Modal>:null
     )
 }
 

@@ -19,6 +19,7 @@ import styles from './ARStudio.module.css'
 import ARStudioCustomize from '../../common/ARStudioCustomize'
 import Loading from '../../common/Loading'
 import { getUser } from '../../../API/user'
+import { useToasts } from 'react-toast-notifications'
 
 interface IProps {
     isEdit? : boolean,
@@ -28,7 +29,8 @@ interface IProps {
 const ARStudio = (props : IProps) => {
 
     const { isEdit, postID, } = props
-
+    
+    const { addToast } = useToasts()
     const router = useRouter()
 
     const [ submiting , setSubmiting ] = useState(false)
@@ -200,8 +202,9 @@ const ARStudio = (props : IProps) => {
                 // setGeneralError(result.error?result.error:'')
             } 
         } catch(error) {
-                // setGeneralError(error)
-                setSubmiting(false)
+            addToast('Bad file format',{ appearance : 'error' })
+            // setGeneralError(error)
+            setSubmiting(false)
         }
     }
 

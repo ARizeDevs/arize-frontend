@@ -1,6 +1,8 @@
 import React from 'react'
 
-import InfoIcon from '../../../../assets/icons/exclusionmark black.svg'
+// import InfoIcon from '../../../../assets/icons/exclusionmark black.svg'
+import Message from '../Message'
+import { IMessageTypes } from '../Message/Message'
 
 import styles from './Toast.module.css'
 
@@ -9,14 +11,18 @@ import styles from './Toast.module.css'
 //     children : any
 // }
 
-const Toast = (props : any) => {
-    const { children } = props
+const Toast = ({ children, appearance, transitionState} : { children : any, appearance : string, transitionState : string}) => {
+
+    let type = IMessageTypes.INFO
+
+    if(appearance === 'error') type = IMessageTypes.ERROR
 
     return (
-        <div className={`${styles.shadowedBox} ${props.transitionState === 'entering' ? styles.fadein : ''} ${props.transitionState === 'exiting' ? styles.fadeout : ''}` }>
-            <InfoIcon />
+        <div className={`${styles.shadowedBox} ${transitionState === 'entering' ? styles.fadein : ''} ${transitionState === 'exiting' ? styles.fadeout : ''}` }>
+            {/* <InfoIcon />
             &nbsp;&nbsp;
-            {children}
+            {children} */}
+            <Message text={children} type={type} />
         </div>
     )
 }
