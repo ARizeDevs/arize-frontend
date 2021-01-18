@@ -75,7 +75,7 @@ const Profile = (props : IProps) => {
         const getInitData = async () => {
             firebase.auth().onAuthStateChanged(async function(user) {
                 try {
-                    if(user) {
+                    // if(user) {
                         if(id === null || id) {
                             const user = await getUser(true,id)
                             if(user && user.data.data){
@@ -121,7 +121,7 @@ const Profile = (props : IProps) => {
                                 if(userData.bio) setBio(userData.bio)
                             }
                         }
-                    }
+                    // }
                 } catch(error) {
                     console.log(error)
                 } finally {
