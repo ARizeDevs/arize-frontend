@@ -103,6 +103,13 @@ const Post = (props : IProps) => {
                             <UDIDContext.Consumer >
                                 {value => {
                                     const addShare = async () => {
+                                        try {
+                                            await navigator.share({ title: "ARize", url: `https://arizear.app/post/${id}` });
+                                            console.log("Data was shared successfully");
+                                        } catch (err) {
+                                            console.error("Share failed:", err.message);
+                                        }
+
                                         if(value.UDIDCTX && post.id) {
                                             if(!shareAdded) {
                                                 try {

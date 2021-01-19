@@ -35,13 +35,18 @@ const SharePostModal = (props : IProps) => {
     </iframe>`
 
     useEffect(() => {
+        const mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+        setIsMobile(mobile)
+        
+    } , [document.getElementById('test')])
+
+    useEffect(() => {
         const run = async () => {
-            const mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-            setIsMobile(mobile)
-    
-            if(mobile) {
+        
+            if(isMobile && typeof window !== 'undefined') {
                 try {
-                    await navigator.share({ title: "", url: shareURL });
+                    // print(window.)
+                    await window.navigator.share({ url: shareURL });
                     console.log("Data was shared successfully");
                 } catch (err) {
                     console.error("Share failed:", err.message);
@@ -52,7 +57,7 @@ const SharePostModal = (props : IProps) => {
         }
 
         run()
-    } , [])
+    }, [isMobile])
 
     const onShareClick = () => {
         copyToClipBoard(shareURL)
@@ -82,7 +87,7 @@ const SharePostModal = (props : IProps) => {
                     </div>
                 </div>
                 <div className={styles.bodyContainer}>
-                    <div className={styles.banner}>
+                    <div id='test' className={styles.banner}>
                         {isEmbedPage?<EmbedBanner /> : <ShareBanner />}
                     </div>
                     <div className={`${styles.column} ${styles.content}`}>
