@@ -1,3 +1,4 @@
+import firebase from 'firebase'
 import axios from '../config/api'
 import { getTokenID } from './utils'
 
@@ -5,6 +6,7 @@ const postServerRoute = '/post'
 
 
 export const sharePost = async (UUID : string, location : { lat : string, long : string }, postID : string) => {
+    firebase.analytics().logEvent('share', { post : postID, viewer : UUID })
     return axios.post(`${postServerRoute}/${postID}/share`, {
         UUID,
         location
@@ -12,6 +14,7 @@ export const sharePost = async (UUID : string, location : { lat : string, long :
 }
 
 export const view3DPost = async (UUID : string, location : { lat : string, long : string }, postID : string) => {
+    firebase.analytics().logEvent('3d_view', { post : postID, viewer : UUID })
     return axios.post(`${postServerRoute}/${postID}/3dview`, {
         UUID,
         location
@@ -19,6 +22,7 @@ export const view3DPost = async (UUID : string, location : { lat : string, long 
 }
 
 export const viewARPost = async (UUID : string, location : { lat : string, long : string }, postID : string) => {
+    firebase.analytics().logEvent('ar_view', { post : postID, viewer : UUID })
     return axios.post(`${postServerRoute}/${postID}/arview`, {
         UUID,
         location

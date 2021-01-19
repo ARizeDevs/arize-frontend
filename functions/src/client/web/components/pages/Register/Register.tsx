@@ -116,6 +116,9 @@ const Register = () => {
 
             if (result.status === 200 || result.status === 201) {
                 router.push('/complete-profile')
+                firebase.analytics().logEvent('sign_up',{
+                    method : 'email'
+                })
             }
         } catch(error) {
             setSubmiting(false)

@@ -54,6 +54,10 @@ const Profile = (props : IProps) => {
 
     const scrollObject = useRef(null);
 
+    useEffect(() => {
+        firebase.analytics().logEvent('notification_received');
+    }, [])
+
     const onScroll = (scrollY : any) => {
         if(scrollY !== 0) {
             setShowGoToTop(true)

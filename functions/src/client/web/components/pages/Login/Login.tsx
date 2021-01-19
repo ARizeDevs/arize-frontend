@@ -76,6 +76,10 @@ const Login = () => {
 
             const result = await firebase.auth().signInWithEmailAndPassword(email, password)
             if(result && result.user) {
+                firebase.analytics().logEvent('login', {
+                    method : 'email'
+                })
+
                 if(!result.user.emailVerified) {
                     await result.user.sendEmailVerification()
                 }

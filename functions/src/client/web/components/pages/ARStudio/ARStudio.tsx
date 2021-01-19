@@ -62,6 +62,7 @@ const ARStudio = (props : IProps) => {
     const [ error, setError ] = useState({})
 
     const [ profilePicSrc, setProfilePicSrc ] = useState('')
+    const [ userId, setUserId ] = useState('')
 
     const validateAndSet = (fn : (arg : any) => void, validate : (arg : any) => any) => {
         return (value : any) => {
@@ -70,6 +71,9 @@ const ARStudio = (props : IProps) => {
             setError({...error,...result})
         }
     }
+
+    useEffect(() => {
+    }, [])
 
     useEffect(() => {
         const getInitData = async () => {
@@ -82,6 +86,8 @@ const ARStudio = (props : IProps) => {
                             setProfilePicSrc(url)
                         })
                     }
+                    setUserId(userData.id)
+                    firebase.analytics().logEvent('creation_started', { user : userData.id } )
                 }
             } catch(error) {
                 console.log(error)
@@ -197,11 +203,14 @@ const ARStudio = (props : IProps) => {
             setSubmiting(false)
             if (result.success)
             {
+                firebase.analytics().logEvent('creation_success', { user : userId } )
                 router.push('/profile')
             } else {
-                // setGeneralError(result.error?result.error:'')
+                firebase.analytics().logEvent('creation_failed', { user : userId } )
+                addToast('Bad file format',{ appearance : 'error' })
             } 
         } catch(error) {
+            firebase.analytics().logEvent('creation_failed', { user : userId } )
             addToast('Bad file format',{ appearance : 'error' })
             // setGeneralError(error)
             setSubmiting(false)

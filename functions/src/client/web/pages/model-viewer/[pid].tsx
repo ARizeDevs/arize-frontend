@@ -14,16 +14,16 @@ import FourOhFour from '../../components/pages/FourOhFour'
 const arstudio = ({ post, isAryanTer } : { post:any, isAryanTer : boolean}) => {
     const router = useRouter()
     
+    if(!post) {
+        return <FourOhFour />
+    }
+
     useEffect(() => {
         if(isAryanTer) {
             router.push("https://arize.io/samples/webar/furniture/ar.html")
         }
-    })
+    }, [])
 
-
-    if(!post) {
-        return <FourOhFour />
-    }
 
     const [ glbURL, setGLBUrl] = useState('')
     const [ usdzURL, setUSDZUrl ] = useState('')

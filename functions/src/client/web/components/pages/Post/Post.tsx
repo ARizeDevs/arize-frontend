@@ -47,7 +47,6 @@ const Post = (props : IProps) => {
         getDirectURL(post.usdzFileURL).then((url) => setUSDZUrl(url)).catch((error) => '')
         getDirectURL(post.imageURL).then((url) => setPoster(url)).catch((error) => '')
         if(post.backGroundImage) getDirectURL(post.backGroundImage).then((url) => setBackgrounImage(url)).catch((error) => '')
-
     })
 
     const onFullScreenClick = () => setFullScreen(!fullScreen)

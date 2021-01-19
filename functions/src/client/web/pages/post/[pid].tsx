@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import fetch from 'node-fetch'
 
@@ -11,6 +11,7 @@ import { view3DPost } from '../../API'
 
 const post = ({ post, relatedPosts } : { post : any, relatedPosts : any}) => {
     const [ viewAdded, setViewAdded ] = useState(false)
+    
     
     if (!post ) {
         return <FourOhFour />
