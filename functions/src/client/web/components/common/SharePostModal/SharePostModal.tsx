@@ -22,7 +22,6 @@ const SharePostModal = (props : IProps) => {
 
     const { addToast } = useToasts()
 
-    const [ isMobile, setIsMobile] = useState(true)
     const [ isEmbedPage , setIsEmbedPage ] = useState(false)
 
     const shareURL = `https://arizear.app/post/${postID}`
@@ -33,31 +32,6 @@ const SharePostModal = (props : IProps) => {
         height="100%"
         src="https://arizear.app/model-viewer/${postID}">
     </iframe>`
-
-    useEffect(() => {
-        const mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-        setIsMobile(mobile)
-        
-    } , [document.getElementById('test')])
-
-    useEffect(() => {
-        const run = async () => {
-        
-            if(isMobile && typeof window !== 'undefined') {
-                try {
-                    // print(window.)
-                    await window.navigator.share({ url: shareURL });
-                    console.log("Data was shared successfully");
-                } catch (err) {
-                    console.error("Share failed:", err.message);
-                } finally {
-                    onCloseRequest()
-                }
-            }
-        }
-
-        run()
-    }, [isMobile])
 
     const onShareClick = () => {
         copyToClipBoard(shareURL)
@@ -73,7 +47,7 @@ const SharePostModal = (props : IProps) => {
 
 
     return(
-        !isMobile?<Modal
+        <Modal
             isOpen={modalOpen}
             onRequestClose={onCloseRequest}
             className={styles.shareModal}
@@ -108,7 +82,7 @@ const SharePostModal = (props : IProps) => {
                     </div>
                 </div>
             </div>
-        </Modal>:null
+        </Modal>
     )
 }
 

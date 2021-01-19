@@ -54,8 +54,10 @@ const ModelViewer = (props : IProps) => {
 
 
     useEffect(() => {
-        const mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-        setIsMobile(mobile)
+        // if(typeof window !== 'undefined' && window.navigator) {
+        //     const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
+        //     setIsMobile(mobile)
+        // }
     }, [])
 
     const compoundUSDZUrl = getUSZFileFullURL(actionButtonColor , actionButtonTextColor, actionButtonInfoBackgroundColor, actionButtonLink, actionButtonText, actionButtonInfoText, actionButtonInfoTextColor)
@@ -66,25 +68,33 @@ const ModelViewer = (props : IProps) => {
         <UDIDContext.Consumer >
             {value => {
                 
-                const addShare = async () => {
-                    try {
-                        await navigator.share({ title: "ARize", url: `https://arizear.app/post/${id}` });
-                        console.log("Data was shared successfully");
-                    } catch (err) {
-                        console.error("Share failed:", err.message);
-                    }
+                const onShareClick = async () => {
+                    // if(typeof window !== 'undefined' && window.navigator) {
+                    //     const mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
 
-                    if(value.UDIDCTX && id) {
-                        if(!shareAdded) {
-                            try {
-                                // @ts-ignore
-                                await sharePost(value.UDIDCTX,value.location, id)
-                                setShareAdded(true)
-                            } catch(error) {
-                                console.log(er)
-                            }
-                        }
-                    }
+                    //     if(mobile) {
+                    //         try {
+                    //             await navigator.share({ title: "ARize", url: `https://arizear.app/post/${id}` });
+                    //             console.log("Data was shared successfully");
+                    //         } catch (err) {
+                    //             console.error("Share failed:", err.message);
+                    //         }    
+                    //     } else {
+                    //         setShareModalOpen(true);
+                    //     }
+
+                    //     if(value.UDIDCTX && id) {
+                    //         if(!shareAdded) {
+                    //             try {
+                    //                 // @ts-ignore
+                    //                 await sharePost(value.UDIDCTX,value.location, id)
+                    //                 setShareAdded(true)
+                    //             } catch(error) {
+                    //                 console.log(error)
+                    //             }
+                    //         }
+                    //     }
+                    // }
                 }
 
                 const addARView = async () => {
@@ -130,7 +140,7 @@ const ModelViewer = (props : IProps) => {
                     <div style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}><ARViewIcon /><h3 style={{marginLeft:'10px'}}>View AR</h3></div>
                 </button> : null}
                 {showShare ?
-                    <button onClick={() => {setShareModalOpen(true);addShare()}} className={styles.shareBtn} >
+                    <button onClick={onShareClick} className={styles.shareBtn} >
                         <div style={{width:'16px',height:'16px'}}>
                             <ShareIcon />    
                         </div>

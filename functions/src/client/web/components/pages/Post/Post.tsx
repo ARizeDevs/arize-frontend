@@ -102,29 +102,37 @@ const Post = (props : IProps) => {
                             </a>&nbsp;
                             <UDIDContext.Consumer >
                                 {value => {
-                                    const addShare = async () => {
-                                        try {
-                                            await navigator.share({ title: "ARize", url: `https://arizear.app/post/${id}` });
-                                            console.log("Data was shared successfully");
-                                        } catch (err) {
-                                            console.error("Share failed:", err.message);
-                                        }
+                                    const onShareClick = async () => {
+                                        // if(typeof window !== 'undefined' && window.navigator) {
+                                        //     const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
+            
+                                        //     if(mobile) {
+                                        //         try {
+                                        //             await window.navigator.share({ title: "ARize", url: `https://arizear.app/post/${post.id}` });
+                                        //             console.log("Data was shared successfully");
+                                        //         } catch (err) {
+                                        //             console.error("Share failed:", err.message);
+                                        //         }    
+                                        //     } else {
+                                        //         setShareModalOpen(true);
+                                        //     }
 
-                                        if(value.UDIDCTX && post.id) {
-                                            if(!shareAdded) {
-                                                try {
-                                                    // @ts-ignore
-                                                    await sharePost(value.UDIDCTX,value.location, post.id)
-                                                    setShareAdded(true)
-                                                } catch(error) {
-                                                    console.log(error)
-                                                }
-                                            }
-                                        }
+                                        //     if(value.UDIDCTX && post.id) {
+                                        //         if(!shareAdded) {
+                                        //             try {
+                                        //                 // @ts-ignore
+                                        //                 await sharePost(value.UDIDCTX,value.location, post.id)
+                                        //                 setShareAdded(true)
+                                        //             } catch(error) {
+                                        //                 console.log(error)
+                                        //             }
+                                        //         }
+                                        //     }
+                                        // }
                                     }
                                     
                                     return (
-                                        <div onClick={() => {setShareModalOpen(true); addShare()}} className={styles.icon + ' ' + styles.column} style={{alignItems:'center'}} >
+                                        <div onClick={onShareClick} className={styles.icon + ' ' + styles.column} style={{alignItems:'center'}} >
                                             <ShareIcon />
                                             <p className={styles.grayColor} >{post.shares?Object.keys(post.shares).length:0}</p>
                                         </div>

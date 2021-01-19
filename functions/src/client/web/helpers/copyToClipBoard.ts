@@ -1,4 +1,8 @@
 export const copyToClipBoard = (text : string) => {
-    navigator.clipboard.writeText(text);
-    return
+    // if(typeof window !== 'undefined' && window.navigator) {
+    //     window.navigator.clipboard.writeText(text);
+    //     return
+    // } else {
+    //     return
+    // }
 }
