@@ -54,10 +54,10 @@ const ModelViewer = (props : IProps) => {
 
 
     useEffect(() => {
-        // if(typeof window !== 'undefined' && window.navigator) {
-        //     const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
-        //     setIsMobile(mobile)
-        // }
+        if(typeof window !== 'undefined' && window.navigator) {
+            const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
+            setIsMobile(mobile)
+        }
     }, [])
 
     const compoundUSDZUrl = getUSZFileFullURL(actionButtonColor , actionButtonTextColor, actionButtonInfoBackgroundColor, actionButtonLink, actionButtonText, actionButtonInfoText, actionButtonInfoTextColor)
@@ -69,32 +69,32 @@ const ModelViewer = (props : IProps) => {
             {value => {
                 
                 const onShareClick = async () => {
-                    // if(typeof window !== 'undefined' && window.navigator) {
-                    //     const mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+                    if(typeof window !== 'undefined' && window.navigator) {
+                        const mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
 
-                    //     if(mobile) {
-                    //         try {
-                    //             await navigator.share({ title: "ARize", url: `https://arizear.app/post/${id}` });
-                    //             console.log("Data was shared successfully");
-                    //         } catch (err) {
-                    //             console.error("Share failed:", err.message);
-                    //         }    
-                    //     } else {
-                    //         setShareModalOpen(true);
-                    //     }
+                        if(mobile) {
+                            try {
+                                await navigator.share({ title: "ARize", url: `https://arizear.app/post/${id}` });
+                                console.log("Data was shared successfully");
+                            } catch (err) {
+                                console.error("Share failed:", err.message);
+                            }    
+                        } else {
+                            setShareModalOpen(true);
+                        }
 
-                    //     if(value.UDIDCTX && id) {
-                    //         if(!shareAdded) {
-                    //             try {
-                    //                 // @ts-ignore
-                    //                 await sharePost(value.UDIDCTX,value.location, id)
-                    //                 setShareAdded(true)
-                    //             } catch(error) {
-                    //                 console.log(error)
-                    //             }
-                    //         }
-                    //     }
-                    // }
+                        if(value.UDIDCTX && id) {
+                            if(!shareAdded) {
+                                try {
+                                    // @ts-ignore
+                                    await sharePost(value.UDIDCTX,value.location, id)
+                                    setShareAdded(true)
+                                } catch(error) {
+                                    console.log(error)
+                                }
+                            }
+                        }
+                    }
                 }
 
                 const addARView = async () => {

@@ -47,16 +47,16 @@ const UniqueDeviceIdDetector = (props : IProps) => {
             }
         });
 
-        // if(typeof navigator !== 'undefined' && "geolocation" in navigator) {
-        //     navigator.geolocation.getCurrentPosition(
-        //     function success(position) {
-        //         setLocation({
-        //             lat : position.coords.latitude.toString(),
-        //             long : position.coords.longitude.toString()
-        //         })
-        //     },
-        //     () => {});
-        // }
+        if(typeof navigator !== 'undefined' && "geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(
+            function success(position) {
+                setLocation({
+                    lat : position.coords.latitude.toString(),
+                    long : position.coords.longitude.toString()
+                })
+            },
+            () => {});
+        }
 
         return () => {
             unsubscribe()
