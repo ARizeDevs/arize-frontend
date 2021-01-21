@@ -118,7 +118,7 @@ const ModelViewer = (props : IProps) => {
 
                 <model-viewer 
                     id="myviewer"
-                    src={actionButtonLink?`${glbURL}#link=${actionButtonLink}`:glbURL} 
+                    src={actionButtonLink?`${glbURL}?link=${actionButtonLink}`:glbURL} 
                     ar 
                     ar-modes="scene-viewer quick-look" 
                     ar-scale="auto"
