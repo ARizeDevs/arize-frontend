@@ -33,10 +33,23 @@ const SharePostModal = (props : IProps) => {
         src="https://arizear.app/model-viewer/${postID}">
     </iframe>`
 
-    const onShareClick = () => {
-        copyToClipBoard(shareURL)
-
-        addToast('url copied',{ appearance : 'info' })
+    const onShareClick = async () => {
+        const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
+    
+        if(mobile) {
+            if(typeof window !== 'undefined' && window.navigator) {
+                try {
+                    await window.navigator.share({ title: "ARize", url: shareURL });
+                    console.log("Data was shared successfully");
+                } catch (err) {
+                    console.error("Share failed:", err.message);
+                }    
+            }
+        } else {
+            copyToClipBoard(shareURL)
+    
+            addToast('url copied',{ appearance : 'info' })
+        }
     }
 
     const onEmbedClick = () => {

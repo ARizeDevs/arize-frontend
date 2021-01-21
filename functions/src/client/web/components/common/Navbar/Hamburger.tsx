@@ -46,9 +46,9 @@ const Hamburger  = () => {
     ]
     
 
-    const renderedItems = menuItemst.map(({ text },index) => {
+    const renderedItems = menuItemst.map(({ text, onClick },index) => {
         return (
-            <div className={styles.hamburgerMenuItem} key={text}>
+            <div onClick={onClick} className={styles.hamburgerMenuItem} key={text}>
                 <h1>{text}</h1>
                 {index !== menuItemst.length -1 ?<div className={styles.hamburgerMenuDivider}></div>:null}
             </div>
