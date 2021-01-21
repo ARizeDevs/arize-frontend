@@ -17,11 +17,11 @@ const Hamburger  = () => {
     const menuItemst = [
         {
             text : 'Profile',
-            onClick : () => router.push('/rofile')
+            onClick : () => router.push('/profile')
         },
         {
             text : 'Edit Profile' ,
-            onClick : () => router.push('/edit-rofile')
+            onClick : () => router.push('/edit-profile')
         },
         {
             text : 'Share Profile',
