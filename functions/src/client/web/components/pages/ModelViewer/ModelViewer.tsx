@@ -53,7 +53,6 @@ const ModelViewer = (props : IProps) => {
     const [ shareAdded, setShareAdded ] = useState(false)
     const [ arViewAdded, setArViewAdded ] = useState(false)
 
-
     useEffect(() => {
         if(typeof window !== 'undefined' && window.navigator) {
             const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
@@ -119,7 +118,7 @@ const ModelViewer = (props : IProps) => {
 
                 <model-viewer 
                     id="myviewer"
-                    src={glbURL} 
+                    src={actionButtonLink?`${glbURL}#link=${actionButtonLink}`:glbURL} 
                     ar 
                     ar-modes="scene-viewer quick-look" 
                     ar-scale="auto"
