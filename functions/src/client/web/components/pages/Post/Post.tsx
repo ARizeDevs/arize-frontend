@@ -71,6 +71,7 @@ const Post = (props : IProps) => {
                         id={post.id}
                         autoPlay={post.autoPlay}
                         background={backGroundImage} 
+                        hasCallToAction={post.hasCallToAction}
                         actionButtonText={post.actionButtonText}
                         actionButtonInfoBackgroundColor={post.actionInfoBackgroundColor}
                         actionButtonInfoTextColor={post.actionButtonInfoTextColor}

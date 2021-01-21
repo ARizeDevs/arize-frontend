@@ -79,6 +79,7 @@ const arstudio = ({ post, isAryanTer } : { post:any, isAryanTer : boolean}) => {
                             poster={poster}
                             autoPlay={post.autoPlay}
                             background={backGroundImage} 
+                            hasCallToAction={post.hasCallToAction}
                             actionButtonText={post.actionButtonText}
                             actionButtonInfoTextColor={post.actionButtonInfoTextColor}
                             actionButtonInfoBackgroundColor={post.actionInfoBackgroundColor}

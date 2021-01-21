@@ -8,10 +8,8 @@ import FourOhFour from '../../components/pages/FourOhFour'
 import { UDIDContext } from '../../components/common/UniqueDeviceIdDetector'
 import { view3DPost } from '../../API'
 
-
 const post = ({ post, relatedPosts } : { post : any, relatedPosts : any}) => {
     const [ viewAdded, setViewAdded ] = useState(false)
-    
     
     if (!post ) {
         return <FourOhFour />

@@ -57,6 +57,7 @@ const Preview = (props : IProps) => {
                         glbURL={typeof window !== "undefined" && contentFile ?  (typeof contentFile !== "string"? window.URL.createObjectURL(contentFile) : contentFile ):''}
                         actionButtonColor={buttonColor}
                         actionButtonInfoBackgroundColor={infoBackgroundColor}
+                        hasCallToAction={hasCallToAction}
                         actionButtonLink={link}
                         actionButtonText={buttonText}
                         actionButtonTextColor={buttonTextColor}

@@ -18,6 +18,7 @@ interface IProps {
     usdzURL : string,
     title : string,
     id : string,
+    hasCallToAction : boolean,
     actionButtonText : string,
     actionButtonTextColor : string,
     actionButtonInfoBackgroundColor : string,
@@ -42,7 +43,7 @@ const getUSZFileFullURL = (actionButtonBackgroundColor : string, actionButtonCol
 
 const ModelViewer = (props : IProps) => {
     const { title, glbURL, background, usdzURL,
-            actionButtonInfoBackgroundColor, actionButtonColor,
+            actionButtonInfoBackgroundColor, actionButtonColor, hasCallToAction,
             actionButtonLink, actionButtonText, actionButtonTextColor, actionButtonInfoTextColor,
             poster, autoPlay, id, actionButtonInfoText, showQR, showShare, onFullScreen, isFullScreen } = props
 
@@ -60,9 +61,12 @@ const ModelViewer = (props : IProps) => {
         }
     }, [])
 
-    const compoundUSDZUrl = getUSZFileFullURL(actionButtonColor , actionButtonTextColor, actionButtonInfoBackgroundColor, actionButtonLink, actionButtonText, actionButtonInfoText, actionButtonInfoTextColor)
+    let fullUSDZUrl = `${usdzURL}`
+    if(hasCallToAction) {
+        const compoundUSDZUrl = getUSZFileFullURL(actionButtonColor , actionButtonTextColor, actionButtonInfoBackgroundColor, actionButtonLink, actionButtonText, actionButtonInfoText, actionButtonInfoTextColor)
+        fullUSDZUrl = `${fullUSDZUrl}#custom=${compoundUSDZUrl}`
+    }
 
-    const fullUSDZUrl = `${usdzURL}#custom=${compoundUSDZUrl}`
 
     return (
         <UDIDContext.Consumer >

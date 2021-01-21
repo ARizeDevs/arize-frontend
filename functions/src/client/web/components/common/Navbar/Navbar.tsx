@@ -10,6 +10,7 @@ import SupportIcon from '../../../../assets/icons/support.svg'
 import styles from './Navbar.module.css'
 import SolidButton from '../buttons/SolidButton'
 import ProfileMenu from '../ProfileMenu'
+import Hamburger from './Hamburger'
 
 interface IProps {
     imageSrc? : string
@@ -76,14 +77,21 @@ const Navbar = (props : IProps) => {
             <div className={styles.subContainer}>
                 {isPublicRoute?null:
                     <>
-                        {renderedRightItems}
-                        
-                        {noMenu?null:<ProfileMenu imageSrc={imageSrc} />}
 
-                        {!isARStudio? 
-                        <div className={styles.arStudioButton}>
-                            <SolidButton onClick={() => router.push('/arstudio')} ><h3>Create AR</h3></SolidButton>
-                        </div> : null }
+                        <div className={styles.hamburgerMenuWrapper}>
+                            <Hamburger />
+                        </div>
+
+                        <div className={`${styles.desktopItems} ${styles.subContainer}`}>
+                            {renderedRightItems}
+                            
+                            {noMenu?null:<ProfileMenu imageSrc={imageSrc} />}
+
+                            {!isARStudio? 
+                            <div className={styles.arStudioButton}>
+                                <SolidButton onClick={() => router.push('/arstudio')} ><h3>Create AR</h3></SolidButton>
+                            </div> : null }
+                        </div>
                     </>    
                 }
             </div>
