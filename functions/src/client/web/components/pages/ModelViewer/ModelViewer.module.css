@@ -50,6 +50,17 @@
     white-space: nowrap;
 }
 
+.bannerWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+}
+
 @media only screen and (max-width : 1000px) {
     
     .myArBtn img {
@@ -64,6 +75,7 @@
         /* left: 65%; */
     /* } */
 }
+
 
 @media only screen and (max-width : 640px) {
     

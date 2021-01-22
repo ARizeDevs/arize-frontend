@@ -33,7 +33,8 @@ interface IProps {
     showQR : boolean,
     showShare? : boolean
     onFullScreen? : () => void,
-    isFullScreen? : boolean
+    isFullScreen? : boolean,
+    showBanner? : boolean
 }
 
 const getUSZFileFullURL = (actionButtonBackgroundColor : string, actionButtonColor : string,
@@ -140,17 +141,20 @@ const ModelViewer = (props : IProps) => {
                         <div onClick={() => addARView()} style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}><ARViewIcon /><h3 style={{marginLeft:'10px'}}>View AR</h3></div>
                     </button>
 
-                    <Banner
-                        postTitle={title}
-                        isAndroid={false}
-                        infoText={actionButtonInfoText}
-                        infoTextColor={actionButtonInfoTextColor}                       
-                        buttonColor={actionButtonColor}
-                        buttonText={actionButtonText}
-                        buttonTextColor={actionButtonTextColor}
-                        infoBackgrounColor={actionButtonInfoBackgroundColor}
-                        link={actionButtonLink}
-                    />
+                    {isMobile? 
+                    <div slot='ar' className={styles.bannerWrapper}>
+                        <Banner
+                            postTitle={title}
+                            isAndroid={false}
+                            infoText={actionButtonInfoText}
+                            infoTextColor={actionButtonInfoTextColor}                       
+                            buttonColor={actionButtonColor}
+                            buttonText={actionButtonText}
+                            buttonTextColor={actionButtonTextColor}
+                            infoBackgrounColor={actionButtonInfoBackgroundColor}
+                            link={actionButtonLink}
+                        />
+                    </div> : null}
                 </model-viewer>
                 {!isMobile && id && showQR ? <button onClick={() => setQRModalOpen(true)} className={styles.myArBtn} >
                     <div style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}><ARViewIcon /><h3 style={{marginLeft:'10px'}}>View AR</h3></div>
