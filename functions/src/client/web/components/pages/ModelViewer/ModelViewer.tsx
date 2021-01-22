@@ -12,6 +12,7 @@ import styles from './ModelViewer.module.css'
 import SharePostModal from '../../common/SharePostModal'
 import { UDIDContext } from '../../common/UniqueDeviceIdDetector'
 import { sharePost, viewARPost } from '../../../API'
+import Banner from '../Banner'
 
 interface IProps {
     glbURL : string,
@@ -120,7 +121,7 @@ const ModelViewer = (props : IProps) => {
                     id="myviewer"
                     src={actionButtonLink?`${glbURL}?link=${actionButtonLink}`:glbURL} 
                     ar 
-                    ar-modes="scene-viewer quick-look" 
+                    ar-modes="webxr scene-viewer quick-look" 
                     ar-scale="auto"
                     loading="eager"
                     reveal={autoPlay?"auto":"interaction"}
@@ -138,6 +139,18 @@ const ModelViewer = (props : IProps) => {
                     <button slot="ar-button"  className={styles.myArBtn} >
                         <div onClick={() => addARView()} style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}><ARViewIcon /><h3 style={{marginLeft:'10px'}}>View AR</h3></div>
                     </button>
+
+                    <Banner
+                        postTitle={title}
+                        isAndroid={false}
+                        infoText={actionButtonInfoText}
+                        infoTextColor={actionButtonInfoTextColor}                       
+                        buttonColor={actionButtonColor}
+                        buttonText={actionButtonText}
+                        buttonTextColor={actionButtonTextColor}
+                        infoBackgrounColor={actionButtonInfoBackgroundColor}
+                        link={actionButtonLink}
+                    />
                 </model-viewer>
                 {!isMobile && id && showQR ? <button onClick={() => setQRModalOpen(true)} className={styles.myArBtn} >
                     <div style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}><ARViewIcon /><h3 style={{marginLeft:'10px'}}>View AR</h3></div>
