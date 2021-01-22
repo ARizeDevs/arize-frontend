@@ -142,7 +142,7 @@ const ModelViewer = (props : IProps) => {
                     </button>
 
                     {isMobile? 
-                    <div slot='ar' className={styles.bannerWrapper}>
+                    <div className={styles.bannerWrapper}>
                         <Banner
                             postTitle={title}
                             isAndroid={false}
