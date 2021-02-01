@@ -1,4 +1,4 @@
-import firebase from 'firebase'
+import firebase from '../../../config/firebase'
 import React,{ useEffect, useState } from 'react'
 import Cookies from 'universal-cookie'
 import { v4 as uuidv4 } from 'uuid';
