@@ -39,7 +39,7 @@ const Banner = (props : IProps) => {
     }
 
     return (
-        <div className={styles.root} style={{backgroundColor:infoBackgrounColor,marginBottom:'5%'}}>
+        <div className={styles.root_ios} style={{backgroundColor:infoBackgrounColor}}>
             <div style={{width:"70%",height:'100%'}}>
                 <p style={{color:infoTextColor,height:'100%',fontSize:'13px',wordWrap: 'break-word',textOverflow: 'ellipsis',overflow:'hidden'}}>{infoText}</p>
             </div>

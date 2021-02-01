@@ -14,17 +14,17 @@ const banner = ({ post } : { post : any}) => {
 
   if(post.hasCallToAction) {
     return (
-    <Banner 
-      infoText={post.actionButtonInfoText}
-      buttonColor={post.actionButtonColor} 
-      buttonText={post.actionButtonText}
-      buttonTextColor={post.actionBUttonTextColor}
-      infoBackgrounColor={post.actionInfoBackgroundColor}
-      infoTextColor={post.actionButtonInfoTextColor}
-      link={post.actionButtonLink}
-      isAndroid={false}
-      postTitle=''
-    />
+      <Banner 
+        infoText={post.actionButtonInfoText}
+        buttonColor={post.actionButtonColor} 
+        buttonText={post.actionButtonText}
+        buttonTextColor={post.actionBUttonTextColor}
+        infoBackgrounColor={post.actionInfoBackgroundColor}
+        infoTextColor={post.actionButtonInfoTextColor}
+        link={post.actionButtonLink}
+        isAndroid={false}
+        postTitle=''
+      />
     )
 
   } else {
