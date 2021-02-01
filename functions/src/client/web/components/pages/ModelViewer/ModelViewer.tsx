@@ -37,10 +37,9 @@ interface IProps {
     showBanner? : boolean
 }
 
-const getUSZFileFullURL = (actionButtonBackgroundColor : string, actionButtonColor : string,
-    actionButtonInfoColor : string, actionButtonLink : string, actionButtonText : string, actionButtonInfoText : string, actionButtonInfoTextColor : string) => {
+const getUSZFileFullURL = (id : string) => {
 
-    return `https://arizear.app/banner?link=${actionButtonLink}&buttonText=${actionButtonText}&buttonColor=${actionButtonBackgroundColor}&buttonTextColor=${actionButtonColor}&infoBackgrounColor=${actionButtonInfoColor}&infoText=${actionButtonInfoText}&infoTextColor=${actionButtonInfoTextColor}`
+    return `https://arizear.app/banner/${id}`
 }
 
 const ModelViewer = (props : IProps) => {
@@ -64,7 +63,7 @@ const ModelViewer = (props : IProps) => {
 
     let fullUSDZUrl = `${usdzURL}`
     if(hasCallToAction) {
-        const compoundUSDZUrl = getUSZFileFullURL(actionButtonColor , actionButtonTextColor, actionButtonInfoBackgroundColor, actionButtonLink, actionButtonText, actionButtonInfoText, actionButtonInfoTextColor)
+        const compoundUSDZUrl = getUSZFileFullURL(id)
         fullUSDZUrl = `${fullUSDZUrl}#custom=${compoundUSDZUrl}`
     }
 
