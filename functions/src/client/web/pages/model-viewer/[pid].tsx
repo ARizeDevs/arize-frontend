@@ -6,10 +6,9 @@ import { useRouter } from 'next/router'
 import ARizeLogo from '../../../assets/icons/logo black new.svg'
 
 import ModelViewer from '../../components/pages/ModelViewer'
-// import { getPost, view3DPost } from '../../API'
-import { getPost } from '../../API'
+import { getPost, view3DPost } from '../../API'
 import { getDirectURL } from '../../config/firebase'
-// import { UDIDContext } from '../../components/common/UniqueDeviceIdDetector'
+import { UDIDContext } from '../../components/common/UniqueDeviceIdDetector'
 import FourOhFour from '../../components/pages/FourOhFour'
 
 const arstudio = ({ post, isAryanTer } : { post:any, isAryanTer : boolean}) => {
@@ -30,7 +29,7 @@ const arstudio = ({ post, isAryanTer } : { post:any, isAryanTer : boolean}) => {
     const [ usdzURL, setUSDZUrl ] = useState('')
     const [ backGroundImage, setBackgrounImage ] = useState('')
     const [ poster, setPoster ] = useState('')
-    // const [ viewAdded, setViewAdded ] = useState(false)
+    const [ viewAdded, setViewAdded ] = useState(false)
 
     useEffect(() => {
         getDirectURL(post.glbFileURL).then((url) => setGLBUrl(url)).catch(() => '' )
@@ -51,7 +50,7 @@ const arstudio = ({ post, isAryanTer } : { post:any, isAryanTer : boolean}) => {
                 <ARizeLogo />
             </div>
             <div style={{width:'100vw',height:'100vh'}}>
-                {/* <UDIDContext.Consumer >
+                <UDIDContext.Consumer >
                     {value => {
                         const addView = async () => {
                             if(value.UDIDCTX && post.id) {
@@ -67,10 +66,9 @@ const arstudio = ({ post, isAryanTer } : { post:any, isAryanTer : boolean}) => {
                             }
                         }
 
-                        addView() */}
+                        addView()
 
-                        {/* return <ModelViewer */}
-                        <ModelViewer
+                        return <ModelViewer
                             showQR={true}
                             title={post.title}
                             showShare={true}
@@ -90,8 +88,8 @@ const arstudio = ({ post, isAryanTer } : { post:any, isAryanTer : boolean}) => {
                             actionButtonTextColor={post.actionBUttonTextColor}
                         />
 
-                    {/* }}
-                </UDIDContext.Consumer> */}
+                    }}
+                </UDIDContext.Consumer>
             </div>
         </>
 )

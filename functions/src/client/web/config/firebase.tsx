@@ -2,7 +2,6 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firebase-firestore"
 import "firebase/storage"
-// import "firebase/analytics"
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAfw0820cs80QQ_f6oGvjY6-0yL9HnZIqY',
@@ -17,7 +16,11 @@ const firebaseConfig = {
 
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
-    // if(typeof window !== 'undefined') firebase.analytics(); 
+    if(typeof window !== 'undefined' && navigator.cookieEnabled){
+      // @ts-ignore
+      require("firebase/analytics")
+      firebase.analytics(); 
+    }
 }
 
 const db = firebase.firestore()
