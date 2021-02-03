@@ -18,17 +18,27 @@ const UniqueDeviceIdDetector = (props : IProps) => {
     useEffect(() => {
         const unsubscribe = firebase.auth().onAuthStateChanged(async function(user) {
             if(!user) {
-                if(typeof window !== undefined && navigator.cookieEnabled) {
-                    const cookies = new Cookies()
-                    let UDID = cookies.get('UDID')
-    
-                    if(!UDID) {
-                        UDID = uuidv4()
-                        cookies.set('UDID', UDID, {
-                            maxAge : 60 * 60 * 24 * 365 * 2
-                        })
+                if(typeof window !== undefined) {
+                    if( navigator.cookieEnabled) {
+                        const cookies = new Cookies()
+                        let UDID = cookies.get('UDID')
+        
+                        if(!UDID) {
+                            UDID = uuidv4()
+                            cookies.set('UDID', UDID, {
+                                maxAge : 60 * 60 * 24 * 365 * 2
+                            })
+                        }
+                        setUDIDCTX(UDID)
+                    } else {
+                        let UDID = localStorage.getItem('UDID')
+
+                        if(!UDID) {
+                            UDID = uuidv4()
+                            localStorage.set('UDID', UDID)
+                        }
+                        setUDIDCTX(UDID)
                     }
-                    setUDIDCTX(UDID)
                 }
             } else {
                 if(user.uid) {
