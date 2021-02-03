@@ -43,7 +43,7 @@ interface IProps {
 }
 
 const ARStudioPostDetail = (props : IProps) => {
-    const { error, actionButtonInfoTextColor, setActionButtonInfoTextColor, actionButtonInfoText, setActionButtonInfoText, hasCallToAction, setHasCallToAction, autoPlay, hasShadow, setAutoPlay, setHasShadow, hasBackground, setHasBackground, buttonText, actionInfoBackgroundColor, setActionInfoBackgroundColor, onFinish , postBackgroundImageBase64, setPostBackgroundImageBase64, actionBUttonTextColor ,actionButtonColor, actionButtonLink, actionButtonText, onBack, setActionBUttonTextColor, setActionButtonColor, setActionButtonLink, setActionButtonText  } = props
+    const { error, actionButtonInfoTextColor, setActionButtonInfoTextColor, actionButtonInfoText, setActionButtonInfoText, hasCallToAction, autoPlay, hasShadow, setAutoPlay, setHasShadow, hasBackground, setHasBackground, buttonText, actionInfoBackgroundColor, setActionInfoBackgroundColor, onFinish , postBackgroundImageBase64, setPostBackgroundImageBase64, actionBUttonTextColor ,actionButtonColor, actionButtonLink, actionButtonText, onBack, setActionBUttonTextColor, setActionButtonColor, setActionButtonLink, setActionButtonText  } = props
 
     return (
         <div className={styles.root}>
@@ -57,7 +57,7 @@ const ARStudioPostDetail = (props : IProps) => {
                 </div>
             </div>
             <div className={styles.inputWrapper}>
-                <Toggle active={hasCallToAction} setActive={setHasCallToAction} text='Set Call To Action' />
+                {/* <Toggle active={hasCallToAction} setActive={setHasCallToAction} text='Set Call To Action' /> */}
                 {hasCallToAction?
                 <>
                     <Input placeholder='https://example.com/...' error={error.actionButtonLink} maxInputLength={500} required text="Action button link"  type="text" value={actionButtonLink} onChange={setActionButtonLink} />

@@ -241,7 +241,7 @@ const ARStudio = (props : IProps) => {
                     {page===2?<ARStudioCustomize
                             actionButtonInfoTextColor={actionButtonInfoTextColor}
                             setActionButtonInfoTextColor={setActionButtonInfoTextColor}
-                            hasCallToAction={hasCallToAction}
+                            hasCallToAction={false}
                             setHasCallToAction={setHasCallToAction }
                             actionButtonInfoText={actionButtonInfoText}
                             setActionButtonInfoText={validateAndSet(setActionButtonInfoText, actionButtonInfoTextValidator)}
