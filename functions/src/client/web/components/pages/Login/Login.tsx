@@ -76,6 +76,7 @@ const Login = () => {
 
             const result = await firebase.auth().signInWithEmailAndPassword(email, password)
             if(result && result.user) {
+                console.log("result", result)
                 if(!result.user.emailVerified) {
                     await result.user.sendEmailVerification()
                 }

@@ -78,7 +78,7 @@ const ContentInput = (props : IProps) => {
             {error ?<Message type={IMessageTypes.ERROR} text={error} />:
                 localError ? <Message type={IMessageTypes.ERROR} text={localError} />:null
             }
-            {!error && !localError && fileChoosingSuccess?<Message type={IMessageTypes.SUCCESS} text={'File successfully uploaded!'} />:null}
+            {!error && !localError && fileChoosingSuccess?<Message type={IMessageTypes.ACTIVE} text={'File successfully uploaded!'} />:null}
         </div>
 }
 

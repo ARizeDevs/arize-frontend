@@ -17,12 +17,13 @@ interface IProps {
   priceYearly?:JSX.Element;
   priceColor?:string;
   details:any;
+  productNum:string;
   rightToggleLabel?:boolean;
 }
 
 
 const PlanType = (props : IProps) => {
-  const {buttonTitle,activeBorder, buttonColor, cardTitle,titleColor,priceMonthly,priceYearly,priceColor, details} = props
+  const {productNum,buttonTitle,activeBorder, buttonColor, cardTitle,titleColor,priceMonthly,priceYearly,priceColor, details} = props
  const [value,setValue]= useState(false)
 
   return (
@@ -37,7 +38,7 @@ const PlanType = (props : IProps) => {
       </h1>
       <div className={styles.choosePlan}>
         
-        {!priceMonthly && <Message type={IMessageTypes.SUCCESS} text={'Active Plan'}/>}
+        {!priceMonthly && <Message type={IMessageTypes.ACTIVE} text={'Active Plan'}/>}
         
         <h2 style={{color:priceColor}}>
           {value ? priceYearly : priceMonthly}
@@ -47,11 +48,14 @@ const PlanType = (props : IProps) => {
         {priceYearly &&  <Toggle active={value} posit='flex-start' rightToggleLabel={true} setActive={setValue} text = {<label className={`${styles.priceLabel2} ${value ? styles.activePriceLabel : ''}`}>Yearly (Get 1 month free)</label>} />}
         
       </div>
+      <div className={styles.product}><div className={styles.productNum}>{productNum}</div><p className={styles.pNum}>Products</p></div>
       <PlanDetails details={details}/>
+      <div className={styles.buttonDiv}>
       {buttonTitle && <SolidButton onClick={null} styleClass={styles.SolidButton}
         colorTheme={buttonColor}>
         {buttonTitle}
       </SolidButton>}
+      </div>
     </div>
     </div>
   )

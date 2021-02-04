@@ -43,6 +43,14 @@
     margin: 0 !important;
 }
 
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 !important;
+}
+
 .banner {
     width: 48%;
     align-items: center;
@@ -57,22 +65,17 @@
         height: auto;
       }
       .column{
-          width: 100% !important;
+          width: 100%;
           overflow: hidden;
-      }
-      .row{
-          width: 100% !important;
-          justify-content: space-around !important;
       }
     }
 
 
+.num {
+    color: #0078FF;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 700;
 
 
-.row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    margin: 0 !important;
 }

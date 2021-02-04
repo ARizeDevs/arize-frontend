@@ -3,7 +3,7 @@
     flex-direction: column;
     width: 100vw;
     height: 100vh;
-    flex: 1 1 auto;
+    
     overflow-y: auto;
 }
 
@@ -18,24 +18,23 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
 .plans {
     flex: 1 1 auto;
-    overflow-y: auto;
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: space-between;
     flex-wrap: wrap;
-}
-.title {
-    display:flex;
-    flex-direction: column;
-   
-}
-
-.monthly {
-    display: flex;
-    flex-direction: row;
     
 }
 
+.title {
+    display:flex;
+    flex-direction: column;
+    width: inherit;
+}
+.monthly {
+    display: flex;
+    flex-direction: row;
+}
