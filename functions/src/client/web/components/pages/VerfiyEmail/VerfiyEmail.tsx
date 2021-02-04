@@ -16,7 +16,7 @@ const VerifyEmail = () => {
         <div className={styles.root}>
             <Navbar  />
             <div className={styles.bodyContainer}>
-                    <div className={styles.column} style={{width:'50%'}}>
+                    <div className={`${styles.column} ${styles.section}`}>
                         <div className={styles.row}>
                             <CheckedIcon />
                             <div className={styles.column}>
@@ -24,11 +24,13 @@ const VerifyEmail = () => {
                                 <p>Your email has been verified successfully! Enjoy your experience with ARize :)</p>
                             </div>
                         </div>
-                        <div style={{width:'50%'}}>
+                        <div className={styles.formContainer}>
                             <SolidButton onClick={() => router.push('/profile')} ><h3>Take Me Home</h3></SolidButton> 
                         </div>
                     </div>
-                <NewMessageBanner />
+                <div className={styles.banner}>
+                    <NewMessageBanner />
+                </div>
             </div>
         </div>
     )

@@ -19,6 +19,7 @@ import styles from './ARStudio.module.css'
 import ARStudioCustomize from '../../common/ARStudioCustomize'
 import Loading from '../../common/Loading'
 import { getUser } from '../../../API/user'
+import { useToasts } from 'react-toast-notifications'
 
 interface IProps {
     isEdit? : boolean,
@@ -27,14 +28,13 @@ interface IProps {
 
 const ARStudio = (props : IProps) => {
 
-    // return (<div>salam</div>)
     const { isEdit, postID, } = props
-
+    
+    const { addToast } = useToasts()
     const router = useRouter()
 
     const [ submiting , setSubmiting ] = useState(false)
     const [ fetchingData, setFetchingData ] = useState(true)
-    // const [ generalError , setGeneralError ] = useState('')
 
     const [ page, setPage ] = useState(1)
     const [ imageSrc , setImageSrc ] = useState('')
@@ -47,9 +47,7 @@ const ARStudio = (props : IProps) => {
     const [ description , setDescription ] = useState('')
     const [ tags , setTags ] = useState(['3DModel'])
     const [ contentFile , setContentFile ] = useState(null)
-    // const [ uploadProgress, setUplaodProgress ] = useState(0)
     const [ hasCallToAction, setHasCallToAction ] = useState(false)
-    // const [ uploadStatus, setUploadStatus ] = useState('')
     const [ actionBUttonTextColor, setActionBUttonTextColor] = useState('#FFFFFF')
     const [ actionButtonColor, setActionButtonColor] = useState('#FF6F48')
     const [ actionButtonInfoText, setActionButtonInfoText ] = useState('')
@@ -64,6 +62,7 @@ const ARStudio = (props : IProps) => {
     const [ error, setError ] = useState({})
 
     const [ profilePicSrc, setProfilePicSrc ] = useState('')
+    const [ userId, setUserId ] = useState('')
 
     const validateAndSet = (fn : (arg : any) => void, validate : (arg : any) => any) => {
         return (value : any) => {
@@ -72,6 +71,9 @@ const ARStudio = (props : IProps) => {
             setError({...error,...result})
         }
     }
+
+    useEffect(() => {
+    }, [])
 
     useEffect(() => {
         const getInitData = async () => {
@@ -84,6 +86,8 @@ const ARStudio = (props : IProps) => {
                             setProfilePicSrc(url)
                         })
                     }
+                    setUserId(userData.id)
+                    firebase.analytics().logEvent('creation_started', { user : userData.id } )
                 }
             } catch(error) {
                 console.log(error)
@@ -103,15 +107,16 @@ const ARStudio = (props : IProps) => {
                         firebase.storage().ref(postData.imageURL).getDownloadURL().then((url) => setImageSrc(url))
                         setDescription(postData.description)
                         setTags(postData.tags.split(','))
-                        setActionBUttonTextColor(postData.actionBUttonTextColor)
-                        setActionButtonColor(postData.actionButtonColor)
+                        if(postData.actionBUttonTextColor) setActionBUttonTextColor(postData.actionBUttonTextColor)
+                        if(postData.actionButtonColor) setActionButtonColor(postData.actionButtonColor)
                         setActionButtonLink(postData.actionButtonLink)
                         setActionButtonText(postData.actionButtonText)
                         setAutoPlay(postData.autoPlay)
+                        if(postData.hasCallToAction) setHasCallToAction(postData.hasCallToAction)
                         setHasShadow(postData.hasShadow)
-                        setActionButtonInfoText(postData.actionButtonInfoText)
-                        setActionButtonInfoTextColor(postData.actionButtonInfoTextColor)
-                        setActionInfoBackgroundColor(postData.actionInfoBackgroundColor)
+                        if(postData.actionButtonInfoText) setActionButtonInfoText(postData.actionButtonInfoText)
+                        if(postData.actionButtonInfoTextColor) setActionButtonInfoTextColor(postData.actionButtonInfoTextColor)
+                        if(postData.actionInfoBackgroundColor) setActionInfoBackgroundColor(postData.actionInfoBackgroundColor)
                         firebase.storage().ref(postData.glbFileURL).getDownloadURL().then((url) => setContentFile(url))
                         if(postData.backGroundImage) firebase.storage().ref(postData.backGroundImage).getDownloadURL().then((url) => setPostBackgroundImageBase64(url))
                         if(!postData.backGroundImage) setHasBackground(false)
@@ -198,13 +203,17 @@ const ARStudio = (props : IProps) => {
             setSubmiting(false)
             if (result.success)
             {
+                firebase.analytics().logEvent('creation_success', { user : userId } )
                 router.push('/profile')
             } else {
-                // setGeneralError(result.error?result.error:'')
+                firebase.analytics().logEvent('creation_failed', { user : userId } )
+                addToast('Bad file format',{ appearance : 'error' })
             } 
         } catch(error) {
-                // setGeneralError(error)
-                setSubmiting(false)
+            firebase.analytics().logEvent('creation_failed', { user : userId } )
+            addToast('Bad file format',{ appearance : 'error' })
+            // setGeneralError(error)
+            setSubmiting(false)
         }
     }
 
@@ -232,7 +241,7 @@ const ARStudio = (props : IProps) => {
                     {page===2?<ARStudioCustomize
                             actionButtonInfoTextColor={actionButtonInfoTextColor}
                             setActionButtonInfoTextColor={setActionButtonInfoTextColor}
-                            hasCallToAction={hasCallToAction}
+                            hasCallToAction={false}
                             setHasCallToAction={setHasCallToAction }
                             actionButtonInfoText={actionButtonInfoText}
                             setActionButtonInfoText={validateAndSet(setActionButtonInfoText, actionButtonInfoTextValidator)}

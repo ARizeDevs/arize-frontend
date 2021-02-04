@@ -45,15 +45,15 @@ const ContentInput = (props : IProps) => {
     } 
 
     return <div className={styles.root}>
-            <p style={{fontWeight:'bold'}} className={error?styles.error:''}>{text}</p>
+            <p style={{fontWeight:'bold'}} className={error || localError?styles.error:''}>{text}</p>
             {typeof window !== "undefined" ? 
             <div className={`${styles.imagePickerButton} ${error || localError?styles.imagePickerButtonError:(fileChoosingSuccess?styles.imagePickerButtonSuccess:'')}`}>
                 
                 {extensions?<FilePicker 
-                    maxSize={100}
+                    maxSize={25}
                     extensions={extensions}
                     onChange={onContentChange}
-                    onError={(errMsg : any) => setLocalError('upload failed!')}
+                    onError={(errMsg : any) => setLocalError(errMsg)}
                 >
                     <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
                         {!error && !localError && fileChoosingSuccess ? 
@@ -62,10 +62,10 @@ const ContentInput = (props : IProps) => {
                         }
                     </div>
                 </FilePicker>: <FilePicker 
-                    maxSize={100}
+                    maxSize={25}
                     // extensions={extensions}
                     onChange={onContentChange}
-                    onError={(errMsg : any) => setLocalError('upload failed!')}
+                    onError={(errMsg : any) => setLocalError(errMsg)}
                 >
                     <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
                         {!error && !localError && fileChoosingSuccess ? 

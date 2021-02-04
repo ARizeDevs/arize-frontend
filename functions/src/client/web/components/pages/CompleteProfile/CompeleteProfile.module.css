@@ -55,9 +55,6 @@
     align-items: center;
 }
 
-.accountTypeMessage {
-}
-
 .pageContainer {
     justify-content:center;
     flex-grow:1;
@@ -71,4 +68,10 @@
     flex-direction:column;
     justify-content:center;
     align-items:center;
+}
+
+@media only screen and (max-width : 1000px) {
+    .bodyContainer {
+        width: 96%;
+    }
 }

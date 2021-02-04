@@ -4,7 +4,10 @@ import React from 'react'
 import UnauthorizedRedirect from '../components/common/UnauthorizedRedirect'
 import Profile from '../components/pages/Profile'
 
-const profile = () => (
+const profile = () => {
+    console.log('oadasda')
+    
+    return (
     <>
         <Head>
             <link rel="shortcut icon" href="/images/favicon.png" />
@@ -15,5 +18,5 @@ const profile = () => (
         </UnauthorizedRedirect>
     </>
 )
-
+    }
 export default profile

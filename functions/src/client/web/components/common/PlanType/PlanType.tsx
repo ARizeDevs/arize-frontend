@@ -50,8 +50,12 @@ const PlanType = (props : IProps) => {
       </div>
       <div className={styles.product}><div className={styles.productNum}>{productNum}</div><p className={styles.pNum}>Products</p></div>
       <PlanDetails details={details}/>
+<<<<<<< HEAD
       <div className={styles.buttonDiv}>
       {buttonTitle && <SolidButton onClick={null} styleClass={styles.SolidButton}
+=======
+      {buttonTitle && <SolidButton onClick={() => ''} styleClass={styles.SolidButton}
+>>>>>>> 16cd5588a80bcd1ef18b60a2f9d593aa3c98839d
         colorTheme={buttonColor}>
         {buttonTitle}
       </SolidButton>}

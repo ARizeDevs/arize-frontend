@@ -11,7 +11,7 @@
   }
 
 .bodyContainer {
-    margin-top: 30px;
+    /* margin-top: 30px; */
     margin-left: auto;
     margin-right: auto;
     flex: 1 1 auto;
@@ -40,6 +40,10 @@
 
 .modelViewer * :focus {
     outline: none !important;
+}
+
+.modelViewerFullScreen {
+    height: 100vh !important;
 }
 
 .row {
@@ -72,6 +76,10 @@
 @media screen and (max-width: 800px) {
     .bodyContainer {
         width: 100vw;
+    }
+
+    .pcARViewButton {
+        display: none;
     }
 
     .modelViewer {

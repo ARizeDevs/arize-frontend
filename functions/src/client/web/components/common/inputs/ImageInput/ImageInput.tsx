@@ -41,6 +41,10 @@ const ImageInput = (props : IProps) => {
 
     const [ modalOpen , setModalOpen ] = useState(false)
 
+    const [ localError, setLocalError ] = useState('')
+
+    if(imageSrc && localError) setLocalError('')
+
     const onImageChange = (base64Image : string) => {
         let mimeType = base64Image.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/)![1]
         const extension = mimeTypes.detectExtension(mimeType)
@@ -61,7 +65,7 @@ const ImageInput = (props : IProps) => {
 
     return <div className={styles.root}>
             <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
-                <p style={{fontWeight:'bold'}} className={error?styles.error:''}>{text}</p>
+                <p style={{fontWeight:'bold'}} className={error || localError?styles.error:''}>{text}</p>
                 {toggle !== undefined?<MySwitch
                     checked={toggle}
                     // @ts-ignore
@@ -75,13 +79,13 @@ const ImageInput = (props : IProps) => {
             {toggle === undefined || toggle ?
                 <>
                 {imageSrc === '' && typeof window !== "undefined" ? 
-                <div className={`${styles.imagePickerButton} ${error?styles.imagePickerButtonError:''}`}>
+                <div className={`${styles.imagePickerButton} ${error || localError?styles.imagePickerButtonError:''}`}>
                 {extensions?<ImagePicker
                         extensions={extensions}
-                        maxSize={10}
+                        maxSize={5}
                         dims={{width : '100%' , height : '100%'}}
                         onChange={onImageChange}
-                        onError={(errMsg : any) => {console.log(errMsg)}}
+                        onError={(errMsg : any) => setLocalError(errMsg)}
                     >
                         <div onClick={() => setModalOpen(true)}  style={{width:'100%',height:'100%',display:'flex',justifyContent:'center',alignItems:'center'}}>
 
@@ -90,8 +94,8 @@ const ImageInput = (props : IProps) => {
                     </ImagePicker>:<ImagePicker
                         dims={{width : '100%' , height : '100%'}}
                         onChange={onImageChange}
-                        maxSize={10}
-                        onError={(errMsg : any) => {console.log(errMsg)}}
+                        maxSize={5}
+                        onError={(errMsg : any) => setLocalError(errMsg)}
                     >
                         <div onClick={() => setModalOpen(true)}  style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
 
@@ -99,12 +103,14 @@ const ImageInput = (props : IProps) => {
                         </div>
                     </ImagePicker>} 
                 </div> :
-                <div className={`${styles.imagePickerButton} ${error?styles.imagePickerButtonError:''}`}>
+                <div className={`${styles.imagePickerButton} ${error || localError?styles.imagePickerButtonError:''}`}>
                     <img onClick={() => setModalOpen(true)} src={imageSrc} className={styles.image}>
 
                     </img>
                 </div>}
-                {error?<Message type={IMessageTypes.ERROR} text={error} />:null}
+                {error ?<Message type={IMessageTypes.ERROR} text={error} />:
+                    localError ? <Message type={IMessageTypes.ERROR} text={localError} />:null
+                }
                 {/* @ts-ignore */}
                 <CropperModal onFinished={(newImage : string) => setImageSrc(newImage)} imageSrc={imageSrc} onImageChange={onImageChange} modalOpen={modalOpen} onRequestClose={() => setModalOpen(false)} />
                 </>

@@ -37,6 +37,7 @@ const Post = (props : IProps) => {
     const [ shareModalOpen, setShareModalOpen ] = useState(false)
     const [ qrModalOpen, setQRModalOpen ] = useState(false)
     const [ shareAdded, setShareAdded ] = useState(false)
+    const [ fullScreen, setFullScreen ] = useState(false)
 
     useEffect(() => {
         if(post.author && post.author.profilePicURL) {
@@ -46,16 +47,21 @@ const Post = (props : IProps) => {
         getDirectURL(post.usdzFileURL).then((url) => setUSDZUrl(url)).catch((error) => '')
         getDirectURL(post.imageURL).then((url) => setPoster(url)).catch((error) => '')
         if(post.backGroundImage) getDirectURL(post.backGroundImage).then((url) => setBackgrounImage(url)).catch((error) => '')
-
     })
+
+    const onFullScreenClick = () => setFullScreen(!fullScreen)
+    const onVisitProfileClick = () => router.push(`/profile/${post.author.id}`)
+
 
     return (
         <div className={styles.root}>
-            <Navbar noMenu />
+            {!fullScreen?<Navbar noMenu />:null}
             <div className={styles.bodyContainer}>
-                <br></br>
-                <div className={styles.modelViewer}>
+                <div className={`${styles.modelViewer} ${fullScreen?styles.modelViewerFullScreen:''}`}>
                     <ModelViewer
+                        isFullScreen={fullScreen}
+                        onFullScreen={onFullScreenClick}
+                        key={post.id}
                         showQR={false}
                         title={post.title}
                         actionButtonInfoText={post.actionButtonInfoText}
@@ -65,6 +71,7 @@ const Post = (props : IProps) => {
                         id={post.id}
                         autoPlay={post.autoPlay}
                         background={backGroundImage} 
+                        hasCallToAction={post.hasCallToAction}
                         actionButtonText={post.actionButtonText}
                         actionButtonInfoBackgroundColor={post.actionInfoBackgroundColor}
                         actionButtonInfoTextColor={post.actionButtonInfoTextColor}
@@ -77,11 +84,11 @@ const Post = (props : IProps) => {
                 <div className={styles.column + ' ' + styles.container} style={{width:'50%'}}>
                     <div className={styles.row} style={{width:'100%',justifyContent:'space-between'}}>
                         <div className={styles.row}>
-                            <div style={{width:'40px',height:'40px'}}>
+                            <div onClick={onVisitProfileClick}  style={{cursor:'pointer',width:'40px',height:'40px'}}>
                                 <img style={{width: '100%',height: '100%',borderRadius: '50%'}} src={profileImageSrc} />
                             </div>&nbsp;
                             <div className={styles.column}>
-                                <h3>{post.author.username}</h3>
+                                <h3 onClick={onVisitProfileClick} style={{cursor:'pointer'}}>{post.author.companyName?post.author.companyName:post.author.username}</h3>
                                 <p className={styles.grayColor}>{new Date(post.submissionDate).toDateString()}</p>
                             </div>
                         </div>
@@ -96,18 +103,37 @@ const Post = (props : IProps) => {
                             </a>&nbsp;
                             <UDIDContext.Consumer >
                                 {value => {
-                                    const addShare = async () => {
-                                        if(value.UDIDCTX && post.id) {
-                                            if(!shareAdded) {
-                                                // @ts-ignore
-                                                await sharePost(value.UDIDCTX,value.location, post.id)
-                                                setShareAdded(true)
+                                    const onShareClick = async () => {
+                                        if(typeof window !== 'undefined' && window.navigator) {
+                                            const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
+            
+                                            if(mobile) {
+                                                try {
+                                                    await window.navigator.share({ title: "ARize", url: `https://arizear.app/post/${post.id}` });
+                                                    console.log("Data was shared successfully");
+                                                } catch (err) {
+                                                    console.error("Share failed:", err.message);
+                                                }    
+                                            } else {
+                                                setShareModalOpen(true);
+                                            }
+
+                                            if(value.UDIDCTX && post.id) {
+                                                if(!shareAdded) {
+                                                    try {
+                                                        // @ts-ignore
+                                                        await sharePost(value.UDIDCTX,value.location, post.id)
+                                                        setShareAdded(true)
+                                                    } catch(error) {
+                                                        console.log(error)
+                                                    }
+                                                }
                                             }
                                         }
                                     }
                                     
                                     return (
-                                        <div onClick={() => {setShareModalOpen(true); addShare()}} className={styles.icon + ' ' + styles.column} style={{alignItems:'center'}} >
+                                        <div onClick={onShareClick} className={styles.icon + ' ' + styles.column} style={{alignItems:'center'}} >
                                             <ShareIcon />
                                             <p className={styles.grayColor} >{post.shares?Object.keys(post.shares).length:0}</p>
                                         </div>
@@ -127,7 +153,7 @@ const Post = (props : IProps) => {
                             {post.hasCallToAction?<div style={{width:'100%',marginBottom : '10px'}}>
                                 <SolidButton onClick={() => router.push(post.actionButtonLink)} styleClass={styles.btn} colorTheme={post.actionButtonColor} ><h3 style={{color:post.actionBUttonTextColor}}>{post.actionButtonText}</h3></SolidButton>
                             </div>:null}
-                            <div style={{width:'100%',marginBottom : '10px'}}>
+                            <div className={styles.pcARViewButton} style={{width:'100%',marginBottom : '10px'}}>
                                 <SolidButton onClick={() => setQRModalOpen(true)}  ><h3>AR View</h3></SolidButton>
                             </div>
                         </div>

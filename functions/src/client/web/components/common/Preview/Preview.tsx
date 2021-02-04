@@ -57,6 +57,7 @@ const Preview = (props : IProps) => {
                         glbURL={typeof window !== "undefined" && contentFile ?  (typeof contentFile !== "string"? window.URL.createObjectURL(contentFile) : contentFile ):''}
                         actionButtonColor={buttonColor}
                         actionButtonInfoBackgroundColor={infoBackgroundColor}
+                        hasCallToAction={hasCallToAction}
                         actionButtonLink={link}
                         actionButtonText={buttonText}
                         actionButtonTextColor={buttonTextColor}
@@ -68,7 +69,7 @@ const Preview = (props : IProps) => {
                     />
                 </div>
                 { hasCallToAction?
-                    <div style={{position:'absolute',bottom:'7%',width:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                    <div style={{position:'absolute',bottom:'2%',width:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}>
                         <Banner
                             postTitle={postTitle}
                             isAndroid={isAndroid}

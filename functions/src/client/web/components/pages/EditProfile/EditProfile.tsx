@@ -178,14 +178,13 @@ const EditProfile = () => {
                     <DatePicker error={error.birthday} value={birthday} onChange={validateAndSet(setBirthday,birthdayValidator)} />
                     <GenderDropdown error={error.gender} onSelect={validateAndSet(setGender, genderValidator)} selected={gender} />
                     <CountryPicker error={error.location} value={location} onChange={validateAndSet(setLocation, locationValidator)} />
-                    <div style={{ display:'flex',flexDirection:'row' }}>
-                        <Input placeholder='Business name' required text='Business Name' type='text' value={businessName} onChange={setBusinessName}/>
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        <Input placeholder='Business type' required text='Business Type' type='text' value={businessType} onChange={setBusinessType}/>
+                    <div style={{ display:'flex',flexDirection:'row',justifyContent:'space-between' }}>
+                        <div style={{width:'49%'}}>
+                            <Input placeholder='Business name' required text='Business Name' type='text' value={businessName} onChange={setBusinessName}/>
+                        </div>
+                        <div style={{width:'49%'}}>
+                            <Input placeholder='Business type' required text='Business Type' type='text' value={businessType} onChange={setBusinessType}/>
+                        </div>
                     </div>
                     <Input placeholder='Describe a little bit...' required={false} text='Why Do You Want To Use ARize?' type='text' value={whyToUse} onChange={setWhyToUse}/>
                     <Input placeholder='https://example.com' required text='Business Website URL' type='text' value={websiteURL} onChange={setWebsiteURL}/>

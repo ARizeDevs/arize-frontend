@@ -8,7 +8,7 @@ import EmailIcon from '../../../../assets/icons/contact icons/email.svg'
 import CallIcon from '../../../../assets/icons/contact icons/Call.svg'
 import ChatIcon from '../../../../assets/icons/contact icons/Chat.svg'
 import FAQsIcon from '../../../../assets/icons/contact icons/FAQs.svg'
-import FeatureReq from '../../../../assets/icons/contact icons/Rocket.svg'
+import FeatureRequestIcon from '../../../../assets/icons/contact icons/Feature.svg'
 
 import styles from './Support.module.css'
 import firebase from 'firebase'
@@ -18,6 +18,7 @@ const Support = () => {
 
     const router  = useRouter()
     const [ imageSrc, setImageSrc ] = useState('')
+    const [ accountType, setAccountType ] = useState('')
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged(async function(user) {
@@ -31,6 +32,7 @@ const Support = () => {
                                 setImageSrc(url)
                             })
                         }
+                        setAccountType(userData.accountType)
                     }
                 }
             } catch (error) {
@@ -43,60 +45,45 @@ const Support = () => {
         <div className={styles.root}>
             <Navbar imageSrc={imageSrc} />
             <div className={styles.bodyContainer}>
-                <div className={styles.rowContainer}>
-                    <div className={styles.column} style={{width:'50%'}}>
+                    <div className={`${styles.column} ${styles.section}`}>
                        <h2>Need Support?</h2>
                        <br></br>
                        <p>We are here to help you further!<br></br>Please choose one of the support methods below:</p>
                        <br></br>
                        <br></br>
-                        <div className={styles.row} style={{width:'50%',justifyContent:'space-between'}}>
-                            <div className={styles.column2} style={{width:'60px',height:'120px',alignItems:'center'}}>
-                                <div /*onClick={() => router.push('/')}*/ style={{cursor:'pointer', width:'60px',height:'60px',alignItems:'center'}}>
-                                    <FAQsIcon />
-                                </div>
-                                <p style={{marginTop:'8px'}}>FAQs</p>
+                        <div className={`${styles.row} ${styles.formContainer}`}>
+                            <div className={`${styles.column} ${styles.supportItem}`}>
+                                <FAQsIcon />
+                                <p className={styles.supportItemText}>FAQs</p>
                             </div>
-                            <div className={styles.column2} style={{width:'60px',height:'120px',alignItems:'center'}}>
-                                <div /*onClick={() => router.push('/')}*/ style={{cursor:'pointer', width:'60px',height:'60px',alignItems:'center'}}>
-                                    <ChatIcon  />
-                                </div>
-                                <p style={{marginTop:'8px'}}>Chat</p>
+                            <div className={`${styles.column} ${styles.supportItem}`}>
+                                <EmailIcon />
+                                <p className={styles.supportItemText}>Email</p>
                             </div>
-                            <div className={styles.column2} style={{width:'60px',height:'120px',alignItems:'center'}}>
-                            <div onClick={() => router.push('/call-info')} style={{cursor:'pointer', width:'60px',height:'60px',alignItems:'center'}}>
-                                <CallIcon />
-                                    </div>
-                                <p style={{marginTop:'8px'}}>Call</p>
-                                </div>
+                            <div className={`${styles.column} ${styles.supportItem}`}>
+                                <FeatureRequestIcon />
+                                <p className={styles.supportItemText}>Request Feature</p>
+                            </div>
                         </div>
-                        <div className={styles.row} style={{width:'50%',justifyContent:'space-between'}}>
-                            
-                            <div className={styles.column2} style={{width:'60px',height:'120px',alignItems:'center'}}>
-                                <div onClick={() => router.push('/problem-support')} style={{cursor:'pointer', width:'60px',height:'60px',alignItems:'center'}}>
-                                    <EmailIcon />
-                                </div>
-                                <p style={{marginTop:'8px'}}>Email</p>
-                               
+                        {accountType && accountType!=='FREE'?
+                        <div className={`${styles.row} ${styles.formContainer}`}>
+                            <div className={`${styles.column} ${styles.supportItem}`}>
+                                <CallIcon />
+                                <p className={styles.supportItemText}>Call</p>
                             </div>
-                            <div className={styles.column2} style={{width:'60px',height:'120px',alignItems:'center'}}>
-                                <div onClick={() => router.push('/feature-request')} style={{cursor:'pointer', width:'60px',height:'60px',alignItems:'center'}}>
-                                        <FeatureReq />
-                                    </div>
-                                    <p style={{marginTop:'8px'}}>Request Feature</p>
+                            <div className={`${styles.column} ${styles.supportItem}`}>
+                                <ChatIcon />
+                                <p className={styles.supportItemText}>Chat</p>
                             </div>
-                            <div className={styles.column2} style={{width:'60px',height:'120px',alignItems:'center'}}>
-                            <div onClick={() => router.push('')} style={{width:'60px',height:'60px',alignItems:'center'}}>
-                             
-                                </div>
-                                <p style={{marginTop:'8px'}}></p>
+                            <div className={`${styles.column} ${styles.supportItem}`}>
+                                <TelegramIcon />
+                                <p className={styles.supportItemText}>Telegram</p>
                             </div>
-                            </div>
-                            
+                        </div>:null}
                     </div>
-                    <div className={styles.banner}>
-                        <SupportBanner />
-                    </div>
+
+                <div className={styles.banner}>
+                    <SupportBanner />
                 </div>
             </div>
         </div>

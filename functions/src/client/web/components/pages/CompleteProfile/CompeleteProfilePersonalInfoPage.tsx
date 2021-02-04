@@ -52,25 +52,23 @@ const CompeleteProfilePersonalInfoPage = ( props : IProps ) => {
     return (
         <div className={styles.fieldsContainer + ' flex-column'}>
             <div >
-                <div style={{ display:'flex',flexDirection:'row' }}>
-                    <Input placeholder='John' error={error.name} maxInputLength={30} required text='Name' type='text' value={name} onChange={setName}/>
-                    &nbsp;
-                    &nbsp;
-                    &nbsp;
-                    &nbsp;
-                    &nbsp;
-                    <Input placeholder='Doe' error={error.surname} maxInputLength={30} required text='Surname' type='text' value={surname} onChange={setSurname}/>
+                <div style={{ display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
+                    <div style={{width:'49%'}}>
+                        <Input placeholder='John' error={error.name} maxInputLength={30} required text='Name' type='text' value={name} onChange={setName}/>
+                    </div>
+                    <div style={{width:'49%'}}>
+                        <Input placeholder='Doe' error={error.surname} maxInputLength={30} required text='Surname' type='text' value={surname} onChange={setSurname}/>
+                    </div>
                 </div>
                 <Input placeholder='myusername' error={error.username} maxInputLength={30} required text='Username' type='text' value={username} onChange={setUsername}/>
                 <MultiLineInput placeholder='some bio about me...' required={false} text='Bio' onChange={setBio} value={bio}/>
-                <div style={{ display:'flex',flexDirection:'row' }}>
-                    <DatePicker error={error.birthday} value={birthday} onChange={setBirthday} />
-                    &nbsp;
-                    &nbsp;
-                    &nbsp;
-                    &nbsp;
-                    &nbsp;
-                    <GenderDropdown error={error.gender} onSelect={setGender} selected={gender} />
+                <div style={{ display:'flex',flexDirection:'row', justifyContent:'space-between' }}>
+                    <div style={{width:'49%'}}>
+                        <DatePicker error={error.birthday} value={birthday} onChange={setBirthday} />
+                    </div>
+                    <div style={{width:'49%'}}>
+                        <GenderDropdown error={error.gender} onSelect={setGender} selected={gender} />
+                    </div>
                 </div>
                 <CountryPicker error={error.location} value={location} onChange={setLocation} />
             </div>

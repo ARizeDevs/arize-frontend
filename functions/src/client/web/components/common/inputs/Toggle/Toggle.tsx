@@ -4,7 +4,7 @@ import React from 'react'
 interface IProps {
     active : boolean ,
     setActive : (active  :boolean) => void,
-    text : JSX.Element,
+    text : JSX.Element | string,
     rightToggleLabel? : boolean,
     posit? : string,
   

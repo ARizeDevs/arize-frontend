@@ -1,8 +1,22 @@
 .root {
     display: flex;
-    width: 70%;
-    height: 70px;
+    width: 80%;
+    height: 90px;
     padding: 2%;
+    box-sizing: border-box;
+    border-radius: 16px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid var(--main-lightgray-color);
+}
+
+.root_ios {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 2%;
+    box-sizing: border-box;
     border-radius: 16px;
     flex-direction: row;
     align-items: center;

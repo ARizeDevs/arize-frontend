@@ -10,9 +10,9 @@ const pricing = () =>
             <link rel="shortcut icon" href="/images/favicon.png" />
             <title>Pricing</title>
         </Head>
-        {/* <UnauthorizedRedirect> */}
+        <UnauthorizedRedirect>
             <Pricing />     
-        {/* </UnauthorizedRedirect> */}
+        </UnauthorizedRedirect>
     </>
 
 export default pricing

@@ -31,6 +31,7 @@ const Message = (props : IProps) => {
             {type === IMessageTypes.INFO? <InfoIcon />:null}
             {type === IMessageTypes.STARRED? <StarredIcon/>:null}
             &nbsp;&nbsp;
+            
             <small 
                 className={
                     `

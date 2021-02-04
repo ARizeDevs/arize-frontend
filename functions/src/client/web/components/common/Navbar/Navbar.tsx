@@ -5,11 +5,12 @@ import { useRouter } from 'next/router'
 import ARizeLogo from '../ARizeLogo'
 
 import SupportIcon from '../../../../assets/icons/support.svg'
-import BellIcon from '../../../../assets/icons/bell.svg'
+// import BellIcon from '../../../../assets/icons/bell.svg'
 
 import styles from './Navbar.module.css'
 import SolidButton from '../buttons/SolidButton'
 import ProfileMenu from '../ProfileMenu'
+import Hamburger from './Hamburger'
 
 interface IProps {
     imageSrc? : string
@@ -21,10 +22,10 @@ const rightItems = [
         Icon : SupportIcon,
         href : '/support'
     },
-    {
-        Icon : BellIcon,
-        href : '/notifications'
-    },
+    // {
+    //     Icon : BellIcon,
+    //     href : '/notifications'
+    // },
 ]
 
 const Navbar = (props : IProps) => {
@@ -76,13 +77,21 @@ const Navbar = (props : IProps) => {
             <div className={styles.subContainer}>
                 {isPublicRoute?null:
                     <>
-                        {renderedRightItems}
-                        
-                        {noMenu?null:<ProfileMenu imageSrc={imageSrc} />}
 
-                        {!isARStudio? <div style={{width:'140px',marginLeft:'24px'}}>
-                            <SolidButton onClick={() => router.push('/arstudio')} ><h3>Create AR</h3></SolidButton>
-                        </div> : null }
+                        <div className={styles.hamburgerMenuWrapper}>
+                            <Hamburger />
+                        </div>
+
+                        <div className={`${styles.desktopItems} ${styles.subContainer}`}>
+                            {renderedRightItems}
+                            
+                            {noMenu?null:<ProfileMenu imageSrc={imageSrc} />}
+
+                            {!isARStudio? 
+                            <div className={styles.arStudioButton}>
+                                <SolidButton onClick={() => router.push('/arstudio')} ><h3>Create AR</h3></SolidButton>
+                            </div> : null }
+                        </div>
                     </>    
                 }
             </div>

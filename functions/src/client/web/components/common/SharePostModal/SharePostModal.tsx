@@ -33,10 +33,23 @@ const SharePostModal = (props : IProps) => {
         src="https://arizear.app/model-viewer/${postID}">
     </iframe>`
 
-    const onShareClick = () => {
-        copyToClipBoard(shareURL)
-
-        addToast('url copied',{ appearance : 'info' })
+    const onShareClick = async () => {
+        const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
+    
+        if(mobile) {
+            if(typeof window !== 'undefined' && window.navigator) {
+                try {
+                    await window.navigator.share({ title: "ARize", url: shareURL });
+                    console.log("Data was shared successfully");
+                } catch (err) {
+                    console.error("Share failed:", err.message);
+                }    
+            }
+        } else {
+            copyToClipBoard(shareURL)
+    
+            addToast('url copied',{ appearance : 'info' })
+        }
     }
 
     const onEmbedClick = () => {
@@ -60,11 +73,11 @@ const SharePostModal = (props : IProps) => {
                         <CrossIcon />
                     </div>
                 </div>
-                <div className={styles.row}>
-                    <div className={styles.banner} style={{width:'40%',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                <div className={styles.bodyContainer}>
+                    <div id='test' className={styles.banner}>
                         {isEmbedPage?<EmbedBanner /> : <ShareBanner />}
                     </div>
-                    <div className={`${styles.column} ${styles.content}`} style={{width:'50%'}}>
+                    <div className={`${styles.column} ${styles.content}`}>
                         <div className={styles.row}>
                             <h3 onClick={() => setIsEmbedPage(false)} className={`${styles.tab} ${!isEmbedPage?styles.tabActive:''}`}>Share</h3>
                             <h3 onClick={() => setIsEmbedPage(true)} className={`${styles.tab} ${isEmbedPage?styles.tabActive:''}`}>Embed</h3>

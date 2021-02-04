@@ -1,5 +1,7 @@
 import React , { useEffect, useState } from 'react'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
+
 
 import ARizeLogo from '../../../assets/icons/logo black new.svg'
 
@@ -9,11 +11,19 @@ import { getDirectURL } from '../../config/firebase'
 import { UDIDContext } from '../../components/common/UniqueDeviceIdDetector'
 import FourOhFour from '../../components/pages/FourOhFour'
 
-const arstudio = ({ post } : { post:any}) => {
+const arstudio = ({ post, isAryanTer } : { post:any, isAryanTer : boolean}) => {
+    const router = useRouter()
     
     if(!post) {
         return <FourOhFour />
     }
+
+    useEffect(() => {
+        if(isAryanTer) {
+            router.push("https://arize.io/samples/webar/furniture/ar.html")
+        }
+    }, [])
+
 
     const [ glbURL, setGLBUrl] = useState('')
     const [ usdzURL, setUSDZUrl ] = useState('')
@@ -45,9 +55,13 @@ const arstudio = ({ post } : { post:any}) => {
                         const addView = async () => {
                             if(value.UDIDCTX && post.id) {
                                 if(!viewAdded) {
-                                    // @ts-ignore
-                                    await view3DPost(value.UDIDCTX,value.location, post.id)
-                                    setViewAdded(true)
+                                    try {
+                                        // @ts-ignore
+                                        await view3DPost(value.UDIDCTX,value.location, post.id)
+                                        setViewAdded(true)
+                                    } catch (error) {
+                                        console.log(error)
+                                    }
                                 }
                             }
                         }
@@ -65,6 +79,7 @@ const arstudio = ({ post } : { post:any}) => {
                             poster={poster}
                             autoPlay={post.autoPlay}
                             background={backGroundImage} 
+                            hasCallToAction={post.hasCallToAction}
                             actionButtonText={post.actionButtonText}
                             actionButtonInfoTextColor={post.actionButtonInfoTextColor}
                             actionButtonInfoBackgroundColor={post.actionInfoBackgroundColor}
@@ -83,6 +98,13 @@ const arstudio = ({ post } : { post:any}) => {
 
 export async function  getServerSideProps (context : any) {
     const id = context.params.pid
+
+    if(id === "uiQAUkPHPDZkmCGWEtr7tal6LfT21608060453904")
+    {
+        return {
+            props: { isAryanTer:true }
+        }
+    }
 
     try {
         const result = await getPost(id , false)

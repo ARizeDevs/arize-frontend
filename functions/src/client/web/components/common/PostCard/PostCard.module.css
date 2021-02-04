@@ -1,0 +1,143 @@
+.root {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    position: relative
+}
+
+.postImage {
+    width: 100%;
+    /* padding-top: 50%; */
+    height: 100%;
+    cursor: pointer;
+    position: relative;
+    border-radius: 20px;
+}
+
+.editPost {
+    cursor: pointer;
+    width:24px;
+    position:absolute;
+    right:3%;
+    top:3%;
+}
+
+.processingOverlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    border-radius: 20px;
+    background-color: black;
+    /* z-index: ; */
+    opacity: .6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.postCardMenuOverlay {
+    width: 100vw;
+    height: 100vh;
+    color: black;
+    opacity: .3;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index:3
+}
+
+.postCardMenu {
+    position:absolute;
+    right:3%;
+    top:6%;
+    width: 200px;
+    z-index: 5;
+    background:white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 10px;
+}
+
+.postCardMenuItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    width: 90%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+
+.postCardMenuItem:hover {
+    background-color: var(--main-lightgray-color);
+}
+
+.share {
+    cursor:pointer;
+    width : 20px;
+    height : 20px;
+}
+
+.share:hover * {
+    fill: var(--main-blue-color);
+}
+
+.view {
+    width : 20px;
+    height : 20px;
+}
+
+@keyframes fadein {
+    from { opacity: 0;}
+    to { opacity: 1;}
+}
+
+.view:hover .viewToolTip {
+    display: flex;
+}
+
+.viewToolTip {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    transform: translate(-45%,-150%);
+    animation: fadein .3s ease-in-out;
+}
+
+.textPart {
+    height: 50px;
+    border-radius: 8px;
+    background-color: white;
+    box-sizing: border-box;
+    padding: 16px;
+    box-shadow: -3px 10px 20px 1px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.textPart * {
+    fill : var(--main-lightgray2-color);
+    color : var(--main-lightgray2-color);
+}
+
+.tailPart {
+    width: 0; 
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    margin-left: auto;
+    margin-right: auto;
+    
+    border-top: 8px solid white;
+}

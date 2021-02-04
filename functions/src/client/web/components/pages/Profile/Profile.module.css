@@ -17,8 +17,10 @@
     margin-top: 30px;
 
     width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    padding-left: 15%;
+    padding-right: 15%;
+    /* padding: 1%; */
+    box-sizing: border-box;
     flex: 1 1 auto;
     /* display: flex;
     align-items: flex-start;
@@ -45,6 +47,10 @@
     align-items: flex-start;
     justify-content: flex-start;
     width: 50%;
+}
+
+.statisticsSection {
+    width: 35%;
 }
 
 .lightColor {
@@ -106,4 +112,21 @@
 
 .name {
     font-weight: 900;
+}
+
+@media only screen and (max-width : 850px) {
+    .bodyContainer {
+        /* width: 96% !important; */
+        padding-left: 2% !important;
+        padding-right: 2% !important;
+    }
+    
+    .profileContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profileSections {
+        width : 90%
+    }
 }

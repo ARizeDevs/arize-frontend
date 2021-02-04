@@ -24,13 +24,26 @@ const ProfileMenu = (props : IProps) => {
     const onProfileClick = () => router.push('/profile')
     const onEditProfileClick = () => router.push('/edit-profile')
     const onShareClick = async () => {
+        const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
         const userID = await getUserID()
-
+    
         const shareURL = `https://arizear.app/profile/${userID}`
 
-        copyToClipBoard(shareURL)
-
-        addToast('url copied',{ appearance : 'info' })
+        if(mobile) {
+            if(typeof window !== 'undefined' && window.navigator) {
+                try {
+                    await window.navigator.share({ title: "ARize", url: shareURL });
+                    console.log("Data was shared successfully");
+                } catch (err) {
+                    console.error("Share failed:", err.message);
+                }    
+            }
+        } else {
+            copyToClipBoard(shareURL)
+    
+            addToast('url copied',{ appearance : 'info' })
+        }
+        
     }
     const onLogoutClick = () => {
         firebase.auth().signOut()
