@@ -56,6 +56,7 @@ const ARStudio = (props : IProps) => {
     const [ actionButtonText, setActionButtonText] = useState('')
     const [ hasShadow, setHasShadow ] = useState(false)
     const [ autoPlay, setAutoPlay ] = useState(false) 
+    const [ arScale, setArScale ] = useState('')
     const [ hasBackground, setHasBackground ] = useState(true)
     const [ actionInfoBackgroundColor, setActionInfoBackgroundColor] = useState('#141323')
     const [ postBackgroundImageBase64, setPostBackgroundImageBase64] = useState('')
@@ -114,6 +115,7 @@ const ARStudio = (props : IProps) => {
                         setAutoPlay(postData.autoPlay)
                         if(postData.hasCallToAction) setHasCallToAction(postData.hasCallToAction)
                         setHasShadow(postData.hasShadow)
+                        if(postData.arScale) setArScale(postData.arScale)
                         if(postData.actionButtonInfoText) setActionButtonInfoText(postData.actionButtonInfoText)
                         if(postData.actionButtonInfoTextColor) setActionButtonInfoTextColor(postData.actionButtonInfoTextColor)
                         if(postData.actionInfoBackgroundColor) setActionInfoBackgroundColor(postData.actionInfoBackgroundColor)
@@ -274,6 +276,7 @@ const ARStudio = (props : IProps) => {
                     <Preview
                         hasCallToAction={hasCallToAction}
                         id={''}
+                        arScale={arScale}
                         postTitle={title}
                         autoPlay={autoPlay}
                         backgrounImage={hasBackground?postBackgroundImageBase64:''}
