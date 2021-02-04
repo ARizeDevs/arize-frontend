@@ -62,6 +62,7 @@ const Post = (props : IProps) => {
                         isFullScreen={fullScreen}
                         onFullScreen={onFullScreenClick}
                         key={post.id}
+                        arScale={post.arScale}
                         showQR={false}
                         title={post.title}
                         actionButtonInfoText={post.actionButtonInfoText}
