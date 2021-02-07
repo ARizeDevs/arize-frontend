@@ -28,7 +28,7 @@ const Toggle = (props : IProps) => {
     const { active, setActive, text, rightToggleLabel = false, posit='space-between'} = props
     
      return (
-        <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:posit}}>
+        <div style={{width:'auto',display:'flex',alignItems:'center',flexDirection:'row',justifyContent:posit}}>
             {!rightToggleLabel && <p style={{fontWeight:'bold', display:'flex'}}>{text}</p>}
                 <MySwitch
                     checked={active}

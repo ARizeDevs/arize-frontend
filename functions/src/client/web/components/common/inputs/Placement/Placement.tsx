@@ -21,14 +21,19 @@ const Placement = (props : IProps) => {
 
     return (
         <div className={styles.root}>
-            <p>Placement*</p>
+            <p style={{fontWeight:900}}>Trigger Position</p>
+            <br></br>
             <div className={styles.itemsContainer}>
-                <div onMouseLeave={() => setOnTheGroundHover(false)} onMouseEnter={() => setOnTheGroundHover(true)} onClick={() => setIsOnTheGround(true)} className={styles.items}>
-                    {isOnTheGround?<GroundActive /> : onTheGroundHover?<GroundHover /> : <GroundDeactive />}
-                </div>
-                <div onMouseLeave={() => setOnTheWallHover(false)} onMouseEnter={() => setOnTheWallHover(true)} onClick={() => setIsOnTheGround(false)} className={styles.items}>
+            <div onMouseLeave={() => setOnTheWallHover(false)} onMouseEnter={() => setOnTheWallHover(true)} onClick={() => setIsOnTheGround(false)} className={styles.items}>
+                <p style={{fontWeight:700,fontSize:13}}>On the wall</p><br></br>
                     {!isOnTheGround?<WallActive /> : onTheWallHover?<WallHover /> : <WallDeactive />}
                 </div>
+                <br></br>
+                <div onMouseLeave={() => setOnTheGroundHover(false)} onMouseEnter={() => setOnTheGroundHover(true)} onClick={() => setIsOnTheGround(true)} className={styles.items}>
+                <p style={{fontWeight:700,fontSize:13}}>On the floor</p><br></br>
+                {isOnTheGround?<GroundActive /> : onTheGroundHover?<GroundHover /> : <GroundDeactive />}
+                </div>
+                
             </div>
         </div>
     )

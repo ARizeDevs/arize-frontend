@@ -19,6 +19,7 @@ interface IProps {
     postTitle : string,
     contentFile : any,
     backgrounImage : string,
+    buttnPreview : boolean,
     hasCallToAction : boolean,
     infoTextColor : string
 }
@@ -29,6 +30,7 @@ const Preview = (props : IProps) => {
         backgrounImage,
         buttonColor,
         buttonText,
+        buttnPreview = true,
         buttonTextColor,
         contentFile,
         infoTextColor,
@@ -97,11 +99,11 @@ const Preview = (props : IProps) => {
 
     return (
         <div className={styles.root}>
-            <div className={styles.title}>
+            {buttnPreview && <div className={styles.title}>
                 <h4>Preview in: </h4>&nbsp;&nbsp;
                 <p onClick={() => setIsAndroid(false)} style={{color : !isAndroid ? 'var(--main-blue-color)' : 'var(--main-lightgray2-color)',fontSize:'13px'}}>IOS</p>&nbsp;&nbsp;
                 <p onClick={() => setIsAndroid(true)} style={{color : isAndroid ? 'var(--main-blue-color)' : 'var(--main-lightgray2-color)',fontSize:'13px'}}>Android</p>
-            </div>
+            </div>}
             {isAndroid ? 
                 <div className={styles.device} style={{background : 'url(/images/android-phone.png)'}}>
                     {renderInnerPreview()}
