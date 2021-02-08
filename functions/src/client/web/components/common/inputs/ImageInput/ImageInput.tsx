@@ -65,7 +65,7 @@ const ImageInput = (props : IProps) => {
 
     return <div className={styles.root}>
             <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
-                <p style={{fontWeight:'bold'}} className={error || localError?styles.error:''}>{text}</p>
+                <p style={{display:'flex',fontWeight:'bold',alignItems:'center'}} className={error || localError?styles.error:''}>{text}</p>
                 {toggle !== undefined?<MySwitch
                     checked={toggle}
                     // @ts-ignore

@@ -48,6 +48,7 @@
     "nodemailer": "^6.4.11",
     "qrcode.react": "^1.0.0",
     "react": "^16.13.1",
+    "react-collapsible": "^2.8.3",
     "react-color": "^2.18.1",
     "react-cookie": "^4.0.3",
     "react-country-flag": "^2.3.0",

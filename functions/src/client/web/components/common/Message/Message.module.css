@@ -9,9 +9,13 @@
     color : var(--main-red-color)
 }
 
-.successText {
+.activeText {
     color : var(--main-green-color)
 }
+.successText {
+    font-weight: 700;
+}
+
 
 .infoText {
     color : black

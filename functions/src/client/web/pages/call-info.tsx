@@ -1,19 +1,18 @@
 import Head from 'next/head'
 import React from 'react'
-
 import UnauthorizedRedirect from '../components/common/UnauthorizedRedirect'
-import Support from '../components/pages/Support'
 
-const support = () => (
+import CallInfo from '../components/pages/CallInfo'
+
+const callInfo = () => 
     <>
         <Head>
             <link rel="shortcut icon" href="/images/favicon.png" />
-            <title>Support</title>
+            <title>Call Info</title>
         </Head>
         {/* <UnauthorizedRedirect> */}
-            <Support />        
+            <CallInfo />        
         {/* </UnauthorizedRedirect> */}
     </>
-)
 
-export default support
+export default callInfo

@@ -10,7 +10,7 @@ export const tagsValidator = (tags : string[]) => {
     const error : any = {
         tags : ''
     }
-    if(!tags || tags.length === 0) error.tags = 'Enter 1 tag at lease'
+    if(!tags || tags.length === 0) error.tags = 'Enter 1 tag at least'
     return error
 }
 
