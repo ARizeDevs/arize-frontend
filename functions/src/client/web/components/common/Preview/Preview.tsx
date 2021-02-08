@@ -18,6 +18,7 @@ interface IProps {
     poster : string,
     postTitle : string,
     contentFile : any,
+    arScale : string,
     backgrounImage : string,
     buttnPreview : boolean,
     hasCallToAction : boolean,
@@ -40,6 +41,7 @@ const Preview = (props : IProps) => {
         // hasShadow,
         poster,
         infoBackgroundColor,
+        arScale,
         link,
         hasCallToAction
     } = props
@@ -52,6 +54,7 @@ const Preview = (props : IProps) => {
             <div style={{display:'flex',flexDirection:'column',width:'100%',height:'100%',alignItems:'center',justifyContent:'center'}}>
                 <div style={{width:'90%',height:'95%'}}>
                     <ModelViewer
+                        arScale={arScale}
                         showQR={false}
                         id={id}
                         title={postTitle}

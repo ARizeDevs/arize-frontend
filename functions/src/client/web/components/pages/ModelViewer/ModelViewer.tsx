@@ -30,6 +30,7 @@ interface IProps {
     autoPlay : boolean,
     actionButtonInfoText : string,
     actionButtonInfoTextColor : string,
+    arScale : string,
     showQR : boolean,
     showShare? : boolean
     onFullScreen? : () => void,
@@ -46,7 +47,7 @@ const ModelViewer = (props : IProps) => {
     const { title, glbURL, background, usdzURL,
             actionButtonInfoBackgroundColor, actionButtonColor, hasCallToAction,
             actionButtonLink, actionButtonText, actionButtonTextColor, actionButtonInfoTextColor,
-            poster, autoPlay, id, actionButtonInfoText, showQR, showShare, onFullScreen, isFullScreen } = props
+            poster, arScale, autoPlay, id, actionButtonInfoText, showQR, showShare, onFullScreen, isFullScreen } = props
 
     const [ qrModalOpen, setQRModalOpen ] = useState(false)
     const [ shareModalOpen, setShareModalOpen ] = useState(false)
@@ -122,7 +123,7 @@ const ModelViewer = (props : IProps) => {
                     src={actionButtonLink?`${glbURL}?link=${actionButtonLink}`:glbURL} 
                     ar 
                     ar-modes="webxr scene-viewer quick-look" 
-                    ar-scale="auto"
+                    ar-scale={arScale?arScale:"auto"}
                     loading="eager"
                     reveal={autoPlay?"auto":"interaction"}
                     camera-controls
