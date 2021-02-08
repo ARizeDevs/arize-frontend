@@ -69,24 +69,25 @@ const arstudio = ({ post, isAryanTer } : { post:any, isAryanTer : boolean}) => {
                         addView()
 
                         return <ModelViewer
+                            
                             showQR={true}
                             title={post.title}
-                            arScale={post.arScale}
+                            allowScaling={post.allowScaling}
                             showShare={true}
-                            actionButtonInfoText={post.actionButtonInfoText}
                             id={post.id}
                             usdzURL={usdzURL} 
                             glbURL={glbURL} 
                             poster={poster}
                             autoPlay={post.autoPlay}
-                            background={backGroundImage} 
-                            hasCallToAction={post.hasCallToAction}
-                            actionButtonText={post.actionButtonText}
-                            actionButtonInfoTextColor={post.actionButtonInfoTextColor}
-                            actionButtonInfoBackgroundColor={post.actionInfoBackgroundColor}
-                            actionButtonLink={post.actionButtonLink}
-                            actionButtonColor={post.actionButtonColor}
-                            actionButtonTextColor={post.actionBUttonTextColor}
+                            backgroundImage={backGroundImage} 
+                            // hasCallToAction={post.hasCallToAction}
+                            // actionButtonInfoText={post.actionButtonInfoText}
+                            // actionButtonText={post.actionButtonText}
+                            // actionButtonInfoTextColor={post.actionButtonInfoTextColor}
+                            // actionButtonInfoBackgroundColor={post.actionInfoBackgroundColor}
+                            // actionButtonLink={post.actionButtonLink}
+                            // actionButtonColor={post.actionButtonColor}
+                            // actionButtonTextColor={post.actionBUttonTextColor}
                         />
 
                     }}

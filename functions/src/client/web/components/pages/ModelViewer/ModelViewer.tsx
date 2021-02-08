@@ -12,42 +12,64 @@ import styles from './ModelViewer.module.css'
 import SharePostModal from '../../common/SharePostModal'
 import { UDIDContext } from '../../common/UniqueDeviceIdDetector'
 import { sharePost, viewARPost } from '../../../API'
-import Banner from '../Banner'
+// import Banner from '../Banner'
 
 interface IProps {
     glbURL : string,
     usdzURL : string,
     title : string,
     id : string,
-    hasCallToAction : boolean,
-    actionButtonText : string,
-    actionButtonTextColor : string,
-    actionButtonInfoBackgroundColor : string,
-    actionButtonColor : string,
-    actionButtonLink : string,
-    background : string,
+
+    hasShareButton : boolean,
+    shareButtonBackgroundColor : string,
+    shareButtonTextColor : string,
+
+    hasARButton : boolean,
+    arButtonBackgroundColor : string,
+    arButtonTextColor : string,
+    
+    allowScaling : boolean,
+
+    hasShadow : boolean,
+    shadowIntensity : number,
+    shadowSoftness : number,
+
+    exposure : number,
+
+    solidBackgroundColor : string,
+
+    // hasCallToAction : boolean,
+    // actionButtonText : string,
+    // actionButtonTextColor : string,
+    // actionButtonInfoBackgroundColor : string,
+    // actionButtonColor : string,
+    // actionButtonLink : string,
+    // actionButtonInfoText : string,
+    // actionButtonInfoTextColor : string,
+
+    backgroundImage : string,
     poster : string,
     autoPlay : boolean,
-    actionButtonInfoText : string,
-    actionButtonInfoTextColor : string,
-    arScale : string,
     showQR : boolean,
-    showShare? : boolean
+
+    showShare? : boolean,
     onFullScreen? : () => void,
     isFullScreen? : boolean,
     showBanner? : boolean
 }
 
-const getUSZFileFullURL = (id : string) => {
+// const getUSZFileFullURL = (id : string) => {
 
-    return `https://arizear.app/banner/${id}`
-}
+//     return `https://arizear.app/banner/${id}`
+// }
 
 const ModelViewer = (props : IProps) => {
-    const { title, glbURL, background, usdzURL,
-            actionButtonInfoBackgroundColor, actionButtonColor, hasCallToAction,
-            actionButtonLink, actionButtonText, actionButtonTextColor, actionButtonInfoTextColor,
-            poster, arScale, autoPlay, id, actionButtonInfoText, showQR, showShare, onFullScreen, isFullScreen } = props
+    const { title, glbURL, backgroundImage, usdzURL, solidBackgroundColor,
+            // actionButtonInfoBackgroundColor, actionButtonColor, hasCallToAction, actionButtonInfoText,
+            // actionButtonLink, actionButtonText, actionButtonTextColor, actionButtonInfoTextColor,
+            poster, allowScaling, exposure, autoPlay, id,  showQR, showShare, onFullScreen, 
+            isFullScreen, hasARButton, hasShareButton, shareButtonBackgroundColor, shareButtonTextColor, 
+            arButtonBackgroundColor, arButtonTextColor, hasShadow, shadowIntensity, shadowSoftness } = props
 
     const [ qrModalOpen, setQRModalOpen ] = useState(false)
     const [ shareModalOpen, setShareModalOpen ] = useState(false)
@@ -62,11 +84,11 @@ const ModelViewer = (props : IProps) => {
         }
     }, [])
 
-    let fullUSDZUrl = `${usdzURL}`
-    if(hasCallToAction) {
-        const compoundUSDZUrl = getUSZFileFullURL(id)
-        fullUSDZUrl = `${fullUSDZUrl}#custom=${compoundUSDZUrl}`
-    }
+    // let fullUSDZUrl = `${usdzURL}`
+    // if(hasCallToAction) {
+    //     const compoundUSDZUrl = getUSZFileFullURL(id)
+    //     fullUSDZUrl = `${fullUSDZUrl}#custom=${compoundUSDZUrl}`
+    // }
 
 
     return (
@@ -120,28 +142,31 @@ const ModelViewer = (props : IProps) => {
 
                 <model-viewer 
                     id="myviewer"
-                    src={actionButtonLink?`${glbURL}?link=${actionButtonLink}`:glbURL} 
+                    // src={actionButtonLink?`${glbURL}?link=${actionButtonLink}`:glbURL} 
+                    src={glbURL} 
                     ar 
                     ar-modes="webxr scene-viewer quick-look" 
-                    ar-scale={arScale?arScale:"auto"}
+                    ar-scale={allowScaling?"auto":'fixed'}
                     loading="eager"
                     reveal={autoPlay?"auto":"interaction"}
                     camera-controls
-                    shadow-intensity="0"
-                    shadow-softness="0"
-                    skybox-image={background?background:null}
+                    background-color={solidBackgroundColor}
+                    exposure={exposure.toString()}
+                    shadow-intensity={hasShadow?shadowIntensity.toString():'0'}
+                    shadow-softness={hasShadow?shadowSoftness.toString():'0'}
+                    skybox-image={backgroundImage?backgroundImage:null}
                     title={title}
                     link={actionButtonLink}
                     alt={title}
-                    ios-src={fullUSDZUrl}
+                    ios-src={usdzURL}
                     poster={poster?poster:null}
                     style={{width: '100%', height: '100%'}}
                 >
-                    <button slot="ar-button"  className={styles.myArBtn} >
-                        <div onClick={() => addARView()} style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}><ARViewIcon /><h3 style={{marginLeft:'10px'}}>View AR</h3></div>
+                    <button slot="ar-button"  className={styles.myArBtn} style={{backgroundColor:arButtonBackgroundColor,display:hasARButton?'block':'none'}}>
+                        <div onClick={() => addARView()} style={{width:'100%',color:arButtonTextColor,display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}><ARViewIcon fill={arButtonTextColor} /><h3 style={{marginLeft:'10px'}}>View AR</h3></div>
                     </button>
 
-                    {isMobile && hasCallToAction ? 
+                    {/* {isMobile && hasCallToAction ? 
                         <div className={styles.bannerWrapper}>
                             <Banner
                                 postTitle={title}
@@ -154,18 +179,21 @@ const ModelViewer = (props : IProps) => {
                                 infoBackgrounColor={actionButtonInfoBackgroundColor}
                                 link={actionButtonLink}
                             />
-                        </div> : null}
+                        </div> : null} */}
                 </model-viewer>
+
                 {!isMobile && id && showQR ? <button onClick={() => setQRModalOpen(true)} className={styles.myArBtn} >
                     <div style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}><ARViewIcon /><h3 style={{marginLeft:'10px'}}>View AR</h3></div>
                 </button> : null}
-                {showShare ?
-                    <button onClick={onShareClick} className={styles.shareBtn} >
+                
+                {showShare && hasShareButton ?
+                    <button onClick={onShareClick} className={styles.shareBtn} style={{backgroundColor:shareButtonBackgroundColor, color : shareButtonTextColor}}>
                         <div style={{width:'16px',height:'16px'}}>
-                            <ShareIcon />    
+                            <ShareIcon fill={shareButtonTextColor} />    
                         </div>
                     </button>:null
                 }
+
                 {onFullScreen ?
                     <div onClick={onFullScreen} style={{cursor:'pointer',position:'absolute',right:'25px',bottom:'25px',width:'20px',height:'20px'}}>
                         {isFullScreen?
@@ -175,12 +203,14 @@ const ModelViewer = (props : IProps) => {
                         }
                     </div>
                 :null}
+
                 <QRModal 
                     isOpen={qrModalOpen}
                     onRequestClose={() => setQRModalOpen(false)}
                     text='Scan to see AR'
                     url={`https://arizear.app/model-viewer/${id}`}
                 />
+
                 <SharePostModal 
                     modalOpen={shareModalOpen}
                     onCloseRequest={() => setShareModalOpen(false)}

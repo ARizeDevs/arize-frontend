@@ -59,26 +59,37 @@ const Post = (props : IProps) => {
             <div className={styles.bodyContainer}>
                 <div className={`${styles.modelViewer} ${fullScreen?styles.modelViewerFullScreen:''}`}>
                     <ModelViewer
+                        exposure={post.exposure}
+                        solidBackgroundColor={post.solidBackgroundColor}
+                        hasARButton={post.hasARButton}
+                        arButtonBackgroundColor={post.arButtonBackgroundColor}
+                        arButtonTextColor={post.arButtonTextColor}
+                        hasShareButton={post.hasShareButton}
+                        shareButtonBackgroundColor={post.shareButtonBackgroundColor}
+                        shareButtonTextColor={post.shareButtonTextColor}
+                        hasShadow={post.hasShadow}
+                        shadowIntensity={post.shadowIntensity}
+                        shadowSoftness={post.shadowSoftness}
                         isFullScreen={fullScreen}
                         onFullScreen={onFullScreenClick}
                         key={post.id}
-                        arScale={post.arScale}
+                        allowScaling={post.allowScaling}
                         showQR={false}
                         title={post.title}
-                        actionButtonInfoText={post.actionButtonInfoText}
                         usdzURL={usdzURL} 
                         glbURL={glbURL} 
                         poster={poster}
                         id={post.id}
                         autoPlay={post.autoPlay}
-                        background={backGroundImage} 
-                        hasCallToAction={post.hasCallToAction}
-                        actionButtonText={post.actionButtonText}
-                        actionButtonInfoBackgroundColor={post.actionInfoBackgroundColor}
-                        actionButtonInfoTextColor={post.actionButtonInfoTextColor}
-                        actionButtonLink={post.actionButtonLink}
-                        actionButtonColor={post.actionButtonColor}
-                        actionButtonTextColor={post.actionBUttonTextColor}
+                        backgroundImage={backGroundImage} 
+                        // hasCallToAction={post.hasCallToAction}
+                        // actionButtonInfoText={post.actionButtonInfoText}
+                        // actionButtonText={post.actionButtonText}
+                        // actionButtonInfoBackgroundColor={post.actionInfoBackgroundColor}
+                        // actionButtonInfoTextColor={post.actionButtonInfoTextColor}
+                        // actionButtonLink={post.actionButtonLink}
+                        // actionButtonColor={post.actionButtonColor}
+                        // actionButtonTextColor={post.actionBUttonTextColor}
                     />
                 </div>
                 <br></br>
@@ -172,11 +183,13 @@ const Post = (props : IProps) => {
                     <br></br>
                 </div>
             </div>
+
             <SharePostModal 
                 modalOpen={shareModalOpen}
                 onCloseRequest={() => setShareModalOpen(false)}
                 postID={post.id}
             />
+            
             <QRModal 
                 isOpen={qrModalOpen}
                 onRequestClose={() => setQRModalOpen(false)}
