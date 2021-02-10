@@ -71,6 +71,7 @@ const arstudio = ({ post, isAryanTer } : { post:any, isAryanTer : boolean}) => {
                         return <ModelViewer
                             showQR={true}
                             title={post.title}
+                            arScale={post.arScale}
                             showShare={true}
                             actionButtonInfoText={post.actionButtonInfoText}
                             id={post.id}

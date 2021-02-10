@@ -128,6 +128,7 @@ const ARStudio = (props : IProps) => {
                         setAutoPlay(postData.autoPlay)
                         if(postData.hasCallToAction) setHasCallToAction(postData.hasCallToAction)
                         setHasShadow(postData.hasShadow)
+                        if(postData.arScale) setArScale(postData.arScale)
                         if(postData.actionButtonInfoText) setActionButtonInfoText(postData.actionButtonInfoText)
                         if(postData.actionButtonInfoTextColor) setActionButtonInfoTextColor(postData.actionButtonInfoTextColor)
                         if(postData.actionInfoBackgroundColor) setActionInfoBackgroundColor(postData.actionInfoBackgroundColor)
@@ -407,8 +408,6 @@ const ARStudio = (props : IProps) => {
                         </div>
                         </div>
                         :null}
-
-
             </>
             {/* :
             <ARStudioProgress
