@@ -13,6 +13,7 @@ import FeatureRequestIcon from '../../../../assets/icons/contact icons/Feature.s
 import styles from './Support.module.css'
 import firebase from 'firebase'
 import { getUser } from '../../../API/user'
+import ToggleSwitch from '../../common/inputs/ToggleSwitch'
 
 const Support = () => {
 
@@ -63,6 +64,7 @@ const Support = () => {
                             <div className={`${styles.column} ${styles.supportItem}`}>
                                 <FeatureRequestIcon />
                                 <p className={styles.supportItemText}>Request Feature</p>
+                                
                             </div>
                         </div>
                         {accountType && accountType!=='FREE'?
