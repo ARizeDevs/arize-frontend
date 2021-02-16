@@ -55,11 +55,14 @@ const arstudio = ({ post, isAryanTer } : { post:any, isAryanTer : boolean}) => {
                         const addView = async () => {
                             if(value.UDIDCTX && post.id) {
                                 if(!viewAdded) {
+                                    setViewAdded(true)
                                     try {
+                                        console.log('adding view with postID : ', post.id,"  and udid : ",value.UDIDCTX)
                                         // @ts-ignore
                                         await view3DPost(value.UDIDCTX,value.location, post.id)
-                                        setViewAdded(true)
+                                        console.log('adding view done')
                                     } catch (error) {
+                                        console.log('adding view failed')
                                         console.log(error)
                                     }
                                 }
