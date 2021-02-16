@@ -4,6 +4,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    
+    height: 100%;
 }
 
 .imageInputContainer {
@@ -13,7 +15,7 @@
 
 .contentImageContainer {
     width: 100%;
-    height: 300px;
+    height: auto;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -26,14 +28,20 @@
     /* padding-left: 10%; */
     padding-right: 2%;
     height: 60vh;
+    font-size: 13px;
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
 }
 
 .buttonWrapper {
     flex: 0 0 auto;
     width: 30%;
 }
+.inputWrapper{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+ 

@@ -15,18 +15,17 @@ const firebaseConfig = {
 }
 
 if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-    if(typeof window !== 'undefined' && navigator.cookieEnabled){
-      // @ts-ignore
-      require("firebase/analytics")
-      firebase.analytics(); 
-    }
+  firebase.initializeApp(firebaseConfig);
+  if(typeof window !== 'undefined' && navigator.cookieEnabled){
+    // @ts-ignore
+    require("firebase/analytics")
+    firebase.analytics(); 
+  }
 }
 
 const db = firebase.firestore()
 
 const getDirectURL = (path : string) => firebase.storage().ref(path).getDownloadURL()
 
-export { db }
-export { getDirectURL }
+export { db, getDirectURL }
 export default firebase

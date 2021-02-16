@@ -12,7 +12,6 @@ import styles from './ModelViewer.module.css'
 import SharePostModal from '../../common/SharePostModal'
 import { UDIDContext } from '../../common/UniqueDeviceIdDetector'
 import { sharePost, viewARPost } from '../../../API'
-// import Banner from '../Banner'
 
 interface IProps {
     glbURL : string,
@@ -31,21 +30,12 @@ interface IProps {
     allowScaling : boolean,
 
     hasShadow : boolean,
-    shadowIntensity : number,
-    shadowSoftness : number,
+    shadowIntensity : string,
+    shadowSoftness : string,
 
-    exposure : number,
+    exposure : string,
 
     solidBackgroundColor : string,
-
-    // hasCallToAction : boolean,
-    // actionButtonText : string,
-    // actionButtonTextColor : string,
-    // actionButtonInfoBackgroundColor : string,
-    // actionButtonColor : string,
-    // actionButtonLink : string,
-    // actionButtonInfoText : string,
-    // actionButtonInfoTextColor : string,
 
     backgroundImage : string,
     poster : string,
@@ -58,15 +48,8 @@ interface IProps {
     showBanner? : boolean
 }
 
-// const getUSZFileFullURL = (id : string) => {
-
-//     return `https://arizear.app/banner/${id}`
-// }
-
 const ModelViewer = (props : IProps) => {
     const { title, glbURL, backgroundImage, usdzURL, solidBackgroundColor,
-            // actionButtonInfoBackgroundColor, actionButtonColor, hasCallToAction, actionButtonInfoText,
-            // actionButtonLink, actionButtonText, actionButtonTextColor, actionButtonInfoTextColor,
             poster, allowScaling, exposure, autoPlay, id,  showQR, showShare, onFullScreen, 
             isFullScreen, hasARButton, hasShareButton, shareButtonBackgroundColor, shareButtonTextColor, 
             arButtonBackgroundColor, arButtonTextColor, hasShadow, shadowIntensity, shadowSoftness } = props
@@ -83,13 +66,6 @@ const ModelViewer = (props : IProps) => {
             setIsMobile(mobile)
         }
     }, [])
-
-    // let fullUSDZUrl = `${usdzURL}`
-    // if(hasCallToAction) {
-    //     const compoundUSDZUrl = getUSZFileFullURL(id)
-    //     fullUSDZUrl = `${fullUSDZUrl}#custom=${compoundUSDZUrl}`
-    // }
-
 
     return (
         <UDIDContext.Consumer >
@@ -139,10 +115,8 @@ const ModelViewer = (props : IProps) => {
                 }
 
             return (<div style={{width:'100%',height:'100%',position:'relative'}}>
-
-                <model-viewer 
+                <model-viewer
                     id="myviewer"
-                    // src={actionButtonLink?`${glbURL}?link=${actionButtonLink}`:glbURL} 
                     src={glbURL} 
                     ar 
                     ar-modes="webxr scene-viewer quick-look" 
@@ -151,12 +125,11 @@ const ModelViewer = (props : IProps) => {
                     reveal={autoPlay?"auto":"interaction"}
                     camera-controls
                     background-color={solidBackgroundColor}
-                    exposure={exposure.toString()}
-                    shadow-intensity={hasShadow?shadowIntensity.toString():'0'}
-                    shadow-softness={hasShadow?shadowSoftness.toString():'0'}
+                    exposure={exposure}
+                    shadow-intensity={hasShadow?shadowIntensity:'0'}
+                    shadow-softness={hasShadow?shadowSoftness:'0'}
                     skybox-image={backgroundImage?backgroundImage:null}
                     title={title}
-                    link={actionButtonLink}
                     alt={title}
                     ios-src={usdzURL}
                     poster={poster?poster:null}
@@ -165,21 +138,6 @@ const ModelViewer = (props : IProps) => {
                     <button slot="ar-button"  className={styles.myArBtn} style={{backgroundColor:arButtonBackgroundColor,display:hasARButton?'block':'none'}}>
                         <div onClick={() => addARView()} style={{width:'100%',color:arButtonTextColor,display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}><ARViewIcon fill={arButtonTextColor} /><h3 style={{marginLeft:'10px'}}>View AR</h3></div>
                     </button>
-
-                    {/* {isMobile && hasCallToAction ? 
-                        <div className={styles.bannerWrapper}>
-                            <Banner
-                                postTitle={title}
-                                isAndroid={false}
-                                infoText={actionButtonInfoText}
-                                infoTextColor={actionButtonInfoTextColor}                       
-                                buttonColor={actionButtonColor}
-                                buttonText={actionButtonText}
-                                buttonTextColor={actionButtonTextColor}
-                                infoBackgrounColor={actionButtonInfoBackgroundColor}
-                                link={actionButtonLink}
-                            />
-                        </div> : null} */}
                 </model-viewer>
 
                 {!isMobile && id && showQR ? <button onClick={() => setQRModalOpen(true)} className={styles.myArBtn} >

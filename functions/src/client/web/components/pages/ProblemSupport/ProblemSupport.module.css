@@ -1,0 +1,72 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+.bodyContainer {
+    margin-top: 30px;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    flex: 1 1 auto;
+    overflow-y: visible;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.rowContainer {
+
+    margin-left: auto;
+    margin-right: auto;
+    flex: 1 1 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+.column {
+    display: flex;
+    flex-direction: column;
+    width:48%;
+    margin: 0 !important;
+    justify-content: center;
+    align-self: center;
+}
+.column2 {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0 !important;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 !important;
+}
+
+.banner {
+    width: 48%;
+    align-items: center;
+}
+
+@media (max-width:1000px){
+    .rowContainer{
+        flex-direction: column-reverse;
+    }
+    .banner{
+        width: 100%;
+        height: auto;
+      }
+      .column{
+          width: 100%;
+          overflow: hidden;
+      }
+    }
+

@@ -16,7 +16,8 @@ export enum IMessageTypes {
     ERROR = 'ERROR',
     SUCCESS = 'SUCCESS',
     INFO = 'INFO',
-    STARRED = 'STARRED'
+    STARRED = 'STARRED',
+    ACTIVE = 'ACTIVE'
 }
 
 const Message = (props : IProps) => {
@@ -26,6 +27,7 @@ const Message = (props : IProps) => {
         <div className={styles.container}>
             {type === IMessageTypes.ERROR? <ErrorTriangle />:null}
             {type === IMessageTypes.SUCCESS? <SuccessSign />:null}
+            {type === IMessageTypes.ACTIVE? <SuccessSign />:null}
             {type === IMessageTypes.INFO? <InfoIcon />:null}
             {type === IMessageTypes.STARRED? <StarredIcon/>:null}
             &nbsp;&nbsp;
@@ -35,6 +37,7 @@ const Message = (props : IProps) => {
                     `
                     ${type === IMessageTypes.ERROR? styles.errorText : ' '}
                     ${type === IMessageTypes.SUCCESS? styles.successText : ' '}
+                    ${type === IMessageTypes.ACTIVE? styles.activeText : ' '}
                     ${type === IMessageTypes.INFO? styles.infoText : ' '}
                     ${type === IMessageTypes.STARRED? styles.starredText : ' '}
 

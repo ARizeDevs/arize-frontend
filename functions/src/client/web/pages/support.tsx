@@ -10,9 +10,9 @@ const support = () => (
             <link rel="shortcut icon" href="/images/favicon.png" />
             <title>Support</title>
         </Head>
-        <UnauthorizedRedirect>
+        {/* <UnauthorizedRedirect> */}
             <Support />        
-        </UnauthorizedRedirect>
+        {/* </UnauthorizedRedirect> */}
     </>
 )
 

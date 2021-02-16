@@ -10,7 +10,7 @@ export const tagsValidator = (tags : string[]) => {
     const error : any = {
         tags : ''
     }
-    if(!tags || tags.length === 0) error.tags = 'Enter 1 tag at lease'
+    if(!tags || tags.length === 0) error.tags = 'Enter 1 tag at least'
     return error
 }
 
@@ -100,29 +100,10 @@ export const postBackgroundImageBase64Validator = (postBackgroundImageBase64 : s
 }
 
 export const validateCustomizationDetail = (
-    hasCallToAction : boolean,
-    actionButtonLink : string,
-    actionButtonText : string,
-    actionBUttonTextColor : string,
-    actionButtonColor : string,
-    actionButtonInfoText : string,
-    actionInfoBackgroundColor : string,
     hasSkyBox : boolean,
     postBackgroundImageBase64 : string
 ) => {
     let error : any = {}
-
-    if(hasCallToAction) {
-        error = {
-            ...error,
-            ...actionButtonLinkValidator(actionButtonLink),
-            ...actionButtonTextValidator(actionButtonText),
-            ...actionBUttonTextColorValidator(actionBUttonTextColor),
-            ...actionButtonColorValidator(actionButtonColor),
-            ...actionButtonInfoTextValidator(actionButtonInfoText),
-            ...actionInfoBackgroundColorValidator(actionInfoBackgroundColor),
-        }
-    }
 
     if(hasSkyBox) {
         error = {

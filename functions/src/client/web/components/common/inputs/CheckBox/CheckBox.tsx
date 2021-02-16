@@ -18,7 +18,7 @@ const CustomCheckBox = withStyles({
 interface IProps {
     isChecked : boolean,
     setIsChecked : (e : any) => void,
-    text : string
+    text : any
 }
 
 const CheckBox =(props : IProps) => {
