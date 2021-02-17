@@ -13,10 +13,29 @@ import UniqueDeviceIdDetector from '../components/common/UniqueDeviceIdDetector'
 
 Modal.setAppElement('#__next')
 
-const  MyApp = ({ Component, pageProps } : { Component:any, pageProps:any}) => 
-    (<>
+const  MyApp = ({ Component, pageProps } : { Component:any, pageProps:any}) => {
+    if(typeof window !== "undefined") {
+        // @ts-ignore
+        window.session = {
+            options: { gapi_location: true },
+            start: function(session){ // can also use window.session global.
+            if (session.first_session.visits > 1){
+                alert('Hi again from ' + session.location.address.city);
+            } else {
+                if (session.contains(session.current_session.referrer_info.host, 'facebook')){
+                alert('Hi there from '+ session.location.address.city +'. How about liking us on facebook?');
+                } else if (session.current_session.search.engine){
+                alert('Did you find what you were looking for from ' + session.current_session.search.engine + '?');
+                }
+            }
+            }
+        }
+    }
+    
+    return  (<>
         <Head>
             <meta content="width=device-width, initial-scale=1" name="viewport" />
+            <script src="http://codejoust.github.com/session.js/session-0.4.js" />
             <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Muli" />
         </Head>
         <ErrorBoundary>
@@ -28,5 +47,6 @@ const  MyApp = ({ Component, pageProps } : { Component:any, pageProps:any}) =>
             </UniqueDeviceIdDetector>
         </ErrorBoundary>
     </>)
+}
 
 export default MyApp

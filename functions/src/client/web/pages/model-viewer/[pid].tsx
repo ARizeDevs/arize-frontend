@@ -10,13 +10,17 @@ import { getPost, view3DPost } from '../../API'
 import { getDirectURL } from '../../config/firebase'
 import { UDIDContext } from '../../components/common/UniqueDeviceIdDetector'
 import FourOhFour from '../../components/pages/FourOhFour'
+import createUniqueDeviceID from '../../helpers/createUniqueDeviceID'
 
-const arstudio = ({ post, isAryanTer } : { post:any, isAryanTer : boolean}) => {
+const arstudio = ({ post, isAryanTer } : { userAgent : any, ipAddress : any , post:any, isAryanTer : boolean}) => {
     const router = useRouter()
     
+
     if(!post) {
         return <FourOhFour />
     }
+
+
 
     useEffect(() => {
         if(isAryanTer) {
@@ -52,24 +56,24 @@ const arstudio = ({ post, isAryanTer } : { post:any, isAryanTer : boolean}) => {
             <div style={{width:'100vw',height:'100vh'}}>
                 <UDIDContext.Consumer >
                     {value => {
-                        const addView = async () => {
-                            if(value.UDIDCTX && post.id) {
-                                if(!viewAdded) {
-                                    setViewAdded(true)
-                                    try {
-                                        console.log('adding view with postID : ', post.id,"  and udid : ",value.UDIDCTX)
-                                        // @ts-ignore
-                                        await view3DPost(value.UDIDCTX,value.location, post.id)
-                                        console.log('adding view done')
-                                    } catch (error) {
-                                        console.log('adding view failed')
-                                        console.log(error)
-                                    }
-                                }
-                            }
-                        }
+                        // const addView = async () => {
+                        //     if(value.UDIDCTX && post.id) {
+                        //         if(!viewAdded) {
+                        //             setViewAdded(true)
+                        //             try {
+                        //                 console.log('adding view with postID : ', post.id,"  and udid : ",value.UDIDCTX)
+                        //                 // @ts-ignore
+                        //                 await view3DPost(value.UDIDCTX,value.location, post.id)
+                        //                 console.log('adding view done')
+                        //             } catch (error) {
+                        //                 console.log('adding view failed')
+                        //                 console.log(error)
+                        //             }
+                        //         }
+                        //     }
+                        // }
 
-                        addView()
+                        // addView()
 
                         return <ModelViewer
                             showQR={true}
@@ -103,21 +107,29 @@ const arstudio = ({ post, isAryanTer } : { post:any, isAryanTer : boolean}) => {
 export async function  getServerSideProps (context : any) {
     const id = context.params.pid
 
-    if(id === "uiQAUkPHPDZkmCGWEtr7tal6LfT21608060453904")
-    {
-        return {
-            props: { isAryanTer:true }
-        }
-    }
-
     try {
+        const deviceID = await createUniqueDeviceID(context.req)
+    
+        if(deviceID) {
+            await view3DPost(deviceID, { lat : '10', long : '10'},id)
+        }
+    
+        if(id === "uiQAUkPHPDZkmCGWEtr7tal6LfT21608060453904")
+        {
+            return {
+                props: { isAryanTer:true}
+            }
+        }
+  
         const result = await getPost(id , false)
         
         return {
-          props: { post : result.data.data.data  },
+          props: { post : result.data.data.data },
         }
     } catch(error) {
+        console.log('=======')
         console.log(error)
+        console.log('=======')
         return {
             props : {}
         }
