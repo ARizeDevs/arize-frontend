@@ -33,7 +33,7 @@ const arstudio = ({ post, isAryanTer } : { userAgent : any, ipAddress : any , po
     const [ usdzURL, setUSDZUrl ] = useState('')
     const [ backGroundImage, setBackgrounImage ] = useState('')
     const [ poster, setPoster ] = useState('')
-    const [ viewAdded, setViewAdded ] = useState(false)
+    // const [ viewAdded, setViewAdded ] = useState(false)
 
     useEffect(() => {
         getDirectURL(post.glbFileURL).then((url) => setGLBUrl(url)).catch(() => '' )

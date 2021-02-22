@@ -90,7 +90,7 @@ export const savePost = async (title : string, description : string, tags : stri
             headers: {
               'Content-Type': 'multipart/form-data'
             }
-          })
+        })
         
         if(result.status === 200 || result.status === 201) {
             

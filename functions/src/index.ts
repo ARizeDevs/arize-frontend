@@ -24,3 +24,8 @@ admin.initializeApp()
 export const nextjsFunc = functions.https.onRequest((req, res) => {
     return nextjsWebServer.prepare().then(() => nextjsWebHandle(req, res))
 })
+
+export const nextjsFuncDevelopment = functions.https.onRequest((req, res) => {
+  // return nextjsWebServer.prepare().then(() => nextjsWebHandle(req, res))
+  res.send('test')
+})
