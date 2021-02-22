@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "tripleearplatform"
+  },
+  "targets": {
+    "tripleearplatform": {
+      "hosting": {
+        "production": [
+          "tripleearplatform"
+        ],
+        "development": [
+          "arize-development"
+        ]
+      }
+    }
   }
 }
