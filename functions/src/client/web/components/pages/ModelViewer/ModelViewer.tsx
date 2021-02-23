@@ -181,9 +181,7 @@ const ModelViewer = (props : IProps) => {
                     onCloseRequest={() => setShareModalOpen(false)}
                     postID={id}
                 />
-            </div>)
-        }}
-    </UDIDContext.Consumer>
+            </div>
     )
 }
 
