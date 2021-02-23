@@ -6,8 +6,6 @@ import { deletePost, sharePost } from '../../../API'
 import Loading from '../Loading'
 import QRModal from '../QRModal'
 import SharePostModal from '../SharePostModal'
-import { UDIDContext } from '../UniqueDeviceIdDetector'
-
 import DotIcon from '../../../../assets/icons/3dot.svg'
 import EyeIcon from '../../../../assets/icons/eye.svg'
 import ShareIcon from '../../../../assets/icons/share.svg'

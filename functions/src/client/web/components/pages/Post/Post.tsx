@@ -15,7 +15,6 @@ import ShareIcon from '../../../../assets/icons/share2.svg'
 import styles from './Post.module.css'
 import { useRouter } from 'next/router'
 import SharePostModal from '../../common/SharePostModal'
-import { UDIDContext } from '../../common/UniqueDeviceIdDetector'
 import { sharePost } from '../../../API'
 
 interface IProps {

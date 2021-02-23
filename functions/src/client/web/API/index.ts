@@ -1,4 +1,3 @@
-import firebase from 'firebase'
 import axios from '../config/api'
 import { getTokenID } from './utils'
 

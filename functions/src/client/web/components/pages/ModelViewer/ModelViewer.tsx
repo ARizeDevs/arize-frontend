@@ -10,7 +10,6 @@ import CompressIcon from '../../../../assets/icons/compress.svg'
 
 import styles from './ModelViewer.module.css'
 import SharePostModal from '../../common/SharePostModal'
-import { UDIDContext } from '../../common/UniqueDeviceIdDetector'
 import { sharePost, viewARPost } from '../../../API'
 import Banner from '../Banner'
 
