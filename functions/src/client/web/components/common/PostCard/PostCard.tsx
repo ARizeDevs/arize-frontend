@@ -65,6 +65,36 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
         })
     } , [imageURL]) 
 
+    const onShareClick = async () => {
+        if(typeof window !== 'undefined' && window.navigator) {
+            const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
+
+            if(mobile) {
+                try {
+                    await window.navigator.share({ title: "ARize", url: `https://arizear.app/post/${id}` });
+                    console.log("Data was shared successfully");
+                } catch (err) {
+                    console.error("Share failed:", err.message);
+                }    
+            } else {
+                setShareModalOpen(true);
+            }
+
+            if(id) {
+                if(!shareAdded) {
+                    setShareAdded(true)
+                    try {
+                        // @ts-ignore
+                        await sharePost( id)
+                    } catch(error) {
+                        console.log(error)
+                    }
+                }
+            }
+        }
+    }
+
+
     return (
         <div className={styles.root}>
             <div className={styles.postImage}>
@@ -95,45 +125,10 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
                     <small style={{color : 'var(--main-lightgray2-color)'}}>{(tdViews?Object.keys(tdViews).length:0) + (arViews?Object.keys(arViews).length:0)}</small>
                     &nbsp;
                     &nbsp;
-                    <UDIDContext.Consumer >
-                        {value => {
-                            const onShareClick = async () => {
-                                if(typeof window !== 'undefined' && window.navigator) {
-                                    const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
-    
-                                    if(mobile) {
-                                        try {
-                                            await window.navigator.share({ title: "ARize", url: `https://arizear.app/post/${id}` });
-                                            console.log("Data was shared successfully");
-                                        } catch (err) {
-                                            console.error("Share failed:", err.message);
-                                        }    
-                                    } else {
-                                        setShareModalOpen(true);
-                                    }
-
-                                    if(value.UDIDCTX && id) {
-                                        if(!shareAdded) {
-                                            try {
-                                                // @ts-ignore
-                                                await sharePost(value.UDIDCTX,value.location, id)
-                                                setShareAdded(true)
-                                            } catch(error) {
-                                                console.log(error)
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            return (
-                                <div onClick={onShareClick} className={styles.share}>
-                                    {/* @ts-ignore */}
-                                    <ShareIcon fill='var(--main-lightgray2-color)'/>
-                                </div>
-                            )
-                        }}
-                    </UDIDContext.Consumer>
+                        <div onClick={onShareClick} className={styles.share}>
+                            {/* @ts-ignore */}
+                            <ShareIcon fill='var(--main-lightgray2-color)'/>
+                        </div>
                     &nbsp;
                     <small style={{color : 'var(--main-lightgray2-color)'}}>{(shares?Object.keys(shares).length:0) +(shareAdded?1:0)}</small>
                 </div>

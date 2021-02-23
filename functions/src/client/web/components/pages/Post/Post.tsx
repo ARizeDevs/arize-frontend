@@ -53,6 +53,35 @@ const Post = (props : IProps) => {
     const onVisitProfileClick = () => router.push(`/profile/${post.author.id}`)
 
 
+    const onShareClick = async () => {
+        if(typeof window !== 'undefined' && window.navigator) {
+            const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
+
+            if(mobile) {
+                try {
+                    await window.navigator.share({ title: "ARize", url: `https://arizear.app/post/${post.id}` });
+                    console.log("Data was shared successfully");
+                } catch (err) {
+                    console.error("Share failed:", err.message);
+                }    
+            } else {
+                setShareModalOpen(true);
+            }
+
+            if(post.id) {
+                if(!shareAdded) {
+                    setShareAdded(true)
+                    try {
+                        // @ts-ignore
+                        await sharePost( post.id)
+                    } catch(error) {
+                        console.log(error)
+                    }
+                }
+            }
+        }
+    }
+
     return (
         <div className={styles.root}>
             {!fullScreen?<Navbar noMenu />:null}
@@ -102,45 +131,11 @@ const Post = (props : IProps) => {
                                 <EmailIcon />
                                 <p>&nbsp;</p>
                             </a>&nbsp;
-                            <UDIDContext.Consumer >
-                                {value => {
-                                    const onShareClick = async () => {
-                                        if(typeof window !== 'undefined' && window.navigator) {
-                                            const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
-            
-                                            if(mobile) {
-                                                try {
-                                                    await window.navigator.share({ title: "ARize", url: `https://arizear.app/post/${post.id}` });
-                                                    console.log("Data was shared successfully");
-                                                } catch (err) {
-                                                    console.error("Share failed:", err.message);
-                                                }    
-                                            } else {
-                                                setShareModalOpen(true);
-                                            }
-
-                                            if(value.UDIDCTX && post.id) {
-                                                if(!shareAdded) {
-                                                    try {
-                                                        // @ts-ignore
-                                                        await sharePost(value.UDIDCTX,value.location, post.id)
-                                                        setShareAdded(true)
-                                                    } catch(error) {
-                                                        console.log(error)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
                                     
-                                    return (
-                                        <div onClick={onShareClick} className={styles.icon + ' ' + styles.column} style={{alignItems:'center'}} >
-                                            <ShareIcon />
-                                            <p className={styles.grayColor} >{post.shares?Object.keys(post.shares).length:0}</p>
-                                        </div>
-                                    )
-                                }}
-                            </UDIDContext.Consumer >
+                                <div onClick={onShareClick} className={styles.icon + ' ' + styles.column} style={{alignItems:'center'}} >
+                                    <ShareIcon />
+                                    <p className={styles.grayColor} >{post.shares?Object.keys(post.shares).length:0}</p>
+                                </div>
                             &nbsp;
                         </div>
                     </div>

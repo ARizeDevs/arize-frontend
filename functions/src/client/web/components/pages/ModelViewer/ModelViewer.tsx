@@ -68,75 +68,70 @@ const ModelViewer = (props : IProps) => {
         fullUSDZUrl = `${fullUSDZUrl}#custom=${compoundUSDZUrl}`
     }
 
+    const onShareClick = async () => {
+        if(typeof window !== 'undefined' && window.navigator) {
+            const mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+
+            if(mobile) {
+                try {
+                    await navigator.share({ title: "ARize", url: `https://arizear.app/post/${id}` });
+                    console.log("Data was shared successfully");
+                } catch (err) {
+                    console.error("Share failed:", err.message);
+                }    
+            } else {
+                setShareModalOpen(true);
+            }
+
+            if(id) {
+                if(!shareAdded) {
+                    setShareAdded(true)
+                    try {
+                        // @ts-ignore
+                        await sharePost( id)
+                    } catch(error) {
+                        console.log(error)
+                    }
+                }
+            }
+        }
+    }
+
+    const addARView = async () => {
+        if(id) {
+            if(!arViewAdded) {
+                setArViewAdded(true)
+                try {
+                    // @ts-ignore
+                    await viewARPost(id)
+                } catch(error) {
+                    console.log(error)
+                }
+            }
+        }
+    }
 
     return (
-        <UDIDContext.Consumer >
-            {value => {
-                
-                const onShareClick = async () => {
-                    if(typeof window !== 'undefined' && window.navigator) {
-                        const mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-
-                        if(mobile) {
-                            try {
-                                await navigator.share({ title: "ARize", url: `https://arizear.app/post/${id}` });
-                                console.log("Data was shared successfully");
-                            } catch (err) {
-                                console.error("Share failed:", err.message);
-                            }    
-                        } else {
-                            setShareModalOpen(true);
-                        }
-
-                        if(value.UDIDCTX && id) {
-                            if(!shareAdded) {
-                                try {
-                                    // @ts-ignore
-                                    await sharePost(value.UDIDCTX,value.location, id)
-                                    setShareAdded(true)
-                                } catch(error) {
-                                    console.log(error)
-                                }
-                            }
-                        }
-                    }
-                }
-
-                const addARView = async () => {
-                    if(value.UDIDCTX && id) {
-                        if(!arViewAdded) {
-                            try {
-                                // @ts-ignore
-                                await viewARPost(value.UDIDCTX,value.location, id)
-                                setArViewAdded(true)
-                            } catch(error) {
-                                console.log(error)
-                            }
-                        }
-                    }
-                }
-
-            return (<div style={{width:'100%',height:'100%',position:'relative'}}>
-
-                <model-viewer 
-                    id="myviewer"
-                    src={actionButtonLink?`${glbURL}?link=${actionButtonLink}`:glbURL} 
-                    ar 
-                    ar-modes="webxr scene-viewer quick-look" 
-                    ar-scale={arScale?arScale:"auto"}
-                    loading="eager"
-                    reveal={autoPlay?"auto":"interaction"}
-                    camera-controls
-                    shadow-intensity="0"
-                    shadow-softness="0"
-                    skybox-image={background?background:null}
-                    title={title}
-                    link={actionButtonLink}
-                    alt={title}
-                    ios-src={fullUSDZUrl}
-                    poster={poster?poster:null}
-                    style={{width: '100%', height: '100%'}}
-                >
+        <div style={{width:'100%',height:'100%',position:'relative'}}>
+            <model-viewer 
+                id="myviewer"
+                src={actionButtonLink?`${glbURL}?link=${actionButtonLink}`:glbURL} 
+                ar 
+                ar-modes="webxr scene-viewer quick-look" 
+                ar-scale={arScale?arScale:"auto"}
+                loading="eager"
+                reveal={autoPlay?"auto":"interaction"}
+                camera-controls
+                shadow-intensity="0"
+                shadow-softness="0"
+                skybox-image={background?background:null}
+                title={title}
+                link={actionButtonLink}
+                alt={title}
+                ios-src={fullUSDZUrl}
+                poster={poster?poster:null}
+                style={{width: '100%', height: '100%'}}
+            >
                     <button slot="ar-button"  className={styles.myArBtn} >
                         <div onClick={() => addARView()} style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}><ARViewIcon /><h3 style={{marginLeft:'10px'}}>View AR</h3></div>
                     </button>

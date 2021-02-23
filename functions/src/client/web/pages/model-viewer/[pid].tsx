@@ -8,7 +8,6 @@ import ARizeLogo from '../../../assets/icons/logo black new.svg'
 import ModelViewer from '../../components/pages/ModelViewer'
 import { getPost, view3DPost } from '../../API'
 import { getDirectURL } from '../../config/firebase'
-import { UDIDContext } from '../../components/common/UniqueDeviceIdDetector'
 import FourOhFour from '../../components/pages/FourOhFour'
 import createUniqueDeviceID from '../../helpers/createUniqueDeviceID'
 
@@ -33,7 +32,6 @@ const arstudio = ({ post, isAryanTer } : { userAgent : any, ipAddress : any , po
     const [ usdzURL, setUSDZUrl ] = useState('')
     const [ backGroundImage, setBackgrounImage ] = useState('')
     const [ poster, setPoster ] = useState('')
-    // const [ viewAdded, setViewAdded ] = useState(false)
 
     useEffect(() => {
         getDirectURL(post.glbFileURL).then((url) => setGLBUrl(url)).catch(() => '' )
@@ -54,50 +52,26 @@ const arstudio = ({ post, isAryanTer } : { userAgent : any, ipAddress : any , po
                 <ARizeLogo />
             </div>
             <div style={{width:'100vw',height:'100vh'}}>
-                <UDIDContext.Consumer >
-                    {value => {
-                        // const addView = async () => {
-                        //     if(value.UDIDCTX && post.id) {
-                        //         if(!viewAdded) {
-                        //             setViewAdded(true)
-                        //             try {
-                        //                 console.log('adding view with postID : ', post.id,"  and udid : ",value.UDIDCTX)
-                        //                 // @ts-ignore
-                        //                 await view3DPost(value.UDIDCTX,value.location, post.id)
-                        //                 console.log('adding view done')
-                        //             } catch (error) {
-                        //                 console.log('adding view failed')
-                        //                 console.log(error)
-                        //             }
-                        //         }
-                        //     }
-                        // }
-
-                        // addView()
-
-                        return <ModelViewer
-                            showQR={true}
-                            title={post.title}
-                            arScale={post.arScale}
-                            showShare={true}
-                            actionButtonInfoText={post.actionButtonInfoText}
-                            id={post.id}
-                            usdzURL={usdzURL} 
-                            glbURL={glbURL} 
-                            poster={poster}
-                            autoPlay={post.autoPlay}
-                            background={backGroundImage} 
-                            hasCallToAction={post.hasCallToAction}
-                            actionButtonText={post.actionButtonText}
-                            actionButtonInfoTextColor={post.actionButtonInfoTextColor}
-                            actionButtonInfoBackgroundColor={post.actionInfoBackgroundColor}
-                            actionButtonLink={post.actionButtonLink}
-                            actionButtonColor={post.actionButtonColor}
-                            actionButtonTextColor={post.actionBUttonTextColor}
-                        />
-
-                    }}
-                </UDIDContext.Consumer>
+                <ModelViewer
+                    showQR={true}
+                    title={post.title}
+                    arScale={post.arScale}
+                    showShare={true}
+                    actionButtonInfoText={post.actionButtonInfoText}
+                    id={post.id}
+                    usdzURL={usdzURL} 
+                    glbURL={glbURL} 
+                    poster={poster}
+                    autoPlay={post.autoPlay}
+                    background={backGroundImage} 
+                    hasCallToAction={post.hasCallToAction}
+                    actionButtonText={post.actionButtonText}
+                    actionButtonInfoTextColor={post.actionButtonInfoTextColor}
+                    actionButtonInfoBackgroundColor={post.actionInfoBackgroundColor}
+                    actionButtonLink={post.actionButtonLink}
+                    actionButtonColor={post.actionButtonColor}
+                    actionButtonTextColor={post.actionBUttonTextColor}
+                />
             </div>
         </>
 )
@@ -110,9 +84,16 @@ export async function  getServerSideProps (context : any) {
     try {
         const deviceID = await createUniqueDeviceID(context.req)
     
+
         if(deviceID) {
             await view3DPost(deviceID, { lat : '10', long : '10'},id)
         }
+    
+    } catch(error) {
+        console.log(error)
+    }
+
+    try {
     
         if(id === "uiQAUkPHPDZkmCGWEtr7tal6LfT21608060453904")
         {

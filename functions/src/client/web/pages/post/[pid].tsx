@@ -1,16 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Head from 'next/head'
 import fetch from 'node-fetch'
 
 import Post from '../../components/pages/Post'
 import { baseURL } from '../../config/api'
 import FourOhFour from '../../components/pages/FourOhFour'
-import { UDIDContext } from '../../components/common/UniqueDeviceIdDetector'
 import { view3DPost } from '../../API'
+import createUniqueDeviceID from '../../helpers/createUniqueDeviceID'
 
 const post = ({ post, relatedPosts } : { post : any, relatedPosts : any}) => {
-    const [ viewAdded, setViewAdded ] = useState(false)
-    
     if (!post ) {
         return <FourOhFour />
     }
@@ -23,26 +21,7 @@ const post = ({ post, relatedPosts } : { post : any, relatedPosts : any}) => {
             <script type="module" src="https://unpkg.com/@google/model-viewer@1.1.0/dist/model-viewer.js"></script>
             <script noModule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
         </Head>
-        <UDIDContext.Consumer>
-            {value => {
-                const addView = async () => {
-                    if(value.UDIDCTX && post.id) {
-                        if(!viewAdded) {
-                            try {
-                                // @ts-ignore
-                                await view3DPost(value.UDIDCTX,value.location, post.id)
-                                setViewAdded(true)
-                            } catch (error) {
-                                console.log(error)
-                            }
-                        }
-                    }
-                }
-
-                addView()
-                return <Post post={post} relatedPosts={relatedPosts} />
-            }}
-        </UDIDContext.Consumer >
+        <Post post={post} relatedPosts={relatedPosts} />
     </>
     )
 }
@@ -52,6 +31,18 @@ export async function  getServerSideProps (context : any) {
     const res = context.res
 
    
+    try {
+        const deviceID = await createUniqueDeviceID(context.req)
+    
+
+        if(deviceID) {
+            await view3DPost(deviceID, { lat : '10', long : '10'},id)
+        }
+    
+    } catch(error) {
+        console.log(error)
+    }
+
 
     try {
         const result = await fetch(`${baseURL}/post/${id}?author=true`)
