@@ -6,7 +6,6 @@ import Post from '../../components/pages/Post'
 import { baseURL } from '../../config/api'
 import FourOhFour from '../../components/pages/FourOhFour'
 import { view3DPost } from '../../API'
-import createUniqueDeviceID from '../../helpers/createUniqueDeviceID'
 
 const post = ({ post, relatedPosts } : { post : any, relatedPosts : any}) => {
     if (!post ) {
@@ -32,13 +31,7 @@ export async function  getServerSideProps (context : any) {
 
    
     try {
-        const deviceID = await createUniqueDeviceID(context.req)
-    
-
-        if(deviceID) {
-            await view3DPost(deviceID, { lat : '10', long : '10'},id)
-        }
-    
+        await view3DPost(id)
     } catch(error) {
         console.log(error)
     }

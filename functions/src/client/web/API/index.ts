@@ -9,12 +9,9 @@ export const sharePost = async ( postID : string) => {
     return axios.post(`${postServerRoute}/${postID}/share`, {})
 }
 
-export const view3DPost = async (UUID : string, location : { lat : string, long : string }, postID : string) => {
+export const view3DPost = async (postID : string) => {
     // firebase.analytics().logEvent('3d_view', { post : postID, viewer : UUID })
-    return axios.post(`${postServerRoute}/${postID}/3dview`, {
-        UUID,
-        location
-    })
+    return axios.post(`${postServerRoute}/${postID}/3dview`, {})
 }
 
 export const viewARPost = async ( postID : string) => {

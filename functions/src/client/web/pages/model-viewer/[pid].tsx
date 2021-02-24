@@ -9,7 +9,6 @@ import ModelViewer from '../../components/pages/ModelViewer'
 import { getPost, view3DPost } from '../../API'
 import { getDirectURL } from '../../config/firebase'
 import FourOhFour from '../../components/pages/FourOhFour'
-import createUniqueDeviceID from '../../helpers/createUniqueDeviceID'
 
 const arstudio = ({ post, isAryanTer } : { userAgent : any, ipAddress : any , post:any, isAryanTer : boolean}) => {
     const router = useRouter()
@@ -82,13 +81,7 @@ export async function  getServerSideProps (context : any) {
     const id = context.params.pid
 
     try {
-        const deviceID = await createUniqueDeviceID(context.req)
-    
-
-        if(deviceID) {
-            await view3DPost(deviceID, { lat : '10', long : '10'},id)
-        }
-    
+        await view3DPost(id)
     } catch(error) {
         console.log(error)
     }
