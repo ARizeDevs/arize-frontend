@@ -20,7 +20,6 @@ import ChartIcon from '../../../../assets/icons/chart-line.svg'
 
 import styles from './PostCard.module.css'
 import SolidButton from '../buttons/SolidButton'
-import { route } from 'next/dist/next-server/server/router'
 
 interface IPost { status: string,arViewsCount : number , tdViewsCount : number , sharesCount : number ,imageURL : string, id : string, title : string }
 
