@@ -99,17 +99,17 @@ const Profile = (props : IProps) => {
                                     let shares = 0
                                     let c = 0
                                     userData.posts.forEach((p : any) => {
-                                        if(p.arViews) {
-                                            arViews += Object.keys(p.arViews).length
+                                        if(p.arViewsCount) {
+                                            arViews += p.arViewsCount
                                         }
-                                        if(p.tdViews) {
-                                            tdViews += Object.keys(p.tdViews).length
+                                        if(p.tdViewsCount) {
+                                            tdViews += p.tdViewsCount
                                         }
-                                        if(p.shares) {
-                                            shares += Object.keys(p.shares).length
+                                        if(p.sharesCount) {
+                                            shares += p.sharesCountp.sharesCount
                                         }
-                                        if(p.clicks) {
-                                            c += Object.keys(p.clicks).length
+                                        if(p.clicksCount) {
+                                            c += p.clicksCount
                                         }
                                     })
                                     setTotalShares(shares)

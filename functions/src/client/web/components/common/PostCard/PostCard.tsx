@@ -21,9 +21,9 @@ import ChartIcon from '../../../../assets/icons/chart-line.svg'
 import styles from './PostCard.module.css'
 import SolidButton from '../buttons/SolidButton'
 
-interface IPost { status: string,arViews : [] , tdViews : [] , shares : [] ,imageURL : string, id : string, title : string }
+interface IPost { status: string,arViewsCount : number , tdViewsCount : number , sharesCount : number ,imageURL : string, id : string, title : string }
 
-const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPost) => {
+const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, title, status,} : IPost) => {
 
     const [ image, setImage ] = useState('')
 
@@ -112,16 +112,16 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
                         <div className={styles.viewToolTip}>
                             <div className={styles.textPart}>
                                 <ARViewsIcon />&nbsp;&nbsp;
-                                <p>{arViews?Object.keys(arViews).length:0}</p>&nbsp;
+                                <p>{arViewsCount?arViewsCount:0}</p>&nbsp;
                                 <div style={{height:'90%',width:'1px',backgroundColor:'var(--main-lightgray2-color'}}></div>&nbsp;
                                 <TDViewsIcon />&nbsp;&nbsp;
-                                <p>{tdViews?Object.keys(tdViews).length:0}</p>
+                                <p>{tdViewsCount?tdViewsCount:0}</p>
                             </div>
                             <div className={styles.tailPart}></div>
                         </div>
                     </div>
                     &nbsp;
-                    <small style={{color : 'var(--main-lightgray2-color)'}}>{(tdViews?Object.keys(tdViews).length:0) + (arViews?Object.keys(arViews).length:0)}</small>
+                    <small style={{color : 'var(--main-lightgray2-color)'}}>{(tdViewsCount?tdViewsCount:0) + (arViewsCount?arViewsCount:0)}</small>
                     &nbsp;
                     &nbsp;
                         <div onClick={onShareClick} className={styles.share}>
@@ -129,7 +129,7 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
                             <ShareIcon fill='var(--main-lightgray2-color)'/>
                         </div>
                     &nbsp;
-                    <small style={{color : 'var(--main-lightgray2-color)'}}>{(shares?Object.keys(shares).length:0) +(shareAdded?1:0)}</small>
+                    <small style={{color : 'var(--main-lightgray2-color)'}}>{(sharesCount?sharesCount:0) +(shareAdded?1:0)}</small>
                 </div>
                 &nbsp;&nbsp;
                 <div style={{display:'flex',flexDirection:'row',flexWrap:'wrap'}}>
