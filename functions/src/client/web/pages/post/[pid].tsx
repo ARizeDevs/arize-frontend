@@ -9,6 +9,8 @@ import FourOhFour from '../../components/pages/FourOhFour'
 import { view3DPost } from '../../API'
 
 const post = ({ post, relatedPosts } : { post : any, relatedPosts : any}) => {
+    
+    console.log(post)
     if (!post ) {
         return <FourOhFour />
     }

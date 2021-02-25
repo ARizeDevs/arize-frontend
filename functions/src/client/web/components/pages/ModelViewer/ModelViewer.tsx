@@ -34,7 +34,8 @@ interface IProps {
     showShare? : boolean
     onFullScreen? : () => void,
     isFullScreen? : boolean,
-    showBanner? : boolean
+    showBanner? : boolean,
+    openar? : boolean
 }
 
 const getUSZFileFullURL = (id : string) => {
@@ -43,7 +44,7 @@ const getUSZFileFullURL = (id : string) => {
 }
 
 const ModelViewer = (props : IProps) => {
-    const { title, glbURL, background, usdzURL,
+    const { openar, title, glbURL, background, usdzURL,
             actionButtonInfoBackgroundColor, actionButtonColor, hasCallToAction,
             actionButtonLink, actionButtonText, actionButtonTextColor, actionButtonInfoTextColor,
             poster, arScale, autoPlay, id, actionButtonInfoText, showQR, showShare, onFullScreen, isFullScreen } = props
@@ -58,6 +59,10 @@ const ModelViewer = (props : IProps) => {
         if(typeof window !== 'undefined' && window.navigator) {
             const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
             setIsMobile(mobile)
+        }
+        if(openar) {
+            const viewer = document.getElementById('myviewer')
+            viewer.activateAR()
         }
     }, [])
 

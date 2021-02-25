@@ -13,20 +13,25 @@ import FourOhFour from '../../components/pages/FourOhFour'
 const arstudio = ({ post, isAryanTer } : { userAgent : any, ipAddress : any , post:any, isAryanTer : boolean}) => {
     const router = useRouter()
     
-
+    
     if(!post) {
         return <FourOhFour />
     }
-
-
-
+    
+    
+    
     useEffect(() => {
+        if(router.query){
+            if(router.query['openar']) {
+                setOpenar(true)
+            }
+        }
         if(isAryanTer) {
             router.push("https://arize.io/samples/webar/furniture/ar.html")
         }
     }, [])
 
-
+    const [ openar, setOpenar ] = useState(false)
     const [ glbURL, setGLBUrl] = useState('')
     const [ usdzURL, setUSDZUrl ] = useState('')
     const [ backGroundImage, setBackgrounImage ] = useState('')
@@ -52,6 +57,7 @@ const arstudio = ({ post, isAryanTer } : { userAgent : any, ipAddress : any , po
             </div>
             <div style={{width:'100vw',height:'100vh'}}>
                 <ModelViewer
+                    openar={openar}
                     showQR={true}
                     title={post.title}
                     arScale={post.arScale}

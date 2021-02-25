@@ -20,6 +20,7 @@ import ChartIcon from '../../../../assets/icons/chart-line.svg'
 
 import styles from './PostCard.module.css'
 import SolidButton from '../buttons/SolidButton'
+import { route } from 'next/dist/next-server/server/router'
 
 interface IPost { status: string,arViewsCount : number , tdViewsCount : number , sharesCount : number ,imageURL : string, id : string, title : string }
 
@@ -38,6 +39,19 @@ const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, title,
     const [ shareAdded, setShareAdded ] = useState(false)
 
     const processing = status === 'PROCESSING'
+
+
+    const onARClick = () => {
+        if(typeof window !== 'undefined' && window.navigator) {
+            const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
+
+            if(mobile) {
+                router.push(`/model-viewer/${id}?openar=true`)
+            } else {
+                setQRModalOpen(true)
+            }
+        }
+    }
 
     const onEdit = () => router.push(`/arstudio/${id}`)
     const onView = () => router.push(`/post/${id}`)
@@ -137,7 +151,7 @@ const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, title,
                         <SolidButton colorTheme='black' onClick={() => {if(!processing)router.push(`/post/${id}`)}} ><div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}><TDViewIcon /><h3>3D</h3></div></SolidButton>
                     </div>
                     <div style={{width:'100px'}}>
-                        <SolidButton onClick={() => setQRModalOpen(true)} ><div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}><ARViewIcon /><h3>AR</h3></div></SolidButton>
+                        <SolidButton onClick={onARClick} ><div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}><ARViewIcon /><h3>AR</h3></div></SolidButton>
                     </div>
                 </div>
             </div>
