@@ -32,7 +32,7 @@ export async function  getServerSideProps (context : any) {
     const ipAddress =  requestIp.getClientIp(context.req)
 
     const ua = context.req.headers['user-agent']
-   
+
     try {
         await view3DPost(id, ua, ipAddress)
     } catch(error) {

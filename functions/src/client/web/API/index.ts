@@ -9,7 +9,7 @@ export const sharePost = async ( postID : string) => {
     return axios.post(`${postServerRoute}/${postID}/share`, {})
 }
 
-export const view3DPost = async (postID : string, ua? : string, ipAddress? : string) => {
+export const view3DPost = async (postID : string, ua? : string | null, ipAddress? : string | null) => {
     let userAgent = ''
     if(ua) {
         userAgent = ua
