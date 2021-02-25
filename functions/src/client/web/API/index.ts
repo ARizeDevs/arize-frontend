@@ -9,9 +9,15 @@ export const sharePost = async ( postID : string) => {
     return axios.post(`${postServerRoute}/${postID}/share`, {})
 }
 
-export const view3DPost = async (postID : string) => {
+export const view3DPost = async (postID : string, ua? : string, ipAddress? : string) => {
+    let userAgent = ''
+    if(ua) {
+        userAgent = ua
+    } else {
+        userAgent = navigator.userAgent
+    }
     // firebase.analytics().logEvent('3d_view', { post : postID, viewer : UUID })
-    return axios.post(`${postServerRoute}/${postID}/3dview`, {})
+    return axios.post(`${postServerRoute}/${postID}/3dview`, {ip : ipAddress?ipAddress:''} , { headers : { 'user-agent' : userAgent}})
 }
 
 export const viewARPost = async ( postID : string) => {

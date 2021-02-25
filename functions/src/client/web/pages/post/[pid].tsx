@@ -1,6 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import fetch from 'node-fetch'
+import requestIp from 'request-ip'
 
 import Post from '../../components/pages/Post'
 import { baseURL } from '../../config/api'
@@ -28,10 +29,12 @@ const post = ({ post, relatedPosts } : { post : any, relatedPosts : any}) => {
 export async function  getServerSideProps (context : any) {
     const id = context.params.pid
     const res = context.res
+    const ipAddress =  requestIp.getClientIp(context.req)
 
+    const ua = context.req.headers['user-agent']
    
     try {
-        await view3DPost(id)
+        await view3DPost(id, ua, ipAddress)
     } catch(error) {
         console.log(error)
     }

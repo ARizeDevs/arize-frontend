@@ -1,7 +1,7 @@
 import React , { useEffect, useState } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-
+import requestIp from 'request-ip'
 
 import ARizeLogo from '../../../assets/icons/logo black new.svg'
 
@@ -79,9 +79,12 @@ const arstudio = ({ post, isAryanTer } : { userAgent : any, ipAddress : any , po
 
 export async function  getServerSideProps (context : any) {
     const id = context.params.pid
+    const ua = context.req.headers['user-agent']
+    const ipAddress =  requestIp.getClientIp(context.req)
+
 
     try {
-        await view3DPost(id)
+        await view3DPost(id, ua, ipAddress)
     } catch(error) {
         console.log(error)
     }
