@@ -58,7 +58,7 @@ const Post = (props : IProps) => {
 
             if(mobile) {
                 try {
-                    await window.navigator.share({ title: "ARize", url: `https://arizear.app/post/${post.id}` });
+                    await window.navigator.share({ title: "ARize", url: `https://arizear.app/model-viewer/${post.id}` });
                     console.log("Data was shared successfully");
                 } catch (err) {
                     console.error("Share failed:", err.message);

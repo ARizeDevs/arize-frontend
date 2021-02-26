@@ -80,7 +80,7 @@ const ModelViewer = (props : IProps) => {
 
             if(mobile) {
                 try {
-                    await navigator.share({ title: "ARize", url: `https://arizear.app/post/${id}` });
+                    await navigator.share({ title: "ARize", url: `https://arizear.app/model-viewer/${id}` });
                     console.log("Data was shared successfully");
                 } catch (err) {
                     console.error("Share failed:", err.message);
@@ -127,6 +127,7 @@ const ModelViewer = (props : IProps) => {
                 ar-scale={arScale?arScale:"auto"}
                 loading="eager"
                 reveal={autoPlay?"auto":"interaction"}
+                quick-look-browsers="safari chrome"
                 camera-controls
                 shadow-intensity="0"
                 shadow-softness="0"
