@@ -62,7 +62,9 @@ const ModelViewer = (props : IProps) => {
         }
         if(openar) {
             const viewer = document.getElementById('myviewer')
-            viewer.activateAR()
+            if(viewer) {
+                if(viewer.activateAR) viewer.activateAR()
+            }
         }
     }, [openar])
 
