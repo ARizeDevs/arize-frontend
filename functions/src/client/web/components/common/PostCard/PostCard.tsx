@@ -106,7 +106,6 @@ const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, title,
         }
     }
 
-
     return (
         <div className={styles.root}>
             <div className={styles.postImage}>

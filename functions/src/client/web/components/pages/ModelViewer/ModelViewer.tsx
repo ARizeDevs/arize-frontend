@@ -60,10 +60,21 @@ const ModelViewer = (props : IProps) => {
             const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
             setIsMobile(mobile)
         }
+        const viewer = document.getElementById('myviewer')
+        const onModelLoad = () => {
+            if(viewer.activateAR) {
+                viewer.activateAR()
+            }
+        }
         if(openar) {
-            const viewer = document.getElementById('myviewer')
             if(viewer) {
-                if(viewer.activateAR) viewer.activateAR()
+                viewer.addEventListener('load' , onModelLoad)
+            }
+        }
+
+        return () => {
+            if(viewer) {
+                viewer.removeEventListener('load' , onModelLoad)
             }
         }
     }, [openar])
