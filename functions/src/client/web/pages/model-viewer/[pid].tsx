@@ -21,6 +21,7 @@ const arstudio = ({ post, isAryanTer } : { userAgent : any, ipAddress : any , po
     
     
     useEffect(() => {
+        console.log(router.query)
         if(router.query){
             if(router.query['openar']) {
                 setOpenar(true)

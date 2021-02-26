@@ -64,7 +64,7 @@ const ModelViewer = (props : IProps) => {
             const viewer = document.getElementById('myviewer')
             viewer.activateAR()
         }
-    }, [])
+    }, [openar])
 
     let fullUSDZUrl = `${usdzURL}`
     if(hasCallToAction) {
