@@ -78,6 +78,7 @@ const Profile = (props : IProps) => {
                     // if(user) {
                         if(id === null || id) {
                             const user = await getUser(true,id)
+                            console.log(user)
                             if(user && user.data.data){
                                 const userData = user.data.data
                                 setName(userData.name)
