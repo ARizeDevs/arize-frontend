@@ -49,7 +49,7 @@ const Profile = (props : IProps) => {
     const [ tdViews, setTDViews ] = useState(0)
     const [ clicks, setClicks ] = useState(0)
     const [ totalShares, setTotalShares ] = useState(0)
-    const [ fetchingData, setFetchingData] = useState(true)
+    const [ fetchingData, setFetchingData] = useState(1)
     const [ showGoToTop, setShowGoToTop ] = useState(false)
 
     const scrollObject = useRef(null);
@@ -126,7 +126,7 @@ const Profile = (props : IProps) => {
                 } catch(error) {
                     console.log(error)
                 } finally {
-                    setFetchingData(false)
+                    setFetchingData(2);
                 }
             })
         }
@@ -134,6 +134,14 @@ const Profile = (props : IProps) => {
         getInitData()
     }, [id])
 
+    useEffect(() => {
+
+        if (fetchingData === 2)
+        {
+            setFetchingData(3);
+        }
+
+    })
 
 
     const onShareProflie = async () => {
@@ -264,7 +272,7 @@ const Profile = (props : IProps) => {
                     <PostsList list={posts} searchText={searchText} setSearchText={setSearchText} />
                 </div>
                 </div>
-            {fetchingData?<Loading text='Loading ...' />:null}
+            {fetchingData !== 3?<Loading text='Loading ...' />:null}
         </div>
     )
 }
