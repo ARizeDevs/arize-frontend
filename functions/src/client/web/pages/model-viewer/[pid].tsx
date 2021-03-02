@@ -13,12 +13,9 @@ import FourOhFour from '../../components/pages/FourOhFour'
 const arstudio = ({ post, isAryanTer } : { userAgent : any, ipAddress : any , post:any, isAryanTer : boolean}) => {
     const router = useRouter()
     
-    
     if(!post) {
         return <FourOhFour />
     }
-    
-    
     
     useEffect(() => {
         console.log(router.query)
@@ -58,26 +55,29 @@ const arstudio = ({ post, isAryanTer } : { userAgent : any, ipAddress : any , po
             </div>
             <div style={{width:'100vw',height:'100vh'}}>
                 <ModelViewer
-                            openar={openar}
-                            showQR={true}
-                            title={post.title}
-                            allowScaling={post.allowScaling}
-                            showShare={true}
-                            id={post.id}
-                            usdzURL={usdzURL} 
-                            glbURL={glbURL} 
-                            poster={poster}
-                            autoPlay={post.autoPlay}
-                            backgroundImage={backGroundImage} 
-                            // hasCallToAction={post.hasCallToAction}
-                            // actionButtonInfoText={post.actionButtonInfoText}
-                            // actionButtonText={post.actionButtonText}
-                            // actionButtonInfoTextColor={post.actionButtonInfoTextColor}
-                            // actionButtonInfoBackgroundColor={post.actionInfoBackgroundColor}
-                            // actionButtonLink={post.actionButtonLink}
-                            // actionButtonColor={post.actionButtonColor}
-                            // actionButtonTextColor={post.actionBUttonTextColor}
-                        />
+                    shadowSoftness={post.shadowSoftness}
+                    hasShadow={post.hasShadow}
+                    shadowIntensity={post.shadowIntensity}
+                    exposure={post.exposure}
+                    hasARButton={post.hasARButton}
+                    arButtonTextColor={post.arButtonTextColor}
+                    arButtonBackgroundColor={post.arButtonBackgroundColor}
+                    hasShareButton={post.hasShareButton}
+                    shareButtonBackgroundColor={post.shareButtonBackgroundColor}
+                    shareButtonTextColor={post.shareButtonTextColor}
+                    solidBackgroundColor={post.solidBackgroundColor}
+                    openar={openar}
+                    showQR={true}
+                    title={post.title}
+                    allowScaling={post.allowScaling}
+                    showShare={true}
+                    id={post.id}
+                    usdzURL={usdzURL} 
+                    glbURL={glbURL} 
+                    poster={poster}
+                    autoPlay={post.autoPlay}
+                    backgroundImage={backGroundImage} 
+                />
             </div>
         </>
 )

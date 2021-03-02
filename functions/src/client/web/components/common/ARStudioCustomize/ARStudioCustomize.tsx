@@ -1,12 +1,12 @@
 import React , {useState} from 'react'
 import SolidButton from '../buttons/SolidButton'
-import Input from '../inputs/Input'
+// import Input from '../inputs/Input'
 import ImageInput from '../inputs/ImageInput'
 import Slider from '../inputs/Slider'
 
 import Collapsible from 'react-collapsible';
 import AngleDown from '../../../../assets/icons/angle-down 1.svg'
-import AngleUp from '../../../../assets/icons/angle-down 2.svg'
+// import AngleUp from '../../../../assets/icons/angle-down 2.svg'
 import styles from './ARStudioCustomize.module.css'
 import ColorPicker from '../inputs/ColorPicker'
 import Toggle from '../inputs/Toggle'
@@ -24,14 +24,26 @@ interface IProps {
     onFinish : () => void,
     onBack : () => void,
     error : {[key : string] : string},
-    arButton : boolean,
-    setArButton:(value : boolean) => void,
     buttonText : string ,
     backButtonText : string,
-    shareButton:boolean,
-    setShareButton: (value : boolean) => void,
+    
+    hasShareButton : boolean,
+    setHasShareButton : (value : boolean ) => void,
+    shareButtonBackgroundColor : string,
+    setShareButtonBackgroundColor : (value : string) => void,
+    shareButtonTextColor : string,
+    setShareButtonTextColor : (value : string ) => void
+
+    hasARButton : boolean,
+    setHasARButton : (value : boolean) => void,
+    arButtonBackgroundColor : string,
+    setARButtonBackgroundColor : (value : string) => void
+    arButtonTextColor : string,
+    setARButtonTextColor : (value : string) => void
+
     allowScaling : boolean,
     setAllowScaling : (value : boolean) => void,
+
     skyBox: boolean,
     setSkyBox: (value : boolean) => void,
     solidBackgroundColor : string,
@@ -44,8 +56,11 @@ interface IProps {
 
 
 const ARStudioPostDetail = (props : IProps) => {
-    const { error,solidBackgroundColor,setSolidBackgroundColor,arButton,
-        setArButton,shareButton,setShareButton, allowScaling, setAllowScaling,
+    const { error,solidBackgroundColor,setSolidBackgroundColor
+        ,arButtonTextColor, shareButtonTextColor, shareButtonBackgroundColor,
+        allowScaling, setAllowScaling, arButtonBackgroundColor, backButtonText,
+        hasARButton, hasShareButton, setARButtonBackgroundColor, setARButtonTextColor,
+        setHasARButton, setHasShareButton, setShareButtonBackgroundColor, setShareButtonTextColor,
         skyBox,setSkyBox,solidBackground, setSolidBackground,
         autoPlay, hasShadow, setAutoPlay, setHasShadow, hasBackground, setHasBackground,
         buttonText, onFinish , postBackgroundImageBase64, setPostBackgroundImageBase64, 
@@ -72,7 +87,7 @@ const ARStudioPostDetail = (props : IProps) => {
                         
                         <div className={styles.contentImageContainer}>
                             <div className={styles.imageInputContainer}>
-                            <ImageInput error={error.postBackgroundImageBase64} toggle={hasBackground} setToggle={setHasBackground} setImageSrc={setPostBackgroundImageBase64}  imageSrc={postBackgroundImageBase64} text='Skybox*' extensions={['hdr','jpeg','jpg','png']}/>
+                                <ImageInput error={error.postBackgroundImageBase64} toggle={hasBackground} setToggle={setHasBackground} setImageSrc={setPostBackgroundImageBase64}  imageSrc={postBackgroundImageBase64} text='Skybox*' extensions={['hdr','jpeg','jpg','png']}/>
                             </div>
                         </div>
                         
@@ -87,29 +102,43 @@ const ARStudioPostDetail = (props : IProps) => {
                                     onChange={setIntensity}
                                     text='Intensity'
                                 />
+                                <Slider 
+                                    min={1}
+                                    max={100}
+                                    value={softness}
+                                    onChange={setSoftness}
+                                    text='Softness'
+                                />
                                 {/* <p style={{marginBottom:10,fontWeight:400}}>Softness</p>
                                 <div className={styles.sliderContainer}>
                                     <input type="range" min="1" max="100" value={intensity} onChange={handleChange} className={styles.slider} id="myRange"/>
                                     <p><span id="demo"></span></p>
                                 </div> */}
                         
-                                <p style={{marginBottom:10,fontWeight:400}}>Intensity</p>
+                                {/* <p style={{marginBottom:10,fontWeight:400}}>Intensity</p>
                                 <div className={styles.sliderContainer}>
                                     <input type="range" min="1" max="100" value={softness} onChange={handleChange} className={styles.slider} id="myRange"/>
                                     <p><span id="demo"></span></p>
-                                </div>
+                                </div> */}
                             </div>
                             <br></br>
                         </div>}
                         <div style={{display:'flex', flexDirection:'column'}}>
-                            <p style={{marginBottom:10,fontWeight:900}}>Exposure</p>
+                            <Slider 
+                                min={1}
+                                max={100}
+                                value={Exposure}
+                                onChange={setExposure}
+                                text='Exposure'
+                            />
+                            {/* <p style={{marginBottom:10,fontWeight:900}}>Exposure</p>
                             <div className={styles.sliderContainer}>
                                 <input type="range" min="1" max="100" value={Exposure} onChange={handleChange} className={styles.slider} id="myRange"/>
                                 <p><span id="demo"></span></p>
-                            </div>
+                            </div> */}
                         </div>
                         
-                        <Toggle  active={scaling} setActive={setScaling} text="Allow Scaling" />  
+                        <Toggle  active={allowScaling} setActive={setAllowScaling} text="Allow Scaling" />  
                         <p style={{fontSize:12}}>This allows user to scale up or down the model. When off, the model will be locked on its actual size.</p>       
                         <br></br>
                         </Collapsible>
@@ -121,25 +150,25 @@ const ARStudioPostDetail = (props : IProps) => {
                             <ImageInput error={error.imageSrc} toggle={waterMark} setToggle={setWaterMark} setImageSrc={setPostBackgroundImageBase64}  imageSrc={postBackgroundImageBase64} text='Watermark*' extensions={['hdr','jpeg','jpg','png']}/>
                         </div>
                         </div>
-                <Toggle  active={shareButton} setActive={setShareButton} text="Share Button" />
-                    {shareButton && <div style={{width:'100%',display:'flex',flexDirection:'column',justifyContent:'space-between'}}>
+                <Toggle  active={hasShareButton} setActive={setHasShareButton} text="Share Button" />
+                    {hasShareButton && <div style={{width:'100%',display:'flex',flexDirection:'column',justifyContent:'space-between'}}>
                         <div style={{width:'95%'}}>
-                            <ColorPicker color={actionButtonInfoTextColor} setColor={setActionButtonInfoTextColor} text='Button Color' />
+                            <ColorPicker color={shareButtonBackgroundColor} setColor={setShareButtonBackgroundColor} text='Button Color' />
                         </div>
                     
                     <br></br>
                     
                         <div style={{width:'95%'}}>
-                            <ColorPicker color={actionBUttonTextColor} setColor={setActionBUttonTextColor} text='Icon Color' />
+                            <ColorPicker color={shareButtonTextColor} setColor={setShareButtonTextColor} text='Icon Color' />
                         </div>
                     </div>}
                     <br></br>
-                    <Toggle  active={arButton} setActive={setArButton} text="AR Button" />
-                    {arButton && <div style={{width:'100%',display:'flex',flexDirection:'column',justifyContent:'space-between'}}>
+                    <Toggle  active={hasARButton} setActive={setHasARButton} text="AR Button" />
+                    {hasARButton && <div style={{width:'100%',display:'flex',flexDirection:'column',justifyContent:'space-between'}}>
                         <div style={{width:'95%'}}>
-                    <ColorPicker color={actionButtonColor} setColor={setActionButtonColor} text='Button Color' />
+                    <ColorPicker color={arButtonBackgroundColor} setColor={setARButtonBackgroundColor} text='Button Color' />
                     <br></br>
-                    <ColorPicker color={actionInfoBackgroundColor} setColor={setActionInfoBackgroundColor} text='Text and Icon Color' />
+                    <ColorPicker color={arButtonTextColor} setColor={setARButtonTextColor} text='Text and Icon Color' />
                     </div>
                     </div>}
                     <br></br>

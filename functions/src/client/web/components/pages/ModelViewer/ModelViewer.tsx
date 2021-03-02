@@ -53,10 +53,6 @@ const ModelViewer = (props : IProps) => {
             poster, allowScaling, exposure, autoPlay, id,  showQR, showShare, onFullScreen, 
             isFullScreen, hasARButton, hasShareButton, shareButtonBackgroundColor, shareButtonTextColor, 
             arButtonBackgroundColor, arButtonTextColor, hasShadow, shadowIntensity, shadowSoftness } = props
-//     const { openar, title, glbURL, background, usdzURL,
-//             actionButtonInfoBackgroundColor, actionButtonColor, hasCallToAction,
-//             actionButtonLink, actionButtonText, actionButtonTextColor, actionButtonInfoTextColor,
-//             poster, arScale, autoPlay, id, actionButtonInfoText, showQR, showShare, onFullScreen, isFullScreen } = props
 
     const [ qrModalOpen, setQRModalOpen ] = useState(false)
     const [ shareModalOpen, setShareModalOpen ] = useState(false)
