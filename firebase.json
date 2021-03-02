@@ -1,13 +1,26 @@
 {
-  "hosting": {
-    "public": "functions/public",
-    "rewrites": [
-      {
-        "source": "**",
-        "function": "nextjsFunc"
-      }
-    ]
-  },
+  "hosting": [
+    {
+      "target" : "production",
+      "public": "functions/public",
+      "rewrites": [
+        {
+          "source": "**",
+          "function": "nextjsFunc"
+        }
+      ]
+    },
+    {
+      "target" : "development",
+      "public": "functions/public",
+      "rewrites": [
+        {
+          "source": "**",
+          "function": "nextjsFuncDevelopment"
+        }
+      ]
+    }
+  ],
   "functions": {
     "predeploy": "npm --prefix \"$RESOURCE_DIR\" run build",
     "source": "functions"

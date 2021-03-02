@@ -49,7 +49,7 @@ const Profile = (props : IProps) => {
     const [ tdViews, setTDViews ] = useState(0)
     const [ clicks, setClicks ] = useState(0)
     const [ totalShares, setTotalShares ] = useState(0)
-    const [ fetchingData, setFetchingData] = useState(true)
+    const [ fetchingData, setFetchingData] = useState(1)
     const [ showGoToTop, setShowGoToTop ] = useState(false)
 
     const scrollObject = useRef(null);
@@ -78,6 +78,7 @@ const Profile = (props : IProps) => {
                     // if(user) {
                         if(id === null || id) {
                             const user = await getUser(true,id)
+                            console.log(user)
                             if(user && user.data.data){
                                 const userData = user.data.data
                                 setName(userData.name)
@@ -99,17 +100,17 @@ const Profile = (props : IProps) => {
                                     let shares = 0
                                     let c = 0
                                     userData.posts.forEach((p : any) => {
-                                        if(p.arViews) {
-                                            arViews += Object.keys(p.arViews).length
+                                        if(p.arViewsCount) {
+                                            arViews += p.arViewsCount
                                         }
-                                        if(p.tdViews) {
-                                            tdViews += Object.keys(p.tdViews).length
+                                        if(p.tdViewsCount) {
+                                            tdViews += p.tdViewsCount
                                         }
-                                        if(p.shares) {
-                                            shares += Object.keys(p.shares).length
+                                        if(p.sharesCount) {
+                                            shares += p.sharesCountp.sharesCount
                                         }
-                                        if(p.clicks) {
-                                            c += Object.keys(p.clicks).length
+                                        if(p.clicksCount) {
+                                            c += p.clicksCount
                                         }
                                     })
                                     setTotalShares(shares)
@@ -125,7 +126,7 @@ const Profile = (props : IProps) => {
                 } catch(error) {
                     console.log(error)
                 } finally {
-                    setFetchingData(false)
+                    setFetchingData(2);
                 }
             })
         }
@@ -133,6 +134,14 @@ const Profile = (props : IProps) => {
         getInitData()
     }, [id])
 
+    useEffect(() => {
+
+        if (fetchingData === 2)
+        {
+            setFetchingData(3);
+        }
+
+    })
 
     const onShareProflie = async () => {
         const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
@@ -262,7 +271,7 @@ const Profile = (props : IProps) => {
                     <PostsList list={posts} searchText={searchText} setSearchText={setSearchText} />
                 </div>
                 </div>
-            {fetchingData?<Loading text='Loading ...' />:null}
+            {fetchingData !== 3?<Loading text='Loading ...' />:null}
         </div>
     )
 }

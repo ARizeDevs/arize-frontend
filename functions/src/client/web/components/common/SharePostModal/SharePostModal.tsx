@@ -24,7 +24,7 @@ const SharePostModal = (props : IProps) => {
 
     const [ isEmbedPage , setIsEmbedPage ] = useState(false)
 
-    const shareURL = `https://arizear.app/post/${postID}`
+    const shareURL = `https://arizear.app/model-viewer/${postID}`
 
     const embedText = `<iframe id="inlineFrameExample"
         title=""

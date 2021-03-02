@@ -16,6 +16,10 @@ const UniqueDeviceIdDetector = (props : IProps) => {
     const [ location, setLocation ] = useState({ lat : undefined, long : undefined} as { lat : undefined|string, long : undefined|string })
 
     useEffect(() => {
+        console.log('here')
+
+         
+
         const unsubscribe = firebase.auth().onAuthStateChanged(async function(user) {
             if(!user) {
                 if(typeof window !== undefined) {
@@ -35,7 +39,7 @@ const UniqueDeviceIdDetector = (props : IProps) => {
 
                         if(!UDID) {
                             UDID = uuidv4()
-                            localStorage.set('UDID', UDID)
+                            localStorage.setItem('UDID', UDID)
                         }
                         setUDIDCTX(UDID)
                     }
@@ -44,16 +48,28 @@ const UniqueDeviceIdDetector = (props : IProps) => {
                 if(user.uid) {
                     setUDIDCTX(user.uid)
                 } else {
-                    const cookies = new Cookies()
-                    let UDID = cookies.get('UDID')
-
-                    if(!UDID) {
-                        UDID = uuidv4()
-                        cookies.set('UDID', UDID, {
-                            maxAge : 60 * 60 * 24 * 365 * 2
-                        })
+                    if(typeof window !== undefined) {
+                        if( navigator.cookieEnabled) {
+                            const cookies = new Cookies()
+                            let UDID = cookies.get('UDID')
+            
+                            if(!UDID) {
+                                UDID = uuidv4()
+                                cookies.set('UDID', UDID, {
+                                    maxAge : 60 * 60 * 24 * 365 * 2
+                                })
+                            }
+                            setUDIDCTX(UDID)
+                        } else {
+                            let UDID = localStorage.getItem('UDID')
+    
+                            if(!UDID) {
+                                UDID = uuidv4()
+                                localStorage.setItem('UDID', UDID)
+                            }
+                            setUDIDCTX(UDID)
+                        }
                     }
-                    setUDIDCTX(UDID)
                 }
             }
         });

@@ -6,7 +6,6 @@ import { deletePost, sharePost } from '../../../API'
 import Loading from '../Loading'
 import QRModal from '../QRModal'
 import SharePostModal from '../SharePostModal'
-import { UDIDContext } from '../UniqueDeviceIdDetector'
 
 import DotIcon from '../../../../assets/icons/3dot.svg'
 import EyeIcon from '../../../../assets/icons/eye.svg'
@@ -22,9 +21,9 @@ import ChartIcon from '../../../../assets/icons/chart-line.svg'
 import styles from './PostCard.module.css'
 import SolidButton from '../buttons/SolidButton'
 
-interface IPost { status: string,arViews : [] , tdViews : [] , shares : [] ,imageURL : string, id : string, title : string }
+interface IPost { status: string,arViewsCount : number , tdViewsCount : number , sharesCount : number ,imageURL : string, id : string, title : string }
 
-const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPost) => {
+const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, title, status,} : IPost) => {
 
     const [ image, setImage ] = useState('')
 
@@ -39,6 +38,19 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
     const [ shareAdded, setShareAdded ] = useState(false)
 
     const processing = status === 'PROCESSING'
+
+
+    const onARClick = () => {
+        if(typeof window !== 'undefined' && window.navigator) {
+            const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
+
+            if(mobile) {
+                router.push(`/model-viewer/${id}?openar=true`)
+            } else {
+                setQRModalOpen(true)
+            }
+        }
+    }
 
     const onEdit = () => router.push(`/arstudio/${id}`)
     const onView = () => router.push(`/post/${id}`)
@@ -65,6 +77,35 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
         })
     } , [imageURL]) 
 
+    const onShareClick = async () => {
+        if(typeof window !== 'undefined' && window.navigator) {
+            const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
+
+            if(mobile) {
+                try {
+                    await window.navigator.share({ title: "ARize", url: `https://arizear.app/model-viewer/${id}` });
+                    console.log("Data was shared successfully");
+                } catch (err) {
+                    console.error("Share failed:", err.message);
+                }    
+            } else {
+                setShareModalOpen(true);
+            }
+
+            if(id) {
+                if(!shareAdded) {
+                    setShareAdded(true)
+                    try {
+                        // @ts-ignore
+                        await sharePost( id)
+                    } catch(error) {
+                        console.log(error)
+                    }
+                }
+            }
+        }
+    }
+
     return (
         <div className={styles.root}>
             <div className={styles.postImage}>
@@ -83,59 +124,24 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
                         <div className={styles.viewToolTip}>
                             <div className={styles.textPart}>
                                 <ARViewsIcon />&nbsp;&nbsp;
-                                <p>{arViews?Object.keys(arViews).length:0}</p>&nbsp;
+                                <p>{arViewsCount?arViewsCount:0}</p>&nbsp;
                                 <div style={{height:'90%',width:'1px',backgroundColor:'var(--main-lightgray2-color'}}></div>&nbsp;
                                 <TDViewsIcon />&nbsp;&nbsp;
-                                <p>{tdViews?Object.keys(tdViews).length:0}</p>
+                                <p>{tdViewsCount?tdViewsCount:0}</p>
                             </div>
                             <div className={styles.tailPart}></div>
                         </div>
                     </div>
                     &nbsp;
-                    <small style={{color : 'var(--main-lightgray2-color)'}}>{(tdViews?Object.keys(tdViews).length:0) + (arViews?Object.keys(arViews).length:0)}</small>
+                    <small style={{color : 'var(--main-lightgray2-color)'}}>{(tdViewsCount?tdViewsCount:0) + (arViewsCount?arViewsCount:0)}</small>
                     &nbsp;
                     &nbsp;
-                    <UDIDContext.Consumer >
-                        {value => {
-                            const onShareClick = async () => {
-                                if(typeof window !== 'undefined' && window.navigator) {
-                                    const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
-    
-                                    if(mobile) {
-                                        try {
-                                            await window.navigator.share({ title: "ARize", url: `https://arizear.app/post/${id}` });
-                                            console.log("Data was shared successfully");
-                                        } catch (err) {
-                                            console.error("Share failed:", err.message);
-                                        }    
-                                    } else {
-                                        setShareModalOpen(true);
-                                    }
-
-                                    if(value.UDIDCTX && id) {
-                                        if(!shareAdded) {
-                                            try {
-                                                // @ts-ignore
-                                                await sharePost(value.UDIDCTX,value.location, id)
-                                                setShareAdded(true)
-                                            } catch(error) {
-                                                console.log(error)
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            return (
-                                <div onClick={onShareClick} className={styles.share}>
-                                    {/* @ts-ignore */}
-                                    <ShareIcon fill='var(--main-lightgray2-color)'/>
-                                </div>
-                            )
-                        }}
-                    </UDIDContext.Consumer>
+                        <div onClick={onShareClick} className={styles.share}>
+                            {/* @ts-ignore */}
+                            <ShareIcon fill='var(--main-lightgray2-color)'/>
+                        </div>
                     &nbsp;
-                    <small style={{color : 'var(--main-lightgray2-color)'}}>{(shares?Object.keys(shares).length:0) +(shareAdded?1:0)}</small>
+                    <small style={{color : 'var(--main-lightgray2-color)'}}>{(sharesCount?sharesCount:0) +(shareAdded?1:0)}</small>
                 </div>
                 &nbsp;&nbsp;
                 <div style={{display:'flex',flexDirection:'row',flexWrap:'wrap'}}>
@@ -143,7 +149,7 @@ const PostCard = ({imageURL, id, arViews, shares, tdViews, title, status,} : IPo
                         <SolidButton colorTheme='black' onClick={() => {if(!processing)router.push(`/post/${id}`)}} ><div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}><TDViewIcon /><h3>3D</h3></div></SolidButton>
                     </div>
                     <div style={{width:'100px'}}>
-                        <SolidButton onClick={() => setQRModalOpen(true)} ><div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}><ARViewIcon /><h3>AR</h3></div></SolidButton>
+                        <SolidButton onClick={onARClick} ><div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}><ARViewIcon /><h3>AR</h3></div></SolidButton>
                     </div>
                 </div>
             </div>

@@ -10,7 +10,6 @@ import CompressIcon from '../../../../assets/icons/compress.svg'
 
 import styles from './ModelViewer.module.css'
 import SharePostModal from '../../common/SharePostModal'
-import { UDIDContext } from '../../common/UniqueDeviceIdDetector'
 import { sharePost, viewARPost } from '../../../API'
 
 interface IProps {
@@ -45,7 +44,8 @@ interface IProps {
     showShare? : boolean,
     onFullScreen? : () => void,
     isFullScreen? : boolean,
-    showBanner? : boolean
+    showBanner? : boolean,
+    openar? : boolean
 }
 
 const ModelViewer = (props : IProps) => {
@@ -53,6 +53,10 @@ const ModelViewer = (props : IProps) => {
             poster, allowScaling, exposure, autoPlay, id,  showQR, showShare, onFullScreen, 
             isFullScreen, hasARButton, hasShareButton, shareButtonBackgroundColor, shareButtonTextColor, 
             arButtonBackgroundColor, arButtonTextColor, hasShadow, shadowIntensity, shadowSoftness } = props
+//     const { openar, title, glbURL, background, usdzURL,
+//             actionButtonInfoBackgroundColor, actionButtonColor, hasCallToAction,
+//             actionButtonLink, actionButtonText, actionButtonTextColor, actionButtonInfoTextColor,
+//             poster, arScale, autoPlay, id, actionButtonInfoText, showQR, showShare, onFullScreen, isFullScreen } = props
 
     const [ qrModalOpen, setQRModalOpen ] = useState(false)
     const [ shareModalOpen, setShareModalOpen ] = useState(false)
@@ -65,56 +69,75 @@ const ModelViewer = (props : IProps) => {
             const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
             setIsMobile(mobile)
         }
-    }, [])
+        const viewer = document.getElementById('myviewer')
+        const onModelLoad = () => {
+            if(viewer.activateAR) {
+                viewer.activateAR()
+            }
+        }
+        if(openar) {
+            if(viewer) {
+                viewer.addEventListener('load' , onModelLoad)
+            }
+        }
 
-    return (
-        <UDIDContext.Consumer >
-            {value => {
-                
-                const onShareClick = async () => {
-                    if(typeof window !== 'undefined' && window.navigator) {
-                        const mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+        return () => {
+            if(viewer) {
+                viewer.removeEventListener('load' , onModelLoad)
+            }
+        }
+    }, [openar])
 
-                        if(mobile) {
-                            try {
-                                await navigator.share({ title: "ARize", url: `https://arizear.app/post/${id}` });
-                                console.log("Data was shared successfully");
-                            } catch (err) {
-                                console.error("Share failed:", err.message);
-                            }    
-                        } else {
-                            setShareModalOpen(true);
-                        }
+    let fullUSDZUrl = `${usdzURL}`
+    if(hasCallToAction) {
+        const compoundUSDZUrl = getUSZFileFullURL(id)
+        fullUSDZUrl = `${fullUSDZUrl}#custom=${compoundUSDZUrl}`
+    }
 
-                        if(value.UDIDCTX && id) {
-                            if(!shareAdded) {
-                                try {
-                                    // @ts-ignore
-                                    await sharePost(value.UDIDCTX,value.location, id)
-                                    setShareAdded(true)
-                                } catch(error) {
-                                    console.log(error)
-                                }
-                            }
-                        }
+    const onShareClick = async () => {
+        if(typeof window !== 'undefined' && window.navigator) {
+            const mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+
+            if(mobile) {
+                try {
+                    await navigator.share({ title: "ARize", url: `https://arizear.app/model-viewer/${id}` });
+                    console.log("Data was shared successfully");
+                } catch (err) {
+                    console.error("Share failed:", err.message);
+                }    
+            } else {
+                setShareModalOpen(true);
+            }
+
+            if(id) {
+                if(!shareAdded) {
+                    setShareAdded(true)
+                    try {
+                        // @ts-ignore
+                        await sharePost( id)
+                    } catch(error) {
+                        console.log(error)
                     }
                 }
+            }
+        }
+    }
 
-                const addARView = async () => {
-                    if(value.UDIDCTX && id) {
-                        if(!arViewAdded) {
-                            try {
-                                // @ts-ignore
-                                await viewARPost(value.UDIDCTX,value.location, id)
-                                setArViewAdded(true)
-                            } catch(error) {
-                                console.log(error)
-                            }
-                        }
-                    }
+    const addARView = async () => {
+        if(id) {
+            if(!arViewAdded) {
+                setArViewAdded(true)
+                try {
+                    // @ts-ignore
+                    await viewARPost(id)
+                } catch(error) {
+                    console.log(error)
                 }
+            }
+        }
+    }
 
-            return (<div style={{width:'100%',height:'100%',position:'relative'}}>
+    return (<div style={{width:'100%',height:'100%',position:'relative'}}>
                 <model-viewer
                     id="myviewer"
                     src={glbURL} 
@@ -124,6 +147,7 @@ const ModelViewer = (props : IProps) => {
                     loading="eager"
                     reveal={autoPlay?"auto":"interaction"}
                     camera-controls
+                    quick-look-browsers="safari chrome"
                     background-color={solidBackgroundColor}
                     exposure={exposure}
                     shadow-intensity={hasShadow?shadowIntensity:'0'}
@@ -175,9 +199,6 @@ const ModelViewer = (props : IProps) => {
                     postID={id}
                 />
             </div>)
-        }}
-    </UDIDContext.Consumer>
-    )
 }
 
 export default ModelViewer
