@@ -134,8 +134,6 @@ const Profile = (props : IProps) => {
         getInitData()
     }, [id])
 
-
-
     const onShareProflie = async () => {
         const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
         
