@@ -28,12 +28,12 @@ export const editUser = async (updatedFields : {} , base64Image? : string) => {
     return axios.put(userServerRoute, data)
 }
 
-export const getUser = async (getPosts : boolean,id : string|null) => {
+export const getUser = async (id : string|null, getPosts? : boolean, limit? : number) => {
     if(id) {
-        return axios.get(`${userServerRoute}/${id}${getPosts?'?posts=true':''}` )
+        return axios.get(`${userServerRoute}/${id}${getPosts?`?posts=true${limit?`&limit=${limit}`:''}`:''}` )
     } else {
         const uid = await getUserID()
-        return axios.get(`${userServerRoute}/${uid}${getPosts?'?posts=true':''}` )
+        return axios.get(`${userServerRoute}/${uid}${getPosts?`?posts=true${limit?`&limit=${limit}`:''}`:''}` )
     }
     
 }

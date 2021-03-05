@@ -10,11 +10,13 @@ import EmptySearchIcon from '../../../../assets/banners/File searching.svg'
 
 import styles from './PostsList.module.css'
 import PostCard from '../PostCard'
+import LoadingInline from '../LoadingInline'
 
 interface IProps {
     searchText : string,
     setSearchText : (txt : string) => void,
-    list : IPost[]
+    list : IPost[],
+    fetchingPosts : boolean
 }
 
 interface IPost { status: string,arViewsCount : number , tdViewsCount : number , sharesCount : number ,imageURL : string, id : string, title : string }
@@ -61,7 +63,10 @@ const PostsColumn = (props : {list:IPost[],windowWidth:number}) => {
                 chunk = 1
             }
             for (i=props.list.length; i>0; i-=chunk) {
-                results.push(<PostsRow  list={props.list.slice(Math.max(i-chunk,0),i)} chunk={chunk}/>)
+                const rowList = props.list.slice(Math.max(i-chunk,0),i)
+                let rowKey: any = rowList.map((item) => item.id)
+                rowKey = rowKey.join('.')
+                results.push(<PostsRow key={rowKey}  list={rowList} chunk={chunk}/>)
             }
         }
 
@@ -109,7 +114,7 @@ const NoSearchResultList = () => {
 }
 
 const PostsList = (props : IProps) => {
-    const { searchText, setSearchText, list } = props
+    const { searchText, setSearchText, list, fetchingPosts } = props
     const [ windowWidth, setWindowWidth ] = useState(0)
 
     const updateWindowWidth = () => setWindowWidth(window.innerWidth)
@@ -132,12 +137,16 @@ const PostsList = (props : IProps) => {
 
     return (
         <div className={styles.root}>
+            <br></br>
+            {fetchingPosts ? <LoadingInline />:null}
+            <br></br>
             {
                 list.length === 0 ? 
                 <EmptyList />:
                 filteredList.length === 0 ?
                 <NoSearchResultList />:
                 <Posts windowWidth={windowWidth} list={filteredList} />
+                
             }
             <br></br>
             <SearchBar text={searchText} setText={setSearchText}  />

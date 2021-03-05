@@ -90,7 +90,7 @@ const ARStudio = (props : IProps) => {
     useEffect(() => {
         const getInitData = async () => {
             try {
-                const user = await getUser(false, null)
+                const user = await getUser(null)
                 if(user && user.data.data){
                     const userData = user.data.data
                     if(userData.profilePicURL) {
