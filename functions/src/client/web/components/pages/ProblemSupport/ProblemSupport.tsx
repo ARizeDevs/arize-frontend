@@ -27,7 +27,7 @@ const ProblemSupport = () => {
         firebase.auth().onAuthStateChanged(async function(user) {
             try {
                 if(user) {
-                    const user = await getUser(false, null)
+                    const user = await getUser(null)
                     if(user && user.data.data){
                         const userData = user.data.data
                         if(userData.profilePicURL) {

@@ -3,7 +3,6 @@ import React , { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { useToasts } from 'react-toast-notifications'
 
-
 import EmailIcon from '../../../../assets/icons/email3.svg'
 import WebsiteIcon from '../../../../assets/icons/website2.svg'
 
@@ -22,6 +21,7 @@ import ScrollToTop from '../../common/ScrollToTop'
 // import TipBox from '../../common/TipBox'
 import { copyToClipBoard } from '../../../helpers/copyToClipBoard'
 import { getUserID } from '../../../API/utils'
+import { getAllPosts } from '../../../API/posts'
 
 interface IProps {
     id? : string | null
@@ -41,6 +41,7 @@ const Profile = (props : IProps) => {
     const [ companyName, setCompanyName ] = useState('')
     const [ location, setLocation ] = useState('')
     const [ posts, setPosts ] = useState([])
+    const [ postsCount, setPostsCount ] = useState(0)
     const [ websiteURL, setWebsiteURL ] = useState('')
     const [ email, setEmail ] = useState('')
     const [ maxSlots, setMaxSlots ] = useState(20)
@@ -51,14 +52,45 @@ const Profile = (props : IProps) => {
     const [ totalShares, setTotalShares ] = useState(0)
     const [ fetchingData, setFetchingData] = useState(1)
     const [ showGoToTop, setShowGoToTop ] = useState(false)
+    const [ fetchingPosts, setFetchingPosts ] = useState(false)
+    const [ allPostsFetched, setAllPostsFetched ] = useState(false)
 
     const scrollObject = useRef(null);
 
-    const onScroll = (scrollY : any) => {
+    const postsPageSize = 9
+
+    const onScroll = (e : any) => {
+        const scrollY = e.target.scrollTop
+        const limit = Math.max( document.body.scrollHeight, document.body.offsetHeight, 
+            document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight ) - 30
+        
         if(scrollY !== 0) {
+            if(limit < scrollY ) {
+                if(fetchingData === 3  && !fetchingPosts && !allPostsFetched) {
+                    setFetchingPosts(true)
+                    getAllPosts(id,undefined,posts.length+1,postsPageSize)
+                    .then((result : any) => {
+                        const newPosts = result.data.data
+                        if((newPosts as any).length === 0) {
+                            setAllPostsFetched(true)
+                        } else {
+                            setPosts([...newPosts,...posts])
+                        }
+                    })
+                    .catch((error : any) => {
+                        console.log(error)
+                    })
+                    .finally(() => {
+                        setFetchingPosts(false)
+                    })
+                }
+            }
             setShowGoToTop(true)
         } else {
             setShowGoToTop(false)
+            
+            // if(scrollY) {
+            // }
         }
     }
 
@@ -77,7 +109,7 @@ const Profile = (props : IProps) => {
                 try {
                     // if(user) {
                         if(id === null || id) {
-                            const user = await getUser(true,id)
+                            const user = await getUser(id, true, postsPageSize)
                             console.log(user)
                             if(user && user.data.data){
                                 const userData = user.data.data
@@ -94,6 +126,7 @@ const Profile = (props : IProps) => {
                                     })
                                 }
                                 if(userData.posts) {
+                                    setPostsCount(userData.postsCount)
                                     setPosts(userData.posts)
                                     let arViews = 0
                                     let tdViews = 0
@@ -174,7 +207,7 @@ const Profile = (props : IProps) => {
         <div className={styles.root}>
             <Navbar imageSrc={imageSrc} />
             {/* @ts-ignore */}
-            <div ref={scrollObject} className={styles.bodyContainer} onScroll={(e) => onScroll(e.target.scrollTop)}>
+            <div ref={scrollObject} className={styles.bodyContainer} onScroll={(e) => onScroll(e)}>
                 {showGoToTop?<ScrollToTop onClick={onGoToTopClick} />:null}
                 <div className={styles.profileContainer}>
                     <div className={styles.profileSections}>
@@ -203,7 +236,7 @@ const Profile = (props : IProps) => {
                         <h1 className={styles.name}>{companyName?companyName:`${name} ${surname}`}</h1>
                         <p className={styles.lightColor}>{id?location:username}</p>
                         <br></br>
-                        {id !== null ? <h4 style={{color : 'var(--main-blue-color)'}}>{posts.length} posts</h4> : null}
+                        {id !== null ? <h4 style={{color : 'var(--main-blue-color)'}}>{postsCount} posts</h4> : null}
                         <br></br>
                         <div style={{width:'70%'}}>
                             <p>{bio}</p>
@@ -215,7 +248,7 @@ const Profile = (props : IProps) => {
                         {id === null ? 
                             <>
                                 <div className={styles.shadowedBox}>
-                                    <RemainingSlots maxSlots={maxSlots} usedSlots={posts.length} />
+                                    <RemainingSlots maxSlots={maxSlots} usedSlots={postsCount} />
                                     <br></br>
                                     <SolidButton colorTheme={'black'} onClick={() => router.push('/pricing')}  ><h3>Upgrade</h3></SolidButton>
                                 </div>
@@ -258,7 +291,7 @@ const Profile = (props : IProps) => {
                     <>
                         <div className={styles.rowContainer} style={{width:'100%'}}>
                             <div className={styles.rowContainer} style={{justifyContent:'flex-start'}}>
-                                <p className={styles.lightColor}>My Posts ( {posts.length} posts )</p>
+                                <p className={styles.lightColor}>My Posts ( {postsCount} posts )</p>
                             </div>
 
                             {/* {posts.length !== 0 ?<div style={{width:'140px'}}>
@@ -268,7 +301,7 @@ const Profile = (props : IProps) => {
                         <div className={styles.verticalDivider}></div>
                     </>
                     : null}
-                    <PostsList list={posts} searchText={searchText} setSearchText={setSearchText} />
+                    <PostsList fetchingPosts={fetchingPosts} list={posts} searchText={searchText} setSearchText={setSearchText} />
                 </div>
                 </div>
             {fetchingData !== 3?<Loading text='Loading ...' />:null}

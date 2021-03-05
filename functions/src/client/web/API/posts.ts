@@ -1,5 +1,5 @@
 import axios from '../config/api'
-import { getTokenID } from './utils'
+import { getTokenID, getUserID } from './utils'
 
 const postServerRoute = '/post'
 
@@ -34,6 +34,13 @@ export const getRelatedPosts = async (id : string) => {
 
 export const getPost = async (id : string , author : boolean) => {
     return axios.get(`${postServerRoute}/${id}${author?'?author=true':''}`)
+}
+
+export const getAllPosts = async (author : string, startDocId? : string, offset? : number, limit? : number) => {
+    let id : any = author
+    if(!id) id = await getUserID()
+    
+    return axios.get(`${postServerRoute}/user/${id}?${startDocId?`startDocId=${startDocId}`:''}&${limit?`limit=${limit}`:''}&${offset?`offset=${offset}`:''}`)
 }
 
 export const savePost = async (title : string, description : string, tags : string[] ,

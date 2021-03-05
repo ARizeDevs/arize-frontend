@@ -1,0 +1,51 @@
+.root {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.circleRoot {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.root h3 {
+    color: var(--main-lightgray2-color);
+    margin-left: 10px;
+}
+
+.circle {
+    width: 8px;
+    height: 8px;
+    margin: 5px;
+    border-radius: 50%;
+    position: relative;
+    background-color: var(--main-lightgray2-color);
+}
+
+.anim1 {
+    animation: example 1s linear  infinite ;
+}
+
+
+.anim2 {
+    animation: example 1s linear .3s infinite ;
+}
+
+
+.anim3 {
+    animation: example 1s linear .1 s infinite ;
+}
+
+
+@keyframes example {
+    0%   {top: 0px;}
+    25%  {top: 5px;}
+    50%  {top: 0px;}
+    75% {top: -5px;}
+    100% {top: 0px;}    
+  }
