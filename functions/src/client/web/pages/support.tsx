@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import React from 'react'
 
-import UnauthorizedRedirect from '../components/common/UnauthorizedRedirect'
 import Support from '../components/pages/Support'
 
 const support = () => (

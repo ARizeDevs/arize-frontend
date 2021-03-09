@@ -9,7 +9,7 @@ interface IProps {
     min : number,
     max : number,
     value : number,
-    onChange : (number) => void,
+    onChange : (value : number) => void,
     error? : string
 }
 

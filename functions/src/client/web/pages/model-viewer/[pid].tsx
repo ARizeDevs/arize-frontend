@@ -10,7 +10,7 @@ import { getPost, view3DPost } from '../../API'
 import { getDirectURL } from '../../config/firebase'
 import FourOhFour from '../../components/pages/FourOhFour'
 
-const arstudio = ({ post, isAryanTer } : { userAgent : any, ipAddress : any , post:any, isAryanTer : boolean}) => {
+const modelViewer = ({ post, isAryanTer } : { userAgent : any, ipAddress : any , post:any, isAryanTer : boolean}) => {
     const router = useRouter()
     
     if(!post) {
@@ -121,4 +121,4 @@ export async function  getServerSideProps (context : any) {
 
 }
 
-export default arstudio
+export default modelViewer

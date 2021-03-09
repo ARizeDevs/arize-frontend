@@ -18,14 +18,16 @@ import { getUser } from '../../../API/user'
 const FeatureRequest = () => {
     const router  = useRouter()
     const [ submiting, setSubmiting] = useState(false)
-    const [email,setEmail] = useState<string>()
-    const [input,setInput] = useState<string>()
-    const [multiline,setMultiLine] = useState<string>()
+    const [email,setEmail] = useState<string>('')
+    const [input,setInput] = useState<string>('')
+    const [multiline,setMultiLine] = useState<string>('')
     const { addToast } = useToasts()
     const [ error, setError ] = useState('')
     const [ imageSrc, setImageSrc ] = useState('')
 
     useEffect(() => {
+        console.log(error)
+        console.log(email)
         firebase.auth().onAuthStateChanged(async function(user) {
             try {
                 if(user) {

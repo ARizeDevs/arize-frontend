@@ -16,14 +16,16 @@ import { getUser } from '../../../API/user'
 const ProblemSupport = () => {
     const router  = useRouter()
     const [ submiting, setSubmiting] = useState(false)
-    const [email,setEmail] = useState<string>()
-    const [input,setInput] = useState<string>()
-    const [multiline,setMultiLine] = useState<string>()
+    const [email,setEmail] = useState<string>('')
+    const [input,setInput] = useState<string>('')
+    const [multiline,setMultiLine] = useState<string>('')
     const { addToast } = useToasts()
     const [ error, setError ] = useState('')
     const [ imageSrc, setImageSrc ] = useState('')
     
     useEffect(() => {
+        console.log(email)
+        console.log(error)
         firebase.auth().onAuthStateChanged(async function(user) {
             try {
                 if(user) {
@@ -59,7 +61,7 @@ const ProblemSupport = () => {
     async function onSubmit() {
         setSubmiting(true)
         try{
-           await createTicket(input,multiline,"SUPPORT")
+           await createTicket(input, multiline,"SUPPORT")
         }catch(error){
             setError('something went wrong')
         }finally {

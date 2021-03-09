@@ -4,7 +4,7 @@ import BlueChecked from '../../../../assets/icons/blueChecked.svg'
 import Crossed from '../../../../assets/icons/Crossed.svg'
 
 interface IProps {
-    details : string[]
+    details : { checked : boolean, title : string }[]
 }
 
 const PlanDetails = (props : IProps) => {

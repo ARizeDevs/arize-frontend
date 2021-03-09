@@ -49,7 +49,7 @@ interface IProps {
 }
 
 const ModelViewer = (props : IProps) => {
-    const { title, glbURL, backgroundImage, usdzURL, solidBackgroundColor,
+    const { title, openar, glbURL, backgroundImage, usdzURL, solidBackgroundColor,
             poster, allowScaling, exposure, autoPlay, id,  showQR, showShare, onFullScreen, 
             isFullScreen, hasARButton, hasShareButton, shareButtonBackgroundColor, shareButtonTextColor, 
             arButtonBackgroundColor, arButtonTextColor, hasShadow, shadowIntensity, shadowSoftness } = props
@@ -83,12 +83,6 @@ const ModelViewer = (props : IProps) => {
             }
         }
     }, [openar])
-
-    let fullUSDZUrl = `${usdzURL}`
-    if(hasCallToAction) {
-        const compoundUSDZUrl = getUSZFileFullURL(id)
-        fullUSDZUrl = `${fullUSDZUrl}#custom=${compoundUSDZUrl}`
-    }
 
     const onShareClick = async () => {
         if(typeof window !== 'undefined' && window.navigator) {

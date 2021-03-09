@@ -44,6 +44,13 @@ interface IProps {
     allowScaling : boolean,
     setAllowScaling : (value : boolean) => void,
 
+    exposure : string,
+    setExposure : (value : string) => void,
+    shadowIntensity : string,
+    setShadowIntensity : (value : string) => void
+    shadowSoftness : string,
+    setShadowSoftness : (value : string) => void,
+
     skyBox: boolean,
     setSkyBox: (value : boolean) => void,
     solidBackgroundColor : string,
@@ -58,23 +65,24 @@ interface IProps {
 const ARStudioPostDetail = (props : IProps) => {
     const { error,solidBackgroundColor,setSolidBackgroundColor
         ,arButtonTextColor, shareButtonTextColor, shareButtonBackgroundColor,
-        allowScaling, setAllowScaling, arButtonBackgroundColor, backButtonText,
+        allowScaling, setAllowScaling, arButtonBackgroundColor,
         hasARButton, hasShareButton, setARButtonBackgroundColor, setARButtonTextColor,
         setHasARButton, setHasShareButton, setShareButtonBackgroundColor, setShareButtonTextColor,
-        skyBox,setSkyBox,solidBackground, setSolidBackground,
-        autoPlay, hasShadow, setAutoPlay, setHasShadow, hasBackground, setHasBackground,
+        solidBackground, setSolidBackground,
+        hasShadow, setHasShadow, hasBackground, setHasBackground,
         buttonText, onFinish , postBackgroundImageBase64, setPostBackgroundImageBase64, 
-        onBack} = props
+        } = props
     const [intensity, setIntensity] = React.useState<number>(30);
     const [softness, setSoftness] = React.useState<number>(30);
     const [Exposure, setExposure] = React.useState<number>(30);
     const [ waterMark, setWaterMark ] = useState(false) 
 
-    const handleChange = (event: any, newValue: number | number[]) => {
-      setIntensity(newValue as number);
-      setExposure(newValue as number);
-      setSoftness(newValue as number);
-    }
+    // const handleChange = (event: any, newValue: number | number[]) => {
+    //   setIntensity(newValue as number);
+    //   setExposure(newValue as number);
+    //   setSoftness(newValue as number);
+    // }
+
     return (
         <div className={styles.root}>
             <div className={styles.inputWrapper}>

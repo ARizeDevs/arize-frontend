@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../../common/Navbar'
-import {useRouter}  from 'next/router'
 
 import SupportBanner from '../../../../assets/banners/Active Support.svg'
 import TelegramIcon from '../../../../assets/icons/contact icons/Telegram.svg'
@@ -16,7 +15,6 @@ import { getUser } from '../../../API/user'
 
 const Support = () => {
 
-    const router  = useRouter()
     const [ imageSrc, setImageSrc ] = useState('')
     const [ accountType, setAccountType ] = useState('')
 

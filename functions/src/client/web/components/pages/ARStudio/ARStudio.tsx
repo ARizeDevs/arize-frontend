@@ -3,13 +3,13 @@ import { useRouter } from 'next/router'
 
 
 import firebase, { getDirectURL } from '../../../config/firebase'
-import ModelViewer from '../ModelViewer'
+// import ModelViewer from '../ModelViewer'
 import Preview from '../../common/Preview'
 import SolidButton from '../../common/buttons/SolidButton'
 import ARStudioPostDetail from '../../common/ARStudioPostDetail'
 import ArrowLeftIcon from '../../../../assets/icons/arrow-left.svg'
 import CrossIcon from '../../../../assets/icons/cross.svg'
-import { savePost, getPost, editPost } from '../../../API'
+import { savePost, getPost} from '../../../API'
 import { contentFileValidator, imageSrcValidator, tagsValidator,
      titleValidator, validatePostDetail,postBackgroundImageBase64Validator,
     validateCustomizationDetail, } from './validators'
@@ -60,22 +60,20 @@ const ARStudio = (props : IProps) => {
     const [ title , setTitle ] = useState('')
     const [ description , setDescription ] = useState('')
     const [ tags , setTags ] = useState([])
-    const [ contentFile , setContentFile ] = useState(null)
+    const [ contentFile , setContentFile ] = useState<any>(null)
     const [ solidBackground, setSolidBackground ] = useState(true)
     const [ solidBackgroundColor, setSolidBackgroundColor ] = useState('#FFFFFF')
     const [ hasShadow, setHasShadow ] = useState(false)
     const [ autoPlay, setAutoPlay ] = useState(false) 
     const [ skyBox, setSkyBox ] = useState(false)
     const [ allowScaling, setAlloScaling ] = useState(false)
-    const [ shareButton, setShareButton ] = useState(true)
-    const [ arButton, setArButton ] = useState(true)
     const [ hasBackground, setHasBackground ] = useState(false)
     const [ postBackgroundImageBase64, setPostBackgroundImageBase64] = useState('')
     const [ error, setError ] = useState({})
     const [ desktop,setDesktop]= useState(false)
-    const [ fullScreen, setFullScreen ] = useState(false)
+    // const [ fullScreen, setFullScreen ] = useState(false)
 
-    const [ profilePicSrc, setProfilePicSrc ] = useState('')
+    // const [ profilePicSrc, setProfilePicSrc ] = useState('')
     const [ userId, setUserId ] = useState('')
     const [ isOnTheGround,setIsOnTheGround ]= useState(false)
 
@@ -88,16 +86,22 @@ const ARStudio = (props : IProps) => {
     }
 
     useEffect(() => {
+        console.log(contentFileChanged)
+        console.log(backGroundImageChanged)
+        console.log(imageSrcChanged)
+        
+        
+        
         const getInitData = async () => {
             try {
                 const user = await getUser(null)
                 if(user && user.data.data){
                     const userData = user.data.data
-                    if(userData.profilePicURL) {
-                        getDirectURL(userData.profilePicURL).then((url : string) => {
-                            setProfilePicSrc(url)
-                        })
-                    }
+                    // if(userData.profilePicURL) {
+                    //     getDirectURL(userData.profilePicURL).then((url : string) => {
+                    //         setProfilePicSrc(url)
+                    //     })
+                    // }
                     setUserId(userData.id)
                     firebase.analytics().logEvent('creation_started', { user : userData.id } )
                 }
@@ -135,7 +139,7 @@ const ARStudio = (props : IProps) => {
         getInitData()
     } , [isEdit,postID])
 
-    const onFullScreenClick = () => setFullScreen(!fullScreen)
+    // const onFullScreenClick = () => setFullScreen(!fullScreen)
 
     const submitPosition = () => setPage(2)
     const onCustomizeBackButtonClicked = () => setPage(1)
@@ -160,6 +164,7 @@ const ARStudio = (props : IProps) => {
                 {
                     id = postID[0]
                 }
+                console.log(id)
             } else {
                 result = await savePost(
                     title, description, tags, hasShadow,
@@ -173,13 +178,11 @@ const ARStudio = (props : IProps) => {
             }
 
             setSubmiting(false)
-            if (result.success)
+            if (result && result.success)
             {
                 firebase.analytics().logEvent('creation_success', { user : userId } )
                 setPage(3)
                 getDirectURL(result.data.glbFileURL).then((url : string) => setContentFile(url))
-
-                // router.push('/profile')
             } else {
                 firebase.analytics().logEvent('creation_failed', { user : userId } )
                 addToast('Bad file format',{ appearance : 'error' })
@@ -219,6 +222,7 @@ const ARStudio = (props : IProps) => {
                 {
                     id = postID[0]
                 }
+                console.log(id)
                 // @ts-ignore
                 // result = await editPost(id,title,description,tags,
                 //     imageSrcChanged?imageSrc:null,
@@ -242,7 +246,7 @@ const ARStudio = (props : IProps) => {
                 )
             }
             setSubmiting(false)
-            if (result.success)
+            if (result && result.success)
             {
                 firebase.analytics().logEvent('creation_success', { user : userId } )
                 router.push('/profile')
@@ -393,16 +397,30 @@ const ARStudio = (props : IProps) => {
             <div className={styles.cust}>
                 <div className={styles.inner}>
                     <ARStudioCustomize
+                        exposure={exposure}
+                        setExposure={setExposure}
+                        setShadowIntensity={setShadowIntensity}
+                        setShadowSoftness={setShadowSoftness}
+                        shadowIntensity={shadowIntensity}
+                        shadowSoftness={shadowSoftness}
                         allowScaling={allowScaling}
                         setAllowScaling={setAlloScaling}
                         solidBackgroundColor = {solidBackgroundColor}
                         setSolidBackgroundColor = {setSolidBackgroundColor}
                         solidBackground={solidBackground}
                         setSolidBackground={setSolidBackground}
-                        shareButton={shareButton}
-                        setShareButton={setShareButton}
-                        arButton={arButton}
-                        setArButton={setArButton}
+                        hasARButton={hasARButton}
+                        arButtonBackgroundColor={arButtonBackgroundColor}
+                        arButtonTextColor={arButtonTextColor}
+                        hasShareButton={hasShareButton}
+                        setARButtonBackgroundColor={setArButtonBackgroundColor}
+                        setARButtonTextColor={setArButtonTextColor}
+                        setHasARButton={setHasARButton}
+                        setHasShareButton={setHasShareButton}
+                        setShareButtonBackgroundColor={setShareButtonBackgroundColor}
+                        setShareButtonTextColor={setShareButtonTextColor}
+                        shareButtonBackgroundColor={shareButtonBackgroundColor}
+                        shareButtonTextColor={shareButtonTextColor}
                         autoPlay={autoPlay}
                         setAutoPlay={setAutoPlay}
                         skyBox={skyBox}

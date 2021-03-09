@@ -40,7 +40,6 @@ const Preview = (props : IProps) => {
         allowScaling,
         arButtonBackgroundColor,
         arButtonTextColor,
-        buttnPreview,
         hasARButton,
         hasShadow,
         hasShareButton,

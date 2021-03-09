@@ -11,7 +11,7 @@ const ARTriggerPosition = ( ) => {
         <div>
                 <Placement isOnTheGround={value} setIsOnTheGround={setValue}/>
                 <div className={styles.buttonWrapper}>
-                    <SolidButton onClick={null} ><h3>Next</h3></SolidButton>
+                    <SolidButton onClick={() => ''} ><h3>Next</h3></SolidButton>
                 </div>
          </div>
     )

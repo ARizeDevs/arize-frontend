@@ -110,14 +110,6 @@ const Post = (props : IProps) => {
                         id={post.id}
                         autoPlay={post.autoPlay}
                         backgroundImage={backGroundImage} 
-                        // hasCallToAction={post.hasCallToAction}
-                        // actionButtonInfoText={post.actionButtonInfoText}
-                        // actionButtonText={post.actionButtonText}
-                        // actionButtonInfoBackgroundColor={post.actionInfoBackgroundColor}
-                        // actionButtonInfoTextColor={post.actionButtonInfoTextColor}
-                        // actionButtonLink={post.actionButtonLink}
-                        // actionButtonColor={post.actionButtonColor}
-                        // actionButtonTextColor={post.actionBUttonTextColor}
                     />
                 </div>
                 <br></br>
@@ -156,9 +148,6 @@ const Post = (props : IProps) => {
                             <p>{post.description}</p>
                         </div>
                         <div className={styles.column} style={{width:'30%',marginRight : '20px'}}>
-                            {post.hasCallToAction?<div style={{width:'100%',marginBottom : '10px'}}>
-                                <SolidButton onClick={() => router.push(post.actionButtonLink)} styleClass={styles.btn} colorTheme={post.actionButtonColor} ><h3 style={{color:post.actionBUttonTextColor}}>{post.actionButtonText}</h3></SolidButton>
-                            </div>:null}
                             <div className={styles.pcARViewButton} style={{width:'100%',marginBottom : '10px'}}>
                                 <SolidButton onClick={() => setQRModalOpen(true)}  ><h3>AR View</h3></SolidButton>
                             </div>

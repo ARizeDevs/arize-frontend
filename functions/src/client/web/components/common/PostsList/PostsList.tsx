@@ -16,7 +16,8 @@ interface IProps {
     searchText : string,
     setSearchText : (txt : string) => void,
     list : IPost[],
-    fetchingPosts : boolean
+    fetchingPosts : boolean,
+    searchList : IPost[]
 }
 
 interface IPost { status: string,arViewsCount : number , tdViewsCount : number , sharesCount : number ,imageURL : string, id : string, title : string }
@@ -114,13 +115,12 @@ const NoSearchResultList = () => {
 }
 
 const PostsList = (props : IProps) => {
-    const { searchText, setSearchText, list, fetchingPosts } = props
+    const { searchText, setSearchText, list, fetchingPosts, searchList } = props
     const [ windowWidth, setWindowWidth ] = useState(0)
 
     const updateWindowWidth = () => setWindowWidth(window.innerWidth)
 
     useEffect(() => {
-
         if(typeof window !== 'undefined') {
             setWindowWidth(window.innerWidth)
             window.addEventListener('resize' , updateWindowWidth)
@@ -133,8 +133,6 @@ const PostsList = (props : IProps) => {
         }
     }, [])
 
-    const filteredList = list.filter((item) => item.title.indexOf(searchText) !== -1)
-
     return (
         <div className={styles.root}>
             <br></br>
@@ -143,9 +141,11 @@ const PostsList = (props : IProps) => {
             {
                 list.length === 0 ? 
                 <EmptyList />:
-                filteredList.length === 0 ?
+                searchText && !fetchingPosts && searchList.length === 0 ?
                 <NoSearchResultList />:
-                <Posts windowWidth={windowWidth} list={filteredList} />
+                searchText?
+                <Posts windowWidth={windowWidth} list={searchList} />:
+                <Posts windowWidth={windowWidth} list={list} />
                 
             }
             <br></br>

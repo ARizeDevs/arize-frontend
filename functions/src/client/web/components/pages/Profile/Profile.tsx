@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import _ from 'lodash'
 import React , { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { useToasts } from 'react-toast-notifications'
@@ -21,6 +22,7 @@ import ScrollToTop from '../../common/ScrollToTop'
 // import TipBox from '../../common/TipBox'
 import { copyToClipBoard } from '../../../helpers/copyToClipBoard'
 import { getUserID } from '../../../API/utils'
+import useDebounce from '../../../helpers/useDebounce'
 import { getAllPosts } from '../../../API/posts'
 
 interface IProps {
@@ -40,7 +42,7 @@ const Profile = (props : IProps) => {
     const [ surname, setSurname ] = useState('')
     const [ companyName, setCompanyName ] = useState('')
     const [ location, setLocation ] = useState('')
-    const [ posts, setPosts ] = useState([])
+    const [ posts, setPosts ] = useState<any>([])
     const [ postsCount, setPostsCount ] = useState(0)
     const [ websiteURL, setWebsiteURL ] = useState('')
     const [ email, setEmail ] = useState('')
@@ -54,10 +56,50 @@ const Profile = (props : IProps) => {
     const [ showGoToTop, setShowGoToTop ] = useState(false)
     const [ fetchingPosts, setFetchingPosts ] = useState(false)
     const [ allPostsFetched, setAllPostsFetched ] = useState(false)
+    const [ allSearchPostsFetched, setAllSearchPostsFetched ] = useState(false)
+    const [ searchedPosts , setSearchedPosts ] = useState<any>([])
 
     const scrollObject = useRef(null);
 
     const postsPageSize = 9
+
+    
+
+    const onSearchTextChange = (text : string) => {
+        if(fetchingData === 3 ) {
+            setAllSearchPostsFetched(false)
+            setFetchingPosts(true)
+            setSearchedPosts([])
+
+
+            const set = (_posts : any[] , newPosts : any[]) => setSearchedPosts(newPosts)
+            loadMorePosts(searchedPosts, set, text)
+        }
+        setSearchText(text)
+    }
+
+    const loadMorePosts = useDebounce( (posts : any[], setPosts : (posts : any[], newPosts : any[]) => void, searchText : string | null) => {
+        getAllPosts(id?id:null, null, posts.length+1, postsPageSize, searchText? searchText : null)
+        .then((result : any) => {
+            const newPosts = result.data.data
+
+            if((newPosts as any).length < postsPageSize) {
+                if(searchText) {
+                    setAllSearchPostsFetched(true)
+                } else {
+                    setAllPostsFetched(true)
+                }
+            }
+
+            setPosts(posts, newPosts)
+        })
+        .catch((error : any) => {
+            console.log(error)
+        })
+        .finally(() => {
+            setFetchingPosts(false)
+        })
+    } , 500)
 
     const onScroll = (e : any) => {
         const scrollY = e.target.scrollTop
@@ -66,31 +108,28 @@ const Profile = (props : IProps) => {
         
         if(scrollY !== 0) {
             if(limit < scrollY ) {
-                if(fetchingData === 3  && !fetchingPosts && !allPostsFetched) {
-                    setFetchingPosts(true)
-                    getAllPosts(id,undefined,posts.length+1,postsPageSize)
-                    .then((result : any) => {
-                        const newPosts = result.data.data
-                        if((newPosts as any).length === 0) {
-                            setAllPostsFetched(true)
-                        } else {
-                            setPosts([...newPosts,...posts])
+
+                if(fetchingData === 3  && !fetchingPosts ) {
+                    if(searchText ) {
+                        if(!allSearchPostsFetched) {
+                            setFetchingPosts(true)
+                            
+                            const set = (posts : any[] , newPosts : any[]) => setPosts([...newPosts,...posts])
+                            loadMorePosts(posts, set, searchText)
                         }
-                    })
-                    .catch((error : any) => {
-                        console.log(error)
-                    })
-                    .finally(() => {
-                        setFetchingPosts(false)
-                    })
+                    } else {
+                        if(!allPostsFetched) {
+                            setFetchingPosts(true)
+                            
+                            const set = (posts : any[] , newPosts : any[]) => setPosts([...newPosts,...posts])
+                            loadMorePosts(posts, set, searchText)
+                        }
+                    }
                 }
             }
             setShowGoToTop(true)
         } else {
             setShowGoToTop(false)
-            
-            // if(scrollY) {
-            // }
         }
     }
 
@@ -110,7 +149,7 @@ const Profile = (props : IProps) => {
                     // if(user) {
                         if(id === null || id) {
                             const user = await getUser(id, true, postsPageSize)
-                            console.log(user)
+
                             if(user && user.data.data){
                                 const userData = user.data.data
                                 setName(userData.name)
@@ -169,11 +208,7 @@ const Profile = (props : IProps) => {
 
     useEffect(() => {
 
-        if (fetchingData === 2)
-        {
-            setFetchingData(3);
-        }
-
+        if (fetchingData === 2) setFetchingData(3)
     })
 
     const onShareProflie = async () => {
@@ -197,7 +232,6 @@ const Profile = (props : IProps) => {
             }
         } else {
             copyToClipBoard(shareURL)
-    
     
             addToast('url copied',{ appearance : 'info' })
         }
@@ -301,7 +335,7 @@ const Profile = (props : IProps) => {
                         <div className={styles.verticalDivider}></div>
                     </>
                     : null}
-                    <PostsList fetchingPosts={fetchingPosts} list={posts} searchText={searchText} setSearchText={setSearchText} />
+                    <PostsList fetchingPosts={fetchingPosts} list={posts} searchList={searchedPosts} searchText={searchText} setSearchText={onSearchTextChange} />
                 </div>
                 </div>
             {fetchingData !== 3?<Loading text='Loading ...' />:null}

@@ -36,11 +36,11 @@ export const getPost = async (id : string , author : boolean) => {
     return axios.get(`${postServerRoute}/${id}${author?'?author=true':''}`)
 }
 
-export const getAllPosts = async (author : string, startDocId? : string, offset? : number, limit? : number) => {
+export const getAllPosts = async (author : string | null, startDocId : string | null, offset : number | null , limit : number | null, searchText : string | null) => {
     let id : any = author
     if(!id) id = await getUserID()
     
-    return axios.get(`${postServerRoute}/user/${id}?${startDocId?`startDocId=${startDocId}`:''}&${limit?`limit=${limit}`:''}&${offset?`offset=${offset}`:''}`)
+    return axios.get(`${postServerRoute}?${id?`uid=${id}`:''}&${startDocId?`startDocId=${startDocId}`:''}&${limit?`limit=${limit}`:''}&${offset?`offset=${offset}`:''}&${searchText?`searchText=${searchText}`:''}`)
 }
 
 export const savePost = async (title : string, description : string, tags : string[] ,
