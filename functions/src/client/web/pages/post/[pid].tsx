@@ -6,7 +6,7 @@ import requestIp from 'request-ip'
 import Post from '../../components/pages/Post'
 import { baseURL } from '../../config/api'
 import FourOhFour from '../../components/pages/FourOhFour'
-import { view3DPost } from '../../API'
+import { view3DPost } from '../../API/posts'
 
 const post = ({ post, relatedPosts } : { post : any, relatedPosts : any}) => {
     

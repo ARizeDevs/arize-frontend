@@ -15,7 +15,7 @@ import ShareIcon from '../../../../assets/icons/share2.svg'
 import styles from './Post.module.css'
 import { useRouter } from 'next/router'
 import SharePostModal from '../../common/SharePostModal'
-import { sharePost } from '../../../API'
+import { sharePost } from '../../../API/posts'
 
 interface IProps {
     post : any,

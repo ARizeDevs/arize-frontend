@@ -8,9 +8,15 @@ export const sharePost = async ( postID : string) => {
     return axios.post(`${postServerRoute}/${postID}/share`, {})
 }
 
-export const view3DPost = async (postID : string) => {
+export const view3DPost = async (postID : string, ua? : string | null, ipAddress? : string | null) => {
+    let userAgent = ''
+    if(ua) {
+        userAgent = ua
+    } else {
+        userAgent = navigator.userAgent
+    }
     // firebase.analytics().logEvent('3d_view', { post : postID, viewer : UUID })
-    return axios.post(`${postServerRoute}/${postID}/3dview`, {})
+    return axios.post(`${postServerRoute}/${postID}/3dview`, {ip : ipAddress?ipAddress:''} , { headers : { 'user-agent' : userAgent}})
 }
 
 export const viewARPost = async ( postID : string) => {
@@ -43,18 +49,29 @@ export const getAllPosts = async (author : string | null, startDocId : string | 
     return axios.get(`${postServerRoute}?${id?`uid=${id}`:''}&${startDocId?`startDocId=${startDocId}`:''}&${limit?`limit=${limit}`:''}&${offset?`offset=${offset}`:''}&${searchText?`searchText=${searchText}`:''}`)
 }
 
-export const savePost = async (title : string, description : string, tags : string[] ,
+
+export const savePost = async (
+    title : string, 
+    description : string, 
+    tags : string[] ,
+    hasShadow : boolean,
+    shadowIntensity : string,
+    shadowSoftness : string,
+    hasARButton : boolean,
+    arButtonBackgroundColor : string,
+    arButtonTextColor : string,
+    hasShareButton : boolean,
+    shareButtonBackgroundColor : string,
+    shareButtonTextColor : string,
+    allowScaling : boolean,
+    exposure : string,
+    solidBackgroundColor : string,
+    isOntheGround : boolean,
+    autoPlay : boolean,
     imageBase64Encoded : string,
-    actionBUttonTextColor : string, actionButtonColor : string, actionButtonLink : string, actionButtonText : string,
-    actionInfoBackgroundColor : string , hasShadow : boolean, autoPlay : boolean,
-    actionButtonInfoText : string,
-    actionButtonInfoTextColor : string,
-    hasCallToAction : boolean,
     postBackgroundImageBase64 : string,
-    contentFile : any,
-       setStatus : (status : string) => void) => {
+    contentFile : any) => {
     try {
-        setStatus('saving your post to database')
         const tokenId = await getTokenID()
 
         const formData = new FormData();
@@ -62,18 +79,38 @@ export const savePost = async (title : string, description : string, tags : stri
         formData.append('title',title)
         formData.append('description',description)
         formData.append('tags',tags.join(','))
-        if(hasCallToAction) {
-            formData.append('hasCallToAction','hasCallToAction')
-            formData.append('actionBUttonTextColor',actionBUttonTextColor)
-            formData.append('actionButtonColor',actionButtonColor)
-            formData.append('actionButtonLink',actionButtonLink)
-            formData.append('actionButtonText',actionButtonText)
-            formData.append('actionInfoBackgroundColor',actionInfoBackgroundColor)
-            formData.append('actionButtonInfoText',actionButtonInfoText)
-            formData.append('actionButtonInfoTextColor',actionButtonInfoTextColor)
-        }
         if(autoPlay) formData.append('autoPlay','autoPlay')
-        if(hasShadow) formData.append('hasShadow','hasShadow')
+        
+        if(hasShadow) {
+            formData.append('hasShadow','hasShadow')
+            formData.append('shadowIntensity',shadowIntensity)
+            formData.append('shadowSoftness', shadowSoftness)
+        }
+
+        if(hasARButton) {
+            formData.append('hasARButton','hasARButton')
+            formData.append('arButtonBackgroundColor', arButtonBackgroundColor)
+            formData.append('arButtonTextColor',arButtonTextColor)
+        }
+
+        if(hasShareButton) {
+            formData.append('hasShareButton','hasShareButton')
+            formData.append('shareButtonBackgroundColor', shareButtonBackgroundColor)
+            formData.append('shareButtonTextColor',shareButtonTextColor)
+        }
+
+        if(allowScaling) formData.append('allowScaling','allowScaling')
+
+        formData.append('exposure',exposure)
+
+        if(isOntheGround) {
+            formData.append('placement','ON_THE_GROUND')
+        } else { 
+            formData.append('placement','ON_THE_WALL')
+        }
+
+        formData.append('solidBackgroundColor',solidBackgroundColor)
+
         formData.append('postImageBase64',imageBase64Encoded)
         formData.append('postBackgroundImageBase64',postBackgroundImageBase64)
         formData.append('tokenId',tokenId)
@@ -89,38 +126,111 @@ export const savePost = async (title : string, description : string, tags : stri
         })
         
         if(result.status === 200 || result.status === 201) {
-            
-            setStatus('post created successfully')
-            return { success : true }
+            return { success : true , data : result.data.data}
         }
 
         return { success : false, error : 'something went wrong' }
 
     } catch(error) {
         return { success : false, error : 'something went wrong' }
-
     }
 }
 
-export const editPost = async (id : string, title : string, description : string, tags : string[] ,
+export const editPost = async (
+    id : string | null, 
+    title : string | null, 
+    description : string | null, 
+    tags : string[] | null,
     imageBase64Encoded : string | null,
-    actionBUttonTextColor : string, actionButtonColor : string, actionButtonLink : string, actionButtonText : string,
-    actionInfoBackgroundColor : string , hasShadow : boolean | null, autoPlay : boolean | null,
-    actionButtonInfoText : string,
-    actionButtonInfoTextColor : string,
-    hasCallToAction : boolean,
+    hasShadow : boolean | null,
+    shadowIntensity : string | null,
+    shadowSoftness : string | null,
+    hasARButton : boolean | null,
+    arButtonTextColor : string | null,
+    arButtonBackgroundColor : string | null,
+    hasShareButton : boolean | null,
+    shareButtonBackgroundColor : string | null,
+    shareButtonTextColor : string | null,
+    allowScaling : boolean | null,
+    exposure : string | null,
+    isOntheGround : boolean | null,
+    solidBackgroundColor : string | null,
+    autoPlay : boolean | null,
     postBackgroundImageBase64 : string | null,
-    contentFile : any,
-       setStatus : (status : string) => void) => {
+    contentFile : any,) => {
     
     
     try {
-        setStatus('saving your post to database')
         const tokenId = await getTokenID()
 
         const formData = new FormData();
 
-        formData.append('title',title)
+        formData.append('tokenId',tokenId)
+        
+        if(title) formData.append('title',title)
+        if(description) formData.append('description',description)
+        if(tags) formData.append('tags',tags.join(','))
+
+        if(imageBase64Encoded) formData.append('postImageBase64',imageBase64Encoded)
+        if(contentFile) formData.append('file',contentFile)
+        if(postBackgroundImageBase64) formData.append('postBackgroundImageBase64',postBackgroundImageBase64)
+
+        if(hasShadow !== null) {
+            if(hasShadow) {
+                formData.append('hasShadow','true')
+                formData.append('shadowIntensity',shadowIntensity)
+                formData.append('shadowSoftness', shadowSoftness)
+            } else{
+                formData.append('hasShadow','false')
+            }
+        }
+
+        if(hasARButton !== null) {
+            if(hasARButton) {
+                formData.append('hasARButton','true')
+                formData.append('arButtonBackgroundColor', arButtonBackgroundColor)
+                formData.append('arButtonTextColor',arButtonTextColor)
+            } else {
+                formData.append('hasARButton','false')
+            }        
+        }
+
+
+        if(hasShareButton !== null) {
+            if(hasShareButton) {
+                formData.append('hasShareButton','true')
+                formData.append('shareButtonBackgroundColor', shareButtonBackgroundColor)
+                formData.append('shareButtonTextColor',shareButtonTextColor)
+            } else {
+                formData.append('hasShareButton','false')
+            }
+        }
+
+        if(allowScaling !== null) {
+            if(allowScaling) {
+                formData.append('allowScaling','true')
+            } else {
+                formData.append('allowScaling','false')
+            }
+        }
+
+        if(exposure !== null) {
+            formData.append('exposure',exposure)
+        }
+
+        if(isOntheGround !== null) {
+            if(isOntheGround) {
+                formData.append('placement','ON_THE_GROUD')
+            } else {
+                formData.append('placement','ON_THE_WALL')
+            }
+        }
+
+        if(solidBackgroundColor !== null) {
+            formData.append('solidBackgroundColor',solidBackgroundColor)
+        }
+
+
         if(autoPlay !== null) {
             if(autoPlay) {
                 formData.append('autoPlay','true')
@@ -128,6 +238,7 @@ export const editPost = async (id : string, title : string, description : string
                 formData.append('autoPlay','false')
             }
         }
+
         if(hasShadow !== null) {
             if(hasShadow) {
                 formData.append('hasShadow','true')
@@ -135,22 +246,6 @@ export const editPost = async (id : string, title : string, description : string
                 formData.append('hasShadow','false')
             }
         }
-        if(hasCallToAction) {
-            formData.append('hasCallToAction','true')
-        }
-        formData.append('description',description)
-        formData.append('tags',tags.join(','))
-        formData.append('actionBUttonTextColor',actionBUttonTextColor)
-        formData.append('actionButtonColor',actionButtonColor)
-        formData.append('actionButtonLink',actionButtonLink)
-        formData.append('actionButtonInfoText',actionButtonInfoText)
-        formData.append('actionButtonInfoTextColor',actionButtonInfoTextColor)
-        formData.append('actionButtonText',actionButtonText)
-        if(imageBase64Encoded) formData.append('postImageBase64',imageBase64Encoded)
-        formData.append('actionInfoBackgroundColor',actionInfoBackgroundColor)
-        if(postBackgroundImageBase64) formData.append('postBackgroundImageBase64',postBackgroundImageBase64)
-        formData.append('tokenId',tokenId)
-        if(contentFile) formData.append('file',contentFile)
 
 
         let result = null
@@ -173,7 +268,6 @@ export const editPost = async (id : string, title : string, description : string
         
         if(result.status === 200 || result.status === 201) {
             
-            setStatus('post updated successfully')
             return { success : true }
         }
 
@@ -181,5 +275,6 @@ export const editPost = async (id : string, title : string, description : string
 
     } catch(error) {
         return { success : false, error : 'something went wrong' }
+
     }
 }

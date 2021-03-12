@@ -13,8 +13,6 @@ import Toggle from '../inputs/Toggle'
 
 
 interface IProps {
-    hasBackground : boolean ,
-    setHasBackground : (value : boolean) => void,
     postBackgroundImageBase64 : string ,
     setPostBackgroundImageBase64 : (src : string) => void,
     hasShadow : boolean ,
@@ -44,15 +42,15 @@ interface IProps {
     allowScaling : boolean,
     setAllowScaling : (value : boolean) => void,
 
-    exposure : string,
-    setExposure : (value : string) => void,
-    shadowIntensity : string,
-    setShadowIntensity : (value : string) => void
-    shadowSoftness : string,
-    setShadowSoftness : (value : string) => void,
+    exposure : number,
+    setExposure : (value : number) => void,
+    shadowIntensity : number,
+    setShadowIntensity : (value : number) => void
+    shadowSoftness : number,
+    setShadowSoftness : (value : number) => void,
 
-    skyBox: boolean,
-    setSkyBox: (value : boolean) => void,
+    hasSkyBox: boolean,
+    setHasSkyBox: (value : boolean) => void,
     solidBackgroundColor : string,
     solidBackground : boolean,
     setSolidBackgroundColor : (value : string) => void,
@@ -68,12 +66,12 @@ const ARStudioPostDetail = (props : IProps) => {
         allowScaling, setAllowScaling, arButtonBackgroundColor,
         hasARButton, hasShareButton, setARButtonBackgroundColor, setARButtonTextColor,
         setHasARButton, setHasShareButton, setShareButtonBackgroundColor, setShareButtonTextColor,
-        solidBackground, setSolidBackground,
-        hasShadow, setHasShadow, hasBackground, setHasBackground,
+        solidBackground, setSolidBackground, hasSkyBox, setHasSkyBox,
+        hasShadow, setHasShadow, shadowIntensity, setShadowIntensity, shadowSoftness, setShadowSoftness,
         buttonText, onFinish , postBackgroundImageBase64, setPostBackgroundImageBase64, 
         } = props
-    const [intensity, setIntensity] = React.useState<number>(30);
-    const [softness, setSoftness] = React.useState<number>(30);
+    // const [intensity, setIntensity] = React.useState<number>(30);
+    // const [softness, setSoftness] = React.useState<number>(30);
     const [Exposure, setExposure] = React.useState<number>(30);
     const [ waterMark, setWaterMark ] = useState(false) 
 
@@ -95,7 +93,7 @@ const ARStudioPostDetail = (props : IProps) => {
                         
                         <div className={styles.contentImageContainer}>
                             <div className={styles.imageInputContainer}>
-                                <ImageInput error={error.postBackgroundImageBase64} toggle={hasBackground} setToggle={setHasBackground} setImageSrc={setPostBackgroundImageBase64}  imageSrc={postBackgroundImageBase64} text='Skybox*' extensions={['hdr','jpeg','jpg','png']}/>
+                                <ImageInput error={error.postBackgroundImageBase64} toggle={hasSkyBox} setToggle={setHasSkyBox} setImageSrc={setPostBackgroundImageBase64}  imageSrc={postBackgroundImageBase64} text='Skybox*' extensions={['hdr','jpeg','jpg','png']}/>
                             </div>
                         </div>
                         
@@ -106,15 +104,15 @@ const ARStudioPostDetail = (props : IProps) => {
                                 <Slider 
                                     min={1}
                                     max={100}
-                                    value={intensity}
-                                    onChange={setIntensity}
+                                    value={shadowIntensity}
+                                    onChange={setShadowIntensity}
                                     text='Intensity'
                                 />
                                 <Slider 
                                     min={1}
                                     max={100}
-                                    value={softness}
-                                    onChange={setSoftness}
+                                    value={shadowSoftness}
+                                    onChange={setShadowSoftness}
                                     text='Softness'
                                 />
                                 {/* <p style={{marginBottom:10,fontWeight:400}}>Softness</p>

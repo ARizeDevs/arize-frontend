@@ -9,7 +9,7 @@ import SolidButton from '../../common/buttons/SolidButton'
 import ARStudioPostDetail from '../../common/ARStudioPostDetail'
 import ArrowLeftIcon from '../../../../assets/icons/arrow-left.svg'
 import CrossIcon from '../../../../assets/icons/cross.svg'
-import { savePost, getPost} from '../../../API'
+import { savePost, getPost} from '../../../API/posts'
 import { contentFileValidator, imageSrcValidator, tagsValidator,
      titleValidator, validatePostDetail,postBackgroundImageBase64Validator,
     validateCustomizationDetail, } from './validators'
@@ -22,6 +22,7 @@ import Loading from '../../common/Loading'
 import { getUser } from '../../../API/user'
 import { useToasts } from 'react-toast-notifications'
 import Toggle from '../../common/inputs/Toggle'
+import { editPost } from '../../../API/posts'
 
 interface IProps {
     isEdit? : boolean,
@@ -37,6 +38,7 @@ const ARStudio = (props : IProps) => {
 
     const [ submiting , setSubmiting ] = useState(false)
     const [ fetchingData, setFetchingData ] = useState(true)
+    const [ savedPostID, setSavedPostID ] = useState<string>(null)
 
     const [ page, setPage ] = useState(1)
     const [ imageSrc , setImageSrc ] = useState('')
@@ -53,23 +55,26 @@ const ARStudio = (props : IProps) => {
     const [ arButtonBackgroundColor, setArButtonBackgroundColor] = useState('#FFFFFF')
     const [ arButtonTextColor, setArButtonTextColor] = useState('#FFFFFF')
 
-    const [ exposure, setExposure ] = useState('10')
-    const [ shadowIntensity, setShadowIntensity ] = useState('10')
-    const [ shadowSoftness, setShadowSoftness ] = useState('10')
+    const [ exposure, setExposure ] = useState(10)
+    const [ shadowIntensity, setShadowIntensity ] = useState(10)
+    const [ shadowSoftness, setShadowSoftness ] = useState(10)
 
     const [ title , setTitle ] = useState('')
+    const [ titleChanged, setTitleChanged ] = useState(false)
     const [ description , setDescription ] = useState('')
+    const [ descriptionChanged, setDescriptionChanged ] = useState(false)
     const [ tags , setTags ] = useState([])
+    const [ tagsChanged, setTagsChanged ] = useState(false)
     const [ contentFile , setContentFile ] = useState<any>(null)
-    const [ solidBackground, setSolidBackground ] = useState(true)
+    const [ hasSolidBackground, setHasSolidBackground ] = useState(true)
     const [ solidBackgroundColor, setSolidBackgroundColor ] = useState('#FFFFFF')
     const [ hasShadow, setHasShadow ] = useState(false)
     const [ autoPlay, setAutoPlay ] = useState(false) 
-    const [ skyBox, setSkyBox ] = useState(false)
+    const [ hasSkyBox, setHasSkyBox ] = useState(false)
     const [ allowScaling, setAlloScaling ] = useState(false)
-    const [ hasBackground, setHasBackground ] = useState(false)
     const [ postBackgroundImageBase64, setPostBackgroundImageBase64] = useState('')
     const [ error, setError ] = useState({})
+    const [ isOnTheGroundChanged, setIsOnTheGroundChanged ] = useState(false)
     const [ desktop,setDesktop]= useState(false)
     // const [ fullScreen, setFullScreen ] = useState(false)
 
@@ -86,12 +91,12 @@ const ARStudio = (props : IProps) => {
     }
 
     useEffect(() => {
-        console.log(contentFileChanged)
-        console.log(backGroundImageChanged)
-        console.log(imageSrcChanged)
-        
-        
-        
+        console.log(hasShadow)
+        console.log(shadowIntensity)
+        console.log(shadowSoftness)
+    }, [hasShadow, shadowIntensity, shadowSoftness])
+
+    useEffect(() => {
         const getInitData = async () => {
             try {
                 const user = await getUser(null)
@@ -128,7 +133,7 @@ const ARStudio = (props : IProps) => {
                         if(postData.allowScaling) setAlloScaling(postData.allowScaling)
                         firebase.storage().ref(postData.glbFileURL).getDownloadURL().then((url) => setContentFile(url))
                         if(postData.backGroundImage) firebase.storage().ref(postData.backGroundImage).getDownloadURL().then((url) => setPostBackgroundImageBase64(url))
-                        if(!postData.backGroundImage) setHasBackground(false)
+                        if(!postData.backGroundImage) setHasSkyBox(false)
                     }
                 } catch (error) {
                 } finally {
@@ -159,19 +164,31 @@ const ARStudio = (props : IProps) => {
         try {
             let result = null
             if(isEdit) {
-                let id = postID
+                let id : string = postID as string
                 if(postID && typeof postID === typeof [])
                 {
                     id = postID[0]
                 }
-                console.log(id)
+                if(titleChanged || descriptionChanged || tagsChanged || imageSrcChanged 
+                    || isOnTheGroundChanged || contentFileChanged) {
+                        result = await editPost(
+                            id, title, description, tags, imageSrcChanged?imageSrc:null,
+                            null, null,null, null, null, null,null, null, null, null,
+                            null,  isOnTheGround, null, null, null, setContentFileChanged?contentFile:null
+                        )
+                } else {
+                    setSubmiting(false)
+                    setPage(3)
+                    return
+                }
+                
             } else {
                 result = await savePost(
                     title, description, tags, hasShadow,
-                    shadowIntensity, shadowSoftness, hasARButton,
+                    shadowIntensity.toString(), shadowSoftness.toString(), hasARButton,
                     arButtonBackgroundColor, arButtonTextColor,
                     hasShareButton, shareButtonBackgroundColor,
-                    shareButtonTextColor, allowScaling, exposure,
+                    shareButtonTextColor, allowScaling, exposure.toString(),
                     solidBackgroundColor, isOnTheGround, autoPlay,
                     imageSrc, postBackgroundImageBase64, contentFile
                 )
@@ -180,6 +197,7 @@ const ARStudio = (props : IProps) => {
             setSubmiting(false)
             if (result && result.success)
             {
+                setSavedPostID(result.data.id)
                 firebase.analytics().logEvent('creation_success', { user : userId } )
                 setPage(3)
                 getDirectURL(result.data.glbFileURL).then((url : string) => setContentFile(url))
@@ -200,7 +218,7 @@ const ARStudio = (props : IProps) => {
         if(submiting) return
 
         const errorResult = validateCustomizationDetail(
-            hasBackground,
+            hasSkyBox,
             postBackgroundImageBase64
         )
 
@@ -222,7 +240,6 @@ const ARStudio = (props : IProps) => {
                 {
                     id = postID[0]
                 }
-                console.log(id)
                 // @ts-ignore
                 // result = await editPost(id,title,description,tags,
                 //     imageSrcChanged?imageSrc:null,
@@ -235,14 +252,12 @@ const ARStudio = (props : IProps) => {
                 //     contentFileChanged?contentFile:null,
                 //     (status : string) => '')
             } else {
-                result = await savePost(
-                    title, description, tags, hasShadow,
-                    shadowIntensity, shadowSoftness, hasARButton,
-                    arButtonBackgroundColor, arButtonTextColor,
-                    hasShareButton, shareButtonBackgroundColor,
-                    shareButtonTextColor, allowScaling, exposure,
-                    solidBackgroundColor, isOnTheGround, autoPlay,
-                    imageSrc, postBackgroundImageBase64, contentFile
+                result = await editPost(
+                    savedPostID, null, null, null, null, hasShadow, shadowIntensity.toString(), shadowSoftness.toString(),
+                    hasARButton, arButtonTextColor, arButtonBackgroundColor,
+                    hasShareButton, shareButtonBackgroundColor, shareButtonTextColor, allowScaling,
+                    exposure.toString(), isOnTheGround, solidBackgroundColor, autoPlay, postBackgroundImageBase64,
+                    null
                 )
             }
             setSubmiting(false)
@@ -309,8 +324,8 @@ const ARStudio = (props : IProps) => {
                     <div className={styles.previewWrapper}>
                     {!desktop && <Preview
                         solidBackgroundColor={solidBackgroundColor}
-                        shadowIntensity={shadowIntensity}
-                        shadowSoftness={shadowSoftness}
+                        shadowIntensity={shadowIntensity.toString()}
+                        shadowSoftness={shadowSoftness.toString()}
                         arButtonBackgroundColor={arButtonBackgroundColor}
                         arButtonTextColor={arButtonTextColor}
                         hasARButton={hasARButton}
@@ -320,10 +335,10 @@ const ARStudio = (props : IProps) => {
                         allowScaling={allowScaling}
                         buttnPreview={false}
                         id={''}
-                        exposure={exposure}
+                        exposure={exposure.toString()}
                         postTitle={title}
                         autoPlay={autoPlay}
-                        backgrounImage={hasBackground?postBackgroundImageBase64:''}
+                        backgrounImage={hasSkyBox?postBackgroundImageBase64:''}
                         contentFile={contentFile}
                         hasShadow={hasShadow}
                         poster={imageSrc}
@@ -358,7 +373,7 @@ const ARStudio = (props : IProps) => {
                 <div className={styles.inner} style={{width:'100%'}}>
                     <div className={styles.inputWrapper}>
                         <div>
-                            <Placement isOnTheGround={isOnTheGround} setIsOnTheGround={setIsOnTheGround}/>
+                            <Placement isOnTheGround={isOnTheGround} setIsOnTheGround={(value : boolean) => { setIsOnTheGround(value);setIsOnTheGroundChanged(true)}}/>
                         </div>
                     </div>
                     <div className={styles.buttonWrapper}>
@@ -380,11 +395,11 @@ const ARStudio = (props : IProps) => {
                         contentFile={contentFile}
                         setContentFile={validateAndSet((contentFile : any) => {setContentFile(contentFile);setContentFileChanged(true)}, contentFileValidator)}
                         description={description}
-                        setDescription={setDescription}
+                        setDescription={(value : string) => { setDescription(value);setDescriptionChanged(true) }}
                         tags={tags}
-                        setTags={validateAndSet(setTags, tagsValidator)}
+                        setTags={validateAndSet((value : string[]) => {setTags(value);setTagsChanged(true)}, tagsValidator)}
                         title={title}
-                        setTitle={validateAndSet(setTitle, titleValidator)}
+                        setTitle={validateAndSet((value : string) => { setTitle(value);setTitleChanged(true) }, titleValidator)}
                         onFinish={onPostCreationPhase1}
                         buttonText='Next'
                     />
@@ -407,8 +422,8 @@ const ARStudio = (props : IProps) => {
                         setAllowScaling={setAlloScaling}
                         solidBackgroundColor = {solidBackgroundColor}
                         setSolidBackgroundColor = {setSolidBackgroundColor}
-                        solidBackground={solidBackground}
-                        setSolidBackground={setSolidBackground}
+                        solidBackground={hasSolidBackground}
+                        setSolidBackground={setHasSolidBackground}
                         hasARButton={hasARButton}
                         arButtonBackgroundColor={arButtonBackgroundColor}
                         arButtonTextColor={arButtonTextColor}
@@ -423,12 +438,10 @@ const ARStudio = (props : IProps) => {
                         shareButtonTextColor={shareButtonTextColor}
                         autoPlay={autoPlay}
                         setAutoPlay={setAutoPlay}
-                        skyBox={skyBox}
-                        setSkyBox={setSkyBox}
+                        hasSkyBox={hasSkyBox}
+                        setHasSkyBox={setHasSkyBox}
                         hasShadow={hasShadow}
                         setHasShadow={setHasShadow}
-                        hasBackground={hasBackground}
-                        setHasBackground={setHasBackground}
                         backButtonText='back'
                         buttonText={isEdit?'Save changes':'Create AR'}
                         error={error}

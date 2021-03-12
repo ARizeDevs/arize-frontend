@@ -10,7 +10,7 @@ import CompressIcon from '../../../../assets/icons/compress.svg'
 
 import styles from './ModelViewer.module.css'
 import SharePostModal from '../../common/SharePostModal'
-import { sharePost, viewARPost } from '../../../API'
+import { sharePost, viewARPost } from '../../../API/posts'
 
 interface IProps {
     glbURL : string,

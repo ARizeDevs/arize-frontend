@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import firebase from '../../../config/firebase'
-import { deletePost, sharePost } from '../../../API'
+import { deletePost, sharePost } from '../../../API/posts'
 import Loading from '../Loading'
 import QRModal from '../QRModal'
 import SharePostModal from '../SharePostModal'

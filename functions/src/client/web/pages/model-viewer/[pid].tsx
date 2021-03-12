@@ -6,7 +6,7 @@ import requestIp from 'request-ip'
 import ARizeLogo from '../../../assets/icons/logo black new.svg'
 
 import ModelViewer from '../../components/pages/ModelViewer'
-import { getPost, view3DPost } from '../../API'
+import { getPost, view3DPost } from '../../API/posts'
 import { getDirectURL } from '../../config/firebase'
 import FourOhFour from '../../components/pages/FourOhFour'
 
