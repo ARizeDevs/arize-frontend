@@ -29,7 +29,7 @@ const CallInfo = () => {
                     }
                 }
             } catch (error) {
-
+                
             }
         })
     })
@@ -54,9 +54,9 @@ const CallInfo = () => {
                             </div>
                              <br></br>
                             
-                            <p className={styles.num}>+31792033163</p>
+                            <a href="tel:31792033163" className={styles.num}>+31792033163 (Dutch and English) </a>
                             <br></br>
-                            <p className={styles.num}>+31629893742</p>
+                            <a href="tel:31629893742" className={styles.num}>+31629893742 (English)</a>
                         
                         </div>
                     </div>

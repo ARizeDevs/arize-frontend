@@ -7,7 +7,8 @@ import EmailIcon from '../../../../assets/icons/contact icons/email.svg'
 import CallIcon from '../../../../assets/icons/contact icons/Call.svg'
 import ChatIcon from '../../../../assets/icons/contact icons/Chat.svg'
 import FAQsIcon from '../../../../assets/icons/contact icons/FAQs.svg'
-import FeatureRequestIcon from '../../../../assets/icons/contact icons/Feature.svg'
+import FeedBack from '../../../../assets/icons/contact icons/feedback.svg'
+import router from 'next/router';
 
 import styles from './Support.module.css'
 import firebase from 'firebase'
@@ -50,34 +51,19 @@ const Support = () => {
                        <br></br>
                        <br></br>
                         <div className={`${styles.row} ${styles.formContainer}`}>
-                            <div className={`${styles.column} ${styles.supportItem}`}>
-                                <FAQsIcon />
-                                <p className={styles.supportItemText}>FAQs</p>
-                            </div>
-                            <div className={`${styles.column} ${styles.supportItem}`}>
+                            <a href="https://share.hsforms.com/1zvmTrSL-QkSpRfuqmNh9Lg5ahuz" className={`${styles.column} ${styles.supportItem}`} >
+                                <FeedBack/>
+                                <p className={styles.supportItemText}>Feedback</p>
+                            </a>
+                            <a href="https://share.hsforms.com/1QIeciJ0BTJ-IkSfiR65eRw5ahuz" className={`${styles.column} ${styles.supportItem}`} >
                                 <EmailIcon />
                                 <p className={styles.supportItemText}>Email</p>
-                            </div>
-                            <div className={`${styles.column} ${styles.supportItem}`}>
-                                <FeatureRequestIcon />
-                                <p className={styles.supportItemText}>Request Feature</p>
-                            </div>
-                        </div>
-                        {accountType && accountType!=='FREE'?
-                        <div className={`${styles.row} ${styles.formContainer}`}>
-                            <div className={`${styles.column} ${styles.supportItem}`}>
+                            </a>
+                            <div className={`${styles.column} ${styles.supportItem}`} onClick= {() => router.push('/call-info')}>
                                 <CallIcon />
                                 <p className={styles.supportItemText}>Call</p>
                             </div>
-                            <div className={`${styles.column} ${styles.supportItem}`}>
-                                <ChatIcon />
-                                <p className={styles.supportItemText}>Chat</p>
-                            </div>
-                            <div className={`${styles.column} ${styles.supportItem}`}>
-                                <TelegramIcon />
-                                <p className={styles.supportItemText}>Telegram</p>
-                            </div>
-                        </div>:null}
+                        </div>
                     </div>
 
                 <div className={styles.banner}>
