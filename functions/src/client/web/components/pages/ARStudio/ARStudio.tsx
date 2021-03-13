@@ -23,6 +23,7 @@ import { getUser } from '../../../API/user'
 import { useToasts } from 'react-toast-notifications'
 import Toggle from '../../common/inputs/Toggle'
 import { editPost } from '../../../API/posts'
+import ModelViewer from '../ModelViewer'
 
 interface IProps {
     isEdit? : boolean,
@@ -47,13 +48,13 @@ const ARStudio = (props : IProps) => {
     const [ backGroundImageChanged, setBackgroundImageChanged ] = useState(false)
     const [ contentFileChanged, setContentFileChanged] = useState(false)
 
-    const [ hasShareButton, setHasShareButton ] = useState(true)
+    const [ hasShareButton, setHasShareButton ] = useState(false)
     const [ shareButtonBackgroundColor, setShareButtonBackgroundColor] = useState('#FFFFFF')
     const [ shareButtonTextColor, setShareButtonTextColor]  = useState('#FFFFFF')
 
-    const [ hasARButton, setHasARButton ] = useState(true)
+    const [ hasARButton, setHasARButton ] = useState(false)
     const [ arButtonBackgroundColor, setArButtonBackgroundColor] = useState('#FFFFFF')
-    const [ arButtonTextColor, setArButtonTextColor] = useState('#FFFFFF')
+    const [ arButtonTextColor, setArButtonTextColor] = useState('#81B8EC')
 
     const [ exposure, setExposure ] = useState(10)
     const [ shadowIntensity, setShadowIntensity ] = useState(10)
@@ -73,6 +74,9 @@ const ARStudio = (props : IProps) => {
     const [ hasSkyBox, setHasSkyBox ] = useState(false)
     const [ allowScaling, setAlloScaling ] = useState(false)
     const [ postBackgroundImageBase64, setPostBackgroundImageBase64] = useState('')
+    const [ hasWaterMark, setHasWaterMark ] = useState(false)
+    const [ waterMarkBase64, setWaterMarkBase64 ] = useState('')
+    const [ waterMarkChanged, setWaterMarkChanged ] = useState(false)
     const [ error, setError ] = useState({})
     const [ isOnTheGroundChanged, setIsOnTheGroundChanged ] = useState(false)
     const [ desktop,setDesktop]= useState(false)
@@ -90,11 +94,9 @@ const ARStudio = (props : IProps) => {
         }
     }
 
-    useEffect(() => {
-        console.log(hasShadow)
-        console.log(shadowIntensity)
-        console.log(shadowSoftness)
-    }, [hasShadow, shadowIntensity, shadowSoftness])
+    // useEffect(() => {
+    //     console.log(waterMarkBase64)
+    // }, [waterMarkBase64])
 
     useEffect(() => {
         const getInitData = async () => {
@@ -129,10 +131,41 @@ const ARStudio = (props : IProps) => {
                         setDescription(postData.description)
                         setTags(postData.tags.split(','))
                         setAutoPlay(postData.autoPlay)
+                        
                         setHasShadow(postData.hasShadow)
+                        if(postData.hasShadow) {
+                            setShadowIntensity(postData.shadowIntensity)
+                            setShadowSoftness(postData.shadowSoftness)
+                        }
+                        
+                        setHasARButton(postData.hasARButton)
+                        if(postData.hasARButton) { 
+                            setArButtonTextColor(postData.arButtonTextColor)
+                            setArButtonBackgroundColor(postData.arButtonBackgroundColor)
+                        }
+
+                        setHasShareButton(postData.hasShareButton)
+                        if(postData.hasShareButton) { 
+                            setShareButtonTextColor(postData.shareButtonTextColor)
+                            setShareButtonBackgroundColor(postData.shareButtonBackgroundColor)
+                        }
+
+                        if(postData.solidBackgroundColor) {
+                            setSolidBackgroundColor(postData.solidBackgroundColor)
+                        }
+
+                        if(postData.Placement === 'ON_THE_GROUND') {
+                            setIsOnTheGround(true)
+                        } else {
+                            setIsOnTheGround(false) 
+                        }
+
+                        setExposure(postData.exposure)
+
                         if(postData.allowScaling) setAlloScaling(postData.allowScaling)
                         firebase.storage().ref(postData.glbFileURL).getDownloadURL().then((url) => setContentFile(url))
                         if(postData.backGroundImage) firebase.storage().ref(postData.backGroundImage).getDownloadURL().then((url) => setPostBackgroundImageBase64(url))
+                        if(postData.waterMarkImageBase64) getDirectURL(postData.waterMarkImageBase64).then((url : string) => setWaterMarkBase64(url)).catch((error) => console.log(error))
                         if(!postData.backGroundImage) setHasSkyBox(false)
                     }
                 } catch (error) {
@@ -174,7 +207,8 @@ const ARStudio = (props : IProps) => {
                         result = await editPost(
                             id, title, description, tags, imageSrcChanged?imageSrc:null,
                             null, null,null, null, null, null,null, null, null, null,
-                            null,  isOnTheGround, null, null, null, setContentFileChanged?contentFile:null
+                            null,  isOnTheGround, null, null, null, setContentFileChanged?contentFile:null,
+                            null
                         )
                 } else {
                     setSubmiting(false)
@@ -190,7 +224,7 @@ const ARStudio = (props : IProps) => {
                     hasShareButton, shareButtonBackgroundColor,
                     shareButtonTextColor, allowScaling, exposure.toString(),
                     solidBackgroundColor, isOnTheGround, autoPlay,
-                    imageSrc, postBackgroundImageBase64, contentFile
+                    imageSrc, postBackgroundImageBase64, contentFile, waterMarkBase64
                 )
             }
 
@@ -234,32 +268,24 @@ const ARStudio = (props : IProps) => {
         setSubmiting(true)
         try {
             let result = null
+            let id : string = ''
             if(isEdit) {
-                let id = postID
+                id = postID as string
                 if(postID && typeof postID === typeof [])
                 {
                     id = postID[0]
                 }
-                // @ts-ignore
-                // result = await editPost(id,title,description,tags,
-                //     imageSrcChanged?imageSrc:null,
-                //     actionBUttonTextColor, actionButtonColor, actionButtonLink, actionButtonText,
-                //     actionInfoBackgroundColor,
-                //     hasShadow, autoPlay,
-                //     actionButtonInfoText,
-                //     actionButtonInfoTextColor,
-                //     backGroundImageChanged?postBackgroundImageBase64:null, 
-                //     contentFileChanged?contentFile:null,
-                //     (status : string) => '')
             } else {
-                result = await editPost(
-                    savedPostID, null, null, null, null, hasShadow, shadowIntensity.toString(), shadowSoftness.toString(),
-                    hasARButton, arButtonTextColor, arButtonBackgroundColor,
-                    hasShareButton, shareButtonBackgroundColor, shareButtonTextColor, allowScaling,
-                    exposure.toString(), isOnTheGround, solidBackgroundColor, autoPlay, postBackgroundImageBase64,
-                    null
-                )
+                id = savedPostID
             }
+            result = await editPost(
+                id, null, null, null, null, hasShadow, shadowIntensity.toString(), shadowSoftness.toString(),
+                hasARButton, arButtonTextColor, arButtonBackgroundColor,
+                hasShareButton, shareButtonBackgroundColor, shareButtonTextColor, allowScaling,
+                exposure.toString(), isOnTheGround, solidBackgroundColor, autoPlay, hasSkyBox && backGroundImageChanged?postBackgroundImageBase64:null,
+                null, hasWaterMark && waterMarkChanged? waterMarkBase64 : null
+            )
+
             setSubmiting(false)
             if (result && result.success)
             {
@@ -292,6 +318,7 @@ const ARStudio = (props : IProps) => {
                                 &nbsp;
                                 &nbsp;
                                 </div>
+                                <Toggle rightToggleLabel={true} active={desktop} text={'Desktop'} setActive={setDesktop}/>
                                 
                         </div>:null}
                         {page===2?<div className={styles.topBar}>
@@ -306,6 +333,7 @@ const ARStudio = (props : IProps) => {
                                 &nbsp;
                                 </div>
                                 <Toggle rightToggleLabel={true} active={desktop} text={'Desktop'} setActive={setDesktop}/>
+
                         </div>:null}
                         {page===3?<div className={styles.topBar}>
                             <div  onClick={() => setPage(2)} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start'}}>
@@ -318,52 +346,63 @@ const ARStudio = (props : IProps) => {
                                 &nbsp;
                                 &nbsp;
                                 </div>
-                                <Toggle active={desktop} text={'dsa'} rightToggleLabel={true} setActive={setDesktop}/>
+
+                                <Toggle active={desktop} text={desktop?'mobile':'desktop'} rightToggleLabel={true} setActive={setDesktop}/>
                                 
                         </div>:null}
-                    <div className={styles.previewWrapper}>
-                    {!desktop && <Preview
-                        solidBackgroundColor={solidBackgroundColor}
-                        shadowIntensity={shadowIntensity.toString()}
-                        shadowSoftness={shadowSoftness.toString()}
-                        arButtonBackgroundColor={arButtonBackgroundColor}
+                    {!desktop && <div className={styles.previewWrapperMobile}>
+                        <Preview
+                            hasWaterMark={hasWaterMark}
+                            waterMarkBase64={waterMarkBase64}
+                            solidBackgroundColor={solidBackgroundColor}
+                            shadowIntensity={shadowIntensity}
+                            shadowSoftness={shadowSoftness}
+                            arButtonBackgroundColor={arButtonBackgroundColor}
+                            arButtonTextColor={arButtonTextColor}
+                            hasARButton={hasARButton}
+                            hasShareButton={hasShareButton}
+                            shareButtonBackgroundColor={shareButtonBackgroundColor}
+                            shareButtonTextColor={shareButtonTextColor}
+                            allowScaling={allowScaling}
+                            buttnPreview={false}
+                            id={postID? postID as string : savedPostID }
+                            exposure={exposure}
+                            postTitle={title}
+                            autoPlay={autoPlay}
+                            backgrounImage={hasSkyBox?postBackgroundImageBase64:''}
+                            contentFile={contentFile}
+                            hasShadow={hasShadow}
+                            poster={imageSrc}
+                        />
+                    </div>}
+                    {desktop && <div className={styles.previewWrapperDesktop}> 
+                        <ModelViewer
+                        hasWaterMark={hasWaterMark}
+                        waterMarkBase64={hasWaterMark?waterMarkBase64:null}
                         arButtonTextColor={arButtonTextColor}
+                        arButtonBackgroundColor={arButtonBackgroundColor}
                         hasARButton={hasARButton}
+                        hasShadow={hasShadow}
                         hasShareButton={hasShareButton}
                         shareButtonBackgroundColor={shareButtonBackgroundColor}
                         shareButtonTextColor={shareButtonTextColor}
+                        solidBackgroundColor={solidBackgroundColor}
+                        shadowIntensity={(shadowIntensity/10).toString()}
+                        shadowSoftness={(shadowSoftness/10).toString()}
+                        exposure={(exposure/10).toString()}
                         allowScaling={allowScaling}
-                        buttnPreview={false}
-                        id={''}
-                        exposure={exposure.toString()}
-                        postTitle={title}
+                        showQR={true}
+                        id={isEdit?postID as string:savedPostID}
+                        title={title}
                         autoPlay={autoPlay}
-                        backgrounImage={hasSkyBox?postBackgroundImageBase64:''}
-                        contentFile={contentFile}
-                        hasShadow={hasShadow}
+                        glbURL={typeof window !== "undefined" && contentFile ?  (typeof contentFile !== "string"? window.URL.createObjectURL(contentFile) : contentFile ):''}
+                        backgroundImage={hasSkyBox?postBackgroundImageBase64:''}
                         poster={imageSrc}
-                    />}
-                    {/* {desktop && <ModelViewer
-                        
-                        solidBackgroundColor={solidBackgroundColor}
-                        shadowIntensity={shadowIntensity}
-                        shadowSoftness={shadowSoftness}
-                        arButtonBackgroundColor={arButtonBackgroundColor}
-                        arButtonTextColor={arButtonTextColor}
-                        hasARButton={hasARButton}
-                        hasShareButton={hasShareButton}
-                        shareButtonBackgroundColor={shareButtonBackgroundColor}
-                        shareButtonTextColor={shareButtonTextColor}
-                        allowScaling={allowScaling}
-                        id={''}
-                        exposure={exposure}
-                        autoPlay={autoPlay}
-                        backgroundImage={hasBackground?postBackgroundImageBase64:''}
-                        hasShadow={hasShadow}
-                        poster={imageSrc}                   />
-                    } */}
-                    </div> 
-                    </div>
+                        showShare={true}
+                        usdzURL={''}
+                    />
+                </div>}
+            </div>
                 
                 
                 
@@ -412,6 +451,10 @@ const ARStudio = (props : IProps) => {
             <div className={styles.cust}>
                 <div className={styles.inner}>
                     <ARStudioCustomize
+                        hasWaterMark={hasWaterMark}
+                        setHasWaterMark={setHasWaterMark}
+                        waterMarkBase64={waterMarkBase64}
+                        setWaterMarkBase64={(value : string) => { setWaterMarkBase64(value); setWaterMarkChanged(true)}}
                         exposure={exposure}
                         setExposure={setExposure}
                         setShadowIntensity={setShadowIntensity}

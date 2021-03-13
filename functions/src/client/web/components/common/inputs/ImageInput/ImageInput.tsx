@@ -11,6 +11,7 @@ import styles from './ImageInput.module.css'
 import { Switch, withStyles } from '@material-ui/core'
 import Message from '../../Message'
 import { IMessageTypes } from '../../Message/Message'
+import Toggle from '../Toggle'
 
 const MySwitch = withStyles({
     switchBase : {
@@ -64,17 +65,12 @@ const ImageInput = (props : IProps) => {
     } 
 
     return <div className={styles.root}>
-            <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
-                <p style={{display:'flex',fontWeight:'bold',alignItems:'center'}} className={error || localError?styles.error:''}>{text}</p>
-                {toggle !== undefined?<MySwitch
-                    checked={toggle}
-                    // @ts-ignore
-                    onChange={(event) => setToggle(event.target.checked)}
-                    color="primary"
-                    name="checkedB"
-                    inputProps={{ 'aria-label': 'primary checkbox' }}
-                />:null}
-            </div>
+            {/* <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'space-between'}}> */}
+                {/* <p style={{display:'flex',fontWeight:'bold',alignItems:'center'}} className={error || localError?styles.error:''}>{text}</p> */}
+                {toggle !== undefined?
+                    <Toggle  active={toggle} setActive={setToggle} text={text} />
+                :null}
+            {/* </div> */}
             {/* @ts-ignore */}
             {toggle === undefined || toggle ?
                 <>

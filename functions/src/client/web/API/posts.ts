@@ -70,7 +70,8 @@ export const savePost = async (
     autoPlay : boolean,
     imageBase64Encoded : string,
     postBackgroundImageBase64 : string,
-    contentFile : any) => {
+    contentFile : any,
+    waterMarkImageBase64 : string,) => {
     try {
         const tokenId = await getTokenID()
 
@@ -81,6 +82,8 @@ export const savePost = async (
         formData.append('tags',tags.join(','))
         if(autoPlay) formData.append('autoPlay','autoPlay')
         
+        formData.append('waterMarkImageBase64',waterMarkImageBase64)
+
         if(hasShadow) {
             formData.append('hasShadow','hasShadow')
             formData.append('shadowIntensity',shadowIntensity)
@@ -157,7 +160,9 @@ export const editPost = async (
     solidBackgroundColor : string | null,
     autoPlay : boolean | null,
     postBackgroundImageBase64 : string | null,
-    contentFile : any,) => {
+    contentFile : any,
+    waterMarkImageBase64 : string | null
+    ) => {
     
     
     try {
@@ -166,7 +171,9 @@ export const editPost = async (
         const formData = new FormData();
 
         formData.append('tokenId',tokenId)
-        
+
+        if(waterMarkImageBase64) formData.append('waterMarkImageBase64',waterMarkImageBase64)
+
         if(title) formData.append('title',title)
         if(description) formData.append('description',description)
         if(tags) formData.append('tags',tags.join(','))

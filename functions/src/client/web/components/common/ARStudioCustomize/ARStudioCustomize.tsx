@@ -55,6 +55,12 @@ interface IProps {
     solidBackground : boolean,
     setSolidBackgroundColor : (value : string) => void,
     setSolidBackground : (value : boolean) => void,
+
+    hasWaterMark : boolean,
+    setHasWaterMark : ( value : boolean ) => void,
+
+    waterMarkBase64 : string,
+    setWaterMarkBase64 : ( value : string ) => void
 }
 
 
@@ -63,17 +69,17 @@ interface IProps {
 const ARStudioPostDetail = (props : IProps) => {
     const { error,solidBackgroundColor,setSolidBackgroundColor
         ,arButtonTextColor, shareButtonTextColor, shareButtonBackgroundColor,
-        allowScaling, setAllowScaling, arButtonBackgroundColor,
+        allowScaling, setAllowScaling, arButtonBackgroundColor, exposure, setExposure,
         hasARButton, hasShareButton, setARButtonBackgroundColor, setARButtonTextColor,
         setHasARButton, setHasShareButton, setShareButtonBackgroundColor, setShareButtonTextColor,
         solidBackground, setSolidBackground, hasSkyBox, setHasSkyBox,
         hasShadow, setHasShadow, shadowIntensity, setShadowIntensity, shadowSoftness, setShadowSoftness,
         buttonText, onFinish , postBackgroundImageBase64, setPostBackgroundImageBase64, 
+        hasWaterMark, setHasWaterMark, waterMarkBase64, setWaterMarkBase64
         } = props
     // const [intensity, setIntensity] = React.useState<number>(30);
     // const [softness, setSoftness] = React.useState<number>(30);
-    const [Exposure, setExposure] = React.useState<number>(30);
-    const [ waterMark, setWaterMark ] = useState(false) 
+    // const [ waterMark, setWaterMark ] = useState(false) 
 
     // const handleChange = (event: any, newValue: number | number[]) => {
     //   setIntensity(newValue as number);
@@ -84,7 +90,7 @@ const ARStudioPostDetail = (props : IProps) => {
     return (
         <div className={styles.root}>
             <div className={styles.inputWrapper}>
-                    <Collapsible  triggerStyle={{cursor:'pointer', fontWeight:800,alignItems:'center',display:'flex',fontSize:16}} open={true} transitionTime={250} trigger={<div style={{width:'100%',paddingBottom:'10px', display:'flex',flexDirection:'row',justifyContent:'space-between'}}><p style={{display:'flex',flexDirection:'row',alignItems:'center'}}>3D View Setting</p><AngleDown></AngleDown></div>}>
+            <Collapsible  triggerStyle={{cursor:'pointer', fontWeight:800,alignItems:'center',display:'flex',fontSize:16}} open={true} transitionTime={250} trigger={<div style={{width:'100%',paddingBottom:'10px', display:'flex',flexDirection:'row',justifyContent:'space-between'}}><p style={{display:'flex',flexDirection:'row',alignItems:'center'}}>3D View Setting</p><AngleDown></AngleDown></div>}>
                         <Toggle active={solidBackground} setActive={setSolidBackground} text='Solid Background' />
                         {solidBackground && 
                         <div style={{width:'95%',marginBottom:20}}>
@@ -133,7 +139,7 @@ const ARStudioPostDetail = (props : IProps) => {
                             <Slider 
                                 min={1}
                                 max={100}
-                                value={Exposure}
+                                value={exposure}
                                 onChange={setExposure}
                                 text='Exposure'
                             />
@@ -153,10 +159,10 @@ const ARStudioPostDetail = (props : IProps) => {
                 <Collapsible  triggerStyle={{cursor:'pointer',paddingTop:20,borderTop:' 1px solid #EBEBEB ', fontWeight:800,alignItems:'center',display:'flex',fontSize:16}} open={true} transitionTime={250} trigger={<div style={{width:'100%',paddingBottom:'10px', display:'flex',flexDirection:'row',justifyContent:'space-between'}}><p style={{display:'flex',flexDirection:'row',alignItems:'center'}}>Custom Branding</p><AngleDown></AngleDown></div>}>
                     <div className={styles.contentImageContainer}>
                         <div className={styles.imageInputContainer}>
-                            <ImageInput error={error.imageSrc} toggle={waterMark} setToggle={setWaterMark} setImageSrc={setPostBackgroundImageBase64}  imageSrc={postBackgroundImageBase64} text='Watermark*' extensions={['hdr','jpeg','jpg','png']}/>
+                            <ImageInput error={error.imageSrc} toggle={hasWaterMark} setToggle={setHasWaterMark} setImageSrc={setWaterMarkBase64}  imageSrc={waterMarkBase64} text='Watermark*' extensions={['hdr','jpeg','jpg','png']}/>
                         </div>
                         </div>
-                <Toggle  active={hasShareButton} setActive={setHasShareButton} text="Share Button" />
+                        <Toggle  active={hasShareButton} setActive={setHasShareButton} text="Share Button" />
                     {hasShareButton && <div style={{width:'100%',display:'flex',flexDirection:'column',justifyContent:'space-between'}}>
                         <div style={{width:'95%'}}>
                             <ColorPicker color={shareButtonBackgroundColor} setColor={setShareButtonBackgroundColor} text='Button Color' />

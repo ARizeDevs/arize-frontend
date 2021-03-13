@@ -7,12 +7,12 @@ import styles from './Preview.module.css'
 interface IProps {
     id : string,
     hasShadow : boolean,
-    shadowIntensity : string,
-    shadowSoftness : string,
+    shadowIntensity : number,
+    shadowSoftness : number,
     autoPlay : boolean,
     poster : string,
     postTitle : string,
-    exposure : string,
+    exposure : number,
     contentFile : any,
     allowScaling : boolean,
     backgrounImage : string,
@@ -26,6 +26,9 @@ interface IProps {
     arButtonTextColor : string,
 
     buttnPreview : boolean,
+
+    hasWaterMark : boolean,
+    waterMarkBase64 : string
 }
 
 const Preview = (props : IProps) => {
@@ -47,7 +50,9 @@ const Preview = (props : IProps) => {
         shareButtonTextColor,
         shadowIntensity,
         shadowSoftness,
-        solidBackgroundColor
+        solidBackgroundColor,
+        hasWaterMark,
+        waterMarkBase64
     } = props
 
     const renderInnerPreview = () => {
@@ -56,6 +61,8 @@ const Preview = (props : IProps) => {
             <div style={{display:'flex',flexDirection:'column',width:'100%',height:'100%',alignItems:'center',justifyContent:'center'}}>
                 <div style={{width:'90%',height:'95%'}}>
                     <ModelViewer
+                        hasWaterMark={hasWaterMark}
+                        waterMarkBase64={waterMarkBase64}
                         arButtonTextColor={arButtonTextColor}
                         arButtonBackgroundColor={arButtonBackgroundColor}
                         hasARButton={hasARButton}
@@ -64,17 +71,18 @@ const Preview = (props : IProps) => {
                         shareButtonBackgroundColor={shareButtonBackgroundColor}
                         shareButtonTextColor={shareButtonTextColor}
                         solidBackgroundColor={solidBackgroundColor}
-                        shadowIntensity={shadowIntensity}
-                        shadowSoftness={shadowSoftness}
-                        exposure={exposure}
+                        shadowIntensity={(shadowIntensity/10).toString()}
+                        shadowSoftness={(shadowSoftness/10).toString()}
+                        exposure={(exposure/10).toString()}
                         allowScaling={allowScaling}
-                        showQR={false}
+                        showQR={true}
                         id={id}
                         title={postTitle}
                         autoPlay={autoPlay}
                         glbURL={typeof window !== "undefined" && contentFile ?  (typeof contentFile !== "string"? window.URL.createObjectURL(contentFile) : contentFile ):''}
                         backgroundImage={backgrounImage}
                         poster={poster}
+                        showShare={true}
                         usdzURL={''}
                     />
                 </div>

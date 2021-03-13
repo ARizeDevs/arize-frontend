@@ -11,6 +11,7 @@ import CompressIcon from '../../../../assets/icons/compress.svg'
 import styles from './ModelViewer.module.css'
 import SharePostModal from '../../common/SharePostModal'
 import { sharePost, viewARPost } from '../../../API/posts'
+import RoundImage from '../../common/RoundImage'
 
 interface IProps {
     glbURL : string,
@@ -46,13 +47,18 @@ interface IProps {
     isFullScreen? : boolean,
     showBanner? : boolean,
     openar? : boolean
+
+    hasWaterMark? : boolean,
+    waterMarkBase64? : string
 }
 
 const ModelViewer = (props : IProps) => {
     const { title, openar, glbURL, backgroundImage, usdzURL, solidBackgroundColor,
             poster, allowScaling, exposure, autoPlay, id,  showQR, showShare, onFullScreen, 
             isFullScreen, hasARButton, hasShareButton, shareButtonBackgroundColor, shareButtonTextColor, 
-            arButtonBackgroundColor, arButtonTextColor, hasShadow, shadowIntensity, shadowSoftness } = props
+            arButtonBackgroundColor, arButtonTextColor, hasShadow, shadowIntensity, shadowSoftness,
+            hasWaterMark, waterMarkBase64
+        } = props
 
     const [ qrModalOpen, setQRModalOpen ] = useState(false)
     const [ shareModalOpen, setShareModalOpen ] = useState(false)
@@ -150,14 +156,32 @@ const ModelViewer = (props : IProps) => {
                     style={{width: '100%', height: '100%'}}
                 >
                     <button slot="ar-button"  className={styles.myArBtn} style={{backgroundColor:arButtonBackgroundColor,display:hasARButton?'block':'none'}}>
-                        <div onClick={() => addARView()} style={{width:'100%',color:arButtonTextColor,display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}><ARViewIcon fill={arButtonTextColor} /><h3 style={{marginLeft:'10px'}}>View AR</h3></div>
+                        <div onClick={() => addARView()} style={{width:'100%',color:arButtonTextColor,display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+                            <ARViewIcon fill={arButtonTextColor} />
+                            <h3 style={{marginLeft:'10px',color : arButtonTextColor}}>View AR</h3>
+                        </div>
                     </button>
                 </model-viewer>
 
-                {!isMobile && id && showQR ? <button onClick={() => setQRModalOpen(true)} className={styles.myArBtn} >
-                    <div style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}><ARViewIcon /><h3 style={{marginLeft:'10px'}}>View AR</h3></div>
+                {/* {hasARButton && !isMobile ?<button slot="ar-button"  className={styles.myArBtn} style={{backgroundColor:arButtonBackgroundColor,display:hasARButton?'block':'none'}}>
+                        <div onClick={() => addARView()} style={{width:'100%',color:arButtonTextColor,display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+                            <ARViewIcon fill={arButtonTextColor} />
+                            <h3 style={{marginLeft:'10px'}}>View AR</h3></div>
+                    </button>:null} */}
+
+                {!isMobile && id && showQR ? <button onClick={() => setQRModalOpen(true)} className={styles.myArBtn} style={{backgroundColor:arButtonBackgroundColor,display:hasARButton?'block':'none'}}>
+                    <div style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+                        <ARViewIcon fill={arButtonTextColor}/>
+                        <h3 style={{marginLeft:'10px',color : arButtonTextColor}}>View AR</h3>
+                    </div>
                 </button> : null}
                 
+                {hasWaterMark ? 
+                    <div className={styles.waterMark} style={{backgroundImage:waterMarkBase64}}>
+                        <RoundImage unchangeable imageSrc={waterMarkBase64} />        
+                    </div>
+                :null}
+
                 {showShare && hasShareButton ?
                     <button onClick={onShareClick} className={styles.shareBtn} style={{backgroundColor:shareButtonBackgroundColor, color : shareButtonTextColor}}>
                         <div style={{width:'16px',height:'16px'}}>
