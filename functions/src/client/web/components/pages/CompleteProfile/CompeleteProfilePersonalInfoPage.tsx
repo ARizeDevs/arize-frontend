@@ -73,7 +73,7 @@ const CompeleteProfilePersonalInfoPage = ( props : IProps ) => {
                 <CountryPicker error={error.location} value={location} onChange={setLocation} />
             </div>
             
-            <div style={{ width : '100%' , display: 'flex',justifyContent : 'flex-end',flexDirection:'row' }}>
+            <div style={{width : '100%' , display: 'flex',justifyContent : 'flex-end',flexDirection:'row', }}>
                 <div className={styles.accountTypeButtonContainer}>
                     <SolidButton onClick={() => onNextClick({name,surname,username,birthday,gender,location})} ><h3>Next</h3></SolidButton>
                 </div>

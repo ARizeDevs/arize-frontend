@@ -1,6 +1,6 @@
 import React from 'react'
 
-import IndividualIcon from '../../../../assets/icons/individual.svg'
+import IndividualIcon from '../../../../assets/icons/alldone.svg'
 
 import SolidButton from '../../common/buttons/SolidButton'
 
@@ -22,12 +22,12 @@ const CompeleteProfileFinalPage = (props : IProps) => {
                 <IndividualIcon />
                 <h1 className={styles.accountTypeMessage}>Congratulations!</h1>
             </div>
-            <p className={styles.accountTypeMessage}>{individualText}</p>
+            <p className={styles.accountTypeMessage} style={{paddingTop:'10%' , textAlign:'center', width:'60%'}} >{individualText}</p>
             <span className={'error-message'}>{error}</span>
-
-            <div style={{ width : '100%' , marginBottom : '40px' , display: 'flex',justifyContent : 'flex-end',flexDirection:'row' }}>
+        
+            <div style={{ width : '100%' , marginBottom : '50%' , display: 'flex',justifyContent : 'center',flexDirection:'row' }}>
                 <div className={styles.accountTypeButtonContainer}>
-                    <SolidButton onClick={onNextClick} ><h3>Explore Now</h3></SolidButton>
+                    <SolidButton onClick={onNextClick} ><h3>Get Started</h3></SolidButton>
                 </div>
             </div>
         </div>

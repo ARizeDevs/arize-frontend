@@ -121,39 +121,11 @@ const CompleteProfile = () => {
         },
         {
             title:'Final One',
-            description:'Please tell us about your business',
-            renderContent: () => <CompleteProfileBusinessPage
-            onSkipClick={() => {
-                    setBusinessType('')
-                    setBusinessName('')
-                    setWhyToUse('')
-                    setWebsiteURL('')
-                    setVatNumber('')
-                    setStep(step+1)
-                }}
-                onNextClick={() => {
-                    setStep(step+1)
-                }}
-                vatNumber={vatNumber}
-                setVATNumber={setVatNumber}
-                businessName={businessName}
-                setBusinessName={setBusinessName}
-                businessType={businessType}
-                setBusinessType={setBusinessType}
-                whyToUse={whyToUse}
-                setWhyToUse={setWhyToUse}
-                websiteURL={websiteURL}
-                setWebsiteURL={setWebsiteURL}
-                error={generalError} 
-                />
-        },
-        {
-            title:'Final One',
             description:'You are almost there!',
             renderContent: () => <CompeleteProfileFinalPage
                 error={generalError}
                 onNextClick={onEditFinish}/>
-        },
+        }
     ]
 
     return (
@@ -164,9 +136,7 @@ const CompleteProfile = () => {
                     activeIndex={step} 
                     onClick={(stepNumber:number) => (stepNumber < step? setStep(stepNumber):null)}  
                     items={[{name : 'Personal Info' , title : "Some Personal Info" , description : 'Please let us know you a little bit more!'},
-                            {name:'Company Info (optional)', title : "Are you a company?" , description : 'Please let us know you a little bit more!'},
-                            {name:'Final', title : "Some Personal Info" , description : 'Please let us know you a little bit more!'}
-                            ]}
+                            {name:'Final', title : "" , description : ''}]}
                     />
                 <div className={styles.pageContainer + ' flex-column'}>
                     {stepsData[step].renderContent()}
