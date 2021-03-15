@@ -251,15 +251,6 @@ export const editPost = async (
             }
         }
 
-        if(hasShadow !== null) {
-            if(hasShadow) {
-                formData.append('hasShadow','true')
-            } else {
-                formData.append('hasShadow','false')
-            }
-        }
-
-
         let result = null
         if(contentFile) {
             result = await axios({
