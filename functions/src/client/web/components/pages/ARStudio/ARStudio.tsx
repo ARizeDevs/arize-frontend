@@ -39,7 +39,7 @@ const ARStudio = (props : IProps) => {
 
     const [ submiting , setSubmiting ] = useState(false)
     const [ fetchingData, setFetchingData ] = useState(true)
-    const [ savedPostID, setSavedPostID ] = useState<string>(null)
+    const [ savedPostID, setSavedPostID ] = useState<string | null>(null)
 
     const [ page, setPage ] = useState(1)
     const [ imageSrc , setImageSrc ] = useState('')
@@ -64,7 +64,7 @@ const ARStudio = (props : IProps) => {
     const [ titleChanged, setTitleChanged ] = useState(false)
     const [ description , setDescription ] = useState('')
     const [ descriptionChanged, setDescriptionChanged ] = useState(false)
-    const [ tags , setTags ] = useState([])
+    const [ tags , setTags ] = useState<string[]>([])
     const [ tagsChanged, setTagsChanged ] = useState(false)
     const [ contentFile , setContentFile ] = useState<any>(null)
     const [ hasSolidBackground, setHasSolidBackground ] = useState(true)
@@ -94,9 +94,9 @@ const ARStudio = (props : IProps) => {
         }
     }
 
-    // useEffect(() => {
-    //     console.log(waterMarkBase64)
-    // }, [waterMarkBase64])
+    useEffect(() => {
+        console.log(hasShadow)
+    }, [hasShadow])
 
     useEffect(() => {
         const getInitData = async () => {
@@ -134,8 +134,8 @@ const ARStudio = (props : IProps) => {
                         
                         setHasShadow(postData.hasShadow)
                         if(postData.hasShadow) {
-                            setShadowIntensity(postData.shadowIntensity)
-                            setShadowSoftness(postData.shadowSoftness)
+                            setShadowIntensity(postData.shadowIntensity * 10)
+                            setShadowSoftness(postData.shadowSoftness * 10)
                         }
                         
                         setHasARButton(postData.hasARButton)
@@ -160,13 +160,22 @@ const ARStudio = (props : IProps) => {
                             setIsOnTheGround(false) 
                         }
 
-                        setExposure(postData.exposure)
+                        setExposure(postData.exposure * 10)
 
                         if(postData.allowScaling) setAlloScaling(postData.allowScaling)
                         firebase.storage().ref(postData.glbFileURL).getDownloadURL().then((url) => setContentFile(url))
-                        if(postData.backGroundImage) firebase.storage().ref(postData.backGroundImage).getDownloadURL().then((url) => setPostBackgroundImageBase64(url))
-                        if(postData.waterMarkImageBase64) getDirectURL(postData.waterMarkImageBase64).then((url : string) => setWaterMarkBase64(url)).catch((error) => console.log(error))
-                        if(!postData.backGroundImage) setHasSkyBox(false)
+                        if(postData.backGroundImage) {
+                            firebase.storage().ref(postData.backGroundImage).getDownloadURL().then((url) => setPostBackgroundImageBase64(url))
+                            setHasSkyBox(true)
+                        } else {
+                            setHasSkyBox(false)
+                        }
+                        if(postData.waterMarkImage) {
+                            getDirectURL(postData.waterMarkImage).then((url : string) => setWaterMarkBase64(url)).catch((error) => console.log(error))
+                            setHasWaterMark(true)
+                        } else {
+                            setHasWaterMark(false)
+                        }
                     }
                 } catch (error) {
                 } finally {
@@ -207,7 +216,7 @@ const ARStudio = (props : IProps) => {
                         result = await editPost(
                             id, title, description, tags, imageSrcChanged?imageSrc:null,
                             null, null,null, null, null, null,null, null, null, null,
-                            null,  isOnTheGround, null, null, null, setContentFileChanged?contentFile:null,
+                            null,  isOnTheGround, null, null, null, contentFileChanged?contentFile:null,
                             null
                         )
                 } else {
@@ -219,10 +228,10 @@ const ARStudio = (props : IProps) => {
             } else {
                 result = await savePost(
                     title, description, tags, hasShadow,
-                    shadowIntensity.toString(), shadowSoftness.toString(), hasARButton,
+                    (shadowIntensity/10).toString(), (shadowSoftness/10).toString(), hasARButton,
                     arButtonBackgroundColor, arButtonTextColor,
                     hasShareButton, shareButtonBackgroundColor,
-                    shareButtonTextColor, allowScaling, exposure.toString(),
+                    shareButtonTextColor, allowScaling, (exposure/10).toString(),
                     solidBackgroundColor, isOnTheGround, autoPlay,
                     imageSrc, postBackgroundImageBase64, contentFile, waterMarkBase64
                 )
@@ -231,10 +240,12 @@ const ARStudio = (props : IProps) => {
             setSubmiting(false)
             if (result && result.success)
             {
+                // @ts-ignore
                 setSavedPostID(result.data.id)
+                // @ts-ignore
+                getDirectURL(result.data.glbFileURL).then((url : string) => setContentFile(url))
                 firebase.analytics().logEvent('creation_success', { user : userId } )
                 setPage(3)
-                getDirectURL(result.data.glbFileURL).then((url : string) => setContentFile(url))
             } else {
                 firebase.analytics().logEvent('creation_failed', { user : userId } )
                 addToast('Bad file format',{ appearance : 'error' })
@@ -276,13 +287,13 @@ const ARStudio = (props : IProps) => {
                     id = postID[0]
                 }
             } else {
-                id = savedPostID
+                id = savedPostID?savedPostID:''
             }
             result = await editPost(
-                id, null, null, null, null, hasShadow, shadowIntensity.toString(), shadowSoftness.toString(),
+                id, null, null, null, null, hasShadow, (shadowIntensity/10).toString(), (shadowSoftness/10).toString(),
                 hasARButton, arButtonTextColor, arButtonBackgroundColor,
                 hasShareButton, shareButtonBackgroundColor, shareButtonTextColor, allowScaling,
-                exposure.toString(), isOnTheGround, solidBackgroundColor, autoPlay, hasSkyBox && backGroundImageChanged?postBackgroundImageBase64:null,
+                (exposure/10).toString(), isOnTheGround, solidBackgroundColor, autoPlay, hasSkyBox && backGroundImageChanged?postBackgroundImageBase64:null,
                 null, hasWaterMark && waterMarkChanged? waterMarkBase64 : null
             )
 
@@ -365,7 +376,7 @@ const ARStudio = (props : IProps) => {
                             shareButtonTextColor={shareButtonTextColor}
                             allowScaling={allowScaling}
                             buttnPreview={false}
-                            id={postID? postID as string : savedPostID }
+                            id={postID? postID as string : (savedPostID?savedPostID:'') }
                             exposure={exposure}
                             postTitle={title}
                             autoPlay={autoPlay}
@@ -378,7 +389,7 @@ const ARStudio = (props : IProps) => {
                     {desktop && <div className={styles.previewWrapperDesktop}> 
                         <ModelViewer
                         hasWaterMark={hasWaterMark}
-                        waterMarkBase64={hasWaterMark?waterMarkBase64:null}
+                        waterMarkBase64={hasWaterMark?waterMarkBase64:undefined}
                         arButtonTextColor={arButtonTextColor}
                         arButtonBackgroundColor={arButtonBackgroundColor}
                         hasARButton={hasARButton}
@@ -392,7 +403,7 @@ const ARStudio = (props : IProps) => {
                         exposure={(exposure/10).toString()}
                         allowScaling={allowScaling}
                         showQR={true}
-                        id={isEdit?postID as string:savedPostID}
+                        id={isEdit?postID as string:(savedPostID?savedPostID:'')}
                         title={title}
                         autoPlay={autoPlay}
                         glbURL={typeof window !== "undefined" && contentFile ?  (typeof contentFile !== "string"? window.URL.createObjectURL(contentFile) : contentFile ):''}

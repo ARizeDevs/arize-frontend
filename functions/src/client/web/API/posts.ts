@@ -164,7 +164,9 @@ export const editPost = async (
     waterMarkImageBase64 : string | null
     ) => {
     
-    
+    console.log('-----------')
+    console.log(allowScaling)
+
     try {
         const tokenId = await getTokenID()
 
@@ -184,9 +186,10 @@ export const editPost = async (
 
         if(hasShadow !== null) {
             if(hasShadow) {
+                console.log('shadow ,',shadowIntensity,'  : ',shadowSoftness)
                 formData.append('hasShadow','true')
-                formData.append('shadowIntensity',shadowIntensity)
-                formData.append('shadowSoftness', shadowSoftness)
+                if(shadowIntensity) formData.append('shadowIntensity',shadowIntensity)
+                if(shadowSoftness) formData.append('shadowSoftness', shadowSoftness)
             } else{
                 formData.append('hasShadow','false')
             }
@@ -195,8 +198,8 @@ export const editPost = async (
         if(hasARButton !== null) {
             if(hasARButton) {
                 formData.append('hasARButton','true')
-                formData.append('arButtonBackgroundColor', arButtonBackgroundColor)
-                formData.append('arButtonTextColor',arButtonTextColor)
+                if(arButtonBackgroundColor) formData.append('arButtonBackgroundColor', arButtonBackgroundColor)
+                if(arButtonTextColor) formData.append('arButtonTextColor',arButtonTextColor)
             } else {
                 formData.append('hasARButton','false')
             }        
@@ -206,8 +209,8 @@ export const editPost = async (
         if(hasShareButton !== null) {
             if(hasShareButton) {
                 formData.append('hasShareButton','true')
-                formData.append('shareButtonBackgroundColor', shareButtonBackgroundColor)
-                formData.append('shareButtonTextColor',shareButtonTextColor)
+                if(shareButtonBackgroundColor) formData.append('shareButtonBackgroundColor', shareButtonBackgroundColor)
+                if(shareButtonTextColor) formData.append('shareButtonTextColor',shareButtonTextColor)
             } else {
                 formData.append('hasShareButton','false')
             }
@@ -215,8 +218,10 @@ export const editPost = async (
 
         if(allowScaling !== null) {
             if(allowScaling) {
+                console.log('scaling added')
                 formData.append('allowScaling','true')
             } else {
+                console.log('scaling removed')
                 formData.append('allowScaling','false')
             }
         }

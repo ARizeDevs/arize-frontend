@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../../common/Navbar'
 
 import SupportBanner from '../../../../assets/banners/Active Support.svg'
-import TelegramIcon from '../../../../assets/icons/contact icons/Telegram.svg'
+// import TelegramIcon from '../../../../assets/icons/contact icons/Telegram.svg'
 import EmailIcon from '../../../../assets/icons/contact icons/email.svg'
 import CallIcon from '../../../../assets/icons/contact icons/Call.svg'
-import ChatIcon from '../../../../assets/icons/contact icons/Chat.svg'
-import FAQsIcon from '../../../../assets/icons/contact icons/FAQs.svg'
+// import ChatIcon from '../../../../assets/icons/contact icons/Chat.svg'
+// import FAQsIcon from '../../../../assets/icons/contact icons/FAQs.svg'
 import FeedBack from '../../../../assets/icons/contact icons/feedback.svg'
 import router from 'next/router';
 
@@ -20,6 +20,7 @@ const Support = () => {
     const [ accountType, setAccountType ] = useState('')
 
     useEffect(() => {
+        console.log(accountType)
         firebase.auth().onAuthStateChanged(async function(user) {
             try {
                 if(user) {
