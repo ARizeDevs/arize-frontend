@@ -21,15 +21,12 @@ const CompeleteProfileFinalPage = (props : IProps) => {
             <div style={{display:"flex",flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
                 <IndividualIcon />
                 <h1 className={styles.accountTypeMessage}>Congratulations!</h1>
-            </div>
-            <p className={styles.accountTypeMessage} style={{paddingTop:'10%' , textAlign:'center', width:'60%'}} >{individualText}</p>
-            <span className={'error-message'}>{error}</span>
-        
-            <div style={{ width : '100%' , marginBottom : '50%' , display: 'flex',justifyContent : 'center',flexDirection:'row' }}>
-                <div className={styles.accountTypeButtonContainer}>
-                    <SolidButton onClick={onNextClick} ><h3>Get Started</h3></SolidButton>
+                <p className={styles.accountTypeMessage} style={{paddingTop:'5%',textAlign:'center', width:'50%'}} >{individualText}</p>
+                <div className={styles.accountTypeButtonContainer} style={{paddingTop:'5%', width:'20%'}} >
+                <SolidButton onClick={onNextClick} ><h3>Get Started</h3></SolidButton>
                 </div>
             </div>
+            <span className={'error-message'}>{error}</span>
         </div>
     )
 }

@@ -5,7 +5,6 @@ import moment from 'moment'
 import Navbar from '../../common/Navbar'
 import Loading from '../../common/Loading'
 import CompeleteProfilePersonalInfoPage from './CompeleteProfilePersonalInfoPage'
-import CompleteProfileBusinessPage from './CompleteProfileBusinessPage'
 import CompeleteProfileFinalPage from './CompeleteProfileFinalPage'
 import { birthdayValidator, personalInfoValidator, genderValidator, locationValidator, nameValidator, surnameValidator, usernameValidator, } from './validators'
 
@@ -25,12 +24,7 @@ const CompleteProfile = () => {
     const [ birthday, setBirthday ] = useState(moment())
     const [ gender, setGender ] = useState({value:'Male',label:'Male'})
     const [ location, setLocation ] = useState('')
-    const [ businessName, setBusinessName ] = useState('')
-    const [ businessType, setBusinessType ] = useState('')
-    const [ whyToUse, setWhyToUse ] = useState('')
     const [ bio, setBio ] = useState('')
-    const [ websiteURL, setWebsiteURL ] = useState('')
-    const [ vatNumber, setVatNumber ] = useState('')
     const [ error, setError ] = useState({} as {[key : string] : string})
 
     const validateAndSet = (fn : (arg : any) => void, validate : (arg : any) => any) => {
@@ -53,11 +47,6 @@ const CompleteProfile = () => {
                 birthday : birthday.toISOString(),
                 gender : gender.value.toUpperCase(),
                 location,
-                companyName :businessName,
-                companyType :businessType,
-                whyUseARize :whyToUse,
-                websiteURL :websiteURL,
-                vatNumber
             }
 
             

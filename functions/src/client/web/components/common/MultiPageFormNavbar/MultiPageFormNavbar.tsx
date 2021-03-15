@@ -1,7 +1,5 @@
 import React from 'react'
 
-import TickIcon from '../../../../assets/icons/tick.svg'
-
 import styles from './MultiPageFormNavbar.module.css'
 
 interface IProps {
@@ -11,7 +9,7 @@ interface IProps {
 }
 
 const MultiPageFormNavbar = (props : IProps) => {
-    const { items, activeIndex, onClick } = props
+    const { items, activeIndex} = props
 
     const renderedTitle = () => {
         if(activeIndex >= items.length) {
