@@ -5,7 +5,6 @@ import moment from 'moment'
 import Navbar from '../../common/Navbar'
 import Loading from '../../common/Loading'
 import CompeleteProfilePersonalInfoPage from './CompeleteProfilePersonalInfoPage'
-import CompleteProfileBusinessPage from './CompleteProfileBusinessPage'
 import CompeleteProfileFinalPage from './CompeleteProfileFinalPage'
 import { birthdayValidator, personalInfoValidator, genderValidator, locationValidator, nameValidator, surnameValidator, usernameValidator, } from './validators'
 
@@ -25,12 +24,7 @@ const CompleteProfile = () => {
     const [ birthday, setBirthday ] = useState(moment())
     const [ gender, setGender ] = useState({value:'Male',label:'Male'})
     const [ location, setLocation ] = useState('')
-    const [ businessName, setBusinessName ] = useState('')
-    const [ businessType, setBusinessType ] = useState('')
-    const [ whyToUse, setWhyToUse ] = useState('')
     const [ bio, setBio ] = useState('')
-    const [ websiteURL, setWebsiteURL ] = useState('')
-    const [ vatNumber, setVatNumber ] = useState('')
     const [ error, setError ] = useState({} as {[key : string] : string})
 
     const validateAndSet = (fn : (arg : any) => void, validate : (arg : any) => any) => {
@@ -53,11 +47,6 @@ const CompleteProfile = () => {
                 birthday : birthday.toISOString(),
                 gender : gender.value.toUpperCase(),
                 location,
-                companyName :businessName,
-                companyType :businessType,
-                whyUseARize :whyToUse,
-                websiteURL :websiteURL,
-                vatNumber
             }
 
             
@@ -121,39 +110,11 @@ const CompleteProfile = () => {
         },
         {
             title:'Final One',
-            description:'Please tell us about your business',
-            renderContent: () => <CompleteProfileBusinessPage
-            onSkipClick={() => {
-                    setBusinessType('')
-                    setBusinessName('')
-                    setWhyToUse('')
-                    setWebsiteURL('')
-                    setVatNumber('')
-                    setStep(step+1)
-                }}
-                onNextClick={() => {
-                    setStep(step+1)
-                }}
-                vatNumber={vatNumber}
-                setVATNumber={setVatNumber}
-                businessName={businessName}
-                setBusinessName={setBusinessName}
-                businessType={businessType}
-                setBusinessType={setBusinessType}
-                whyToUse={whyToUse}
-                setWhyToUse={setWhyToUse}
-                websiteURL={websiteURL}
-                setWebsiteURL={setWebsiteURL}
-                error={generalError} 
-                />
-        },
-        {
-            title:'Final One',
             description:'You are almost there!',
             renderContent: () => <CompeleteProfileFinalPage
                 error={generalError}
                 onNextClick={onEditFinish}/>
-        },
+        }
     ]
 
     return (
@@ -164,9 +125,7 @@ const CompleteProfile = () => {
                     activeIndex={step} 
                     onClick={(stepNumber:number) => (stepNumber < step? setStep(stepNumber):null)}  
                     items={[{name : 'Personal Info' , title : "Some Personal Info" , description : 'Please let us know you a little bit more!'},
-                            {name:'Company Info (optional)', title : "Are you a company?" , description : 'Please let us know you a little bit more!'},
-                            {name:'Final', title : "Some Personal Info" , description : 'Please let us know you a little bit more!'}
-                            ]}
+                            {name:'Final', title : "" , description : ''}]}
                     />
                 <div className={styles.pageContainer + ' flex-column'}>
                     {stepsData[step].renderContent()}
