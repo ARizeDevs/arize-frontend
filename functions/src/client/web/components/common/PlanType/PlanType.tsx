@@ -19,11 +19,12 @@ interface IProps {
   details:any;
   productNum:string;
   rightToggleLabel?:boolean;
+  onClick?:() => void
 }
 
 
 const PlanType = (props : IProps) => {
-  const {productNum,buttonTitle,activeBorder, buttonColor, cardTitle,titleColor,priceMonthly,priceYearly,priceColor, details} = props
+  const {productNum,buttonTitle,activeBorder, buttonColor, cardTitle,titleColor,priceMonthly,priceYearly,priceColor, details, onClick} = props
  const [value,setValue]= useState(false)
 
   return (
@@ -51,7 +52,7 @@ const PlanType = (props : IProps) => {
       <div className={styles.product}><div className={styles.productNum}>{productNum}</div><p className={styles.pNum}>Products</p></div>
       <PlanDetails details={details}/>
       <div className={styles.buttonDiv}>
-      {buttonTitle && <SolidButton onClick={() => ''} styleClass={styles.SolidButton}
+      {buttonTitle && <SolidButton onClick={onClick} styleClass={styles.SolidButton}
         colorTheme={buttonColor}>
         {buttonTitle}
       </SolidButton>}

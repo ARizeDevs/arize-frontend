@@ -21,7 +21,7 @@ const SolidButton = (props : IProps) => {
     }
 
     return (
-        <button onClick={onClick} className={styles.btn + newClass} style={style} ><div style={{color:'white'}}>{children}</div></button>
+        <button onClick={onClick? onClick:()=>''} className={styles.btn + newClass} style={style} ><div style={{color:'white'}}>{children}</div></button>
     )
 }
 

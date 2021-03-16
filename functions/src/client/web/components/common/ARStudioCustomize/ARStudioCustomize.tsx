@@ -64,8 +64,6 @@ interface IProps {
 }
 
 
-
-
 const ARStudioPostDetail = (props : IProps) => {
     const { error,solidBackgroundColor,setSolidBackgroundColor
         ,arButtonTextColor, shareButtonTextColor, shareButtonBackgroundColor,
