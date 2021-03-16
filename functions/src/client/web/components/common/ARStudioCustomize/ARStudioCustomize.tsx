@@ -75,7 +75,7 @@ const ARStudioPostDetail = (props : IProps) => {
         solidBackground, setSolidBackground, hasSkyBox, setHasSkyBox,
         hasShadow, setHasShadow, shadowIntensity, setShadowIntensity, shadowSoftness, setShadowSoftness,
         buttonText, onFinish , postBackgroundImageBase64, setPostBackgroundImageBase64, 
-        hasWaterMark, setHasWaterMark, waterMarkBase64, setWaterMarkBase64
+        hasWaterMark, setHasWaterMark, waterMarkBase64, setWaterMarkBase64, autoPlay, setAutoPlay
         } = props
     // const [intensity, setIntensity] = React.useState<number>(30);
     // const [softness, setSoftness] = React.useState<number>(30);
@@ -153,6 +153,7 @@ const ARStudioPostDetail = (props : IProps) => {
                         <Toggle  active={allowScaling} setActive={setAllowScaling} text="Allow Scaling" />  
                         <p style={{fontSize:12}}>This allows user to scale up or down the model. When off, the model will be locked on its actual size.</p>       
                         <br></br>
+                        <Toggle  active={autoPlay} setActive={setAutoPlay} text="Auto Play" />  
                         </Collapsible>
                            
                 <>

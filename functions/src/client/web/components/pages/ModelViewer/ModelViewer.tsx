@@ -37,6 +37,8 @@ interface IProps {
 
     solidBackgroundColor : string,
 
+    isOnTheWall? : boolean,
+
     backgroundImage : string,
     poster : string,
     autoPlay : boolean,
@@ -57,7 +59,7 @@ const ModelViewer = (props : IProps) => {
             poster, allowScaling, exposure, autoPlay, id,  showQR, showShare, onFullScreen, 
             isFullScreen, hasARButton, hasShareButton, shareButtonBackgroundColor, shareButtonTextColor, 
             arButtonBackgroundColor, arButtonTextColor, hasShadow, shadowIntensity, shadowSoftness,
-            hasWaterMark, waterMarkBase64
+            hasWaterMark, waterMarkBase64, isOnTheWall
         } = props
 
     const [ qrModalOpen, setQRModalOpen ] = useState(false)
@@ -144,6 +146,7 @@ const ModelViewer = (props : IProps) => {
                     reveal={autoPlay?"auto":"interaction"}
                     camera-controls
                     quick-look-browsers="safari chrome"
+                    ar-placement={isOnTheWall?'wall':''}
                     background-color={solidBackgroundColor}
                     exposure={exposure}
                     shadow-intensity={hasShadow?shadowIntensity:'0'}

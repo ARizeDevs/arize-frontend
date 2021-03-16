@@ -8,7 +8,7 @@ import ImageInput from '../../common/inputs/ImageInput'
 import ContentInput from '../../common/inputs/ContentInput'
 
 import styles from './ARStudioPostDetail.module.css'
-import Checkbox from './../../common/inputs/CheckBox'
+// import Checkbox from './../../common/inputs/CheckBox'
 
 interface IProps {
     imageSrc : string,
@@ -42,7 +42,7 @@ const ARStudioPostDetail = (props : IProps) => {
                     <div className={styles.imageInputContainer}>
                         <ImageInput error={error.imageSrc} setImageSrc={setImageSrc}  imageSrc={imageSrc} text='Thumbnail*' extensions={['jpg','jpeg','png']} />
                     </div>
-                    <Checkbox isChecked={false} setIsChecked={() => ''} text={<div style={{display:'flex',flexDirection:'column',marginTop:20}}><p style={{fontWeight:700}}>I don’t have my 3D model file</p><p style={{fontWeight:400}}> (You can still create your post woithout having the 3D files)</p></div>}/>
+                    {/* <Checkbox isChecked={false} setIsChecked={() => ''} text={<div style={{display:'flex',flexDirection:'column',marginTop:20}}><p style={{fontWeight:700}}>I don’t have my 3D model file</p><p style={{fontWeight:400}}> (You can still create your post woithout having the 3D files)</p></div>}/> */}
                     <div className={styles.imageInputContainer}>
                         <ContentInput error={error.contentFile} file={contentFile} setFile={setContentFile} extensions={['zip','glb']}  text='GLB / ZIP *' />
                     </div>

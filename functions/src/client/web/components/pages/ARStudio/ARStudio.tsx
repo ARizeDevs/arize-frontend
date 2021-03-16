@@ -24,6 +24,7 @@ import { useToasts } from 'react-toast-notifications'
 import Toggle from '../../common/inputs/Toggle'
 import { editPost } from '../../../API/posts'
 import ModelViewer from '../ModelViewer'
+import TextSwitch from '../../common/inputs/TextSwitch'
 
 interface IProps {
     isEdit? : boolean,
@@ -329,9 +330,15 @@ const ARStudio = (props : IProps) => {
                                 &nbsp;
                                 &nbsp;
                                 </div>
-                                <Toggle rightToggleLabel={true} active={desktop} text={'Desktop'} setActive={setDesktop}/>
-                                
-                        </div>:null}
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                <TextSwitch text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
+
+            </div>:null}
                         {page===2?<div className={styles.topBar}>
                             <div  onClick={() => setPage(1)} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start'}}>
                                 <div style={{width:'16px',marginRight:'8px'}}>
@@ -343,7 +350,13 @@ const ARStudio = (props : IProps) => {
                                 &nbsp;
                                 &nbsp;
                                 </div>
-                                <Toggle rightToggleLabel={true} active={desktop} text={'Desktop'} setActive={setDesktop}/>
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                <TextSwitch text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
 
                         </div>:null}
                         {page===3?<div className={styles.topBar}>
@@ -357,9 +370,14 @@ const ARStudio = (props : IProps) => {
                                 &nbsp;
                                 &nbsp;
                                 </div>
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                <TextSwitch text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
 
-                                <Toggle active={desktop} text={desktop?'mobile':'desktop'} rightToggleLabel={true} setActive={setDesktop}/>
-                                
                         </div>:null}
                     {!desktop && <div className={styles.previewWrapperMobile}>
                         <Preview
