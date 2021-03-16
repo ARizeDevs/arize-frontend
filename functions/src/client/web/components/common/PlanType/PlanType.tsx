@@ -52,7 +52,7 @@ const PlanType = (props : IProps) => {
       <div className={styles.product}><div className={styles.productNum}>{productNum}</div><p className={styles.pNum}>Products</p></div>
       <PlanDetails details={details}/>
       <div className={styles.buttonDiv}>
-      {buttonTitle && <SolidButton onClick={onClick} styleClass={styles.SolidButton}
+      {buttonTitle && <SolidButton onClick={onClick? onClick:()=>''} styleClass={styles.SolidButton}
         colorTheme={buttonColor}>
         {buttonTitle}
       </SolidButton>}

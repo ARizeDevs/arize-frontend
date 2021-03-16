@@ -148,6 +148,8 @@ const Profile = (props : IProps) => {
                 try {
                     // if(user) {
                         if(id === null || id) {
+                            
+
                             const user = await getUser(id, true, postsPageSize)
 
                             if(user && user.data.data){
@@ -254,7 +256,7 @@ const Profile = (props : IProps) => {
                             </div>
                             {id === null ?<div className={styles.row}>
                                 <div style={{width : '110px',marginRight : '10px'}}>
-                                <SolidButton styleClass={styles.editProfileBTN} colorTheme='white' onClick={() => router.push('/edit-profile')} ><h4 style={{color : 'black'}}>Edit Profile</h4></SolidButton>
+                                <SolidButton styleClass={styles.editProfileBTN} colorTheme='white' onClick={() => router.push('/edit-profile')}><h4 style={{color : 'black'}}>Edit Profile</h4></SolidButton>
                                 </div>
                                 <div className={styles.shareProfile} style={{width : '110px'}}>
                                     <SolidButton styleClass={styles.shareProfileBTN} colorTheme='white' 
