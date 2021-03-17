@@ -151,7 +151,9 @@ const ARStudioPostDetail = (props : IProps) => {
                         <Toggle  active={allowScaling} setActive={setAllowScaling} text="Allow Scaling" />  
                         <p style={{fontSize:12}}>This allows user to scale up or down the model. When off, the model will be locked on its actual size.</p>       
                         <br></br>
-                        <Toggle  active={autoPlay} setActive={setAutoPlay} text="Auto Play" />  
+                        <Toggle  active={autoPlay} setActive={setAutoPlay} text="Auto Play" />
+                        <p style={{fontSize:12}}> If "On" the 3D model will show right after the page loaded. If "Off" requires a click on the thumbnail to show the 3D model </p> 
+                        <br></br>
                         </Collapsible>
                            
                 <>

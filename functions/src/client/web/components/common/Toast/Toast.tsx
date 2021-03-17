@@ -15,7 +15,12 @@ const Toast = ({ children, appearance, transitionState} : { children : any, appe
 
     let type = IMessageTypes.INFO
 
-    if(appearance === 'error') type = IMessageTypes.ERROR
+    if(appearance === 'error'){ 
+        type = IMessageTypes.ERROR
+    } else if(appearance === 'success'){
+        type = IMessageTypes.SUCCESS;
+    }
+
 
     return (
         <div className={`${styles.shadowedBox} ${transitionState === 'entering' ? styles.fadein : ''} ${transitionState === 'exiting' ? styles.fadeout : ''}` }>
