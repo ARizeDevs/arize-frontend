@@ -41,7 +41,7 @@ const DatePickerInput = ( props : IProps ) => {
     return (
         <MuiPickersUtilsProvider utils={MomentUtils}>
             <div className={styles.container + ' flex-column'}>
-                <p className={`${styles.label} ${error?styles.error:''}`}>Day of Birth*</p>
+                <p className={`${styles.label} ${error?styles.error:''}`}>Date of birth*</p>
                 <div className={`${styles.secondContainer} flex-row ${active?styles.secondContainerActive:''}`}>
                     <DatePicker
                         className={'naked'}

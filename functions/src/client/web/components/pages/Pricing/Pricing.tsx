@@ -40,22 +40,24 @@ const Pricing = () => {
                 <div className={styles.plans}>
                    <PlanType
                         cardTitle='Free'
-                        productNum='10'
+                        productNum='3'
                         details={[
-                        {title:'3D Visualizer', checked:true},
-                        {title:'Augmented reality', checked:true},
-                        {title:'Sharabel link', checked:true},
-                        {title:'Embeded Link', checked:true},
-                        {title:'Analytics', checked:false},
-                        {title:'Custome Branding', checked:false},
-                        {title:'Email Support', checked:true},
-                        {title:'Phone Chat/Support', checked:false},
+                            {title:'Up to 1,500 views', checked:true},
+                            {title:'3D Visualizer', checked:true},
+                            {title:'Augmented reality', checked:true},
+                            {title:'Sharabel link', checked:true},
+                            {title:'Embeded Link', checked:true},
+                            {title:'Analytics', checked:false},
+                            {title:'Custome Branding', checked:false},
+                            {title:'Email Support', checked:true},
+                            {title:'Phone / Chat Support', checked:false},
                         ]}
                     />
                 
                    <PlanType
-                        productNum='60'
+                        productNum='50'
                         details={[
+                            {title:'2K+ views, €0.01 / view', checked:true},
                             {title:'3D Visualizer', checked:true},
                             {title:'Augmented reality', checked:true},
                             {title:'Sharabel link', checked:true},
@@ -63,26 +65,28 @@ const Pricing = () => {
                             {title:'Analytics', checked:true},
                             {title:'Custome Branding', checked:true},
                             {title:'Email Support', checked:true},
-                            {title:'Phone Chat/Support', checked:true},
+                            {title:'Phone / Chat Support', checked:true},
                             ]}
                         priceColor='#0078FF'
                         activeBorder='2px solid #FF6F48'
                         priceMonthly={<div className={styles.monthly}>
-                                <p style={{fontSize:24, fontWeight:900}}>€45</p>
-                                <p style={{fontSize:22, fontWeight:500}}>/month</p>
+                                <p style={{fontSize:24, fontWeight:900}}>€50 </p>
+                                <p style={{fontSize:22, fontWeight:500}}>/ month</p>
                             </div>}
                         priceYearly={<div className={styles.monthly}>
-                                <p style={{fontSize:24, fontWeight:900}}>€495</p>
-                                <p style={{fontSize:22, fontWeight:500}}>/year</p>
+                                <p style={{fontSize:24, fontWeight:900}}>€550</p>
+                                <p style={{fontSize:22, fontWeight:500}}>/ year</p>
                             </div>}
                         titleColor='#FF6F48'
                         cardTitle='Starter'
                         buttonTitle='Upgrade to Starter'
                         buttonColor='#FF6F48'
+                        onClick= {() => {window.open("https://share.hsforms.com/1S1eWqiIhQn6-Ko40h5J9Uw5ahuz","_parent")}}
                    />
                     <PlanType
-                        productNum='200'
+                        productNum='120'
                         details={[
+                            {title:'4K+ views, €0.01 / view', checked:true},
                             {title:'3D Visualizer', checked:true},
                             {title:'Augmented reality', checked:true},
                             {title:'Sharabel link', checked:true},
@@ -90,23 +94,25 @@ const Pricing = () => {
                             {title:'Analytics', checked:true},
                             {title:'Custome Branding', checked:true},
                             {title:'Email Support', checked:true},
-                            {title:'Phone Chat/Support', checked:true},
+                            {title:'Phone / Chat Support', checked:true},
                             ]}
                         priceColor='#0078FF'
                         priceMonthly={<div className={styles.monthly}>
-                            <p style={{fontSize:24, fontWeight:900}}>€124</p>
-                            <p style={{fontSize:22, fontWeight:500}}>/month</p></div>}
+                            <p style={{fontSize:24, fontWeight:900}}>€100</p>
+                            <p style={{fontSize:22, fontWeight:500}}>/ month</p></div>}
                         priceYearly={<div className={styles.monthly}>
-                            <p style={{fontSize:24, fontWeight:900}}>€1,375</p>
-                            <p style={{fontSize:22, fontWeight:500}}>/year</p>
+                            <p style={{fontSize:24, fontWeight:900}}>€1,120</p>
+                            <p style={{fontSize:22, fontWeight:500}}>/ year</p>
                             </div>}
                         cardTitle='Pro'
                         buttonTitle='Upgrade to Pro'
                         buttonColor='#141323'
+                        onClick={() => {window.open("https://share.hsforms.com/1miIElly8QLmQrSYwbVdwYg5ahuz","_parent")}}
                    />
                     <PlanType
                         productNum='200+'
                         details={[
+                            {title:'4K+ views, €0.01 / view', checked:true},
                             {title:'3D Visualizer', checked:true},
                             {title:'Augmented reality', checked:true},
                             {title:'Sharabel link', checked:true},
@@ -121,6 +127,7 @@ const Pricing = () => {
                         priceMonthly={<p style={{fontSize:24, fontWeight:900}}>Contact Us</p>}
                         buttonTitle='Contact Us'
                         buttonColor='#141323'
+                        onClick={() => {window.open("https://share.hsforms.com/1FjWz8732Qb-2XFDxm6QOwA5ahuz","_parent")}}
                     />
                 </div>
             </div>

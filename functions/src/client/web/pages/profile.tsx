@@ -5,8 +5,6 @@ import UnauthorizedRedirect from '../components/common/UnauthorizedRedirect'
 import Profile from '../components/pages/Profile'
 
 const profile = () => {
-    console.log('oadasda')
-    
     return (
     <>
         <Head>

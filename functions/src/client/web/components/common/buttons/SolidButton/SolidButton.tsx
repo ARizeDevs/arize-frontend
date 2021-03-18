@@ -6,6 +6,7 @@ import styles from './SolidButton.module.css'
 const SolidButton = (props : IProps) => {
     const { children, styleClass, onClick, colorTheme, width, height, borderRadius } = props
 
+
     let newClass = ' '
     if(styleClass) newClass = newClass + styleClass
     let style : any = {}

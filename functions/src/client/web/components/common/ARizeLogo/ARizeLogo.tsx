@@ -6,7 +6,7 @@ import styles from './ARizeLogo.module.css'
 
 const ARizeLogo = () => {
     return (<div className={styles.root}>
-        <ARizeIconColored /><h2>&nbsp;AR<span style={{fontWeight:'normal'}}>ize</span></h2>
+        <ARizeIconColored /><h2>&nbsp;<a href="/profile">Home</a></h2>
     </div>)
 }
 

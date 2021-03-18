@@ -52,7 +52,7 @@ const ARStudio = (props : IProps) => {
     const [ shareButtonBackgroundColor, setShareButtonBackgroundColor] = useState('#FFFFFF')
     const [ shareButtonTextColor, setShareButtonTextColor]  = useState('#FFFFFF')
 
-    const [ hasARButton, setHasARButton ] = useState(false)
+    const [ hasARButton, setHasARButton ] = useState(true)
     const [ arButtonBackgroundColor, setArButtonBackgroundColor] = useState('#FFFFFF')
     const [ arButtonTextColor, setArButtonTextColor] = useState('#81B8EC')
 
@@ -142,12 +142,16 @@ const ARStudio = (props : IProps) => {
                         if(postData.hasARButton) { 
                             setArButtonTextColor(postData.arButtonTextColor)
                             setArButtonBackgroundColor(postData.arButtonBackgroundColor)
+                        } else {
+                            setHasARButton(true);
                         }
 
                         setHasShareButton(postData.hasShareButton)
                         if(postData.hasShareButton) { 
                             setShareButtonTextColor(postData.shareButtonTextColor)
                             setShareButtonBackgroundColor(postData.shareButtonBackgroundColor)
+                        } else {
+                            setHasShareButton(false);
                         }
 
                         if(postData.solidBackgroundColor) {
@@ -156,8 +160,10 @@ const ARStudio = (props : IProps) => {
 
                         if(postData.Placement === 'ON_THE_GROUND') {
                             setIsOnTheGround(true)
-                        } else {
+                        } else if(postData.Placement === "ON_THE_WALL"){
                             setIsOnTheGround(false) 
+                        } else{
+                            setIsOnTheGround(true);
                         }
 
                         setExposure(postData.exposure * 10)
@@ -320,7 +326,7 @@ const ARStudio = (props : IProps) => {
             <div className={styles.column}>
             {page===1?<div className={styles.topBar}>
                 <div  onClick={() => router.push('/profile')} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start'}}>
-                    <div style={{width:'16px',marginRight:'8px'}}>
+                    <div style={{width:'16px',marginRight:'8px', paddingTop:'5px'}}>
                         {/* @ts-ignore */}
                         <CrossIcon fill='black'/>
                     </div>
@@ -340,7 +346,7 @@ const ARStudio = (props : IProps) => {
             </div>:null}
                         {page===2?<div className={styles.topBar}>
                             <div  onClick={() => setPage(1)} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start'}}>
-                                <div style={{width:'16px',marginRight:'8px'}}>
+                                <div style={{width:'16px',marginRight:'8px', paddingTop:'5px'}}>
                                     {/* @ts-ignore */}
                                     <ArrowLeftIcon fill='black'/>
                                 </div>
@@ -360,7 +366,7 @@ const ARStudio = (props : IProps) => {
                         </div>:null}
                         {page===3?<div className={styles.topBar}>
                             <div  onClick={() => setPage(2)} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start'}}>
-                                <div style={{width:'16px',marginRight:'8px'}}>
+                                <div style={{width:'16px',marginRight:'8px', paddingTop:'5px'}}>
                                     {/* @ts-ignore */}
                                     <ArrowLeftIcon fill='black'/>
                                 </div>

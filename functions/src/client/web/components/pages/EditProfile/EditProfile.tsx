@@ -172,7 +172,7 @@ const EditProfile = () => {
                     <Input placeholder='name...' error={error.name} maxInputLength={30} required text='Name' type='text' value={name} onChange={validateAndSet(setName,nameValidator)}/>
                     <Input placeholder='surname...' error={error.surname} maxInputLength={30} required text='Surname' type='text' value={surname} onChange={validateAndSet(setSurname,surnameValidator)}/>
                     <Input placeholder='username...' error={error.username} maxInputLength={30}  required text='Username' type='text' value={username} onChange={validateAndSet(setUsername, usernameValidator)}/>
-                    <MultiLineInput placeholder='Some bio about you...' maxInputLength={200} required={false} text='Bio' value={bio} onChange={setBio}  />
+                    <MultiLineInput placeholder='Please write a few sentences to describe yourself to others' maxInputLength={200} required={false} text='Bio' value={bio} onChange={setBio}  />
                     <Input placeholder='example@mail.com' disabled required text='Email' type='text' value={email} onChange={setEmail}  RightIcon={PenIcon} onRightIconClick={() => router.push('/change-email')}/>
                     <Input placeholder='************' disabled required text='Password' type='password' value={'123456789'} onChange={() => ''} RightIcon={PenIcon} onRightIconClick={() => router.push('/forget-password')}/>
                     <DatePicker error={error.birthday} value={birthday} onChange={validateAndSet(setBirthday,birthdayValidator)} />
@@ -186,8 +186,8 @@ const EditProfile = () => {
                             <Input placeholder='Business type' required text='Business Type' type='text' value={businessType} onChange={setBusinessType}/>
                         </div>
                     </div>
-                    <Input placeholder='Describe a little bit...' required={false} text='Why Do You Want To Use ARize?' type='text' value={whyToUse} onChange={setWhyToUse}/>
-                    <Input placeholder='https://example.com' required text='Business Website URL' type='text' value={websiteURL} onChange={setWebsiteURL}/>
+                    <Input placeholder='Type here... ' required={false} text='Why do you want to use ARize?' type='text' value={whyToUse} onChange={setWhyToUse}/>
+                    <Input placeholder='https://example.com' required text='Business website URL' type='text' value={websiteURL} onChange={setWebsiteURL}/>
                     <Input placeholder='...' required text='VAT Number' type='text' value={vatNumber} onChange={setVatNumber}/>
                 </div>
             </div>

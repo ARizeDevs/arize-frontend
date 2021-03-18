@@ -32,7 +32,7 @@ const ARStudioPostDetail = (props : IProps) => {
     return (
         <div className={styles.root}>
             <div className={styles.inputWrapper}>
-                <p style={{fontSize:16,fontWeight:900}}>Details and Fiiles</p>
+                <p style={{fontSize:16,fontWeight:900}}>Details and files</p>
                 <br></br>
                 <Input placeholder='title...' error={error.title} maxInputLength={50} required text="Post Title"  type="text" value={title} onChange={setTitle} />
                 <MultiLineInput placeholder='description...' maxInputLength={200} required={false} text="Post Description" value={description} onChange={setDescription} />

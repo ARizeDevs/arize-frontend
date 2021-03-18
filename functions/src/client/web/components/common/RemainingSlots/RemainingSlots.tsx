@@ -27,7 +27,7 @@ const RemainingSlots = (props : IProps) => {
         <div className={styles.root}>
             <div className={styles.textContainer}>
                 <h4 >Remaining AR Slots</h4>
-                <h4>{remainingSlots}/{maxSlots}</h4>
+                <h4>{remainingSlots}</h4>
             </div>
             <div className={styles.progressBar}>
                 <div className={styles.progressBarProgress} style={{width:widthPercent+'%' , backgroundColor: color}}>
