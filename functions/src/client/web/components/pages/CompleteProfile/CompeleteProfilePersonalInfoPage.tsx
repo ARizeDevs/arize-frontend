@@ -61,7 +61,7 @@ const CompeleteProfilePersonalInfoPage = ( props : IProps ) => {
                     </div>
                 </div>
                 <Input placeholder='myusername' error={error.username} maxInputLength={30} required text='Username' type='text' value={username} onChange={setUsername}/>
-                <MultiLineInput placeholder='some bio about me...' required={false} text='Bio' onChange={setBio} value={bio}/>
+                <MultiLineInput placeholder='Please write a few sentences to describe yourself to others' required={false} text='Bio' onChange={setBio} value={bio}/>
                 <div style={{ display:'flex',flexDirection:'row', justifyContent:'space-between' }}>
                     <div style={{width:'49%'}}>
                         <DatePicker error={error.birthday} value={birthday} onChange={setBirthday} />
