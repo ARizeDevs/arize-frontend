@@ -232,7 +232,7 @@ export const editPost = async (
 
         if(isOntheGround !== null) {
             if(isOntheGround) {
-                formData.append('placement','ON_THE_GROUD')
+                formData.append('placement','ON_THE_GROUND')
             } else {
                 formData.append('placement','ON_THE_WALL')
             }
