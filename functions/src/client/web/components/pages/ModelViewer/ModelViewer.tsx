@@ -181,7 +181,8 @@ const ModelViewer = (props : IProps) => {
                 
                 {hasWaterMark ? 
                     <div className={styles.waterMark} style={{backgroundImage:waterMarkBase64}}>
-                        <RoundImage unchangeable imageSrc={waterMarkBase64} />        
+                        {/* <RoundImage unchangeable imageSrc={waterMarkBase64} />         */}
+                        <img className={styles.roundImage} src={waterMarkBase64} />
                     </div>
                 :null}
 
