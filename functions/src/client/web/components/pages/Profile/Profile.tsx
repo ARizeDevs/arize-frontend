@@ -181,7 +181,7 @@ const Profile = (props : IProps) => {
                                             tdViews += p.tdViewsCount
                                         }
                                         if(p.sharesCount) {
-                                            shares += p.sharesCountp.sharesCount
+                                            shares += p.sharesCount
                                         }
                                         if(p.clicksCount) {
                                             c += p.clicksCount

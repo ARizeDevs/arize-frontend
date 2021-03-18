@@ -45,10 +45,10 @@ const Pricing = () => {
                             {title:'Up to 1,500 views', checked:true},
                             {title:'3D Visualizer', checked:true},
                             {title:'Augmented reality', checked:true},
-                            {title:'Sharabel link', checked:true},
-                            {title:'Embeded Link', checked:true},
+                            {title:'Shareable link', checked:true},
+                            {title:'Embedded link', checked:true},
                             {title:'Analytics', checked:false},
-                            {title:'Custome Branding', checked:false},
+                            {title:'Custom branding', checked:false},
                             {title:'Email Support', checked:true},
                             {title:'Phone / Chat Support', checked:false},
                         ]}
@@ -60,15 +60,13 @@ const Pricing = () => {
                             {title:'2K+ views, €0.01 / view', checked:true},
                             {title:'3D Visualizer', checked:true},
                             {title:'Augmented reality', checked:true},
-                            {title:'Sharabel link', checked:true},
-                            {title:'Embeded Link', checked:true},
+                            {title:'Shareable link', checked:true},
+                            {title:'Embedded link', checked:true},
                             {title:'Analytics', checked:true},
-                            {title:'Custome Branding', checked:true},
+                            {title:'Custom branding', checked:true},
                             {title:'Email Support', checked:true},
                             {title:'Phone / Chat Support', checked:true},
                             ]}
-                        priceColor='#0078FF'
-                        activeBorder='2px solid #FF6F48'
                         priceMonthly={<div className={styles.monthly}>
                                 <p style={{fontSize:24, fontWeight:900}}>€50 </p>
                                 <p style={{fontSize:22, fontWeight:500}}>/ month</p>
@@ -77,10 +75,9 @@ const Pricing = () => {
                                 <p style={{fontSize:24, fontWeight:900}}>€550</p>
                                 <p style={{fontSize:22, fontWeight:500}}>/ year</p>
                             </div>}
-                        titleColor='#FF6F48'
                         cardTitle='Starter'
                         buttonTitle='Upgrade to Starter'
-                        buttonColor='#FF6F48'
+                        buttonColor='#141323'
                         onClick= {() => {window.open("https://share.hsforms.com/1S1eWqiIhQn6-Ko40h5J9Uw5ahuz","_parent")}}
                    />
                     <PlanType
@@ -89,14 +86,15 @@ const Pricing = () => {
                             {title:'4K+ views, €0.01 / view', checked:true},
                             {title:'3D Visualizer', checked:true},
                             {title:'Augmented reality', checked:true},
-                            {title:'Sharabel link', checked:true},
-                            {title:'Embeded Link', checked:true},
+                            {title:'Shareable link', checked:true},
+                            {title:'Embedded link', checked:true},
                             {title:'Analytics', checked:true},
-                            {title:'Custome Branding', checked:true},
+                            {title:'Custom branding', checked:true},
                             {title:'Email Support', checked:true},
                             {title:'Phone / Chat Support', checked:true},
                             ]}
                         priceColor='#0078FF'
+                        activeBorder='2px solid #FF6F48'
                         priceMonthly={<div className={styles.monthly}>
                             <p style={{fontSize:24, fontWeight:900}}>€100</p>
                             <p style={{fontSize:22, fontWeight:500}}>/ month</p></div>}
@@ -104,9 +102,10 @@ const Pricing = () => {
                             <p style={{fontSize:24, fontWeight:900}}>€1,120</p>
                             <p style={{fontSize:22, fontWeight:500}}>/ year</p>
                             </div>}
+                        titleColor='#FF6F48'
                         cardTitle='Pro'
                         buttonTitle='Upgrade to Pro'
-                        buttonColor='#141323'
+                        buttonColor='#FF6F48'
                         onClick={() => {window.open("https://share.hsforms.com/1miIElly8QLmQrSYwbVdwYg5ahuz","_parent")}}
                    />
                     <PlanType
@@ -115,10 +114,10 @@ const Pricing = () => {
                             {title:'4K+ views, €0.01 / view', checked:true},
                             {title:'3D Visualizer', checked:true},
                             {title:'Augmented reality', checked:true},
-                            {title:'Sharabel link', checked:true},
-                            {title:'Embeded Link', checked:true},
+                            {title:'Shareable link', checked:true},
+                            {title:'Embedded link', checked:true},
                             {title:'Analytics', checked:true},
-                            {title:'Custome Branding', checked:true},
+                            {title:'Custom branding', checked:true},
                             {title:'Email Support', checked:true},
                             {title:'Phone Chat/Support', checked:true},
                             ]}

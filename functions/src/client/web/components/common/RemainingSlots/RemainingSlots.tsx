@@ -29,6 +29,10 @@ const RemainingSlots = (props : IProps) => {
                 <h4 >Remaining AR Slots</h4>
                 <h4>{remainingSlots}</h4>
             </div>
+            <div className={styles.root}>
+                <h5 style={{paddingTop:'10px', textAlign:'left'}}>This means the number of products you can upload to your ARize account to have 3D and AR avliable for them</h5>
+            </div>
+            <br></br>
             <div className={styles.progressBar}>
                 <div className={styles.progressBarProgress} style={{width:widthPercent+'%' , backgroundColor: color}}>
                 </div>

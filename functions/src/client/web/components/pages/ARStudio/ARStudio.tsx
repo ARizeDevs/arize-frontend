@@ -192,7 +192,6 @@ const ARStudio = (props : IProps) => {
         getInitData()
     } , [isEdit,postID])
 
-    // const onFullScreenClick = () => setFullScreen(!fullScreen)
 
     const submitPosition = () => setPage(2)
     const onCustomizeBackButtonClicked = () => setPage(1)
