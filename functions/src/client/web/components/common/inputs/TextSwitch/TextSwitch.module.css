@@ -84,3 +84,19 @@ input:checked + .slider .toggleText1 {
 .slider.round:before {
     border-radius: 34px;
 }
+
+.disabled {
+    border: 1px solid var(--main-gray-color);
+}
+
+.disabled::before {
+    background-color: var(--main-gray-color);
+}
+
+.disabled .toggleText2 {
+    color : var(--main-gray-color)
+}
+
+input:checked + .disabled  .toggleText1 {
+    color: var(--main-gray-color);
+}

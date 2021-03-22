@@ -196,6 +196,7 @@ const ARStudio = (props : IProps) => {
     const submitPosition = () => setPage(2)
     const onCustomizeBackButtonClicked = () => setPage(1)
 
+    
     const onPostCreationPhase1 = async () => {
         const errorResult = validatePostDetail(title, tags, imageSrc, contentFile)
         setError(errorResult)
@@ -253,11 +254,11 @@ const ARStudio = (props : IProps) => {
                 setPage(3)
             } else {
                 firebase.analytics().logEvent('creation_failed', { user : userId } )
-                addToast('Bad file format',{ appearance : 'error' })
+                addToast('Something went wrong',{ appearance : 'error' })
             } 
         } catch(error) {
             firebase.analytics().logEvent('creation_failed', { user : userId } )
-            addToast('Bad file format',{ appearance : 'error' })
+            addToast('Something went wrong',{ appearance : 'error' })
             // setGeneralError(error)
             setSubmiting(false)
         }
@@ -309,11 +310,11 @@ const ARStudio = (props : IProps) => {
                 router.push('/profile')
             } else {
                 firebase.analytics().logEvent('creation_failed', { user : userId } )
-                addToast('Bad file format',{ appearance : 'error' })
+                addToast('Something went wrong',{ appearance : 'error' })
             } 
         } catch(error) {
             firebase.analytics().logEvent('creation_failed', { user : userId } )
-            addToast('Bad file format',{ appearance : 'error' })
+            addToast('Something went wrong',{ appearance : 'error' })
             // setGeneralError(error)
             setSubmiting(false)
         }
@@ -324,28 +325,21 @@ const ARStudio = (props : IProps) => {
         <div className={styles.bodyContainer}>
             <div className={styles.column}>
             {page===1?<div className={styles.topBar}>
-                <div  onClick={() => router.push('/profile')} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start'}}>
-                    <div style={{width:'16px',marginRight:'8px', paddingTop:'5px'}}>
+                <div  onClick={() => router.push('/profile')} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start', marginRight:'50px'}}>
+                    <div style={{width:'16px',marginRight:'16px',marginTop:'6px'}}>
                         {/* @ts-ignore */}
                         <CrossIcon fill='black'/>
                     </div>
-                                <p style={{display:'flex',fontWeight:'bold',alignSelf:'center'}}>Cancel</p>
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                </div>
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                <TextSwitch text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
-
+                        <p style={{display:'flex',fontWeight:'bold',alignSelf:'center'}}>Cancel</p>
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                </div>
+                <TextSwitch disabled={true} text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
             </div>:null}
                         {page===2?<div className={styles.topBar}>
-                            <div  onClick={() => setPage(1)} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start'}}>
-                                <div style={{width:'16px',marginRight:'8px', paddingTop:'5px'}}>
+                            <div  onClick={() => setPage(1)} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start', marginRight:'50px'}}>
+                            <div style={{width:'16px',marginRight:'16px'}}>
                                     {/* @ts-ignore */}
                                     <ArrowLeftIcon fill='black'/>
                                 </div>
@@ -354,18 +348,12 @@ const ARStudio = (props : IProps) => {
                                 &nbsp;
                                 &nbsp;
                                 </div>
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                <TextSwitch text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
+                                <TextSwitch disabled={false} text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
 
                         </div>:null}
                         {page===3?<div className={styles.topBar}>
-                            <div  onClick={() => setPage(2)} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start'}}>
-                                <div style={{width:'16px',marginRight:'8px', paddingTop:'5px'}}>
+                            <div  onClick={() => setPage(2)} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start', marginRight:'50px'}}>
+                                <div style={{width:'16px',marginRight:'16px'}}>
                                     {/* @ts-ignore */}
                                     <ArrowLeftIcon fill='black'/>
                                 </div>
@@ -373,18 +361,13 @@ const ARStudio = (props : IProps) => {
                                 &nbsp;
                                 &nbsp;
                                 &nbsp;
-                                </div>
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                <TextSwitch text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
+                            </div>
+                            <TextSwitch disabled={false} text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
 
                         </div>:null}
                     {!desktop && <div className={styles.previewWrapperMobile}>
                         <Preview
+                            page={page}
                             hasWaterMark={hasWaterMark}
                             waterMarkBase64={waterMarkBase64}
                             solidBackgroundColor={solidBackgroundColor}
@@ -402,6 +385,7 @@ const ARStudio = (props : IProps) => {
                             exposure={exposure}
                             postTitle={title}
                             autoPlay={autoPlay}
+                            isOnTheGround={isOnTheGround}
                             backgrounImage={hasSkyBox?postBackgroundImageBase64:''}
                             contentFile={contentFile}
                             hasShadow={hasShadow}

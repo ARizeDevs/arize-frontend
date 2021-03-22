@@ -1,5 +1,9 @@
 import React from 'react'
 
+import GroundActive from '../../../../assets/icons/placement/ground hover.svg'
+import WallActive from '../../../../assets/icons/placement/wall hover.svg'
+
+
 import ModelViewer from '../../pages/ModelViewer'
 
 import styles from './Preview.module.css'
@@ -16,6 +20,8 @@ interface IProps {
     contentFile : any,
     allowScaling : boolean,
     backgrounImage : string,
+    isOnTheGround : boolean,
+    page : number,
     solidBackgroundColor : string,
     hasShareButton : boolean,
     shareButtonBackgroundColor : string,
@@ -52,14 +58,16 @@ const Preview = (props : IProps) => {
         shadowSoftness,
         solidBackgroundColor,
         hasWaterMark,
-        waterMarkBase64
+        waterMarkBase64,
+        page,
+        isOnTheGround
     } = props
 
     const renderInnerPreview = () => {
         return (
         <>
             <div style={{display:'flex',flexDirection:'column',width:'100%',height:'100%',alignItems:'center',justifyContent:'center'}}>
-                <div style={{width:'90%',height:'95%'}}>
+                <div style={{width:'90%',height:'95%',position:'relative'}}>
                     <ModelViewer
                         hasWaterMark={hasWaterMark}
                         waterMarkBase64={waterMarkBase64}
@@ -88,6 +96,12 @@ const Preview = (props : IProps) => {
                 </div>
 
                 <img className={styles.iosDeviceBackground} src={'/images/iOS phone.png'}></img>
+                {page===1?
+                <div style={{position:'absolute',width:'80%'}}>
+                    {isOnTheGround?
+                    <GroundActive  />:<WallActive />}
+                </div>
+                :null}
             </div>
         </>
         )
