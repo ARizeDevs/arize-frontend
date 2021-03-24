@@ -115,14 +115,14 @@ const Profile = (props : IProps) => {
                         if(!allSearchPostsFetched) {
                             setFetchingPosts(true)
                             
-                            const set = (posts : any[] , newPosts : any[]) => setPosts([...newPosts,...posts])
+                            const set = (posts : any[] , newPosts : any[]) => setPosts([...newPosts.reverse(),...posts])
                             loadMorePosts(posts, set, searchText)
                         }
                     } else {
                         if(!allPostsFetched) {
                             setFetchingPosts(true)
                             
-                            const set = (posts : any[] , newPosts : any[]) => setPosts([...newPosts,...posts])
+                            const set = (posts : any[] , newPosts : any[]) => setPosts([...newPosts.reverse(),...posts])
                             loadMorePosts(posts, set, searchText)
                         }
                     }
@@ -168,8 +168,10 @@ const Profile = (props : IProps) => {
                                     })
                                 }
                                 if(userData.posts) {
+                                    console.log('---------')
+                                    console.log(userData.postsCount)
                                     setPostsCount(userData.postsCount)
-                                    setPosts(userData.posts)
+                                    setPosts(userData.posts.reverse())
                                     let arViews = 0
                                     let tdViews = 0
                                     let shares = 0
