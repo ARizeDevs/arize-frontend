@@ -37,5 +37,6 @@
 
 .buttonWrapper {
     flex: 0 0 auto;
+    margin-top: 20px;
     width: 100%;
 }
