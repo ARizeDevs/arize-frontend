@@ -189,7 +189,7 @@ const ARStudioPostDetail = (props : IProps) => {
                 </>               
 
             </div>
-            <div style={{display:'flex' ,marginTop:10, alignItems:'center' , width:'100%', flexDirection : 'column' , justifyContent : 'center'}}>
+            <div style={{marginTop:'20px',display:'flex' , alignItems:'center' , width:'100%', flexDirection : 'column' , justifyContent : 'center'}}>
                 {/* <div className={styles.buttonWrapper}>
                     <SolidButton onClick={onBack} ><h3>{backButtonText}</h3></SolidButton>
                 </div> */}
