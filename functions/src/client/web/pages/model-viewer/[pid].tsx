@@ -34,12 +34,21 @@ const modelViewer = ({ post, isAryanTer } : { userAgent : any, ipAddress : any ,
     const [ usdzURL, setUSDZUrl ] = useState('')
     const [ backGroundImage, setBackgrounImage ] = useState('')
     const [ poster, setPoster ] = useState('')
+    const [ waterMarkImage, setWaterMarkImage] = useState('');
+    const [ hasWaterMark, setHasWaterMark] = useState(false);
 
     useEffect(() => {
         getDirectURL(post.glbFileURL).then((url) => setGLBUrl(url)).catch(() => '' )
         getDirectURL(post.usdzFileURL).then((url) => setUSDZUrl(url)).catch(() => '' )
         getDirectURL(post.imageURL).then((url) => setPoster(url)).catch(() => '' )
+        if(post.waterMarkImage){
+            getDirectURL(post.waterMarkImage).then((url) => setWaterMarkImage(url)).catch(() => '')
+            setHasWaterMark(true);
+            console.log(waterMarkImage);
+        }
+
         if(post.backGroundImage) getDirectURL(post.backGroundImage).then((url) => setBackgrounImage(url)).catch(() => '' )
+
     },[])
     
     return (
@@ -51,7 +60,9 @@ const modelViewer = ({ post, isAryanTer } : { userAgent : any, ipAddress : any ,
                 <script noModule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
             </Head>
             <div style={{position:'absolute',left:'20px',top:'20px'}}>
-                <ARizeLogo />
+                {/* {hasWaterMark ?
+                    <ARizeLogo/>
+                :null} */}
             </div>
             <div style={{width:'100vw',height:'100vh'}}>
                 <ModelViewer
@@ -77,6 +88,8 @@ const modelViewer = ({ post, isAryanTer } : { userAgent : any, ipAddress : any ,
                     poster={poster}
                     autoPlay={post.autoPlay}
                     backgroundImage={backGroundImage} 
+                    hasWaterMark={hasWaterMark}
+                    waterMarkBase64={waterMarkImage}
                 />
             </div>
         </>

@@ -14,7 +14,7 @@ const VerifyEmail = () => {
 
     return (
         <div className={styles.root}>
-            <Navbar  />
+            <Navbar/>
             <div className={styles.bodyContainer}>
                     <div className={`${styles.column} ${styles.section}`}>
                         <div className={styles.row}>

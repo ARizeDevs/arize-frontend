@@ -41,7 +41,7 @@ const Post = (props : IProps) => {
     useEffect(() => {
         
         if(post.author && post.author.profilePicURL) {
-            getDirectURL(post.author.profilePicURL).then((url) => setProfileImageSrc(url))
+            // getDirectURL(post.author.profilePicURL).then((url) => setProfileImageSrc(url))
         }
         getDirectURL(post.glbFileURL).then((url) => setGLBUrl(url)).catch((error) => '')
         getDirectURL(post.usdzFileURL).then((url) => setUSDZUrl(url)).catch((error) => '')
