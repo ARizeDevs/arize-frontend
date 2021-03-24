@@ -6,7 +6,6 @@ import SolidButton from '../../common/buttons/SolidButton'
 import CrossIcon from '../../../../assets/icons/cross.svg';
 
 import styles from './UpgradeModal.module.css'
-import { divide } from 'lodash';
 
 interface IProps {
 

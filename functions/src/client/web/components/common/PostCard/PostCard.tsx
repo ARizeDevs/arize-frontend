@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import firebase, { getDirectURL } from '../../../config/firebase'
+import { getDirectURL } from '../../../config/firebase'
 import { deletePost, sharePost } from '../../../API/posts'
 import Loading from '../Loading'
 import QRModal from '../QRModal'

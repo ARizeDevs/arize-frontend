@@ -33,22 +33,6 @@ const Pricing = () => {
         })
     })
 
-
-    function onUpgradeclick(packageName:string){
-
-        if(packageName === "Starter"){
-
-        } else if(packageName === "Pro"){
-
-        } else if(packageName === "Enterprise"){
-
-        }
-
-
-    }
-
-
-
     return (
         <div className={styles.root}>
             <Navbar imageSrc={imageSrc} />   
