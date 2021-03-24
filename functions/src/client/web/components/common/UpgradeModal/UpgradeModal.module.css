@@ -1,7 +1,7 @@
 .upgradeModal {
     position: absolute;
-    width: 250px;
-    height: 250px;
+    width: 400px;
+    height: 400px;
     background-color: white;
     border-radius: 16px;
     outline: none;

@@ -72,7 +72,7 @@ const Profile = (props : IProps) => {
             setSearchedPosts([])
 
 
-            const set = (_posts : any[] , newPosts : any[]) => setSearchedPosts(newPosts)
+            const set = (_posts : any[] , newPosts : any[]) => setSearchedPosts(newPosts.reverse())
             loadMorePosts(searchedPosts, set, text)
         }
         setSearchText(text)
@@ -114,14 +114,14 @@ const Profile = (props : IProps) => {
                         if(!allSearchPostsFetched) {
                             setFetchingPosts(true)
                             
-                            const set = (posts : any[] , newPosts : any[]) => setPosts([...newPosts,...posts])
+                            const set = (posts : any[] , newPosts : any[]) => setPosts([...newPosts.reverse(),...posts])
                             loadMorePosts(posts, set, searchText)
                         }
                     } else {
                         if(!allPostsFetched) {
                             setFetchingPosts(true)
                             
-                            const set = (posts : any[] , newPosts : any[]) => setPosts([...newPosts,...posts])
+                            const set = (posts : any[] , newPosts : any[]) => setPosts([...newPosts.reverse(),...posts])
                             loadMorePosts(posts, set, searchText)
                         }
                     }

@@ -4,9 +4,13 @@ import PlanType from '../../common/PlanType'
 import styles from './Pricing.module.css'
 import firebase from 'firebase'
 import { getUser } from '../../../API/user'
+import UpgradeModal from '../../common/UpgradeModal';
 
 const Pricing = () => {
+    
     const [ imageSrc, setImageSrc ] = useState('')
+    const [upgradeModalOpen, setUpgradeModalOpen] = useState(false);
+
     
     useEffect(() => {
         firebase.auth().onAuthStateChanged(async function(user) {
@@ -27,6 +31,21 @@ const Pricing = () => {
             }
         })
     })
+
+
+    function onUpgradeclick(packageName:string){
+
+        if(packageName === "Starter"){
+
+        } else if(packageName === "Pro"){
+
+        } else if(packageName === "Enterprise"){
+
+        }
+
+
+    }
+
 
 
     return (
@@ -78,7 +97,7 @@ const Pricing = () => {
                         cardTitle='Starter'
                         buttonTitle='Upgrade to Starter'
                         buttonColor='#141323'
-                        onClick= {() => {window.open("https://share.hsforms.com/1S1eWqiIhQn6-Ko40h5J9Uw5ahuz","_parent")}}
+                        onClick= {() => {setUpgradeModalOpen(true)}}
                    />
                     <PlanType
                         productNum='120'
@@ -130,6 +149,15 @@ const Pricing = () => {
                     />
                 </div>
             </div>
+
+            <UpgradeModal
+                isOpen={upgradeModalOpen}
+                onRequestClose = {() => setUpgradeModalOpen(false)}
+                text="This is the upgrade modal"
+                packageName="Starter"
+            />
+
+
         </div>
     )
 }
