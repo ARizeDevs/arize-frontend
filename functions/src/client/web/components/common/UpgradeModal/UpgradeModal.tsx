@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
-import { classNames } from 'react-select/src/utils';
+// import { classNames } from 'react-select/src/utils';
 
 import CrossIcon from '../../../../assets/icons/cross.svg';
 
@@ -15,7 +15,7 @@ interface IProps {
 }
 
 const UpgradeModal = (props : IProps) => {
-    const {isOpen, onRequestClose, text, packageName} = props
+    const {isOpen, onRequestClose, text} = props
 
     return(
         <Modal
