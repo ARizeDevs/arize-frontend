@@ -4,6 +4,7 @@ import RecoverPassword from '../components/pages/RecoverPassword'
 import firebase from 'firebase'
 import VerifyEmail from '../components/pages/VerfiyEmail'
 import Head from 'next/head'
+import Loading from '../components/common/Loading'
 
 const action = () => {
     const router = useRouter()
@@ -27,7 +28,7 @@ const action = () => {
                 break;
             case 'verifyEmail':
 
-                const auth = firebase.auth();
+            const auth = firebase.auth();
                 
             if(oobCode) {
                 auth.applyActionCode(oobCode)
@@ -53,6 +54,7 @@ const action = () => {
             </Head>
             {mode === 1?<RecoverPassword  oobCode={oobCode} />:null}
             {mode === 2?<VerifyEmail />:null}
+            {mode === 0?<Loading text='Processing...' />:null}
         </>
     )
 }

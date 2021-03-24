@@ -24,6 +24,9 @@ const VerifyEmail = () => {
                                 <p>Your email has been verified successfully! Enjoy your experience with ARize :)</p>
                             </div>
                         </div>
+                        <br></br>
+                        <br></br>
+                        <br></br>
                         <div className={styles.formContainer}>
                             <SolidButton onClick={() => router.push('/profile')} ><h3>Take Me Home</h3></SolidButton> 
                         </div>

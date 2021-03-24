@@ -5,6 +5,7 @@ import styles from './Pricing.module.css'
 import firebase from 'firebase'
 import { getUser } from '../../../API/user'
 import UpgradeModal from '../../common/UpgradeModal';
+import { getDirectURL } from '../../../config/firebase'
 
 const Pricing = () => {
     
@@ -20,7 +21,7 @@ const Pricing = () => {
                     if(user && user.data.data){
                         const userData = user.data.data
                         if(userData.profilePicURL) {
-                            firebase.storage().ref(userData.profilePicURL).getDownloadURL().then((url : any) => {
+                            getDirectURL(userData.profilePicURL).then((url : any) => {
                                 setImageSrc(url)
                             })
                         }
@@ -153,7 +154,6 @@ const Pricing = () => {
             <UpgradeModal
                 isOpen={upgradeModalOpen}
                 onRequestClose = {() => setUpgradeModalOpen(false)}
-                text="This is the upgrade modal"
                 packageName="Starter"
             />
 

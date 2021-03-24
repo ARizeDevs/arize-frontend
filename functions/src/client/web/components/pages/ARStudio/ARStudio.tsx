@@ -24,6 +24,7 @@ import { useToasts } from 'react-toast-notifications'
 import { editPost } from '../../../API/posts'
 import ModelViewer from '../ModelViewer'
 import TextSwitch from '../../common/inputs/TextSwitch'
+import toDataURL from '../../../helpers/toDataURL'
 
 interface IProps {
     isEdit? : boolean,
@@ -49,7 +50,7 @@ const ARStudio = (props : IProps) => {
     const [ contentFileChanged, setContentFileChanged] = useState(false)
 
     const [ hasShareButton, setHasShareButton ] = useState(false)
-    const [ shareButtonBackgroundColor, setShareButtonBackgroundColor] = useState('#FFFFFF')
+    const [ shareButtonBackgroundColor, setShareButtonBackgroundColor] = useState('#000000')
     const [ shareButtonTextColor, setShareButtonTextColor]  = useState('#FFFFFF')
 
     const [ hasARButton, setHasARButton ] = useState(true)
@@ -70,11 +71,11 @@ const ARStudio = (props : IProps) => {
     const [ hasSolidBackground, setHasSolidBackground ] = useState(true)
     const [ solidBackgroundColor, setSolidBackgroundColor ] = useState('#FFFFFF')
     const [ hasShadow, setHasShadow ] = useState(false)
-    const [ autoPlay, setAutoPlay ] = useState(false) 
+    const [ autoPlay, setAutoPlay ] = useState(true) 
     const [ hasSkyBox, setHasSkyBox ] = useState(false)
     const [ allowScaling, setAlloScaling ] = useState(false)
     const [ postBackgroundImageBase64, setPostBackgroundImageBase64] = useState('')
-    const [ hasWaterMark, setHasWaterMark ] = useState(false)
+    const [ hasWaterMark, setHasWaterMark ] = useState(true)
     const [ waterMarkBase64, setWaterMarkBase64 ] = useState('')
     const [ waterMarkChanged, setWaterMarkChanged ] = useState(false)
     const [ error, setError ] = useState({})
@@ -127,7 +128,7 @@ const ARStudio = (props : IProps) => {
                     if(post && post.data.data){
                         const postData = post.data.data.data
                         setTitle(postData.title)
-                        firebase.storage().ref(postData.imageURL).getDownloadURL().then((url) => setImageSrc(url))
+                        getDirectURL(postData.imageURL).then((url) => setImageSrc(url))
                         setDescription(postData.description)
                         setTags(postData.tags.split(','))
                         setAutoPlay(postData.autoPlay)
@@ -169,9 +170,9 @@ const ARStudio = (props : IProps) => {
                         setExposure(postData.exposure * 10)
 
                         if(postData.allowScaling) setAlloScaling(postData.allowScaling)
-                        firebase.storage().ref(postData.glbFileURL).getDownloadURL().then((url) => setContentFile(url))
+                        getDirectURL(postData.glbFileURL).then((url) => setContentFile(url))
                         if(postData.backGroundImage) {
-                            firebase.storage().ref(postData.backGroundImage).getDownloadURL().then((url) => setPostBackgroundImageBase64(url))
+                            getDirectURL(postData.backGroundImage).then((url) => setPostBackgroundImageBase64(url))
                             setHasSkyBox(true)
                         } else {
                             setHasSkyBox(false)
@@ -187,6 +188,8 @@ const ARStudio = (props : IProps) => {
                 } finally {
                     setFetchingData(false)
                 }
+            } else {
+                toDataURL('/images/favicon.png').then((data : any) => setWaterMarkBase64(data)).catch((error) => console.log(error))
             }
         }
         getInitData()

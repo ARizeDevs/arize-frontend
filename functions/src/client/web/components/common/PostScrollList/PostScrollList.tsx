@@ -16,7 +16,7 @@ const MenuItem = ({ url , title, id }) => {
   const [ imageSRC, setImageSRC ] = useState('')
 
   useEffect(() => {
-    getDirectURL(url).then((src) => setImageSRC(src))
+    getDirectURL(url).then((src) => setImageSRC(src)).catch((error) => console.log(error))
   } , [url])
 
   return <div key={id}>

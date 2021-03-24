@@ -13,6 +13,7 @@ import router from 'next/router';
 import styles from './Support.module.css'
 import firebase from 'firebase'
 import { getUser } from '../../../API/user'
+import { getDirectURL } from '../../../config/firebase'
 
 const Support = () => {
 
@@ -28,7 +29,7 @@ const Support = () => {
                     if(user && user.data.data){
                         const userData = user.data.data
                         if(userData.profilePicURL) {
-                            firebase.storage().ref(userData.profilePicURL).getDownloadURL().then((url : any) => {
+                            getDirectURL(userData.profilePicURL).then((url : any) => {
                                 setImageSrc(url)
                             })
                         }

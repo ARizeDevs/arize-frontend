@@ -24,6 +24,7 @@ import { copyToClipBoard } from '../../../helpers/copyToClipBoard'
 import { getUserID } from '../../../API/utils'
 import useDebounce from '../../../helpers/useDebounce'
 import { getAllPosts } from '../../../API/posts'
+import { getDirectURL } from '../../../config/firebase'
 
 interface IProps {
     id? : string | null
@@ -162,13 +163,15 @@ const Profile = (props : IProps) => {
                                 setWebsiteURL(userData.websiteURL)
                                 setEmail(userData.email)
                                 if(userData.profilePicURL) {
-                                    firebase.storage().ref(userData.profilePicURL).getDownloadURL().then((url : any) => {
+                                    getDirectURL(userData.profilePicURL).then((url : any) => {
                                         setImageSrc(url)
                                     })
                                 }
                                 if(userData.posts) {
+                                    console.log('---------')
+                                    console.log(userData.postsCount)
                                     setPostsCount(userData.postsCount)
-                                    setPosts(userData.posts)
+                                    setPosts(userData.posts.reverse())
                                     let arViews = 0
                                     let tdViews = 0
                                     let shares = 0

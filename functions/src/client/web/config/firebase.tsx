@@ -25,7 +25,7 @@ if (!firebase.apps.length) {
 
 const db = firebase.firestore()
 
-const getDirectURL = (path : string) => firebase.storage().ref(path).getDownloadURL()
+const getDirectURL = (path : string) => firebase.storage().ref(path).getDownloadURL().catch((error) => console.log('gooz'))
 
 export { db, getDirectURL }
 export default firebase

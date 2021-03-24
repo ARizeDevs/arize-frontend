@@ -1,6 +1,7 @@
 import firebase from 'firebase'
 import React, { useEffect, useState } from 'react'
 import { getUser } from '../../../API/user'
+import { getDirectURL } from '../../../config/firebase'
 import Navbar from '../../common/Navbar'
 import NotificationCard from '../../common/NotificationCard'
 
@@ -17,7 +18,7 @@ const Notifications = () => {
                     if(user && user.data.data){
                         const userData = user.data.data
                         if(userData.profilePicURL) {
-                            firebase.storage().ref(userData.profilePicURL).getDownloadURL().then((url : any) => {
+                            getDirectURL(userData.profilePicURL).then((url : any) => {
                                 setImageSrc(url)
                             })
                         }

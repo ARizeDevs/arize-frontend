@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import firebase from '../../../config/firebase'
+import firebase, { getDirectURL } from '../../../config/firebase'
 import { deletePost, sharePost } from '../../../API/posts'
 import Loading from '../Loading'
 import QRModal from '../QRModal'
@@ -72,9 +72,10 @@ const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, title,
     }
 
     useEffect(() => {
-        firebase.storage().ref(imageURL).getDownloadURL().then((url : string) => {
+        getDirectURL(imageURL).then((url : string) => {
             setImage(url)
         })
+        .catch
     } , [imageURL]) 
 
     const onShareClick = async () => {

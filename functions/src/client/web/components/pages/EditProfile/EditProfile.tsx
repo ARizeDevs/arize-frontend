@@ -15,7 +15,7 @@ import { birthdayValidator, editProfileValidator, genderValidator,
 
 import PenIcon from '../../../../assets/icons/pen.svg'
 
-import firebase from '../../../config/firebase'
+import firebase, { getDirectURL } from '../../../config/firebase'
 
 import styles from './EditProfile.module.css'
 import { editUser, getUser } from '../../../API/user'
@@ -70,7 +70,7 @@ const EditProfile = () => {
                             setGender({value:gValue,label:gValue})
                             setEmail(userData.email)
                             if(userData.profilePicURL) {
-                                firebase.storage().ref(userData.profilePicURL).getDownloadURL().then((url : any) => {
+                                getDirectURL(userData.profilePicURL).then((url : any) => {
                                     setImageSrc(url)
                                 })
                             }

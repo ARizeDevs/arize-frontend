@@ -1,7 +1,7 @@
 import React from 'react'
 
-import GroundActive from '../../../../assets/icons/placement/ground hover.svg'
-import WallActive from '../../../../assets/icons/placement/wall hover.svg'
+import Ground from '../../../../assets/banners/Ground.svg'
+import Wall from '../../../../assets/banners/Wall.svg'
 
 
 import ModelViewer from '../../pages/ModelViewer'
@@ -95,13 +95,13 @@ const Preview = (props : IProps) => {
                     />
                 </div>
 
-                <img className={styles.iosDeviceBackground} src={'/images/iOS phone.png'}></img>
                 {page===1?
-                <div style={{position:'absolute',width:'80%'}}>
+                <div style={{position:'absolute',width:'90%'}}>
                     {isOnTheGround?
-                    <GroundActive  />:<WallActive />}
+                    <Ground  />:<Wall />}
                 </div>
                 :null}
+                <img className={styles.iosDeviceBackground} src={'/images/iOS phone.png'}></img>
             </div>
         </>
         )
