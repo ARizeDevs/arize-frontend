@@ -178,6 +178,7 @@ const Post = (props : IProps) => {
                 onRequestClose={() => setQRModalOpen(false)}
                 text='Scan to see AR'
                 url={`https://arizear.app/model-viewer/${post.id}`}
+            
             />
         </div>
     )

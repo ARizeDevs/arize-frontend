@@ -3,7 +3,7 @@ import React , { useState, useEffect } from 'react'
 
 import QRModal from '../../common/QRModal'
 
-import ARViewIcon from '../../../../assets/icons/arViewIcon.svg'
+import ARViewIcon from '../../../../assets/icons/arViewIcon2.svg'
 import ShareIcon from '../../../../assets/icons/share.svg'
 import FocusIcon from '../../../../assets/icons/focus.svg'
 import CompressIcon from '../../../../assets/icons/compress.svg'
@@ -11,7 +11,7 @@ import CompressIcon from '../../../../assets/icons/compress.svg'
 import styles from './ModelViewer.module.css'
 import SharePostModal from '../../common/SharePostModal'
 import { sharePost, viewARPost } from '../../../API/posts'
-import RoundImage from '../../common/RoundImage'
+// import RoundImage from '../../common/RoundImage'
 
 interface IProps {
     glbURL : string,

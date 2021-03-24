@@ -8,6 +8,7 @@ import styles from './CallInfo.module.css'
 import ProblemSupportBanner from '../../../../assets/banners/ProblemSupport.svg'
 import firebase from 'firebase'
 import { getUser } from '../../../API/user'
+import { getDirectURL } from '../../../config/firebase'
 
 
 const CallInfo = () => {
@@ -22,7 +23,7 @@ const CallInfo = () => {
                     if(user && user.data.data){
                         const userData = user.data.data
                         if(userData.profilePicURL) {
-                            firebase.storage().ref(userData.profilePicURL).getDownloadURL().then((url : any) => {
+                            getDirectURL(userData.profilePicURL).then((url : any) => {
                                 setImageSrc(url)
                             })
                         }
