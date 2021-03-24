@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { isMobileDevice } from 'react-select/src/utils'
+import React from 'react'
 
 import Ground from '../../../../assets/banners/Ground.svg'
 import Wall from '../../../../assets/banners/Wall.svg'
