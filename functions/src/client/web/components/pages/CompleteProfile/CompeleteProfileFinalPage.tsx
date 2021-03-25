@@ -11,7 +11,7 @@ interface IProps {
     error : string
 }
 
-const individualText = 'You just successfully created your first Account. Now you can freely explore ARize and share your AR experiences with your friends!'
+const individualText = 'You just successfully created your ARize account. Now you can freely create and share your AR experiences within your website, webshop and your clients!'
 
 const CompeleteProfileFinalPage = (props : IProps) => {
     const {  error, onNextClick } = props

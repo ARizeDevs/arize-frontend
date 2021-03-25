@@ -41,7 +41,7 @@ const Pricing = () => {
             <div className={styles.bodyContainer}>
                 <div className={styles.title}>
                     <h2 style={{fontWeight:1000}}>Upgrade and thrive!</h2>
-                    <p>We always keep our AR packages up to date for diffrenet customer choices.</p>
+                    <p>Choose which package fits you best! Need help in deciding? No problem, get in touch here. We are happy to help. </p>
                 </div>
                 <div className={styles.plans}>
                    <PlanType
@@ -109,7 +109,7 @@ const Pricing = () => {
                             <p style={{fontSize:24, fontWeight:900}}>€100</p>
                             <p style={{fontSize:22, fontWeight:500}}>/ month</p></div>}
                         priceYearly={<div className={styles.monthly}>
-                            <p style={{fontSize:24, fontWeight:900}}>€1,120</p>
+                            <p style={{fontSize:24, fontWeight:900}}>€1,100</p>
                             <p style={{fontSize:22, fontWeight:500}}>/ year</p>
                             </div>}
                         titleColor='#FF6F48'

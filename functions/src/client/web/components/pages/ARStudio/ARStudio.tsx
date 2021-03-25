@@ -177,6 +177,7 @@ const ARStudio = (props : IProps) => {
                         } else {
                             setHasSkyBox(false)
                         }
+
                         if(postData.waterMarkImage) {
                             getDirectURL(postData.waterMarkImage).then((url : string) => setWaterMarkBase64(url)).catch((error) => console.log(error))
                             setHasWaterMark(true)
@@ -269,6 +270,9 @@ const ARStudio = (props : IProps) => {
     }
     
     const onPostCreationPhase2 = async () => {
+        console.log(hasWaterMark + "/" + waterMarkChanged);
+        console.log("WaterMark URL:" + waterMarkBase64);
+        
         if(submiting) return
 
         const errorResult = validateCustomizationDetail(
@@ -472,7 +476,7 @@ const ARStudio = (props : IProps) => {
                 <div className={styles.inner}>
                     <ARStudioCustomize
                         hasWaterMark={hasWaterMark}
-                        setHasWaterMark={setHasWaterMark}
+                        setHasWaterMark={(value : boolean) =>{setHasWaterMark(value); setWaterMarkChanged(true)}}
                         waterMarkBase64={waterMarkBase64}
                         setWaterMarkBase64={(value : string) => { setWaterMarkBase64(value); setWaterMarkChanged(true)}}
                         exposure={exposure}

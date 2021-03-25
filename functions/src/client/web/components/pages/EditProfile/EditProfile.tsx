@@ -33,7 +33,7 @@ const EditProfile = () => {
     const [ surname, setSurname ] = useState('')
     const [ username, setUsername ] = useState('')
     const [ bio, setBio ] = useState('')
-    const [ birthday, setBirthday ] = useState(moment())
+    const [ birthday, setBirthday ] = useState('')
     const [ gender, setGender ] = useState({value:'Male',label:'Male'})
     const [ location, setLocation ] = useState('')
     const [ email, setEmail ] = useState('')
@@ -64,7 +64,7 @@ const EditProfile = () => {
                             setLocation(userData.location);
                             setSurname(userData.surname)
                             setUsername(userData.username)
-                            setBirthday(moment(userData.birthday))
+                            setBirthday(userData.birthday)
                             const g = userData.gender
                             const gValue = g.charAt(0).toUpperCase() + g.toLowerCase().slice(1)
                             setGender({value:gValue,label:gValue})
@@ -121,7 +121,7 @@ const EditProfile = () => {
             surname,
             bio,
             username,
-            birthday : birthday.toISOString(),
+            birthday,
             gender : gender.value.toUpperCase(),
             location,
             companyName :businessName,
@@ -172,21 +172,17 @@ const EditProfile = () => {
                     <Input placeholder='name...' error={error.name} maxInputLength={30} required text='Name' type='text' value={name} onChange={validateAndSet(setName,nameValidator)}/>
                     <Input placeholder='surname...' error={error.surname} maxInputLength={30} required text='Surname' type='text' value={surname} onChange={validateAndSet(setSurname,surnameValidator)}/>
                     <Input placeholder='username...' error={error.username} maxInputLength={30}  required text='Username' type='text' value={username} onChange={validateAndSet(setUsername, usernameValidator)}/>
-                    <MultiLineInput placeholder='Please write a few sentences to describe yourself to others' maxInputLength={200} required={false} text='Bio' value={bio} onChange={setBio}  />
+                    <MultiLineInput placeholder='Please write a few sentences to describe your business so when sharing your ARize profile it will be seen by others' maxInputLength={200} required={false} text='Your company bio' value={bio} onChange={setBio}  />
                     <Input placeholder='example@mail.com' disabled required text='Email' type='text' value={email} onChange={setEmail}  RightIcon={PenIcon} onRightIconClick={() => router.push('/change-email')}/>
                     <Input placeholder='************' disabled required text='Password' type='password' value={'123456789'} onChange={() => ''} RightIcon={PenIcon} onRightIconClick={() => router.push('/forget-password')}/>
-                    <DatePicker error={error.birthday} value={birthday} onChange={validateAndSet(setBirthday,birthdayValidator)} />
+                    {/* <DatePicker error={error.birthday} value={birthday} onChange={validateAndSet(setBirthday,birthdayValidator)} /> */}
+                    <Input placeholder='dd/mm/yyyy' error={error.birthday} maxInputLength={30} required text='Date of birth' type='date' value={birthday} onChange={validateAndSet(setBirthday,birthdayValidator)}/>
                     <GenderDropdown error={error.gender} onSelect={validateAndSet(setGender, genderValidator)} selected={gender} />
                     <CountryPicker error={error.location} value={location} onChange={validateAndSet(setLocation, locationValidator)} />
                     <div style={{ display:'flex',flexDirection:'row',justifyContent:'space-between' }}>
-                        <div style={{width:'49%'}}>
-                            <Input placeholder='Business name' required text='Business Name' type='text' value={businessName} onChange={setBusinessName}/>
-                        </div>
-                        <div style={{width:'49%'}}>
-                            <Input placeholder='Business type' required text='Business Type' type='text' value={businessType} onChange={setBusinessType}/>
-                        </div>
+                        <Input placeholder='Business name' required text='Business Name' type='text' value={businessName} onChange={setBusinessName}/>
                     </div>
-                    <Input placeholder='Type here... ' required={false} text='Why do you want to use ARize?' type='text' value={whyToUse} onChange={setWhyToUse}/>
+                    {/* <Input placeholder='Type here... ' required={false} text='Why do you want to use ARize?' type='text' value={whyToUse} onChange={setWhyToUse}/> */}
                     <Input placeholder='https://example.com' required text='Business website URL' type='text' value={websiteURL} onChange={setWebsiteURL}/>
                     <Input placeholder='...' required text='VAT Number' type='text' value={vatNumber} onChange={setVatNumber}/>
                 </div>

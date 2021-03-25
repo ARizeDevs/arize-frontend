@@ -44,7 +44,7 @@ const CompleteProfile = () => {
                 surname,
                 bio,
                 username,
-                birthday : birthday.toISOString(),
+                birthday,
                 gender : gender.value.toUpperCase(),
                 location,
             }
@@ -124,7 +124,7 @@ const CompleteProfile = () => {
                 <MultiPageFormNavbar  
                     activeIndex={step} 
                     onClick={(stepNumber:number) => (stepNumber < step? setStep(stepNumber):null)}  
-                    items={[{name : 'Personal Info' , title : "Some Personal Info" , description : 'Please let us know you a little bit more!'},
+                    items={[{name : 'Personal Info' , title : "Account holder info" , description : 'please fill in the form below'},
                             {name:'Final', title : "" , description : ''}]}
                     />
                 <div className={styles.pageContainer + ' flex-column'}>

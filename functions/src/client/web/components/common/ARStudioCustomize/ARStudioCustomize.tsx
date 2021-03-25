@@ -160,7 +160,7 @@ const ARStudioPostDetail = (props : IProps) => {
                 <Collapsible  triggerStyle={{cursor:'pointer',paddingTop:20,borderTop:' 1px solid #EBEBEB ', fontWeight:800,alignItems:'center',display:'flex',fontSize:16}} open={true} transitionTime={250} trigger={<div style={{width:'100%',paddingBottom:'10px', display:'flex',flexDirection:'row',justifyContent:'space-between'}}><p style={{display:'flex',flexDirection:'row',alignItems:'center'}}>Custom Branding</p><AngleDown></AngleDown></div>}>
                     <div className={styles.contentImageContainer}>
                         <div className={styles.imageInputContainer}>
-                            <ImageInput error={error.imageSrc} toggle={hasWaterMark} setToggle={setHasWaterMark} setImageSrc={setWaterMarkBase64}  imageSrc={waterMarkBase64} text='Watermark*' extensions={['hdr','jpeg','jpg','png']}/>
+                            <ImageInput error={error.imageSrc} toggle={hasWaterMark} setToggle={setHasWaterMark} setImageSrc={setWaterMarkBase64}  imageSrc={waterMarkBase64} text='Watermark*' extensions={['jpeg','jpg','png']}/>
                         </div>
                         </div>
                         <Toggle  active={hasShareButton} setActive={setHasShareButton} text="Share Button" />
