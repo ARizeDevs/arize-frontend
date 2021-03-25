@@ -174,7 +174,9 @@ export const editPost = async (
 
         formData.append('tokenId',tokenId)
 
-        if(waterMarkImageBase64) formData.append('waterMarkImageBase64',waterMarkImageBase64)
+        if(waterMarkImageBase64 !== null) { 
+            formData.append('waterMarkImageBase64',waterMarkImageBase64)
+        }
 
         if(title) formData.append('title',title)
         if(description) formData.append('description',description)
@@ -271,7 +273,7 @@ export const editPost = async (
         
         if(result.status === 200 || result.status === 201) {
             
-            return { success : true }
+            return { success : true, data : result.data.data }
         }
 
         return { success : false, error : 'something went wrong' }

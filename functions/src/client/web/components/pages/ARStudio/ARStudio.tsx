@@ -33,7 +33,7 @@ interface IProps {
 
 const ARStudio = (props : IProps) => {
 
-    const { isEdit, postID, } = props
+    const { isEdit, postID } = props
     
     const { addToast } = useToasts()
     const router = useRouter()
@@ -159,9 +159,10 @@ const ARStudio = (props : IProps) => {
                             setSolidBackgroundColor(postData.solidBackgroundColor)
                         }
 
-                        if(postData.Placement === 'ON_THE_GROUND') {
+                        console.log(postData.placement)
+                        if(postData.placement === 'ON_THE_GROUND') {
                             setIsOnTheGround(true)
-                        } else if(postData.Placement === "ON_THE_WALL"){
+                        } else if(postData.placement === "ON_THE_WALL"){
                             setIsOnTheGround(false) 
                         } else{
                             setIsOnTheGround(true);
@@ -243,15 +244,21 @@ const ARStudio = (props : IProps) => {
                     hasShareButton, shareButtonBackgroundColor,
                     shareButtonTextColor, allowScaling, (exposure/10).toString(),
                     solidBackgroundColor, isOnTheGround, autoPlay,
-                    imageSrc, postBackgroundImageBase64, contentFile, waterMarkBase64
+                    imageSrc, hasSkyBox?postBackgroundImageBase64:'', contentFile, 
+                    hasWaterMark?waterMarkBase64:''
                 )
             }
+
+            console.log(result)
 
             setSubmiting(false)
             if (result && result.success)
             {
-                // @ts-ignore
-                setSavedPostID(result.data.id)
+                if(!isEdit) {
+                    // @ts-ignore
+                    setSavedPostID(result.data.id)
+                }
+
                 // @ts-ignore
                 getDirectURL(result.data.glbFileURL).then((url : string) => setContentFile(url))
                 firebase.analytics().logEvent('creation_success', { user : userId } )
@@ -261,6 +268,8 @@ const ARStudio = (props : IProps) => {
                 addToast('Something went wrong',{ appearance : 'error' })
             } 
         } catch(error) {
+            console.log(error);
+            
             firebase.analytics().logEvent('creation_failed', { user : userId } )
             addToast('Something went wrong',{ appearance : 'error' })
             // setGeneralError(error)
@@ -306,8 +315,9 @@ const ARStudio = (props : IProps) => {
                 id, null, null, null, null, hasShadow, (shadowIntensity/10).toString(), (shadowSoftness/10).toString(),
                 hasARButton, arButtonTextColor, arButtonBackgroundColor,
                 hasShareButton, shareButtonBackgroundColor, shareButtonTextColor, allowScaling,
-                (exposure/10).toString(), isOnTheGround, solidBackgroundColor, autoPlay, hasSkyBox && backGroundImageChanged?postBackgroundImageBase64:null,
-                null, hasWaterMark && waterMarkChanged? waterMarkBase64 : null
+                (exposure/10).toString(), isOnTheGround, solidBackgroundColor, autoPlay, 
+                backGroundImageChanged?(hasSkyBox?postBackgroundImageBase64:''):null,
+                null, waterMarkChanged?(hasWaterMark?waterMarkBase64 : ''):null
             )
 
             setSubmiting(false)

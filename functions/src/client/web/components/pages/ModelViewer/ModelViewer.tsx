@@ -135,7 +135,7 @@ const ModelViewer = (props : IProps) => {
         }
     }
 
-    return (<div style={{width:'100%',height:'100%',position:'relative'}}>
+    return (<div style={{width:'100%',height:'100%',position:'relative',backgroundColor:solidBackgroundColor}}>
                 <model-viewer
                     id="myviewer"
                     src={glbURL} 
@@ -145,9 +145,10 @@ const ModelViewer = (props : IProps) => {
                     loading="eager"
                     reveal={autoPlay?"auto":"interaction"}
                     camera-controls
+                    // style={`background-color: ${solidBackgroundColor};`}
                     quick-look-browsers="safari chrome"
                     ar-placement={isOnTheWall?'wall':''}
-                    background-color={solidBackgroundColor}
+                    // background-color={solidBackgroundColor}
                     exposure={exposure}
                     shadow-intensity={hasShadow?shadowIntensity:'0'}
                     shadow-softness={hasShadow?shadowSoftness:'0'}
