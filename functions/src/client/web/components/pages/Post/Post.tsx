@@ -162,7 +162,7 @@ const Post = (props : IProps) => {
                     </div> */}
                     <div style={{width:'100%'}}>
                         {/* @ts-ignore */}
-                        {/* <PostScrollList list={relatedPosts} /> */}
+                        <PostScrollList list={relatedPosts} />
                     </div>
                     <br></br>
                     <br></br>

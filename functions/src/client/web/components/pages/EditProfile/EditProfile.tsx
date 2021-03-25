@@ -1,11 +1,11 @@
 import React , { useState, useEffect } from 'react'
-import moment from 'moment'
+// import moment from 'moment'
 import { useRouter } from 'next/router'
 
 import SolidButton from '../../common/buttons/SolidButton'
 import Navbar from '../../common/Navbar'
 import Input from '../../common/inputs/Input'
-import DatePicker from '../../common/inputs/DatePicker'
+// import DatePicker from '../../common/inputs/DatePicker'
 import GenderDropdown from '../../common/inputs/GenderDropdown'
 import CountryPicker from '../../common/inputs/CountryPicker'
 import Loading from '../../common/Loading'

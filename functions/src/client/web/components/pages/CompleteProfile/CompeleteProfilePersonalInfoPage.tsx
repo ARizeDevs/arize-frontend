@@ -2,7 +2,7 @@ import React from 'react'
 
 import CountryPicker from '../../common/inputs/CountryPicker'
 import GenderDropdown from '../../common/inputs/GenderDropdown'
-import DatePicker from '../../common/inputs/DatePicker'
+// import DatePicker from '../../common/inputs/DatePicker'
 import Input from '../../common/inputs/Input'
 import SolidButton from '../../common/buttons/SolidButton'
 
