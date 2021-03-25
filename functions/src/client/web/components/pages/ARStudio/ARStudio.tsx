@@ -190,7 +190,7 @@ const ARStudio = (props : IProps) => {
                     setFetchingData(false)
                 }
             } else {
-                toDataURL('/images/favicon.png').then((data : any) => setWaterMarkBase64(data)).catch((error) => console.log(error))
+                toDataURL('/images/logo black new.png').then((data : any) => setWaterMarkBase64(data)).catch((error) => console.log(error))
             }
         }
         getInitData()

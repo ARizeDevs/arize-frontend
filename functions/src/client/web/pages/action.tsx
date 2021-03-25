@@ -13,16 +13,30 @@ const action = () => {
     const [ oobCode, setOOBCode ] = useState('')
 
     useEffect(() => {
+        console.log('here');
+        
         const mode = router.query.mode
-        const code = router.query.oobCode
+        let code = router.query.oobCode
         if(typeof code === typeof []) {
+            code = code[0]
             setOOBCode(code[0])
         } else {
             // @ts-ignore
             setOOBCode(code)
         }
+        
 
         switch (mode) {
+            // case 'ook':
+            //     firebase.auth().onAuthStateChanged(async function(user) {
+            //         try {
+            //             (firebase.auth().currentUser as any).sendEmailVerification()
+            //         } catch(error) {
+
+            //         }   
+            //     } 
+
+            //     break;
             case 'resetPassword':
                 setMode(1)
                 break;
@@ -30,11 +44,14 @@ const action = () => {
 
             const auth = firebase.auth();
                 
-            if(oobCode) {
-                auth.applyActionCode(oobCode)
+            if(code) {
+                auth.applyActionCode(code as string)
                 .then(() => {
+                    console.log('verified')
                     setMode(2)
                 }).catch(e => {
+                    console.log('-----------')
+                    console.log(e)
                     router.push('/login')
                 })
             }
@@ -42,15 +59,15 @@ const action = () => {
             default:
                 break;
         }
-    } )
+    } , [router.query.mode,router.query.oobCode])
 
     return (
         <>
             <Head>
                 <link rel="shortcut icon" href="/images/favicon.png" />
                 <title>action</title>
-                <script type="module" src="https://unpkg.com/@google/model-viewer@1.1.0/dist/model-viewer.js"></script>
-                <script noModule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
+                {/* <script type="module" src="https://unpkg.com/@google/model-viewer@1.1.0/dist/model-viewer.js"></script> */}
+                {/* <script noModule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script> */}
             </Head>
             {mode === 1?<RecoverPassword  oobCode={oobCode} />:null}
             {mode === 2?<VerifyEmail />:null}
