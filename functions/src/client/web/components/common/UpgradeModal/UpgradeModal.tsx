@@ -52,7 +52,10 @@ const UpgradeModal = (props : IProps) => {
 
                             case 'For Enterprise':
                                 window.open('https://share.hsforms.com/1epny56Q2RnuUQAjDG5oGxA5ahuz', '_parent')
-                                
+                                break;
+
+                            case 'Need upgrade':
+                                // Arash code 
                                 break;
                         }
                     }}> <h3>Upgrade</h3></SolidButton>
