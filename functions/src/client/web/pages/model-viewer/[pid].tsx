@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import requestIp from 'request-ip'
 
-import ARizeLogo from '../../../assets/icons/logo black new.svg'
+// import ARizeLogo from '../../../assets/icons/logo black new.svg'
 
 import ModelViewer from '../../components/pages/ModelViewer'
 import { getPost, view3DPost } from '../../API/posts'

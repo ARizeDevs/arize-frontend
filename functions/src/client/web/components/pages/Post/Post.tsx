@@ -28,7 +28,7 @@ const Post = (props : IProps) => {
 
     const { post, relatedPosts } = props
 
-    const [ profileImageSrc, setProfileImageSrc ] = useState('')
+    // const [ profileImageSrc, setProfileImageSrc ] = useState('')
     const [ glbURL, setGLBUrl] = useState('')
     const [ usdzURL, setUSDZUrl ] = useState('')
     const [ backGroundImage, setBackgrounImage ] = useState('')
@@ -119,7 +119,7 @@ const Post = (props : IProps) => {
                     <div className={styles.row} style={{width:'100%',justifyContent:'space-between'}}>
                         <div className={styles.row}>
                             <div onClick={onVisitProfileClick}  style={{cursor:'pointer',width:'40px',height:'40px'}}>
-                                <img style={{width: '100%',height: '100%',borderRadius: '50%'}} src={profileImageSrc} />
+                                {/* <img style={{width: '100%',height: '100%',borderRadius: '50%'}} src={profileImageSrc} /> */}
                             </div>&nbsp;
                             <div className={styles.column}>
                                 <h3 onClick={onVisitProfileClick} style={{cursor:'pointer'}}>{post.author.companyName?post.author.companyName:post.author.username}</h3>

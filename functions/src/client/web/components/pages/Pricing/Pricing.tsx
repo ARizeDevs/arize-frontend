@@ -7,12 +7,14 @@ import { getUser } from '../../../API/user'
 import UpgradeModal from '../../common/UpgradeModal';
 import { getDirectURL } from '../../../config/firebase'
 
+var amount: string;
+var packageNmae: string;
+
 const Pricing = () => {
     
     const [ imageSrc, setImageSrc ] = useState('')
     const [upgradeModalOpen, setUpgradeModalOpen] = useState(false);
 
-    
     useEffect(() => {
         firebase.auth().onAuthStateChanged(async function(user) {
             try {
@@ -82,7 +84,11 @@ const Pricing = () => {
                         cardTitle='Starter'
                         buttonTitle='Upgrade to Starter'
                         buttonColor='#141323'
-                        onClick= {() => {setUpgradeModalOpen(true)}}
+                        onClick= {() => {
+                            amount = "€50 per month"
+                            packageNmae="Starter"
+                            setUpgradeModalOpen(true)
+                        }}
                    />
                     <PlanType
                         productNum='120'
@@ -110,7 +116,11 @@ const Pricing = () => {
                         cardTitle='Pro'
                         buttonTitle='Upgrade to Pro'
                         buttonColor='#FF6F48'
-                        onClick={() => {window.open("https://share.hsforms.com/1miIElly8QLmQrSYwbVdwYg5ahuz","_parent")}}
+                        onClick= {() => {
+                            amount = "€100 per month"
+                            packageNmae="Pro"
+                            setUpgradeModalOpen(true)
+                        }}
                    />
                     <PlanType
                         productNum='200+'
@@ -130,7 +140,11 @@ const Pricing = () => {
                         priceMonthly={<p style={{fontSize:24, fontWeight:900}}>Contact Us</p>}
                         buttonTitle='Contact Us'
                         buttonColor='#141323'
-                        onClick={() => {window.open("https://share.hsforms.com/1FjWz8732Qb-2XFDxm6QOwA5ahuz","_parent")}}
+                        onClick= {() => {
+                            amount = "Contacts"
+                            packageNmae="For Enterprise"
+                            setUpgradeModalOpen(true)
+                        }}
                     />
                 </div>
             </div>
@@ -138,10 +152,9 @@ const Pricing = () => {
             <UpgradeModal
                 isOpen={upgradeModalOpen}
                 onRequestClose = {() => setUpgradeModalOpen(false)}
-                packageName="Starter"
+                packageName= {packageNmae}
+                amount= {amount}
             />
-
-
         </div>
     )
 }
