@@ -53,7 +53,7 @@ const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, title,
     }
 
     const onEdit = () => router.push(`/arstudio/${id}`)
-    const onView = () => router.push(`/post/${id}`)
+    const onView = () => router.push(`/model-viewer/${id}`)
     const onInsights = () => router.push(`/post/statistics/${id}`)
     const onDelete = async () => {
         if(deleting) return
