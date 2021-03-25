@@ -4,10 +4,14 @@ import PlanType from '../../common/PlanType'
 import styles from './Pricing.module.css'
 import firebase from 'firebase'
 import { getUser } from '../../../API/user'
+import UpgradeModal from '../../common/UpgradeModal';
 import { getDirectURL } from '../../../config/firebase'
 
 const Pricing = () => {
+    
     const [ imageSrc, setImageSrc ] = useState('')
+    const [upgradeModalOpen, setUpgradeModalOpen] = useState(false);
+
     
     useEffect(() => {
         firebase.auth().onAuthStateChanged(async function(user) {
@@ -28,7 +32,6 @@ const Pricing = () => {
             }
         })
     })
-
 
     return (
         <div className={styles.root}>
@@ -79,7 +82,7 @@ const Pricing = () => {
                         cardTitle='Starter'
                         buttonTitle='Upgrade to Starter'
                         buttonColor='#141323'
-                        onClick= {() => {window.open("https://share.hsforms.com/1S1eWqiIhQn6-Ko40h5J9Uw5ahuz","_parent")}}
+                        onClick= {() => {setUpgradeModalOpen(true)}}
                    />
                     <PlanType
                         productNum='120'
@@ -131,6 +134,14 @@ const Pricing = () => {
                     />
                 </div>
             </div>
+
+            <UpgradeModal
+                isOpen={upgradeModalOpen}
+                onRequestClose = {() => setUpgradeModalOpen(false)}
+                packageName="Starter"
+            />
+
+
         </div>
     )
 }

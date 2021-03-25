@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import firebase, { getDirectURL } from '../../../config/firebase'
+import { getDirectURL } from '../../../config/firebase'
 import { deletePost, sharePost } from '../../../API/posts'
 import Loading from '../Loading'
 import QRModal from '../QRModal'
@@ -110,7 +110,7 @@ const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, title,
     return (
         <div className={styles.root}>
             <div className={styles.postImage}>
-                <img className={styles.postImage} onClick={() => {if(!processing)router.push(`/post/${id}`)}}  src={image} />
+                <img className={styles.postImage} onClick={() => {if(!processing)router.push(`/model-viewer/${id}`)}}  src={image} />
                 <div className={styles.editPost} onClick={() => setMenuOpen(!menuOpen)}>
                     <DotIcon />
                 </div>
@@ -147,7 +147,7 @@ const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, title,
                 &nbsp;&nbsp;
                 <div style={{display:'flex',flexDirection:'row',flexWrap:'wrap'}}>
                     <div style={{width:'100px',marginRight:'10px'}}>
-                        <SolidButton colorTheme='black' onClick={() => {if(!processing)router.push(`/post/${id}`)}} ><div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}><TDViewIcon /><h3>3D</h3></div></SolidButton>
+                        <SolidButton colorTheme='black' onClick={() => {if(!processing)router.push(`/model-viewer/${id}`)}} ><div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}><TDViewIcon /><h3>3D</h3></div></SolidButton>
                     </div>
                     <div style={{width:'100px'}}>
                         <SolidButton onClick={onARClick} ><div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}><ARViewIcon /><h3>AR</h3></div></SolidButton>

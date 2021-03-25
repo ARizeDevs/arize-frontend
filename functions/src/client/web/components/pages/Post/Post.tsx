@@ -39,18 +39,20 @@ const Post = (props : IProps) => {
     const [ fullScreen, setFullScreen ] = useState(false)
 
     useEffect(() => {
+        
         if(post.author && post.author.profilePicURL) {
-            getDirectURL(post.author.profilePicURL).then((url) => setProfileImageSrc(url))
+            // getDirectURL(post.author.profilePicURL).then((url) => setProfileImageSrc(url))
         }
         getDirectURL(post.glbFileURL).then((url) => setGLBUrl(url)).catch((error) => '')
         getDirectURL(post.usdzFileURL).then((url) => setUSDZUrl(url)).catch((error) => '')
         getDirectURL(post.imageURL).then((url) => setPoster(url)).catch((error) => '')
         if(post.backGroundImage) getDirectURL(post.backGroundImage).then((url) => setBackgrounImage(url)).catch((error) => '')
+
     })
 
     const onFullScreenClick = () => setFullScreen(!fullScreen)
     const onVisitProfileClick = () => router.push(`/profile/${post.author.id}`)
-
+    
 
     const onShareClick = async () => {
         if(typeof window !== 'undefined' && window.navigator) {

@@ -73,7 +73,7 @@ const Profile = (props : IProps) => {
             setSearchedPosts([])
 
 
-            const set = (_posts : any[] , newPosts : any[]) => setSearchedPosts(newPosts)
+            const set = (_posts : any[] , newPosts : any[]) => setSearchedPosts(newPosts.reverse())
             loadMorePosts(searchedPosts, set, text)
         }
         setSearchText(text)
