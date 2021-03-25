@@ -157,12 +157,12 @@ const Post = (props : IProps) => {
                     </div>
                     <br></br>
                     <br></br>
-                    <div className={styles.row} style={{width:'100%'}}>
+                    {/* <div className={styles.row} style={{width:'100%'}}>
                         <h2>Similar Posts</h2>
-                    </div>
+                    </div> */}
                     <div style={{width:'100%'}}>
                         {/* @ts-ignore */}
-                        <PostScrollList list={relatedPosts} />
+                        {/* <PostScrollList list={relatedPosts} /> */}
                     </div>
                     <br></br>
                     <br></br>
