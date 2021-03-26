@@ -37,7 +37,7 @@ const Pricing = () => {
     })
 
     const onUpgradeModalButtonClick = () => {
-        switch(packageNmae)
+        switch(packageName)
         {
             case 'Starter':
                 window.open('https://share.hsforms.com/1S1eWqiIhQn6-Ko40h5J9Uw5ahuz', '_parent')
