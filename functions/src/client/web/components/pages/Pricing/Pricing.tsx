@@ -37,7 +37,7 @@ const Pricing = () => {
     })
 
     const onUpgradeModalButtonClick = () => {
-        switch(packageNmae)
+        switch(packageName)
         {
             case 'Starter':
                 window.open('https://share.hsforms.com/1S1eWqiIhQn6-Ko40h5J9Uw5ahuz', '_parent')
@@ -175,7 +175,7 @@ const Pricing = () => {
                 description={`You are about to upgrade your account to the ${packageName} 
                 and hereby authorise a monthly debit of ${amount} (ex. VAT). To continue, click the blue button and leave your details.`}
                 buttonText='upgrade'
-                type={IMessageTypes.STARRED}
+                type={IMessageTypes.NONE}
                 onClick={onUpgradeModalButtonClick}
             />
         </div>
