@@ -60,7 +60,7 @@ const Pricing = () => {
             <div className={styles.bodyContainer}>
                 <div className={styles.title}>
                     <h2 style={{fontWeight:1000}}>Upgrade and thrive!</h2>
-                    <p>Choose which package fits you best! Need help in deciding? No problem, get in touch here. We are happy to help. </p>
+                    <p>Choose which package fits you best! Need help in deciding? No problem, get in touch <a href="https://arizear.app/support">here</a> . We are happy to help. </p>
                 </div>
                 <div className={styles.plans}>
                    <PlanType

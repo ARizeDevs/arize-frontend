@@ -54,11 +54,9 @@ const CallInfo = () => {
                                      />
                             </div>
                              <br></br>
-                            
                             <a href="tel:31792033163" className={styles.num}>+31792033163 (Dutch and English) </a>
                             <br></br>
-                            <a href="tel:31629893742" className={styles.num}>+31629893742 (English)</a>
-                        
+                    
                         </div>
                     </div>
                     <div className={styles.banner}>

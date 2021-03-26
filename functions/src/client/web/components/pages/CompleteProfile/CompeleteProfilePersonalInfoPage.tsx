@@ -61,7 +61,7 @@ const CompeleteProfilePersonalInfoPage = ( props : IProps ) => {
                     </div>
                 </div>
                 <Input placeholder='myusername' error={error.username} maxInputLength={30} required text='Username' type='text' value={username} onChange={setUsername}/>
-                <MultiLineInput placeholder='Please write a few sentences to describe your business so when sharing your ARize profile it will be seen by others' required={false} text='Your company bio' onChange={setBio} value={bio}/>
+                <MultiLineInput placeholder='Please write a few sentences to describe your business so when sharing your ARize profile it will be seen by others' required={false} text='About your business' onChange={setBio} value={bio}/>
                 <div style={{ display:'flex',flexDirection:'row', justifyContent:'space-between' }}>
                     <div style={{width:'49%'}}>
                     <Input placeholder='dd/mm/yyyy' error={error.birthday} maxInputLength={30} required text='Date of birth' type='date' value={birthday} onChange={setBirthday}/>

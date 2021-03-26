@@ -30,7 +30,7 @@ const CountryPicker = (props : IProps) => {
 
     return (
         <div  className={styles.container + ' flex-column'}>
-            <p className={`${styles.label} ${error?styles.error:''}`}>Location</p>
+            <p className={`${styles.label} ${error?styles.error:''}`}>Your business location</p>
             <div onClick={() => setModalOpen(true)} onFocus={onFocus} onBlur={onBlur} className={`${styles.secondContainer} flex-row ${error?styles.secondContainerError:(active?styles.secondContainerActive:'')}`}>
                 <div  className={styles.icon}>
                     {code ?<ReactCountryFlag 
