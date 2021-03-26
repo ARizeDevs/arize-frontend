@@ -4,7 +4,7 @@ import PlanType from '../../common/PlanType'
 import styles from './Pricing.module.css'
 import firebase from 'firebase'
 import { getUser } from '../../../API/user'
-import UpgradeModal from '../../common/UpgradeModal';
+import UpgradeModal from '../../common/GeneralModal';
 import { getDirectURL } from '../../../config/firebase'
 import { IMessageTypes } from '../../common/Message/Message'
 
