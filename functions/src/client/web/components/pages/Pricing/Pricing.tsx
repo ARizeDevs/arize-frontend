@@ -8,13 +8,13 @@ import UpgradeModal from '../../common/UpgradeModal';
 import { getDirectURL } from '../../../config/firebase'
 import { IMessageTypes } from '../../common/Message/Message'
 
-var amount: string;
-var packageNmae: string;
 
 const Pricing = () => {
     
     const [ imageSrc, setImageSrc ] = useState('')
-    const [upgradeModalOpen, setUpgradeModalOpen] = useState(false);
+    const [ upgradeModalOpen, setUpgradeModalOpen ] = useState(false);
+    const [ amount, setAmount] = useState('');
+    const [ packageName, setPackageName] = useState('');
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged(async function(user) {
@@ -104,8 +104,8 @@ const Pricing = () => {
                         buttonTitle='Upgrade to Starter'
                         buttonColor='#141323'
                         onClick= {() => {
-                            amount = "€50 per month"
-                            packageNmae="Starter"
+                            setAmount("€50 per month")
+                            setPackageName("Starter")
                             setUpgradeModalOpen(true)
                         }}
                    />
@@ -136,8 +136,8 @@ const Pricing = () => {
                         buttonTitle='Upgrade to Pro'
                         buttonColor='#FF6F48'
                         onClick= {() => {
-                            amount = "€100 per month"
-                            packageNmae="Pro"
+                            setAmount("€100 per month")
+                            setPackageName("Pro")
                             setUpgradeModalOpen(true)
                         }}
                    />
@@ -160,8 +160,8 @@ const Pricing = () => {
                         buttonTitle='Contact Us'
                         buttonColor='#141323'
                         onClick= {() => {
-                            amount = "Contacts"
-                            packageNmae="For Enterprise"
+                            setAmount("Contacts")
+                            setPackageName("For Enterprise")
                             setUpgradeModalOpen(true)
                         }}
                     />
@@ -171,8 +171,8 @@ const Pricing = () => {
             <UpgradeModal
                 isOpen={upgradeModalOpen}
                 onRequestClose = {() => setUpgradeModalOpen(false)}
-                title={`${packageNmae} - ${amount}`}
-                description={`You are about to upgrade your account to the ${packageNmae} 
+                title={`${packageName} - ${amount}`}
+                description={`You are about to upgrade your account to the ${packageName} 
                 and hereby authorise a monthly debit of ${amount} (ex. VAT). To continue, click the blue button and leave your details.`}
                 buttonText='upgrade'
                 type={IMessageTypes.STARRED}

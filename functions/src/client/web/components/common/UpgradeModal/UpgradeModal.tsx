@@ -55,30 +55,7 @@ const UpgradeModal = (props : IProps) => {
                 <br></br>
                 <br></br>
                 <div className={styles.column} style={{width:'50%',justifyContent:'top',height:'100%'}}>
-<<<<<<< HEAD
                     <SolidButton onClick={onClick}> <h3>{buttonText}</h3></SolidButton>
-=======
-                    <SolidButton onClick={() => {
-                        switch(packageName)
-                        {
-                            case 'Starter':
-                                window.open('https://share.hsforms.com/1S1eWqiIhQn6-Ko40h5J9Uw5ahuz', '_parent')
-                                break;
-                            
-                            case 'Pro':
-                                window.open('https://share.hsforms.com/1kCOppF_eReSCcwneHlufNg5ahuz', '_parent')
-                                break;
-
-                            case 'For Enterprise':
-                                window.open('https://share.hsforms.com/1epny56Q2RnuUQAjDG5oGxA5ahuz', '_parent')
-                                break;
-
-                            case 'Need upgrade':
-                                // Arash code 
-                                break;
-                        }
-                    }}> <h3>Upgrade</h3></SolidButton>
->>>>>>> 03e394f685c90ce83387aec8139abf9a3f1008ac
                 </div>
             </div>
         </Modal>
