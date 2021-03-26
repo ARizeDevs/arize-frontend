@@ -47,7 +47,7 @@ const Profile = (props : IProps) => {
     const [ postsCount, setPostsCount ] = useState(0)
     const [ websiteURL, setWebsiteURL ] = useState('')
     const [ email, setEmail ] = useState('')
-    const [ maxSlots, setMaxSlots ] = useState(20)
+    const [ maxSlots, setMaxSlots ] = useState(3)
     const [ bio, setBio ] = useState('')
     const [ arViews, setARViews ] = useState(0)
     const [ tdViews, setTDViews ] = useState(0)

@@ -6,6 +6,7 @@ import firebase from 'firebase'
 import { getUser } from '../../../API/user'
 import UpgradeModal from '../../common/UpgradeModal';
 import { getDirectURL } from '../../../config/firebase'
+import { IMessageTypes } from '../../common/Message/Message'
 
 var amount: string;
 var packageNmae: string;
@@ -34,6 +35,24 @@ const Pricing = () => {
             }
         })
     })
+
+    const onUpgradeModalButtonClick = () => {
+        switch(packageNmae)
+        {
+            case 'Starter':
+                window.open('https://share.hsforms.com/1S1eWqiIhQn6-Ko40h5J9Uw5ahuz', '_parent')
+                break;
+            
+            case 'Pro':
+                window.open('https://share.hsforms.com/1kCOppF_eReSCcwneHlufNg5ahuz', '_parent')
+                break;
+
+            case 'For Enterprise':
+                window.open('https://share.hsforms.com/1epny56Q2RnuUQAjDG5oGxA5ahuz', '_parent')
+                
+                break;
+        }
+    }
 
     return (
         <div className={styles.root}>
@@ -152,8 +171,12 @@ const Pricing = () => {
             <UpgradeModal
                 isOpen={upgradeModalOpen}
                 onRequestClose = {() => setUpgradeModalOpen(false)}
-                packageName= {packageNmae}
-                amount= {amount}
+                title={`${packageNmae} - ${amount}`}
+                description={`You are about to upgrade your account to the ${packageNmae} 
+                and hereby authorise a monthly debit of ${amount} (ex. VAT). To continue, click the blue button and leave your details.`}
+                buttonText='upgrade'
+                type={IMessageTypes.STARRED}
+                onClick={onUpgradeModalButtonClick}
             />
         </div>
     )

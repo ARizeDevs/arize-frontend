@@ -17,7 +17,8 @@ export enum IMessageTypes {
     SUCCESS = 'SUCCESS',
     INFO = 'INFO',
     STARRED = 'STARRED',
-    ACTIVE = 'ACTIVE'
+    ACTIVE = 'ACTIVE',
+    NONE = 'NONE'
 }
 
 const Message = (props : IProps) => {

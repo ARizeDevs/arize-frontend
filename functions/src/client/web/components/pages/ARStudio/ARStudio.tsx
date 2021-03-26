@@ -184,6 +184,7 @@ const ARStudio = (props : IProps) => {
                             setHasWaterMark(true)
                         } else {
                             setHasWaterMark(false)
+                            toDataURL('/images/logo black new.png').then((data : any) => setWaterMarkBase64(data)).catch((error) => console.log(error))
                         }
                     }
                 } catch (error) {
@@ -386,7 +387,7 @@ const ARStudio = (props : IProps) => {
                         <Preview
                             page={page}
                             hasWaterMark={hasWaterMark}
-                            waterMarkBase64={waterMarkBase64}
+                            waterMarkBase64={isEdit?waterMarkBase64:page===3 ?waterMarkBase64:''}
                             solidBackgroundColor={solidBackgroundColor}
                             shadowIntensity={shadowIntensity}
                             shadowSoftness={shadowSoftness}
@@ -412,7 +413,7 @@ const ARStudio = (props : IProps) => {
                     {desktop && <div className={styles.previewWrapperDesktop}> 
                         <ModelViewer
                         hasWaterMark={hasWaterMark}
-                        waterMarkBase64={hasWaterMark?waterMarkBase64:undefined}
+                        waterMarkBase64={hasWaterMark ?(isEdit?waterMarkBase64:(page===3 ?waterMarkBase64:undefined)):undefined}
                         arButtonTextColor={arButtonTextColor}
                         arButtonBackgroundColor={arButtonBackgroundColor}
                         hasARButton={hasARButton}

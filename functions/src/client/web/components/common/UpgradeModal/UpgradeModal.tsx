@@ -4,19 +4,27 @@ import Modal from 'react-modal';
 import SolidButton from '../../common/buttons/SolidButton'
 
 import CrossIcon from '../../../../assets/icons/cross.svg';
+import ErrorTriangle from '../../../../assets/icons/error-triangle.svg'
+import SuccessSign from '../../../../assets/icons/success-sign.svg'
+import InfoIcon from '../../../../assets/icons/exclamation.svg'
+import StarredIcon from '../../../../assets/icons/starred.svg'
+
 
 import styles from './UpgradeModal.module.css'
+import { IMessageTypes } from '../Message/Message';
 
 interface IProps {
-
     isOpen : boolean,
     onRequestClose : () => void,
-    packageName: string,
-    amount : string
+    title: string,
+    onClick : () => void,
+    buttonText : string,
+    type : IMessageTypes,
+    description : string
 }
 
 const UpgradeModal = (props : IProps) => {
-    const {isOpen, onRequestClose, packageName, amount} = props
+    const {isOpen, onRequestClose, title, description, buttonText, onClick, type} = props
 
     return(
         <Modal
@@ -33,29 +41,21 @@ const UpgradeModal = (props : IProps) => {
             </div>
             
             <div className={styles.column} style={{width:'100%',justifyContent:'top',alignItems:'center',height:'100%'}} >
-                <h2>{packageName} - {amount}</h2>
-                <p style={{textAlign:'center', paddingTop:'30px', marginLeft:'15px', marginRight:'15px'}}> You are about to upgrade your account to the {packageName} 
-                and hereby authorise a monthly debit of {amount} (ex. VAT). To continue, click the blue button and leave your details.</p>
+                <div className={styles.row}>
+                    {type === IMessageTypes.ERROR? <ErrorTriangle />:null}
+                    {type === IMessageTypes.SUCCESS? <SuccessSign />:null}
+                    {type === IMessageTypes.ACTIVE? <SuccessSign />:null}
+                    {type === IMessageTypes.INFO? <InfoIcon />:null}
+                    {type === IMessageTypes.STARRED? <StarredIcon/>:null}
+                    &nbsp;&nbsp;
+                    <h2>{title}</h2>
+                </div>
+                
+                <p style={{textAlign:'center', paddingTop:'30px', marginLeft:'15px', marginRight:'15px'}}>{description}</p>
                 <br></br>
                 <br></br>
                 <div className={styles.column} style={{width:'50%',justifyContent:'top',height:'100%'}}>
-                    <SolidButton onClick={() => {
-                        switch(packageName)
-                        {
-                            case 'Starter':
-                                window.open('https://share.hsforms.com/1S1eWqiIhQn6-Ko40h5J9Uw5ahuz', '_parent')
-                                break;
-                            
-                            case 'Pro':
-                                window.open('https://share.hsforms.com/1kCOppF_eReSCcwneHlufNg5ahuz', '_parent')
-                                break;
-
-                            case 'For Enterprise':
-                                window.open('https://share.hsforms.com/1epny56Q2RnuUQAjDG5oGxA5ahuz', '_parent')
-                                
-                                break;
-                        }
-                    }}> <h3>Upgrade</h3></SolidButton>
+                    <SolidButton onClick={onClick}> <h3>{buttonText}</h3></SolidButton>
                 </div>
             </div>
         </Modal>

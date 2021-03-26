@@ -27,6 +27,14 @@
     justify-content: flex-start;
 }
 
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
 .grayColor {
     color : var(--main-lightgray2-color)
 }

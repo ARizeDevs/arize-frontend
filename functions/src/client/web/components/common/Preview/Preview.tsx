@@ -70,7 +70,7 @@ const Preview = (props : IProps) => {
                 <div style={{width:'90%',height:'95%',position:'relative'}}>
                     <ModelViewer
                         hasWaterMark={hasWaterMark}
-                        waterMarkBase64={waterMarkBase64}
+                        waterMarkBase64={page===3?waterMarkBase64:''}
                         arButtonTextColor={arButtonTextColor}
                         arButtonBackgroundColor={arButtonBackgroundColor}
                         hasARButton={hasARButton}
