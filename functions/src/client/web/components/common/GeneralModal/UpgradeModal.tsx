@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 // import { classNames } from 'react-select/src/utils';
-import SolidButton from '../../common/buttons/SolidButton'
+import SolidButton from '../buttons/SolidButton'
 
 import CrossIcon from '../../../../assets/icons/cross.svg';
 import ErrorTriangle from '../../../../assets/icons/error-triangle.svg'

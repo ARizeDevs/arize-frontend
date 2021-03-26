@@ -26,6 +26,7 @@ import useDebounce from '../../../helpers/useDebounce'
 import { getAllPosts } from '../../../API/posts'
 import { getDirectURL } from '../../../config/firebase'
 
+
 interface IProps {
     id? : string | null
 }
@@ -244,7 +245,7 @@ const Profile = (props : IProps) => {
 
     return (
         <div className={styles.root}>
-            <Navbar imageSrc={imageSrc} />
+            <Navbar imageSrc={imageSrc} haveMoreSlots={maxSlots - postsCount > 0} />
             {/* @ts-ignore */}
             <div ref={scrollObject} className={styles.bodyContainer} onScroll={(e) => onScroll(e)}>
                 {showGoToTop?<ScrollToTop onClick={onGoToTopClick} />:null}

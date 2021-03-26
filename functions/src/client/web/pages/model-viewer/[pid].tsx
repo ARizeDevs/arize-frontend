@@ -58,11 +58,12 @@ const modelViewer = ({ post, isAryanTer } : { userAgent : any, ipAddress : any ,
                 <title>Model Viewer</title>
                 <script type="module" src="https://unpkg.com/@google/model-viewer@1.1.0/dist/model-viewer.js"></script>
                 <script noModule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
-                <meta property="og:image" content="/images/favicon.png" />
-                <meta property="og:title" content={post.title} />
-                <meta property="og:description" content={post.description} />
-                {/* <meta property="og:url" content="https://www.imdb.com/title/tt0117500/" /> */}
-                <meta property="og:image" content={poster} />
+                <meta name="og:site_name" content='Arize' />
+                <meta name="og:type" content='website' />
+                <meta name="og:title" content={post.title} />
+                <meta name="og:url" content={`https://arizear.app/model-viewer/${post.id}`} />
+                <meta name="og:description" content={post.author.companyName?post.author.companyName:post.author.username} />
+                <meta name="og:image" content={poster} />
             </Head>
             <div style={{position:'absolute',left:'20px',top:'20px'}}>
                 {/* {hasWaterMark ?
@@ -123,7 +124,7 @@ export async function  getServerSideProps (context : any) {
             }
         }
   
-        const result = await getPost(id , false)
+        const result = await getPost(id , true)
         
         return {
           props: { post : result.data.data.data },

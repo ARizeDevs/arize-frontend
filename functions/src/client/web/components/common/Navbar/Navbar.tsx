@@ -11,10 +11,13 @@ import styles from './Navbar.module.css'
 import SolidButton from '../buttons/SolidButton'
 import ProfileMenu from '../ProfileMenu'
 import Hamburger from './Hamburger'
+import GeneralModal from '../../common/GeneralModal'
+import { IMessageTypes } from '../Message/Message'
 
 interface IProps {
-    imageSrc? : string
-    noMenu? : boolean
+    imageSrc? : string,
+    noMenu? : boolean,
+    haveMoreSlots? : boolean,
 }
 
 const rightItems = [
@@ -29,10 +32,12 @@ const rightItems = [
 ]
 
 const Navbar = (props : IProps) => {
-    const { imageSrc, noMenu } = props
+    const { imageSrc, noMenu, haveMoreSlots } = props
 
     const [isARStudio,setIsARStudio] = useState(false)
     const [ isPublicRoute, setPublicRoute ] = useState(false)
+    const [ arStudioModalOpen, setARStudioModalOpen ] = useState(false)
+
     const router  = useRouter()
 
     useLayoutEffect(() => {
@@ -69,6 +74,7 @@ const Navbar = (props : IProps) => {
     })
 
     return (
+        <>
         <div className={styles.root}>
             <div className={styles.subContainer}>
                 <ARizeLogo />
@@ -89,13 +95,33 @@ const Navbar = (props : IProps) => {
 
                             {!isARStudio? 
                             <div className={styles.arStudioButton}>
-                                <SolidButton onClick={() => router.push('/arstudio')} ><h3>Create AR</h3></SolidButton>
+                                <SolidButton onClick={() => {
+                                    if(haveMoreSlots) {
+                                        router.push('/arstudio')
+                                    } else {
+                                        setARStudioModalOpen(true)
+                                    }
+                                }} >
+                                    <h3>Create AR</h3>
+                                </SolidButton>
                             </div> : null }
                         </div>
                     </>    
                 }
             </div>
         </div>
+
+        <GeneralModal
+            buttonText='Upgrade'
+            description={'You have reached your maximum number of posts to create new post please upgrade your account'}
+            isOpen={arStudioModalOpen}
+            onRequestClose={() => setARStudioModalOpen(false)}
+            onClick={() => router.push('/pricing')}
+            title='No more slots'
+            type={IMessageTypes.NONE}
+        />
+
+        </>
     )
 }
 
