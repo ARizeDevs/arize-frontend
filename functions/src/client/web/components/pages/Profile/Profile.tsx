@@ -1,5 +1,5 @@
 import firebase from 'firebase'
-import _ from 'lodash'
+import _, { result } from 'lodash'
 import React , { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { useToasts } from 'react-toast-notifications'
@@ -28,11 +28,11 @@ import { getDirectURL } from '../../../config/firebase'
 
 
 interface IProps {
-    id? : string | null
+    user? : any | null
 }
 
 const Profile = (props : IProps) => {
-    const { id } = props
+    const { user } = props
     const { addToast } = useToasts()
 
     const router = useRouter()
@@ -81,7 +81,7 @@ const Profile = (props : IProps) => {
     }
 
     const loadMorePosts = useDebounce( (posts : any[], setPosts : (posts : any[], newPosts : any[]) => void, searchText : string | null) => {
-        getAllPosts(id?id:null, null, posts.length+1, postsPageSize, searchText? searchText : null)
+        getAllPosts(user && user.id?user.id:null, null, posts.length+1, postsPageSize, searchText? searchText : null)
         .then((result : any) => {
             const newPosts = result.data.data
 
@@ -146,71 +146,69 @@ const Profile = (props : IProps) => {
 
     useEffect(() => {
         const getInitData = async () => {
-            firebase.auth().onAuthStateChanged(async function(user) {
-                try {
-                    // if(user) {
-                        if(id === null || id) {
-                            
+            try {
+                let userData = user
 
-                            const user = await getUser(id, true, postsPageSize)
-
-                            if(user && user.data.data){
-                                const userData = user.data.data
-                                setName(userData.name)
-                                setUsername(userData.username)
-                                setCompanyName(userData.companyName)
-                                setSurname(userData.surname)
-                                setLocation(userData.location)
-                                setWebsiteURL(userData.websiteURL)
-                                setEmail(userData.email)
-                                if(userData.profilePicURL) {
-                                    getDirectURL(userData.profilePicURL).then((url : any) => {
-                                        setImageSrc(url)
-                                    })
-                                }
-                                if(userData.posts) {
-                                    console.log('---------')
-                                    console.log(userData.postsCount)
-                                    setPostsCount(userData.postsCount)
-                                    setPosts(userData.posts.reverse())
-                                    let arViews = 0
-                                    let tdViews = 0
-                                    let shares = 0
-                                    let c = 0
-                                    userData.posts.forEach((p : any) => {
-                                        if(p.arViewsCount) {
-                                            arViews += p.arViewsCount
-                                        }
-                                        if(p.tdViewsCount) {
-                                            tdViews += p.tdViewsCount
-                                        }
-                                        if(p.sharesCount) {
-                                            shares += p.sharesCount
-                                        }
-                                        if(p.clicksCount) {
-                                            c += p.clicksCount
-                                        }
-                                    })
-                                    setTotalShares(shares)
-                                    setARViews(arViews)
-                                    setTDViews(tdViews)
-                                    setClicks(c)
-                                }
-                                setMaxSlots(userData.maxSlots)
-                                if(userData.bio) setBio(userData.bio)
-                            }
-                        }
-                    // }
-                } catch(error) {
-                    console.log(error)
-                } finally {
-                    setFetchingData(2);
+                if(user === null) {
+                    const result = await getUser(null, true, postsPageSize)
+                    if(result && result.data.data){
+                        userData = result.data.data
+                    }
                 }
-            })
+
+                if(userData) {
+                    setName(userData.name)
+                    setUsername(userData.username)
+                    setCompanyName(userData.companyName)
+                    setSurname(userData.surname)
+                    setLocation(userData.location)
+                    setWebsiteURL(userData.websiteURL)
+                    setEmail(userData.email)
+                    if(userData.profilePicURL) {
+                        getDirectURL(userData.profilePicURL).then((url : any) => {
+                            setImageSrc(url)
+                        })
+                    }
+                    if(userData.posts) {
+                        console.log('---------')
+                        console.log(userData.postsCount)
+                        setPostsCount(userData.postsCount)
+                        setPosts(userData.posts.reverse())
+                        let arViews = 0
+                        let tdViews = 0
+                        let shares = 0
+                        let c = 0
+                        userData.posts.forEach((p : any) => {
+                            if(p.arViewsCount) {
+                                arViews += p.arViewsCount
+                            }
+                            if(p.tdViewsCount) {
+                                tdViews += p.tdViewsCount
+                            }
+                            if(p.sharesCount) {
+                                shares += p.sharesCount
+                            }
+                            if(p.clicksCount) {
+                                c += p.clicksCount
+                            }
+                        })
+                        setTotalShares(shares)
+                        setARViews(arViews)
+                        setTDViews(tdViews)
+                        setClicks(c)
+                    }
+                    setMaxSlots(userData.maxSlots)
+                    if(userData.bio) setBio(userData.bio)
+                }
+            } catch(error) {
+                console.log(error)
+            } finally {
+                setFetchingData(2);
+            }
         }
 
         getInitData()
-    }, [id])
+    }, [user])
 
     useEffect(() => {
 
@@ -220,7 +218,7 @@ const Profile = (props : IProps) => {
     const onShareProflie = async () => {
         const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
         
-        let userID : any = id
+        let userID : any = user? user.id:null
         if(!userID) {
             userID = await getUserID()
         }
@@ -258,7 +256,7 @@ const Profile = (props : IProps) => {
                                     unchangeable
                                 />
                             </div>
-                            {id === null ?<div className={styles.row}>
+                            {user === null ?<div className={styles.row}>
                                 <div style={{width : '110px',marginRight : '10px'}}>
                                 <SolidButton styleClass={styles.editProfileBTN} colorTheme='white' onClick={() => router.push('/edit-profile')}><h4 style={{color : 'black'}}>Edit Profile</h4></SolidButton>
                                 </div>
@@ -274,9 +272,9 @@ const Profile = (props : IProps) => {
                         <br></br>
                         <br></br>
                         <h1 className={styles.name}>{companyName?companyName:`${name} ${surname}`}</h1>
-                        <p className={styles.lightColor}>{id?location:username}</p>
+                        <p className={styles.lightColor}>{user?location:username}</p>
                         <br></br>
-                        {id !== null ? <h4 style={{color : 'var(--main-blue-color)'}}>{postsCount} posts</h4> : null}
+                        {user !== null ? <h4 style={{color : 'var(--main-blue-color)'}}>{postsCount} posts</h4> : null}
                         <br></br>
                         <div style={{width:'70%'}}>
                             <p>{bio}</p>
@@ -285,7 +283,7 @@ const Profile = (props : IProps) => {
                     </div>
                     <div className={`${styles.profileSections} ${styles.statisticsSection}`}>
                         
-                        {id === null ? 
+                        {user === null ? 
                             <>
                                 <div className={styles.shadowedBox}>
                                     <RemainingSlots maxSlots={maxSlots} usedSlots={postsCount} />
@@ -327,7 +325,7 @@ const Profile = (props : IProps) => {
                 </div>
                 <br></br>
                 <div className={styles.profilePostsContainer}>
-                    {id === null ?
+                    {user === null ?
                     <>
                         <div className={styles.rowContainer} style={{width:'100%'}}>
                             <div className={styles.rowContainer} style={{justifyContent:'flex-start'}}>

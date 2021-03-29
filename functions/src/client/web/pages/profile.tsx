@@ -12,7 +12,7 @@ const profile = () => {
             <title>Profile</title>
         </Head>
         <UnauthorizedRedirect>
-            <Profile id={null} />        
+            <Profile user={null} />        
         </UnauthorizedRedirect>
     </>
 )
