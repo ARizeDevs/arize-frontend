@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firebase-firestore"
 import "firebase/storage"
+(global as any).XMLHttpRequest = require('xhr2');
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAfw0820cs80QQ_f6oGvjY6-0yL9HnZIqY',
