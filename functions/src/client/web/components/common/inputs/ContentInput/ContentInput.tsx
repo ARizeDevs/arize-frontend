@@ -45,7 +45,8 @@ const ContentInput = (props : IProps) => {
     } 
 
     return <div className={styles.root}>
-            <p style={{fontWeight:'bold'}} className={error || localError?styles.error:''}>{text}</p>
+            <p style={{fontWeight:'bold'}} className={error || localError?styles.error:''}>{text} (max 23mb)*</p>
+            <p style={{fontWeight:'normal'}}> Using Blender, Maya, 3Dmax, cinema 4D or any other software you can export your  3D file to GBL/GLTF using plugins avliable fo them.</p>
             {typeof window !== "undefined" ? 
             <div className={`${styles.imagePickerButton} ${error || localError?styles.imagePickerButtonError:(fileChoosingSuccess?styles.imagePickerButtonSuccess:'')}`}>
                 

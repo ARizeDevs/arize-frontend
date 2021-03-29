@@ -8,6 +8,7 @@ const support = () => (
         <Head>
             <link rel="shortcut icon" href="/images/favicon.png" />
             <title>Support</title>
+            <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/8887787.js"></script>
         </Head>
         {/* <UnauthorizedRedirect> */}
             <Support />        
