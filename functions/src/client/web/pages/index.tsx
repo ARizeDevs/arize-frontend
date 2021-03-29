@@ -11,7 +11,7 @@ const home = () => (
             <title>Home</title>
         </Head>
         <UnauthorizedRedirect>
-            <Profile id={null} />        
+            <Profile user={null} />        
         </UnauthorizedRedirect>
     </>
 )
