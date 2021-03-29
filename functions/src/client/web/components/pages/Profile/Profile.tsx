@@ -1,5 +1,4 @@
-import firebase from 'firebase'
-import _, { result } from 'lodash'
+import _ from 'lodash'
 import React , { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { useToasts } from 'react-toast-notifications'
