@@ -9,7 +9,7 @@ import SolidButton from '../../common/buttons/SolidButton'
 import ARStudioPostDetail from '../../common/ARStudioPostDetail'
 import ArrowLeftIcon from '../../../../assets/icons/arrow-left.svg'
 import CrossIcon from '../../../../assets/icons/cross.svg'
-import { savePost, getPost} from '../../../API/posts'
+import { savePost, getPost, deletePost} from '../../../API/posts'
 import { contentFileValidator, imageSrcValidator, tagsValidator,
      titleValidator, validatePostDetail,postBackgroundImageBase64Validator,
     validateCustomizationDetail, } from './validators'
@@ -338,12 +338,28 @@ const ARStudio = (props : IProps) => {
         }
     }
 
+    const onCancelClick = async () => {
+        if(savedPostID) {
+            try {
+                setSubmiting(true)
+                await deletePost(savedPostID)
+            } catch(error) {
+                console.log(error)
+            } finally {
+                setSubmiting(false)
+                router.push('/profile')
+            }
+        } else {
+            router.push('/profile')
+        }
+    }
+
     return (
     <div className={styles.root}>    
         <div className={styles.bodyContainer}>
             <div className={styles.column}>
             {page===1?<div className={styles.topBar}>
-                <div  onClick={() => router.push('/profile')} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start', marginRight:'50px'}}>
+                <div  onClick={onCancelClick} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start', marginRight:'50px'}}>
                     <div style={{width:'16px',marginRight:'16px',marginTop:'6px'}}>
                         {/* @ts-ignore */}
                         <CrossIcon fill='black'/>

@@ -10,7 +10,7 @@ import { getPost, view3DPost } from '../../API/posts'
 import { getDirectURL } from '../../config/firebase'
 import FourOhFour from '../../components/pages/FourOhFour'
 
-const modelViewer = ({ post, isAryanTer } : { userAgent : any, ipAddress : any , post:any, isAryanTer : boolean}) => {
+const modelViewer = ({ poster ,post, isAryanTer } : { poster : string, userAgent : any, ipAddress : any , post:any, isAryanTer : boolean}) => {
     const router = useRouter()
     
     if(!post) {
@@ -33,14 +33,12 @@ const modelViewer = ({ post, isAryanTer } : { userAgent : any, ipAddress : any ,
     const [ glbURL, setGLBUrl] = useState('')
     const [ usdzURL, setUSDZUrl ] = useState('')
     const [ backGroundImage, setBackgrounImage ] = useState('')
-    const [ poster, setPoster ] = useState('')
     const [ waterMarkImage, setWaterMarkImage] = useState('');
     const [ hasWaterMark, setHasWaterMark] = useState(false);
 
     useEffect(() => {
         getDirectURL(post.glbFileURL).then((url) => setGLBUrl(url)).catch(() => '' )
         getDirectURL(post.usdzFileURL).then((url) => setUSDZUrl(url)).catch(() => '' )
-        getDirectURL(post.imageURL).then((url) => setPoster(url)).catch(() => '' )
         if(post.waterMarkImage){
             getDirectURL(post.waterMarkImage).then((url) => setWaterMarkImage(url)).catch(() => '')
             setHasWaterMark(true);
@@ -126,8 +124,10 @@ export async function  getServerSideProps (context : any) {
   
         const result = await getPost(id , true)
         
+        
+        const poster = await getDirectURL(result.data.data.data.imageURL)
         return {
-          props: { post : result.data.data.data },
+          props: { post : result.data.data.data, poster },
         }
     } catch(error) {
         console.log('=======')
