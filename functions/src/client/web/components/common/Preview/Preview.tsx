@@ -67,7 +67,7 @@ const Preview = (props : IProps) => {
         return (
         <>
             <div style={{display:'flex',position:'relative',flexDirection:'column',width:'100%',height:'100%',alignItems:'center',justifyContent:'center'}}>
-                <div style={{width:'90%',height:'95%',position:'absolute'}}>
+                <div style={{width:'90%',height:'95%',position:'absolute',zIndex:4}}>
                     <ModelViewer
                         hasWaterMark={page===3?hasWaterMark:false}
                         waterMarkBase64={page===3?waterMarkBase64:''}
@@ -97,7 +97,7 @@ const Preview = (props : IProps) => {
 
 
                 {page===1?
-                    <div style={{position:'absolute',width:'90%'}}>
+                    <div style={{position:'absolute',width:'90%',zIndex:5}}>
                         {isOnTheGround?
                         <Ground  />:<Wall />}
                     </div>
