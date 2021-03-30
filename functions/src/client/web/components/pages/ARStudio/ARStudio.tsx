@@ -68,7 +68,7 @@ const ARStudio = (props : IProps) => {
     const [ tags , setTags ] = useState<string[]>([])
     const [ tagsChanged, setTagsChanged ] = useState(false)
     const [ contentFile , setContentFile ] = useState<any>(null)
-    const [ hasSolidBackground, setHasSolidBackground ] = useState(true)
+    // const [ hasSolidBackground, setHasSolidBackground ] = useState(true)
     const [ solidBackgroundColor, setSolidBackgroundColor ] = useState('#FFFFFF')
     const [ hasShadow, setHasShadow ] = useState(false)
     const [ autoPlay, setAutoPlay ] = useState(true) 
@@ -402,8 +402,10 @@ const ARStudio = (props : IProps) => {
                     {!desktop && <div className={styles.previewWrapperMobile}>
                         <Preview
                             page={page}
+                            hasSkybox={hasSkyBox}
                             hasWaterMark={hasWaterMark}
                             waterMarkBase64={isEdit?waterMarkBase64:page===3 ?waterMarkBase64:''}
+                            // hasSolidBackground={hasSolidBackground}
                             solidBackgroundColor={solidBackgroundColor}
                             shadowIntensity={shadowIntensity}
                             shadowSoftness={shadowSoftness}
@@ -516,8 +518,8 @@ const ARStudio = (props : IProps) => {
                         setAllowScaling={setAlloScaling}
                         solidBackgroundColor = {solidBackgroundColor}
                         setSolidBackgroundColor = {setSolidBackgroundColor}
-                        solidBackground={hasSolidBackground}
-                        setSolidBackground={setHasSolidBackground}
+                        // solidBackground={hasSolidBackground}
+                        // setSolidBackground={setHasSolidBackground}
                         hasARButton={hasARButton}
                         arButtonBackgroundColor={arButtonBackgroundColor}
                         arButtonTextColor={arButtonTextColor}

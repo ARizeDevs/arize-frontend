@@ -257,7 +257,7 @@ const ModelViewer = (props : IProps) => {
 
     //--------------- end Panning ----------//
 
-    return (<div style={{width:'100%',height:'100%',position:'relative',backgroundColor:solidBackgroundColor}}>
+    return (<div style={{width:'100%',height:'100%',position:'relative',backgroundColor:solidBackgroundColor?solidBackgroundColor:'#FFFFF'}}>
                 <model-viewer
                     id="myviewer"
                     src={glbURL} 

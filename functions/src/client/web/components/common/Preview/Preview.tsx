@@ -19,9 +19,11 @@ interface IProps {
     exposure : number,
     contentFile : any,
     allowScaling : boolean,
+    hasSkybox : boolean,
     backgrounImage : string,
     isOnTheGround : boolean,
     page : number,
+    // hasSolidBackground : boolean,
     solidBackgroundColor : string,
     hasShareButton : boolean,
     shareButtonBackgroundColor : string,
@@ -56,11 +58,13 @@ const Preview = (props : IProps) => {
         shareButtonTextColor,
         shadowIntensity,
         shadowSoftness,
+        // hasSolidBackground,
         solidBackgroundColor,
         hasWaterMark,
         waterMarkBase64,
         page,
-        isOnTheGround
+        isOnTheGround,
+        hasSkybox
     } = props
 
     const renderInnerPreview = () => {
@@ -78,7 +82,7 @@ const Preview = (props : IProps) => {
                         hasShareButton={hasShareButton}
                         shareButtonBackgroundColor={shareButtonBackgroundColor}
                         shareButtonTextColor={shareButtonTextColor}
-                        solidBackgroundColor={solidBackgroundColor}
+                        solidBackgroundColor={!hasSkybox?solidBackgroundColor:'#FFFFFF'}
                         shadowIntensity={(shadowIntensity/10).toString()}
                         shadowSoftness={(shadowSoftness/10).toString()}
                         exposure={(exposure/10).toString()}

@@ -52,9 +52,9 @@ interface IProps {
     hasSkyBox: boolean,
     setHasSkyBox: (value : boolean) => void,
     solidBackgroundColor : string,
-    solidBackground : boolean,
+    // solidBackground : boolean,
     setSolidBackgroundColor : (value : string) => void,
-    setSolidBackground : (value : boolean) => void,
+    // setSolidBackground : (value : boolean) => void,
 
     hasWaterMark : boolean,
     setHasWaterMark : ( value : boolean ) => void,
@@ -70,7 +70,7 @@ const ARStudioPostDetail = (props : IProps) => {
         allowScaling, setAllowScaling, arButtonBackgroundColor, exposure, setExposure,
         hasARButton, hasShareButton, setARButtonBackgroundColor, setARButtonTextColor,
         setHasARButton, setHasShareButton, setShareButtonBackgroundColor, setShareButtonTextColor,
-        solidBackground, setSolidBackground, hasSkyBox, setHasSkyBox,
+        hasSkyBox, setHasSkyBox,
         hasShadow, setHasShadow, shadowIntensity, setShadowIntensity, shadowSoftness, setShadowSoftness,
         buttonText, onFinish , postBackgroundImageBase64, setPostBackgroundImageBase64, 
         hasWaterMark, setHasWaterMark, waterMarkBase64, setWaterMarkBase64, autoPlay, setAutoPlay
@@ -89,8 +89,8 @@ const ARStudioPostDetail = (props : IProps) => {
         <div className={styles.root}>
             <div className={styles.inputWrapper}>
             <Collapsible  triggerStyle={{cursor:'pointer', fontWeight:800,alignItems:'center',display:'flex',fontSize:16}} open={true} transitionTime={250} trigger={<div style={{width:'100%',paddingBottom:'10px', display:'flex',flexDirection:'row',justifyContent:'space-between'}}><p style={{display:'flex',flexDirection:'row',alignItems:'center'}}>3D View Setting</p><AngleDown></AngleDown></div>}>
-                        <Toggle active={solidBackground} setActive={setSolidBackground} text='Solid Background' />
-                        {solidBackground && 
+                        <Toggle active={!hasSkyBox} setActive={(value : boolean) => setHasSkyBox(!value)} text='Solid Background' />
+                        {!hasSkyBox && 
                         <div style={{width:'95%',marginBottom:20}}>
                                 <ColorPicker text=''  color={solidBackgroundColor} setColor={setSolidBackgroundColor} />
                         </div>}
