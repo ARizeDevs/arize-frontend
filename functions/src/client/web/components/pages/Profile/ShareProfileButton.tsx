@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { getUserID } from '../../../API/utils'
 import { copyToClipBoard } from '../../../helpers/copyToClipBoard'
 import SolidButton from '../../common/buttons/SolidButton'
@@ -16,7 +16,7 @@ interface IProps {
 const ShareProfileButton = (props : IProps) => {
 
     const [ on, setOn ] = useState(false)
-    const [ timer, setTimer ] = useState(null)
+    const [ timer, setTimer ] = useState<any>(null)
     const { uid } = props
 
     const onShareProflie = async () => {
@@ -49,19 +49,8 @@ const ShareProfileButton = (props : IProps) => {
             } else {
                 setTimer(setInterval(() => setOn(false),1000))
             }
-            // addToast('url copied',{ appearance : 'success' })
         }
     }
-
-    // useEffect(() => {
-    //     const timer = setInterval(() => {
-    //         setOn(!on)
-    //     }, 2000)
-
-    //     return () => {
-    //         clearInterval(timer)
-    //     }
-    // }, [])
 
     return (
         <>
@@ -78,8 +67,6 @@ const ShareProfileButton = (props : IProps) => {
 }
 
 const ShareProfileToast = ({ on } : { on : boolean}) => {
-    console.log(on);
-    
     return (
         <div className={styles.shareProfileToast} style={{opacity:!on?'0':'1'}}>
             <RoundTick />
