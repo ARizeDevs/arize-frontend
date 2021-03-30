@@ -130,3 +130,24 @@
         width : 90%
     }
 }
+
+.shareProfileToast {
+    background-color: var(--main-green-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 200px;
+    height: 45px;
+    opacity: 1;
+    border-radius: 16px;
+    margin-left: 16px;
+    box-shadow:0px 7px 25px rgba(87, 223, 142, 0.5);
+    transition: .4s;
+}
+
+.shareProfileToast * {
+    color: white;
+}
+
+/* .sharePro */

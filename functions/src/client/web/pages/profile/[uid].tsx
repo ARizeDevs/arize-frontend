@@ -21,7 +21,7 @@ const profile = (props : IProps) => {
         <Head>
             <link rel="shortcut icon" href="/images/favicon.png" />
             <title>Profile</title>
-            <meta name="og:site_name" content='Arize' />
+            <meta name="og:site_name" content='ARize' />
             <meta name="og:type" content='website' />
             <meta name="og:title" content={user.companyName?user.companyName:user.username} />
             <meta name="og:url" content={`https://arizear.app/profile/${user.id}`} />

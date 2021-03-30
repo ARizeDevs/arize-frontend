@@ -1,7 +1,6 @@
 import _ from 'lodash'
 import React , { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
-import { useToasts } from 'react-toast-notifications'
 
 import EmailIcon from '../../../../assets/icons/email3.svg'
 import WebsiteIcon from '../../../../assets/icons/website2.svg'
@@ -19,11 +18,10 @@ import PostsList from '../../common/PostsList'
 import Loading from '../../common/Loading'
 import ScrollToTop from '../../common/ScrollToTop'
 // import TipBox from '../../common/TipBox'
-import { copyToClipBoard } from '../../../helpers/copyToClipBoard'
-import { getUserID } from '../../../API/utils'
 import useDebounce from '../../../helpers/useDebounce'
 import { getAllPosts } from '../../../API/posts'
 import { getDirectURL } from '../../../config/firebase'
+import ShareProfileButton from './ShareProfileButton'
 
 
 interface IProps {
@@ -32,7 +30,6 @@ interface IProps {
 
 const Profile = (props : IProps) => {
     const { user } = props
-    const { addToast } = useToasts()
 
     const router = useRouter()
     const [ searchText, setSearchText ] = useState('')
@@ -214,31 +211,7 @@ const Profile = (props : IProps) => {
         if (fetchingData === 2) setFetchingData(3)
     })
 
-    const onShareProflie = async () => {
-        const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
-        
-        let userID : any = user? user.id:null
-        if(!userID) {
-            userID = await getUserID()
-        }
-
-        const shareURL = `https://arizear.app/profile/${userID}`
-
-        if(mobile) {
-            if(typeof window !== 'undefined' && window.navigator) {
-                try {
-                    await window.navigator.share({ title: "ARize", url: shareURL });
-                    console.log("Data was shared successfully");
-                } catch (err) {
-                    console.error("Share failed:", err.message);
-                }    
-            }
-        } else {
-            copyToClipBoard(shareURL)
     
-            addToast('url copied',{ appearance : 'success' })
-        }
-    }
 
     return (
         <div className={styles.root}>
@@ -259,13 +232,7 @@ const Profile = (props : IProps) => {
                                 <div style={{width : '110px',marginRight : '10px'}}>
                                 <SolidButton styleClass={styles.editProfileBTN} colorTheme='white' onClick={() => router.push('/edit-profile')}><h4 style={{color : 'black'}}>Edit Profile</h4></SolidButton>
                                 </div>
-                                <div className={styles.shareProfile} style={{width : '110px'}}>
-                                    <SolidButton styleClass={styles.shareProfileBTN} colorTheme='white' 
-                                        onClick={onShareProflie} 
-                                    >
-                                        <h4 style={{color : 'var(--main-blue-color)'}}>Share Profile</h4>
-                                    </SolidButton>
-                                </div>
+                                <ShareProfileButton />
                             </div>:null}
                         </div>
                         <br></br>
