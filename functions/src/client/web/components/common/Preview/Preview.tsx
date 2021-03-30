@@ -66,10 +66,10 @@ const Preview = (props : IProps) => {
     const renderInnerPreview = () => {
         return (
         <>
-            <div style={{display:'flex',flexDirection:'column',width:'100%',height:'100%',alignItems:'center',justifyContent:'center'}}>
-                <div style={{width:'90%',height:'95%',position:'relative'}}>
+            <div style={{display:'flex',position:'relative',flexDirection:'column',width:'100%',height:'100%',alignItems:'center',justifyContent:'center'}}>
+                <div style={{width:'90%',height:'95%',position:'absolute'}}>
                     <ModelViewer
-                        hasWaterMark={hasWaterMark}
+                        hasWaterMark={page===3?hasWaterMark:false}
                         waterMarkBase64={page===3?waterMarkBase64:''}
                         arButtonTextColor={arButtonTextColor}
                         arButtonBackgroundColor={arButtonBackgroundColor}
@@ -95,12 +95,13 @@ const Preview = (props : IProps) => {
                     />
                 </div>
 
+
                 {page===1?
-                <div style={{position:'absolute',width:'90%'}}>
-                    {isOnTheGround?
-                    <Ground  />:<Wall />}
-                </div>
-                :null}
+                    <div style={{position:'absolute',width:'90%'}}>
+                        {isOnTheGround?
+                        <Ground  />:<Wall />}
+                    </div>
+                    :null}
                 <img className={styles.iosDeviceBackground} src={'/images/iOS phone.png'}></img>
             </div>
         </>

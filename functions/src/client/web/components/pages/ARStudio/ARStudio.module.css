@@ -9,8 +9,8 @@
     /* padding: 40px; */
   
     width: 100%;
-    
-    flex: 1 1 auto;
+    height: 100%;
+    /* flex: 1 1 auto; */
     display: flex;
     align-items: center;
     

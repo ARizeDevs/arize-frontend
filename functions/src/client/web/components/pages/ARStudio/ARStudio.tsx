@@ -372,7 +372,7 @@ const ARStudio = (props : IProps) => {
                 <TextSwitch disabled={true} text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
             </div>:null}
                         {page===2?<div className={styles.topBar}>
-                            <div  onClick={() => setPage(1)} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start', marginRight:'50px'}}>
+                            <div  onClick={() => {setPage(1);setDesktop(false)}} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start', marginRight:'50px'}}>
                             <div style={{width:'16px',marginRight:'16px'}}>
                                     {/* @ts-ignore */}
                                     <ArrowLeftIcon fill='black'/>
