@@ -15,6 +15,8 @@ const Pricing = () => {
     const [ upgradeModalOpen, setUpgradeModalOpen ] = useState(false);
     const [ amount, setAmount] = useState('');
     const [ packageName, setPackageName] = useState('');
+    const [ postCount, setPostCount] = useState(0);
+    const [ maxSlots, setMaxSlots] = useState(0);
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged(async function(user) {
@@ -28,6 +30,10 @@ const Pricing = () => {
                                 setImageSrc(url)
                             })
                         }
+
+                        setPostCount(userData.postsCount);
+                        setMaxSlots(userData.maxSlots);
+
                     }
                 }
             } catch (error) {
@@ -56,7 +62,7 @@ const Pricing = () => {
 
     return (
         <div className={styles.root}>
-            <Navbar imageSrc={imageSrc} />   
+            <Navbar imageSrc={imageSrc} haveMoreSlots={maxSlots - postCount > 0}/>   
             <div className={styles.bodyContainer}>
                 <div className={styles.title}>
                     <h2 style={{fontWeight:1000}}>Upgrade and thrive!</h2>

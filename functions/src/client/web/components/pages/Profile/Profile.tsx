@@ -166,8 +166,6 @@ const Profile = (props : IProps) => {
                         })
                     }
                     if(userData.posts) {
-                        console.log('---------')
-                        console.log(userData.postsCount)
                         setPostsCount(userData.postsCount)
                         setPosts(userData.posts.reverse())
                         let arViews = 0

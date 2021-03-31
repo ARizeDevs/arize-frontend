@@ -118,7 +118,7 @@ const Navbar = (props : IProps) => {
             onRequestClose={() => setARStudioModalOpen(false)}
             onClick={() => router.push('/pricing')}
             title='No more slots'
-            type={IMessageTypes.NONE}
+            type={IMessageTypes.INFO}
         />
 
         </>
