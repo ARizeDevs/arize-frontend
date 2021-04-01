@@ -18,7 +18,7 @@ interface IProps {
     imageSrc? : string,
     noMenu? : boolean,
     haveMoreSlots? : boolean,
-    accountType: string
+    accountType?: string
 }
 
 const rightItems = [
