@@ -181,7 +181,7 @@ const Pricing = () => {
                 description={`You are about to upgrade your account to the ${packageName} 
                 and hereby authorise a monthly debit of ${amount} (ex. VAT). To continue, click the blue button and leave your details.`}
                 buttonText='upgrade'
-                type={IMessageTypes.NONE}
+                type={IMessageTypes.INFO}
                 onClick={onUpgradeModalButtonClick}
             />
         </div>

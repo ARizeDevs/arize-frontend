@@ -266,7 +266,7 @@ const ModelViewer = (props : IProps) => {
                     ar 
                     ar-modes="webxr scene-viewer quick-look" 
                     ar-scale={allowScaling?"auto":'fixed'}
-                    loading="eager"
+                    loading="lazy"
                     reveal={autoPlay?"auto":"interaction"}
                     camera-controls
                     // style={`background-color: ${solidBackgroundColor};`}

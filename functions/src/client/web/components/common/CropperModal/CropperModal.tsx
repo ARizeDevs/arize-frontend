@@ -16,7 +16,7 @@ import styles from './CropperModal.module.css'
 const CropperModal = (props) => {
     const { imageSrc } = props
 
-  const [crop, setCrop] = useState({ x: 0, y: 0 })
+  const [crop, setCrop] = useState({ x: 1.3, y: 1 })
   const [initialCroppedAreaPixels, setInitialCroppedAreaPixels] = useState(
     undefined
   )

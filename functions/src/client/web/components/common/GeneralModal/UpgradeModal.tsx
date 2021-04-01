@@ -4,10 +4,10 @@ import Modal from 'react-modal';
 import SolidButton from '../buttons/SolidButton'
 
 import CrossIcon from '../../../../assets/icons/cross.svg';
-import ErrorTriangle from '../../../../assets/icons/error-triangle.svg'
-import SuccessSign from '../../../../assets/icons/success-sign.svg'
-import InfoIcon from '../../../../assets/icons/exclamation.svg'
-import StarredIcon from '../../../../assets/icons/starred.svg'
+import ErrorTriangle from '../../../../assets/icons/error1.svg'
+import SuccessSign from '../../../../assets/icons/success1.svg'
+import InfoIcon from '../../../../assets/icons/info1.svg'
+import StarredIcon from '../../../../assets/icons/starred1.svg'
 
 
 import styles from './UpgradeModal.module.css'
@@ -48,9 +48,9 @@ const UpgradeModal = (props : IProps) => {
                     {type === IMessageTypes.INFO? <InfoIcon />:null}
                     {type === IMessageTypes.STARRED? <StarredIcon/>:null}
                     &nbsp;&nbsp;
-                    <h2>{title}</h2>
+                    
                 </div>
-                
+                <h2>{title}</h2>
                 <p style={{textAlign:'center', paddingTop:'30px', marginLeft:'15px', marginRight:'15px'}}>{description}</p>
                 <br></br>
                 <br></br>
