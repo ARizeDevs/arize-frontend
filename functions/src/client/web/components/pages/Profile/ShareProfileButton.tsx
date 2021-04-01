@@ -20,7 +20,11 @@ const ShareProfileButton = (props : IProps) => {
     const { uid } = props
 
     const onShareProflie = async () => {
-        const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
+        
+        let mobile = false
+        if(typeof window !== 'undefined') {
+            mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
+        }
         
         let userID : any = uid? uid:null
         if(!userID) {
