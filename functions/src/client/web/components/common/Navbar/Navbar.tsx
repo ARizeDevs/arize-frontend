@@ -84,7 +84,6 @@ const Navbar = (props : IProps) => {
             <div className={styles.subContainer}>
                 {isPublicRoute?null:
                     <>
-
                         <div className={styles.hamburgerMenuWrapper}>
                             <Hamburger />
                         </div>

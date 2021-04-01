@@ -134,9 +134,8 @@ const ModelViewer = (props : IProps) => {
             }, true)
 
             self.addEventListener('mouseup', (event) => {
-                if(event.button === 2)
-                {
-                    // recenter(event);
+                if(event.button === 2){
+                    recenter(event);
                 }
               }, true);
               
@@ -283,6 +282,7 @@ const ModelViewer = (props : IProps) => {
                     ios-src={usdzURL}
                     poster={poster?poster:null}
                     style={{width: '100%', height: '100%'}}
+                    data-js-focus-visible
                 >
                     <button slot="ar-button"  className={styles.myArBtn} style={{backgroundColor:arButtonBackgroundColor,display:hasARButton?'block':'none'}}>
                         <div onClick={() => addARView()} style={{width:'100%',color:arButtonTextColor,display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
