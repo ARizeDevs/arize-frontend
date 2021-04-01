@@ -134,7 +134,10 @@ const ModelViewer = (props : IProps) => {
             }, true)
 
             self.addEventListener('mouseup', (event) => {
-                recenter(event);
+                if(event.button === 2)
+                {
+                    // recenter(event);
+                }
               }, true);
               
             self.addEventListener('touchend', (event) => {
