@@ -14,6 +14,8 @@ import { getDirectURL } from '../../../config/firebase'
 const CallInfo = () => {
 
     const [ imageSrc, setImageSrc ] = useState('')
+    const [ postCount, setPostCount] = useState(0);
+    const [ maxSlots, setMaxSlots] = useState(3); 
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged(async function(user) {
@@ -27,6 +29,10 @@ const CallInfo = () => {
                                 setImageSrc(url)
                             })
                         }
+
+                        setPostCount(userData.postsCount);
+                        setMaxSlots(userData.maxSlots);
+
                     }
                 }
             } catch (error) {
@@ -37,7 +43,7 @@ const CallInfo = () => {
 
     return (
         <div className={styles.root}>
-           <Navbar imageSrc={imageSrc} />
+           <Navbar imageSrc={imageSrc} haveMoreSlots={maxSlots - postCount > 0}/>
             <div className={styles.bodyContainer}>
                 <div className={styles.rowContainer}>  
                     <div className={styles.column}>

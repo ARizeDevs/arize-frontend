@@ -43,6 +43,8 @@ const EditProfile = () => {
     const [ websiteURL, setWebsiteURL ] = useState('')
     const [ vatNumber, setVatNumber ] = useState('')
     const [ error, setError ] = useState({} as {[key : string] : string})
+    const [ maxSlots, setMaxSlots] = useState(3);
+    const [ postCount, setPostCount] = useState(0);
 
     const validateAndSet = (fn : (arg : any) => void, validate : (arg : any) => any) => {
         return (value : any) => {
@@ -80,6 +82,8 @@ const EditProfile = () => {
                             setWhyToUse(userData.whyUseARize)
                             setWebsiteURL(userData.websiteURL)
                             setVatNumber(userData.vatNumber)
+                            setPostCount(userData.postsCount);
+                            setMaxSlots(userData.maxSlots);
                         }
                     }
                 } catch(error) {
@@ -154,7 +158,7 @@ const EditProfile = () => {
 
     return (
         <div className={styles.root}>
-            <Navbar imageSrc={imageSrc} />
+            <Navbar imageSrc={imageSrc} haveMoreSlots={maxSlots - postCount > 0}/>
             <div className={styles.bodyContainer}>
                 <div style={{ width:'90%' }}>
                     <div style={{width : "90px" , height:'90px'}}>

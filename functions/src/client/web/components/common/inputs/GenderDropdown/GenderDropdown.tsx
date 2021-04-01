@@ -43,7 +43,7 @@ const GenderDropdown = (props : IProps) => {
       
     return (
         <div  className={styles.container + ' flex-column'}>
-            <p className={`${styles.label} ${error?styles.error:''}`}>Gender</p>
+            <p className={`${styles.label} ${error?styles.error:''}`}>Gender*</p>
             <Select styles={customStyles} value={selected} onChange={(value) => onSelect(value)} options={options} />
             {error?<Message text={error} type={IMessageTypes.ERROR} />:null}
         </div>

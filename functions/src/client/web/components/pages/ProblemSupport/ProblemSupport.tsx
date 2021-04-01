@@ -23,6 +23,8 @@ const ProblemSupport = () => {
     const { addToast } = useToasts()
     const [ error, setError ] = useState('')
     const [ imageSrc, setImageSrc ] = useState('')
+    const [ postCount, setPostCount] = useState(0);
+    const [ maxSlots, setMaxSlots] = useState(3);
     
     useEffect(() => {
         console.log(email)
@@ -38,6 +40,10 @@ const ProblemSupport = () => {
                                 setImageSrc(url)
                             })
                         }
+
+                        setMaxSlots(userData.maxSlots);
+                        setPostCount(userData.postCount);
+
                     }
                 }
             } catch (error) {
@@ -76,7 +82,7 @@ const ProblemSupport = () => {
     }
     return (
         <div className={styles.root}>
-            <Navbar imageSrc={imageSrc} />
+            <Navbar imageSrc={imageSrc} haveMoreSlots={maxSlots - postCount > 0}/>
             <div className={styles.bodyContainer}>
                 <div className={styles.rowContainer}>
                     <div className={styles.column}>
