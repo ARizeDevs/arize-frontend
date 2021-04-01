@@ -6,22 +6,23 @@
 }
 
 .errorText {
-    color : var(--main-red-color)
+    color : white
 }
 
 .activeText {
-    color : var(--main-green-color)
+    color : white
 }
 .successText {
     font-weight: 700;
+    color: white;
 }
 
 
 .infoText {
-    color : black
+    color :white
 }
 
 .starredText {
-    color:#FF6F48
+    color:white
 
 }

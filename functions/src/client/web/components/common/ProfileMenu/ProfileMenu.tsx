@@ -41,7 +41,7 @@ const ProfileMenu = (props : IProps) => {
         } else {
             copyToClipBoard(shareURL)
     
-            addToast('url copied',{ appearance : 'info' })
+            addToast('url copied',{ appearance : 'success' })
         }
         
     }
