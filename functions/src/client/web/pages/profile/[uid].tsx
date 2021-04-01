@@ -36,8 +36,7 @@ const profile = (props : IProps) => {
 export async function  getServerSideProps (context : any) {
     const id = context.params.uid
 
-    try {
-  
+    try {  
         const result = await getUser(id, true, 9)
         if(result && result.data && result.data.data){
             const data = result.data.data
