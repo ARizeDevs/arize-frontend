@@ -2,7 +2,7 @@ import React from 'react'
 
 import CountryPicker from '../../common/inputs/CountryPicker'
 import GenderDropdown from '../../common/inputs/GenderDropdown'
-// import DatePicker from '../../common/inputs/DatePicker'
+import DatePicker from '../../common/inputs/DatePicker'
 import Input from '../../common/inputs/Input'
 import SolidButton from '../../common/buttons/SolidButton'
 
@@ -64,8 +64,8 @@ const CompeleteProfilePersonalInfoPage = ( props : IProps ) => {
                 <MultiLineInput placeholder='Please write a few sentences to describe your business so when sharing your ARize profile it will be seen by others' required={false} text='About your business' onChange={setBio} value={bio}/>
                 <div style={{ display:'flex',flexDirection:'row', justifyContent:'space-between' }}>
                     <div style={{width:'49%'}}>
-                    <Input placeholder='dd/mm/yyyy' error={error.birthday} maxInputLength={30} required text='Date of birth' type='date' value={birthday} onChange={setBirthday}/>
-                        {/* <DatePicker error={error.birthday} value={birthday} onChange={setBirthday} /> */}
+                    {/* <Input placeholder='dd/mm/yyyy' error={error.birthday} maxInputLength={30} required text='Date of birth' type='date' value={birthday} onChange={setBirthday}/> */}
+                        <DatePicker error={error.birthday} value={birthday} onChange={setBirthday} />
                     </div>
                     <div style={{width:'49%'}}>
                         <GenderDropdown error={error.gender} onSelect={setGender} selected={gender} />

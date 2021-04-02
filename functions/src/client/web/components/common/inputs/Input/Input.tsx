@@ -20,14 +20,17 @@ interface IProps {
     disabled? : boolean,
     error? : string,
     maxInputLength? : number
+    shouldFocus? : boolean
 }
 
 const Input = (props : IProps) => {
-    const { error, maxInputLength, disabled, text, required, LeftIcon, RightIcon, type, onLeftIconClick, onRightIconClick, onChange, value, placeholder, removeBorder, onKeyDown } = props
+    const { error, maxInputLength, disabled, text, required, LeftIcon, RightIcon, type, onLeftIconClick, onRightIconClick, onChange, value, placeholder, removeBorder, shouldFocus, onKeyDown } = props
     const [ active, setActive ] = useState(false)
 
     const onFocus = () => setActive(true)
     const onBlur = () => setActive(false)
+
+    console.log(shouldFocus);
 
     const labelText = `${text}${required?'*':''}`
 
@@ -48,7 +51,7 @@ const Input = (props : IProps) => {
                 {LeftIcon?<LeftIcon onClick={onLeftIconClick?onLeftIconClick:null} className={styles.iconLeft} fill={active?'var(--main-blue-color)':'var(--main-lightgray2-color)'} />:null}
                 {disabled?
                     <input disabled onKeyDown={onKeyDown} placeholder={placeholder?placeholder:''} onChange={onInputChanged as any} value={value} type={type}  className={styles.input}/>
-                    :<input onPaste={(e) => {}} onKeyDown={onKeyDown} placeholder={placeholder?placeholder:''} onChange={onInputChanged as any} value={value} type={type}   className={styles.input}/>
+                    :<input autoFocus={shouldFocus} onPaste={(e) => {}} onKeyDown={onKeyDown} placeholder={placeholder?placeholder:''} onChange={onInputChanged as any} value={value} type={type}   className={styles.input}/>
                 }
                 {RightIcon?<RightIcon onClick={onRightIconClick?onRightIconClick:null} className={styles.iconRight} fill={active?'var(--main-blue-color)':'var(--main-black-color)'} />:null}
             </div>

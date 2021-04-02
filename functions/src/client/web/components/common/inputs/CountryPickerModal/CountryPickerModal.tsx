@@ -48,7 +48,7 @@ const CountryPickerModal = (props : IProps) => {
     return (
         <div className={styles.root}>
             <div className={styles.searchInputContainer}>
-                <Input removeBorder LeftIcon={SearchInputIcon} required={false} text='' type='text' value={search} onChange={setSearch} placeholder='search' />
+                <Input removeBorder shouldFocus={true} LeftIcon={SearchInputIcon} required={false} text='' type='text' value={search} onChange={setSearch} placeholder='search' />
             </div>
             <div className={styles.countryList}>
                 {rendredCountryList}
