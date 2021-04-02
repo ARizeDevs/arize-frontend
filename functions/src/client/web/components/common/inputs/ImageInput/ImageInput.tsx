@@ -22,6 +22,8 @@ interface IProps {
     error? : string
 }
 
+
+
 const ImageInput = (props : IProps) => {
     const { toggle, error, setToggle, text, extensions, imageSrc, setImageSrc } = props
 
@@ -34,6 +36,7 @@ const ImageInput = (props : IProps) => {
     const onImageChange = (base64Image : string) => {
         let mimeType = base64Image.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/)![1]
         const extension = mimeTypes.detectExtension(mimeType)
+
         if(extensions) {
             const result = extensions.findIndex((item) => item===extension)
             if(result !== -1) {
