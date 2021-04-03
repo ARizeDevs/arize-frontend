@@ -71,6 +71,7 @@ export const savePost = async (
     imageBase64Encoded : string,
     postBackgroundImageBase64 : string,
     contentFile : any,
+    skyBoxHDRImage : any,
     waterMarkImageBase64 : string,) => {
     try {
         const tokenId = await getTokenID()
@@ -118,6 +119,10 @@ export const savePost = async (
         formData.append('postBackgroundImageBase64',postBackgroundImageBase64)
         formData.append('tokenId',tokenId)
         formData.append('file',contentFile)
+        
+        if(skyBoxHDRImage) {
+            formData.append('skyBoxHDRImage',skyBoxHDRImage)
+        }
 
         const result = await axios({
             method: "POST",

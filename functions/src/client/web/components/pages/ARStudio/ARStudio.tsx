@@ -87,6 +87,8 @@ const ARStudio = (props : IProps) => {
     const [ userId, setUserId ] = useState('')
     const [ isOnTheGround,setIsOnTheGround ]= useState(false)
 
+    const [ skyBoxHDRFile, setSkyBoxHDRFile ] = useState<File>()
+
     const validateAndSet = (fn : (arg : any) => void, validate : (arg : any) => any) => {
         return (value : any) => {
             fn(value)
@@ -200,7 +202,7 @@ const ARStudio = (props : IProps) => {
 
 
     const submitPosition = () => setPage(2)
-    const onCustomizeBackButtonClicked = () => setPage(1)
+    const onCustomizeBackButtonClicked = () => {setPage(1);setDesktop(false);}
 
     
     const onPostCreationPhase1 = async () => {
@@ -245,8 +247,8 @@ const ARStudio = (props : IProps) => {
                     hasShareButton, shareButtonBackgroundColor,
                     shareButtonTextColor, allowScaling, (exposure/10).toString(),
                     solidBackgroundColor, isOnTheGround, autoPlay,
-                    imageSrc, hasSkyBox?postBackgroundImageBase64:'', contentFile, 
-                    hasWaterMark?waterMarkBase64:''
+                    imageSrc, hasSkyBox?postBackgroundImageBase64:'', contentFile,
+                    skyBoxHDRFile, hasWaterMark?waterMarkBase64:''
                 )
             }
 
@@ -369,7 +371,7 @@ const ARStudio = (props : IProps) => {
                         &nbsp;
                         &nbsp;
                 </div>
-                <TextSwitch disabled={true} text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
+                {/* <TextSwitch disabled={true} text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/> */}
             </div>:null}
                         {page===2?<div className={styles.topBar}>
                             <div  onClick={() => {setPage(1);setDesktop(false)}} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start', marginRight:'50px'}}>
@@ -430,29 +432,29 @@ const ARStudio = (props : IProps) => {
                     </div>}
                     {desktop && <div className={styles.previewWrapperDesktop}> 
                         <ModelViewer
-                        hasWaterMark={hasWaterMark}
-                        waterMarkBase64={hasWaterMark ?(isEdit?waterMarkBase64:(page===3 ?waterMarkBase64:undefined)):undefined}
-                        arButtonTextColor={arButtonTextColor}
-                        arButtonBackgroundColor={arButtonBackgroundColor}
-                        hasARButton={hasARButton}
-                        hasShadow={hasShadow}
-                        hasShareButton={hasShareButton}
-                        shareButtonBackgroundColor={shareButtonBackgroundColor}
-                        shareButtonTextColor={shareButtonTextColor}
-                        solidBackgroundColor={solidBackgroundColor}
-                        shadowIntensity={(shadowIntensity/10).toString()}
-                        shadowSoftness={(shadowSoftness/10).toString()}
-                        exposure={(exposure/10).toString()}
-                        allowScaling={allowScaling}
-                        showQR={true}
-                        id={isEdit?postID as string:(savedPostID?savedPostID:'')}
-                        title={title}
-                        autoPlay={autoPlay}
-                        glbURL={typeof window !== "undefined" && contentFile ?  (typeof contentFile !== "string"? window.URL.createObjectURL(contentFile) : contentFile ):''}
-                        backgroundImage={hasSkyBox?postBackgroundImageBase64:''}
-                        poster={imageSrc}
-                        showShare={true}
-                        usdzURL={''}
+                            hasWaterMark={page===3?hasWaterMark:false}
+                            waterMarkBase64={hasWaterMark ?(isEdit?waterMarkBase64:(page===3 ?waterMarkBase64:undefined)):undefined}
+                            arButtonTextColor={arButtonTextColor}
+                            arButtonBackgroundColor={arButtonBackgroundColor}
+                            hasARButton={hasARButton}
+                            hasShadow={hasShadow}
+                            hasShareButton={hasShareButton}
+                            shareButtonBackgroundColor={shareButtonBackgroundColor}
+                            shareButtonTextColor={shareButtonTextColor}
+                            solidBackgroundColor={solidBackgroundColor}
+                            shadowIntensity={(shadowIntensity/10).toString()}
+                            shadowSoftness={(shadowSoftness/10).toString()}
+                            exposure={(exposure/10).toString()}
+                            allowScaling={allowScaling}
+                            showQR={true}
+                            id={isEdit?postID as string:(savedPostID?savedPostID:'')}
+                            title={title}
+                            autoPlay={autoPlay}
+                            glbURL={typeof window !== "undefined" && contentFile ?  (typeof contentFile !== "string"? window.URL.createObjectURL(contentFile) : contentFile ):''}
+                            backgroundImage={hasSkyBox?postBackgroundImageBase64:''}
+                            poster={imageSrc}
+                            showShare={true}
+                            usdzURL={''}
                     />
                 </div>}
             </div>
@@ -504,6 +506,8 @@ const ARStudio = (props : IProps) => {
             <div className={styles.cust}>
                 <div className={styles.inner}>
                     <ARStudioCustomize
+                        hdrFile={skyBoxHDRFile}
+                        setHDRFile={setSkyBoxHDRFile}
                         hasWaterMark={hasWaterMark}
                         setHasWaterMark={(value : boolean) =>{setHasWaterMark(value); setWaterMarkChanged(true)}}
                         waterMarkBase64={waterMarkBase64}

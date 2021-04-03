@@ -259,6 +259,10 @@ const ModelViewer = (props : IProps) => {
 
     //--------------- end Panning ----------//
 
+    console.log('////////');
+    console.log(backgroundImage);
+    console.log('//////////');
+    
     return (<div style={{width:'100%',height:'100%',position:'relative',backgroundColor:solidBackgroundColor?solidBackgroundColor:'#FFFFF'}}>
                 <model-viewer
                     id="myviewer"

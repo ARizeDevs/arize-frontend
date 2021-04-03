@@ -8,9 +8,7 @@ import UpgradeModal from '../../common/GeneralModal';
 import { getDirectURL } from '../../../config/firebase'
 import { IMessageTypes } from '../../common/Message/Message'
 
-
 const Pricing = () => {
-    
     const [ imageSrc, setImageSrc ] = useState('')
     const [ upgradeModalOpen, setUpgradeModalOpen ] = useState(false);
     const [ amount, setAmount] = useState('');

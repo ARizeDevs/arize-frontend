@@ -3,7 +3,7 @@ import React, { useState, useCallback, useEffect } from 'react'
 import Slider from '@material-ui/core/Slider'
 import Cropper from 'react-easy-crop'
 import Modal from 'react-modal';
-import { ImagePicker } from 'react-file-picker'
+import { FilePicker } from 'react-file-picker'
 
 
 import getCroppedImg from './CropImage'
@@ -83,14 +83,14 @@ const CropperModal = (props) => {
                 <div className={styles.footerSubContainer}>
                     <div style={{width:'200px'}}>
                             {/* @ts-ignore */}
-                        {typeof window !== "undefined" ? <ImagePicker
-                            extensions={['jpg', 'jpeg', 'png']}
+                        {typeof window !== "undefined" ? <FilePicker
+                            extensions={['jpg', 'jpeg', 'png', 'hdr']}
                             dims={{width : '100%' , height : '100%'}}
                             onChange={base64 => {onImageChange(base64); }}
                             onError={errMsg => {console.log(errMsg)}}
                         >
                             <SolidButton colorTheme={'black'} onClick={() => {}} ><h3>Choose Another</h3></SolidButton>
-                        </ImagePicker> : null}
+                        </FilePicker> : null}
                     </div>&nbsp;&nbsp;&nbsp;
                     <div style={{width:'200px'}}>
                         <SolidButton  onClick={async () => {

@@ -9,7 +9,7 @@ import { getUser } from '../../../API/user'
 import SolidButton from '../../common/buttons/SolidButton'
 
 import Navbar from '../../common/Navbar'
-// import RoundImage from '../../common/RoundImage'
+import { SolidRoundImage } from '../../common/RoundImage'
 
 import styles from './Profile.module.css'
 import RemainingSlots from '../../common/RemainingSlots'
@@ -221,14 +221,13 @@ const Profile = (props : IProps) => {
                     <div className={styles.profileSections}>
                         <div className={styles.row}>
                             <div style={{width : "90px" , height:'90px', marginRight:'20px'}}>
-                                {/* <RoundImage
+                                <SolidRoundImage
                                     imageSrc={imageSrc}
-                                    unchangeable
-                                /> */}
-                                <img 
+                                />
+                                {/* <img 
                                     style={{width:'100%',height:'100%',borderRadius:'50%'}}
                                     src={imageSrc}
-                                />
+                                /> */}
                             </div>
                             {user === null ?<div className={styles.row}>
                                 <div style={{width : '110px',marginRight : '10px'}}>

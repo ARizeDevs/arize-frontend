@@ -75,7 +75,7 @@ const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, title,
         getDirectURL(imageURL).then((url : string) => {
             setImage(url)
         })
-        .catch
+        .catch((error) => console.log(error))
     } , [imageURL]) 
 
     const onShareClick = async () => {
@@ -109,7 +109,7 @@ const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, title,
 
     return (
         <div className={styles.root}>
-            <div className={styles.postImage}>
+            <div className={styles.postImageContainer}>
                 <img className={styles.postImage} onClick={() => {if(!processing)router.push(`/model-viewer/${id}`)}}  src={image} />
                 <div className={styles.editPost} onClick={() => setMenuOpen(!menuOpen)}>
                     <DotIcon />
