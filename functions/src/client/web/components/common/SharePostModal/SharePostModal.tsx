@@ -1,7 +1,5 @@
 import Modal from 'react-modal'
-import { useToasts } from 'react-toast-notifications'
 import React, { useState } from 'react'
-
 import CrossIcon from '../../../../assets/icons/cross.svg'
 import ShareBanner from '../../../../assets/banners/share banner.svg'
 import EmbedBanner from '../../../../assets/banners/embed banner.svg'

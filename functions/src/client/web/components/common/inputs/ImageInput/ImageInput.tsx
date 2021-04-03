@@ -1,8 +1,6 @@
 import React , { useState } from 'react'
 import { FilePicker } from 'react-file-picker'
 
-const mimeTypes =  require('mimetypes')
-
 import CropperModal from '../../CropperModal'
 
 import ImageUploadLogo from '../../../../../assets/icons/image upload.svg'
@@ -25,6 +23,8 @@ interface IProps {
     error? : string
 }
 
+
+
 const ImageInput = (props : IProps) => {
     const { toggle, error,hdrFile, setHDRFile, setToggle, text, extensions, imageSrc, setImageSrc } = props
 
@@ -38,8 +38,6 @@ const ImageInput = (props : IProps) => {
     console.log(error);
     console.log(localError);
     
-    
-
     const onImageChange = async (file : File) => {
         const name = file.name
         const splitedName = name.split('.')

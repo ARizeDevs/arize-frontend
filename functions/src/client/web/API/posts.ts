@@ -118,7 +118,7 @@ export const savePost = async (
         formData.append('postImageBase64',imageBase64Encoded)
         formData.append('postBackgroundImageBase64',postBackgroundImageBase64)
         formData.append('tokenId',tokenId)
-        formData.append('file',contentFile)
+        formData.append('content',contentFile)
         
         if(skyBoxHDRImage) {
             formData.append('skyBoxHDRImage',skyBoxHDRImage)

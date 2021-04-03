@@ -19,6 +19,8 @@ const Support = () => {
 
     const [ imageSrc, setImageSrc ] = useState('')
     const [ accountType, setAccountType ] = useState('')
+    const [ maxSlots, setMaxSlots] = useState(3);
+    const [ postsCount, setPostsCount] = useState(0);
 
     useEffect(() => {
         console.log(accountType)
@@ -34,6 +36,9 @@ const Support = () => {
                             })
                         }
                         setAccountType(userData.accountType)
+                        
+                        setPostsCount(userData.postsCount)
+                        setMaxSlots(userData.maxSlots)
                     }
                 }
             } catch (error) {
@@ -44,7 +49,7 @@ const Support = () => {
 
     return (
         <div className={styles.root}>
-            <Navbar imageSrc={imageSrc} />
+            <Navbar imageSrc={imageSrc} haveMoreSlots={maxSlots - postsCount > 0}/>
             <div className={styles.bodyContainer}>
                     <div className={`${styles.column} ${styles.section}`}>
                        <h2>Need Support?</h2>
