@@ -122,7 +122,7 @@ export const savePost = async (
         
         console.log(contentFile);
         
-        if(skyBoxHDRImage) {
+        if(skyBoxHDRImage !== null) {
             console.log(skyBoxHDRImage);
             
             formData.append('skyBoxHDRImage',skyBoxHDRImage)

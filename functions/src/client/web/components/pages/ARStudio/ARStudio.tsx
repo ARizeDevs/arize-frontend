@@ -248,7 +248,7 @@ const ARStudio = (props : IProps) => {
                     shareButtonTextColor, allowScaling, (exposure/10).toString(),
                     solidBackgroundColor, isOnTheGround, autoPlay,
                     imageSrc, hasSkyBox?postBackgroundImageBase64:'', contentFile,
-                    skyBoxHDRFile, hasWaterMark?waterMarkBase64:''
+                    null, hasWaterMark?waterMarkBase64:''
                 )
             }
 
