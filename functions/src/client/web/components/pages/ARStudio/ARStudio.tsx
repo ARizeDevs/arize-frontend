@@ -87,7 +87,7 @@ const ARStudio = (props : IProps) => {
     const [ userId, setUserId ] = useState('')
     const [ isOnTheGround,setIsOnTheGround ]= useState(false)
 
-    const [ skyBoxHDRFile, setSkyBoxHDRFile ] = useState<File>()
+    const [ skyBoxHDRFile, setSkyBoxHDRFile ] = useState<File | null>()
 
     const validateAndSet = (fn : (arg : any) => void, validate : (arg : any) => any) => {
         return (value : any) => {
@@ -321,7 +321,7 @@ const ARStudio = (props : IProps) => {
                 (exposure/10).toString(), isOnTheGround, solidBackgroundColor, autoPlay, 
                 backGroundImageChanged?(hasSkyBox?postBackgroundImageBase64:''):null,
                 null, waterMarkChanged?(hasWaterMark?waterMarkBase64 : ''):null,
-                backGroundImageChanged?(hasSkyBox?skyBoxHDRFile:null):null
+                backGroundImageChanged?(hasSkyBox?skyBoxHDRFile:''):null
             )
 
             setSubmiting(false)
@@ -508,7 +508,7 @@ const ARStudio = (props : IProps) => {
                 <div className={styles.inner}>
                     <ARStudioCustomize
                         hdrFile={skyBoxHDRFile}
-                        setHDRFile={(file : File) => {setSkyBoxHDRFile(file);setBackgroundImageChanged(true)}}
+                        setHDRFile={(file : any) => {setSkyBoxHDRFile(file);setBackgroundImageChanged(true)}}
                         hasWaterMark={hasWaterMark}
                         setHasWaterMark={(value : boolean) =>{setHasWaterMark(value); setWaterMarkChanged(true)}}
                         waterMarkBase64={waterMarkBase64}

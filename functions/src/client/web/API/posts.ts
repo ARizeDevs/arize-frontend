@@ -171,7 +171,7 @@ export const editPost = async (
     postBackgroundImageBase64 : string | null,
     contentFile : any,
     waterMarkImageBase64 : string | null,
-    skyBoxHDRFile : File | null
+    skyBoxHDRFile : any | null
     ) => {
     
     try {

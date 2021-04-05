@@ -16,8 +16,8 @@ interface IProps {
     extensions? : string[],
     imageSrc : string,
     setImageSrc : (image : string) => void,
-    hdrFile? : File,
-    setHDRFile? : (file : File) => void,
+    hdrFile? : any,
+    setHDRFile? : (file : any) => void,
     toggle? : boolean,
     setToggle? : (value : boolean) => void,
     error? : string
