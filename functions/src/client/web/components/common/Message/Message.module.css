@@ -10,7 +10,7 @@
 }
 
 .activeText {
-    color : white
+    color : black
 }
 .successText {
     font-weight: 700;
@@ -19,10 +19,10 @@
 
 
 .infoText {
-    color :white
+    color :black
 }
 
 .starredText {
-    color:white
+    color:black
 
 }
