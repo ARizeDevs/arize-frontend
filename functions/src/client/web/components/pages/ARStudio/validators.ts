@@ -95,7 +95,7 @@ export const postBackgroundImageBase64Validator = (postBackgroundImageBase64 : s
     const error : any = {
         postBackgroundImageBase64 : ''
     }
-    if(!postBackgroundImageBase64) error.postBackgroundImageBase64 = 'Choose a postBackgroundImage'
+    // if(!postBackgroundImageBase64) error.postBackgroundImageBase64 = 'Choose a postBackgroundImage'
     return error
 }
 

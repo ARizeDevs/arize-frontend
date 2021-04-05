@@ -62,7 +62,7 @@ interface IProps {
     waterMarkBase64 : string,
     setWaterMarkBase64 : ( value : string ) => void
 
-    hdrFile : File,
+    hdrFile? : File,
     setHDRFile : (file : File) => void
 }
 

@@ -43,12 +43,14 @@ const ImageInput = (props : IProps) => {
         const splitedName = name.split('.')
         const extension = splitedName[splitedName.length -1 ]
         if(extension === 'hdr') {
-            setHDRFile(file)
+            console.log('xd');
+            console.log(file);
+            if(setHDRFile) setHDRFile(file)
             setImageSrc('')
         } else {
             const base64Image : string = await toDataURL(URL.createObjectURL(file)) as string
             setImageSrc(base64Image)
-            setHDRFile(null)
+            if(setHDRFile) setHDRFile(null)
             setModalOpen(true)
         }
         // console.log(base64Image)
@@ -119,7 +121,7 @@ const ImageInput = (props : IProps) => {
                 }
 
                 {/* @ts-ignore */}
-                <CropperModal onFinished={(newImage : string) => { setImageSrc(newImage); setHDRFile(null)}} imageSrc={imageSrc} onImageChange={onImageChange} modalOpen={modalOpen} onRequestClose={() => setModalOpen(false)} />
+                <CropperModal onFinished={(newImage : string) => { setImageSrc(newImage);if(setHDRFile)setHDRFile(null)}} imageSrc={imageSrc} onImageChange={onImageChange} modalOpen={modalOpen} onRequestClose={() => setModalOpen(false)} />
                 </>
             :null}
         </div>

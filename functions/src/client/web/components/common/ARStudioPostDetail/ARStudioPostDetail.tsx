@@ -23,11 +23,11 @@ interface IProps {
     setContentFile : (contentFile : any) => void,
     onFinish : () => void,
     error : {[key : string]:any},
-    buttonText : string
+    buttonText : string,
 }
 
 const ARStudioPostDetail = (props : IProps) => {
-    const { error, buttonText, onFinish , imageSrc, setImageSrc, title, setTitle, tags, setTags, description, setDescription, contentFile, setContentFile} = props
+    const {error, buttonText, onFinish , imageSrc, setImageSrc, title, setTitle, tags, setTags, description, setDescription, contentFile, setContentFile} = props
 
     return (
         <div className={styles.root}>

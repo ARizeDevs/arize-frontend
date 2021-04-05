@@ -231,7 +231,7 @@ const ARStudio = (props : IProps) => {
                             id, title, description, tags, imageSrcChanged?imageSrc:null,
                             null, null,null, null, null, null,null, null, null, null,
                             null,  isOnTheGround, null, null, null, contentFileChanged?contentFile:null,
-                            null
+                            null, null
                         )
                 } else {
                     setSubmiting(false)
@@ -320,7 +320,8 @@ const ARStudio = (props : IProps) => {
                 hasShareButton, shareButtonBackgroundColor, shareButtonTextColor, allowScaling,
                 (exposure/10).toString(), isOnTheGround, solidBackgroundColor, autoPlay, 
                 backGroundImageChanged?(hasSkyBox?postBackgroundImageBase64:''):null,
-                null, waterMarkChanged?(hasWaterMark?waterMarkBase64 : ''):null
+                null, waterMarkChanged?(hasWaterMark?waterMarkBase64 : ''):null,
+                backGroundImageChanged?(hasSkyBox?skyBoxHDRFile:null):null
             )
 
             setSubmiting(false)
@@ -507,7 +508,7 @@ const ARStudio = (props : IProps) => {
                 <div className={styles.inner}>
                     <ARStudioCustomize
                         hdrFile={skyBoxHDRFile}
-                        setHDRFile={setSkyBoxHDRFile}
+                        setHDRFile={(file : File) => {setSkyBoxHDRFile(file);setBackgroundImageChanged(true)}}
                         hasWaterMark={hasWaterMark}
                         setHasWaterMark={(value : boolean) =>{setHasWaterMark(value); setWaterMarkChanged(true)}}
                         waterMarkBase64={waterMarkBase64}
