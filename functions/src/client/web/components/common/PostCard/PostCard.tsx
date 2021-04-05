@@ -16,6 +16,7 @@ import ARViewsIcon from '../../../../assets/icons/ar-views.svg'
 import TDViewsIcon from '../../../../assets/icons/3d-views.svg'
 import PenIcon from '../../../../assets/icons/pen2.svg'
 import TrashIcon from '../../../../assets/icons/trash-alt.svg'
+import AddToWebsiteIcon from '../../../../assets/icons/arrow 1.svg'
 import ChartIcon from '../../../../assets/icons/chart-line.svg'
 
 import styles from './PostCard.module.css'
@@ -111,6 +112,14 @@ const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, title,
         <div className={styles.root}>
             <div className={styles.postImageContainer}>
                 <img className={styles.postImage} onClick={() => {if(!processing)router.push(`/model-viewer/${id}`)}}  src={image} />
+                <div className={styles.sharePost}>
+                    <SolidButton onClick={onShareClick} >
+                        <div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}>
+                            <AddToWebsiteIcon />
+                            <h3>Add to website</h3>
+                        </div>
+                    </SolidButton>
+                </div>
                 <div className={styles.editPost} onClick={() => setMenuOpen(!menuOpen)}>
                     <DotIcon />
                 </div>

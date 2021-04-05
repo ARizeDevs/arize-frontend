@@ -71,7 +71,7 @@ export const savePost = async (
     imageBase64Encoded : string,
     postBackgroundImageBase64 : string,
     contentFile : any,
-    skyBoxHDRImage : any,
+    // skyBoxHDRImage : any,
     waterMarkImageBase64 : string,) => {
     try {
         const tokenId = await getTokenID()
@@ -122,11 +122,11 @@ export const savePost = async (
         
         console.log(contentFile);
         
-        if(skyBoxHDRImage !== null) {
-            console.log(skyBoxHDRImage);
+        // if(skyBoxHDRImage !== null) {
+        //     console.log(skyBoxHDRImage);
             
-            formData.append('skyBoxHDRImage',skyBoxHDRImage)
-        }
+        //     formData.append('skyBoxHDRImage',skyBoxHDRImage)
+        // }
 
         const result = await axios({
             method: "POST",
@@ -171,7 +171,7 @@ export const editPost = async (
     postBackgroundImageBase64 : string | null,
     contentFile : any,
     waterMarkImageBase64 : string | null,
-    skyBoxHDRFile : any | null
+    // skyBoxHDRFile : any | null
     ) => {
     
     try {
@@ -193,17 +193,17 @@ export const editPost = async (
         if(contentFile) formData.append('file',contentFile)
 
         if(postBackgroundImageBase64 !== null) {
-            if(skyBoxHDRFile === null || !skyBoxHDRFile || typeof skyBoxHDRFile === 'string') {
+            // if(skyBoxHDRFile === null || !skyBoxHDRFile || typeof skyBoxHDRFile === 'string') {
                 formData.append('postBackgroundImageBase64',postBackgroundImageBase64)
-            }
+            // }
         }
-        if(skyBoxHDRFile !== null) {
-            console.log('2');
-            if(typeof skyBoxHDRFile !== 'string' && skyBoxHDRFile) {
-                console.log('3');
-                formData.append('skyBoxHDRImage',skyBoxHDRFile)
-            }
-        }
+        // if(skyBoxHDRFile !== null) {
+        //     console.log('2');
+        //     if(typeof skyBoxHDRFile !== 'string' && skyBoxHDRFile) {
+        //         console.log('3');
+        //         formData.append('skyBoxHDRImage',skyBoxHDRFile)
+        //     }
+        // }
 
         if(hasShadow !== null) {
             if(hasShadow) {
@@ -274,7 +274,7 @@ export const editPost = async (
 
         
         let result = null
-        if(contentFile || skyBoxHDRFile) {
+        if(contentFile) {
             result = await axios({
                 method: "PUT",
                 url: `${postServerRoute}/${id}`,

@@ -62,8 +62,8 @@ interface IProps {
     waterMarkBase64 : string,
     setWaterMarkBase64 : ( value : string ) => void
 
-    hdrFile? : any,
-    setHDRFile : (file : any) => void
+    // hdrFile? : any,
+    // setHDRFile : (file : any) => void
 }
 
 
@@ -73,7 +73,8 @@ const ARStudioPostDetail = (props : IProps) => {
         allowScaling, setAllowScaling, arButtonBackgroundColor, exposure, setExposure,
         hasARButton, hasShareButton, setARButtonBackgroundColor, setARButtonTextColor,
         setHasARButton, setHasShareButton, setShareButtonBackgroundColor, setShareButtonTextColor,
-        hasSkyBox, setHasSkyBox,hdrFile, setHDRFile,
+        hasSkyBox, setHasSkyBox,
+        // ,hdrFile, setHDRFile,
         hasShadow, setHasShadow, shadowIntensity, setShadowIntensity, shadowSoftness, setShadowSoftness,
         buttonText, onFinish , postBackgroundImageBase64, setPostBackgroundImageBase64, 
         hasWaterMark, setHasWaterMark, waterMarkBase64, setWaterMarkBase64, autoPlay, setAutoPlay
@@ -100,7 +101,10 @@ const ARStudioPostDetail = (props : IProps) => {
                         
                         <div className={styles.contentImageContainer}>
                             <div className={styles.imageInputContainer}>
-                                <ImageInput hdrFile={hdrFile} setHDRFile={setHDRFile} error={error.postBackgroundImageBase64} toggle={hasSkyBox} setToggle={setHasSkyBox} setImageSrc={setPostBackgroundImageBase64}  imageSrc={postBackgroundImageBase64} text='Skybox*' extensions={['hdr','jpeg','jpg','png']}/>
+                                <ImageInput 
+                                    // hdrFile={hdrFile} 
+                                    // setHDRFile={setHDRFile} 
+                                    error={error.postBackgroundImageBase64} toggle={hasSkyBox} setToggle={setHasSkyBox} setImageSrc={setPostBackgroundImageBase64}  imageSrc={postBackgroundImageBase64} text='Skybox*' extensions={['hdr','jpeg','jpg','png']}/>
                             </div>
                         </div>
                         

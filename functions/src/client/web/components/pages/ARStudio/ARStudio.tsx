@@ -87,7 +87,7 @@ const ARStudio = (props : IProps) => {
     const [ userId, setUserId ] = useState('')
     const [ isOnTheGround,setIsOnTheGround ]= useState(false)
 
-    const [ skyBoxHDRFile, setSkyBoxHDRFile ] = useState<File | null>()
+    // const [ skyBoxHDRFile, setSkyBoxHDRFile ] = useState<File | null>()
 
     const validateAndSet = (fn : (arg : any) => void, validate : (arg : any) => any) => {
         return (value : any) => {
@@ -175,7 +175,14 @@ const ARStudio = (props : IProps) => {
                         if(postData.allowScaling) setAlloScaling(postData.allowScaling)
                         getDirectURL(postData.glbFileURL).then((url) => setContentFile(url))
                         if(postData.backGroundImage) {
-                            getDirectURL(postData.backGroundImage).then((url) => setPostBackgroundImageBase64(url))
+                            // const patt = /\.([0-9a-z]+)(?:[\?#]|$)/i
+                            // const isHDR = (postData.backGroundImage).match(patt)
+                            getDirectURL(postData.backGroundImage).then((url) => {
+                                setPostBackgroundImageBase64(url)
+                                // if(!isHDR) setPostBackgroundImageBase64(url)
+                                // else setSkyBoxHDRFile(url)
+                            })
+                            
                             setHasSkyBox(true)
                         } else {
                             setHasSkyBox(false)
@@ -231,7 +238,7 @@ const ARStudio = (props : IProps) => {
                             id, title, description, tags, imageSrcChanged?imageSrc:null,
                             null, null,null, null, null, null,null, null, null, null,
                             null,  isOnTheGround, null, null, null, contentFileChanged?contentFile:null,
-                            null, null
+                            null
                         )
                 } else {
                     setSubmiting(false)
@@ -248,7 +255,7 @@ const ARStudio = (props : IProps) => {
                     shareButtonTextColor, allowScaling, (exposure/10).toString(),
                     solidBackgroundColor, isOnTheGround, autoPlay,
                     imageSrc, hasSkyBox?postBackgroundImageBase64:'', contentFile,
-                    null, hasWaterMark?waterMarkBase64:''
+                    hasWaterMark?waterMarkBase64:''
                 )
             }
 
@@ -321,7 +328,7 @@ const ARStudio = (props : IProps) => {
                 (exposure/10).toString(), isOnTheGround, solidBackgroundColor, autoPlay, 
                 backGroundImageChanged?(hasSkyBox?postBackgroundImageBase64:''):null,
                 null, waterMarkChanged?(hasWaterMark?waterMarkBase64 : ''):null,
-                backGroundImageChanged?(hasSkyBox?skyBoxHDRFile:''):null
+                // backGroundImageChanged?(hasSkyBox?skyBoxHDRFile:''):null
             )
 
             setSubmiting(false)
@@ -507,8 +514,8 @@ const ARStudio = (props : IProps) => {
             <div className={styles.cust}>
                 <div className={styles.inner}>
                     <ARStudioCustomize
-                        hdrFile={skyBoxHDRFile}
-                        setHDRFile={(file : any) => {setSkyBoxHDRFile(file);setBackgroundImageChanged(true)}}
+                        // hdrFile={skyBoxHDRFile}
+                        // setHDRFile={(file : any) => {setSkyBoxHDRFile(file);setBackgroundImageChanged(true)}}
                         hasWaterMark={hasWaterMark}
                         setHasWaterMark={(value : boolean) =>{setHasWaterMark(value); setWaterMarkChanged(true)}}
                         waterMarkBase64={waterMarkBase64}

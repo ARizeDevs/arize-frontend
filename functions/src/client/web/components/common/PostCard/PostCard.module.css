@@ -23,6 +23,14 @@
     top:3%;
 }
 
+.sharePost {
+    cursor: pointer;
+    width:150px;
+    position:absolute;
+    left:3%;
+    top:3%;
+}
+
 .processingOverlay {
     position: absolute;
     top: 0px;

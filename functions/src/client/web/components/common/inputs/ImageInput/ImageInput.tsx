@@ -16,8 +16,8 @@ interface IProps {
     extensions? : string[],
     imageSrc : string,
     setImageSrc : (image : string) => void,
-    hdrFile? : any,
-    setHDRFile? : (file : any) => void,
+    // hdrFile? : any,
+    // setHDRFile? : (file : any) => void,
     toggle? : boolean,
     setToggle? : (value : boolean) => void,
     error? : string
@@ -26,7 +26,9 @@ interface IProps {
 
 
 const ImageInput = (props : IProps) => {
-    const { toggle, error,hdrFile, setHDRFile, setToggle, text, extensions, imageSrc, setImageSrc } = props
+    const { toggle, error, 
+        // hdrFile, setHDRFile, 
+        setToggle, text, extensions, imageSrc, setImageSrc } = props
 
     const [ modalOpen , setModalOpen ] = useState(false)
 
@@ -39,20 +41,20 @@ const ImageInput = (props : IProps) => {
     console.log(localError);
     
     const onImageChange = async (file : File) => {
-        const name = file.name
-        const splitedName = name.split('.')
-        const extension = splitedName[splitedName.length -1 ]
-        if(extension === 'hdr') {
-            console.log('xd');
-            console.log(file);
-            if(setHDRFile) setHDRFile(file)
-            setImageSrc('')
-        } else {
+        // const name = file.name
+        // const splitedName = name.split('.')
+        // const extension = splitedName[splitedName.length -1 ]
+        // if(extension === 'hdr') {
+        //     console.log('xd');
+        //     console.log(file);
+        //     if(setHDRFile) setHDRFile(file)
+        //     setImageSrc('')
+        // } else {
             const base64Image : string = await toDataURL(URL.createObjectURL(file)) as string
             setImageSrc(base64Image)
-            if(setHDRFile) setHDRFile(null)
+            // if(setHDRFile) setHDRFile(null)
             setModalOpen(true)
-        }
+        // }
         // console.log(base64Image)
         // let mimeType = base64Image.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/)![1]
         // const extension = mimeTypes.detectExtension(mimeType)
@@ -116,12 +118,12 @@ const ImageInput = (props : IProps) => {
                     </img>
                 </div>}
                 {error ?<Message type={IMessageTypes.ERROR} text={error} />:
-                    localError ? <Message type={IMessageTypes.ERROR} text={localError} />:
-                    hdrFile?<Message type={IMessageTypes.ACTIVE} text={'File successfully uploaded!'} />:null
+                    localError ? <Message type={IMessageTypes.ERROR} text={localError} />:null
+                    // hdrFile?<Message type={IMessageTypes.ACTIVE} text={'File successfully uploaded!'} />:null
                 }
 
                 {/* @ts-ignore */}
-                <CropperModal onFinished={(newImage : string) => { setImageSrc(newImage);if(setHDRFile)setHDRFile(null)}} imageSrc={imageSrc} onImageChange={onImageChange} modalOpen={modalOpen} onRequestClose={() => setModalOpen(false)} />
+                <CropperModal onFinished={(newImage : string) => { setImageSrc(newImage);}} imageSrc={imageSrc} onImageChange={onImageChange} modalOpen={modalOpen} onRequestClose={() => setModalOpen(false)} />
                 </>
             :null}
         </div>
