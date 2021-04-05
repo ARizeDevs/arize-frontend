@@ -30,8 +30,7 @@ const Toast = ({ children, appearance, transitionState} : { children : any, appe
 
 
     return (
-        <div className={`${styles.shadowedBox} ${transitionState === 'entering' ? styles.fadein : ''} ${transitionState === 'exiting' ? styles.fadeout : ''}` }
-            style={{backgroundColor:backColor}}>
+        <div className={`${styles.shadowedBox} ${transitionState === 'entering' ? styles.fadein : ''} ${transitionState === 'exiting' ? styles.fadeout : ''}` }>
             {/* <InfoIcon />
             &nbsp;&nbsp;
             {children} */}

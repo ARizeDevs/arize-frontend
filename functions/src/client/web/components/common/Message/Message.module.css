@@ -6,7 +6,7 @@
 }
 
 .errorText {
-    color : white
+    color : #EE5253
 }
 
 .activeText {
@@ -14,7 +14,7 @@
 }
 .successText {
     font-weight: 700;
-    color: white;
+    color: #47D27E;
 }
 
 
