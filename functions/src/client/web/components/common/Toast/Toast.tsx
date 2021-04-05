@@ -14,24 +14,23 @@ import styles from './Toast.module.css'
 const Toast = ({ children, appearance, transitionState} : { children : any, appearance : string, transitionState : string}) => {
 
     let type = IMessageTypes.INFO
-    let backColor = "#ffffff";
+    // let backColor = "#ffffff";
 
     if(appearance === 'error'){ 
         type = IMessageTypes.ERROR
-        backColor = "#EE5253";
+        // backColor = "#EE5253";
     } else if(appearance === 'success'){
         type = IMessageTypes.SUCCESS;
-        backColor = "#47D27E"
+        // backColor = "#47D27E"
     } else if(appearance === "info")
     {
         type = IMessageTypes.INFO;
-        backColor = "#0078FF";
+        // backColor = "#0078FF";
     }
 
 
     return (
-        <div className={`${styles.shadowedBox} ${transitionState === 'entering' ? styles.fadein : ''} ${transitionState === 'exiting' ? styles.fadeout : ''}` }
-            style={{backgroundColor:backColor}}>
+        <div className={`${styles.shadowedBox} ${transitionState === 'entering' ? styles.fadein : ''} ${transitionState === 'exiting' ? styles.fadeout : ''}` }>
             {/* <InfoIcon />
             &nbsp;&nbsp;
             {children} */}
