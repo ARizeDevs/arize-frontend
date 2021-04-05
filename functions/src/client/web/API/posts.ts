@@ -196,11 +196,12 @@ export const editPost = async (
             if(skyBoxHDRFile === null || !skyBoxHDRFile || typeof skyBoxHDRFile === 'string') {
                 formData.append('postBackgroundImageBase64',postBackgroundImageBase64)
             }
-        } else {
-            if(skyBoxHDRFile !== null) {
-                if(typeof skyBoxHDRFile !== 'string' && skyBoxHDRFile) {
-                    formData.append('skyBoxHDRImage',skyBoxHDRFile)
-                }
+        }
+        if(skyBoxHDRFile !== null) {
+            console.log('2');
+            if(typeof skyBoxHDRFile !== 'string' && skyBoxHDRFile) {
+                console.log('3');
+                formData.append('skyBoxHDRImage',skyBoxHDRFile)
             }
         }
 
