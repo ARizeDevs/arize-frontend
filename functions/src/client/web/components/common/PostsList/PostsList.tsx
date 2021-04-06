@@ -18,7 +18,7 @@ interface IProps {
     list : IPost[],
     fetchingPosts : boolean,
     searchList : IPost[],
-    removeEdits? : boolean
+    removeEdits : boolean
 }
 
 interface IPost { status: string,arViewsCount : number , tdViewsCount : number , sharesCount : number ,imageURL : string, id : string, title : string }
@@ -40,7 +40,7 @@ const PostsRow = (props : {removeEdits:boolean, list : IPost[], chunk : number} 
         <div style={{marginBottom:'10px',width:`${containerWidth}%`,display:'flex',flexDirection:'row-reverse',alignItems:'center',justifyContent:'flex-start'}}>
             {props.list.map((item, index) => 
                 <div key={item.id} style={{width:`${itemWidth}%`,margin:'auto'}}>
-                    <PostCard removeEdits {...item} />
+                    <PostCard removeEdits={props.removeEdits} {...item} />
                 </div>
             )}
         </div>
@@ -68,7 +68,7 @@ const PostsColumn = (props : {removeEdits : boolean, list:IPost[],windowWidth:nu
                 const rowList = props.list.slice(Math.max(i-chunk,0),i)
                 let rowKey: any = rowList.map((item) => item.id)
                 rowKey = rowKey.join('.')
-                results.push(<PostsRow removeEdits key={rowKey}  list={rowList} chunk={chunk}/>)
+                results.push(<PostsRow removeEdits={props.removeEdits} key={rowKey}  list={rowList} chunk={chunk}/>)
             }
         }
 
@@ -83,7 +83,7 @@ const PostsColumn = (props : {removeEdits : boolean, list:IPost[],windowWidth:nu
 
 const Posts = (props : {removeEdits : boolean, list:IPost[], windowWidth : number}) => {
     return (
-        <PostsColumn removeEdits windowWidth={props.windowWidth} list={props.list} />
+        <PostsColumn removeEdits={props.removeEdits} windowWidth={props.windowWidth} list={props.list} />
     )
 }
 
@@ -145,8 +145,8 @@ const PostsList = (props : IProps) => {
                 searchText && !fetchingPosts && searchList.length === 0 ?
                 <NoSearchResultList />:
                 searchText?
-                <Posts removeEdits windowWidth={windowWidth} list={searchList} />:
-                <Posts removeEdits windowWidth={windowWidth} list={list} />
+                <Posts removeEdits={removeEdits} windowWidth={windowWidth} list={searchList} />:
+                <Posts removeEdits={removeEdits} windowWidth={windowWidth} list={list} />
                 
             }
             <br></br>
