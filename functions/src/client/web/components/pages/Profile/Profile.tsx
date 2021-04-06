@@ -9,7 +9,7 @@ import { getUser } from '../../../API/user'
 import SolidButton from '../../common/buttons/SolidButton'
 
 import Navbar from '../../common/Navbar'
-import { SolidRoundImage } from '../../common/RoundImage'
+import SolidRoundImage from '../../common/RoundImage/SolidRoundImage'
 
 import styles from './Profile.module.css'
 import RemainingSlots from '../../common/RemainingSlots'
@@ -270,14 +270,14 @@ const Profile = (props : IProps) => {
                                 </div>
                             </>
                         :   <div className={styles.row}>
-                                <div style={{width : '180px',marginRight : '10px'}}>
+                                {websiteURL?<div style={{width : '180px',marginRight : '10px'}}>
                                     <SolidButton styleClass={styles.editProfileBTN} colorTheme='white' onClick={() => {websiteURL?router.push(websiteURL):''}} >
                                         <div className={styles.row} style={{justifyContent:'center'}}>
                                             <WebsiteIcon />
                                             <h4 style={{color : 'black',marginLeft:'10px'}}>Visit Website</h4>
                                         </div>
                                     </SolidButton>
-                                </div>
+                                </div>:null}
                                 <div className={styles.shareProfile} style={{width : '110px'}}>
                                     <SolidButton styleClass={styles.shareProfileBTN} colorTheme='white' 
                                         onClick={() => {email?router.push(`mailto:${email}?subject = Feedback&body = Message`):''}} 
@@ -308,7 +308,7 @@ const Profile = (props : IProps) => {
                         <div className={styles.verticalDivider}></div>
                     </>
                     : null}
-                    <PostsList fetchingPosts={fetchingPosts} list={posts} searchList={searchedPosts} searchText={searchText} setSearchText={onSearchTextChange} />
+                    <PostsList removeEdits={user !== null} fetchingPosts={fetchingPosts} list={posts} searchList={searchedPosts} searchText={searchText} setSearchText={onSearchTextChange} />
                 </div>
                 </div>
             {fetchingData !== 3?<Loading text='Loading ...' />:null}
