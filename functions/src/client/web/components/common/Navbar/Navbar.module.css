@@ -33,6 +33,14 @@
     color : black
 }
 
+.navbarAccountType{
+    display: flex;   
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    color : black
+}
+
 .arStudioButton {
     width:140px;
     margin-left:24px;

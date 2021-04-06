@@ -56,6 +56,7 @@ const Profile = (props : IProps) => {
     const [ allPostsFetched, setAllPostsFetched ] = useState(false)
     const [ allSearchPostsFetched, setAllSearchPostsFetched ] = useState(false)
     const [ searchedPosts , setSearchedPosts ] = useState<any>([])
+    const [ accountType, setAccountType] = useState('');
 
     const scrollObject = useRef(null);
 
@@ -160,6 +161,7 @@ const Profile = (props : IProps) => {
                     setLocation(userData.location)
                     setWebsiteURL(userData.websiteURL)
                     setEmail(userData.email)
+                    setAccountType(userData.accountType)
                     if(userData.profilePicURL) {
                         getDirectURL(userData.profilePicURL).then((url : any) => {
                             setImageSrc(url)
@@ -213,7 +215,7 @@ const Profile = (props : IProps) => {
 
     return (
         <div className={styles.root}>
-            <Navbar imageSrc={imageSrc} haveMoreSlots={maxSlots - postsCount > 0} />
+            <Navbar imageSrc={imageSrc} haveMoreSlots={maxSlots - postsCount > 0} accountType={accountType} />
             {/* @ts-ignore */}
             <div ref={scrollObject} className={styles.bodyContainer} onScroll={(e) => onScroll(e)}>
                 {showGoToTop?<ScrollToTop onClick={onGoToTopClick} />:null}
