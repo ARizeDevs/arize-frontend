@@ -1,6 +1,6 @@
 import RoundImage from './RoundImage'
-import SolidRoundImage from './RoundImageNoPicker'
+// import SolidRoundImage from './SolidRoundImage'
 
 
-export { SolidRoundImage }
+// export { SolidRoundImage }
 export default RoundImage

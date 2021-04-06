@@ -22,9 +22,9 @@ import ChartIcon from '../../../../assets/icons/chart-line.svg'
 import styles from './PostCard.module.css'
 import SolidButton from '../buttons/SolidButton'
 
-interface IPost { status: string,arViewsCount : number , tdViewsCount : number , sharesCount : number ,imageURL : string, id : string, title : string }
+interface IPost { removeEdits:boolean ,status: string,arViewsCount : number , tdViewsCount : number , sharesCount : number ,imageURL : string, id : string, title : string }
 
-const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, title, status,} : IPost) => {
+const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, removeEdits, title, status,} : IPost) => {
 
     const [ image, setImage ] = useState('')
 
@@ -112,17 +112,20 @@ const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, title,
         <div className={styles.root}>
             <div className={styles.postImageContainer}>
                 <img className={styles.postImage} onClick={() => {if(!processing)router.push(`/model-viewer/${id}`)}}  src={image} />
-                <div className={styles.sharePost}>
-                    <SolidButton onClick={onShareClick} >
-                        <div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}>
-                            <AddToWebsiteIcon />
-                            <h3>Add to website</h3>
-                        </div>
-                    </SolidButton>
-                </div>
-                <div className={styles.editPost} onClick={() => setMenuOpen(!menuOpen)}>
-                    <DotIcon />
-                </div>
+                {removeEdits?null:
+                <>
+                    <div className={styles.sharePost}>
+                        <SolidButton onClick={onShareClick} >
+                            <div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}>
+                                <AddToWebsiteIcon />
+                                <h3>Add to website</h3>
+                            </div>
+                        </SolidButton>
+                    </div>
+                    <div className={styles.editPost} onClick={() => setMenuOpen(!menuOpen)}>
+                        <DotIcon />
+                    </div>
+                </>}
                 {processing?<div className={`${styles.processingOverlay}`} ><h3 style={{color:'white'}} >Processing ...</h3></div>:null}
             </div>
             {menuOpen?<PostCardMenu onCloseRequest={() => setMenuOpen(false)} onEdit={onEdit} onDelete={onDelete} onInsights={onInsights} onView={onView}  />:null}

@@ -9,7 +9,7 @@ interface IProps {
     color?:string,
 }
 
-const RoundImage = (props : IProps) => {
+const SolidRoundImage = (props : IProps) => {
     const { imageSrc, color } = props
 
     if(imageSrc) {
@@ -23,4 +23,4 @@ const RoundImage = (props : IProps) => {
     }
 }
 
-export default RoundImage
+export default SolidRoundImage

@@ -17,7 +17,8 @@ interface IProps {
     setSearchText : (txt : string) => void,
     list : IPost[],
     fetchingPosts : boolean,
-    searchList : IPost[]
+    searchList : IPost[],
+    removeEdits? : boolean
 }
 
 interface IPost { status: string,arViewsCount : number , tdViewsCount : number , sharesCount : number ,imageURL : string, id : string, title : string }
@@ -30,7 +31,7 @@ const SearchBar = ({ text, setText } : { text : string, setText : (text : string
     )
 }
 
-const PostsRow = (props : {list : IPost[], chunk : number} ) => {
+const PostsRow = (props : {removeEdits:boolean, list : IPost[], chunk : number} ) => {
 
     const itemWidth = (3 / props.list.length) * 30
     const containerWidth = (props.list.length / props.chunk) * 100
@@ -39,14 +40,14 @@ const PostsRow = (props : {list : IPost[], chunk : number} ) => {
         <div style={{marginBottom:'10px',width:`${containerWidth}%`,display:'flex',flexDirection:'row-reverse',alignItems:'center',justifyContent:'flex-start'}}>
             {props.list.map((item, index) => 
                 <div key={item.id} style={{width:`${itemWidth}%`,margin:'auto'}}>
-                    <PostCard {...item} />
+                    <PostCard removeEdits {...item} />
                 </div>
             )}
         </div>
     )
 }
 
-const PostsColumn = (props : {list:IPost[],windowWidth:number}) => {
+const PostsColumn = (props : {removeEdits : boolean, list:IPost[],windowWidth:number}) => {
     const renderRows = () => {
         const { windowWidth } = props
         
@@ -67,7 +68,7 @@ const PostsColumn = (props : {list:IPost[],windowWidth:number}) => {
                 const rowList = props.list.slice(Math.max(i-chunk,0),i)
                 let rowKey: any = rowList.map((item) => item.id)
                 rowKey = rowKey.join('.')
-                results.push(<PostsRow key={rowKey}  list={rowList} chunk={chunk}/>)
+                results.push(<PostsRow removeEdits key={rowKey}  list={rowList} chunk={chunk}/>)
             }
         }
 
@@ -80,9 +81,9 @@ const PostsColumn = (props : {list:IPost[],windowWidth:number}) => {
     )
 }
 
-const Posts = (props : {list:IPost[], windowWidth : number}) => {
+const Posts = (props : {removeEdits : boolean, list:IPost[], windowWidth : number}) => {
     return (
-        <PostsColumn windowWidth={props.windowWidth} list={props.list} />
+        <PostsColumn removeEdits windowWidth={props.windowWidth} list={props.list} />
     )
 }
 
@@ -115,7 +116,7 @@ const NoSearchResultList = () => {
 }
 
 const PostsList = (props : IProps) => {
-    const { searchText, setSearchText, list, fetchingPosts, searchList } = props
+    const { searchText, setSearchText, list, removeEdits, fetchingPosts, searchList } = props
     const [ windowWidth, setWindowWidth ] = useState(0)
 
     const updateWindowWidth = () => setWindowWidth(window.innerWidth)
@@ -144,8 +145,8 @@ const PostsList = (props : IProps) => {
                 searchText && !fetchingPosts && searchList.length === 0 ?
                 <NoSearchResultList />:
                 searchText?
-                <Posts windowWidth={windowWidth} list={searchList} />:
-                <Posts windowWidth={windowWidth} list={list} />
+                <Posts removeEdits windowWidth={windowWidth} list={searchList} />:
+                <Posts removeEdits windowWidth={windowWidth} list={list} />
                 
             }
             <br></br>
