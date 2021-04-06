@@ -5,6 +5,10 @@ import { useRouter } from 'next/router'
 import ARizeLogo from '../ARizeLogo'
 
 import SupportIcon from '../../../../assets/icons/support.svg'
+import FreeIcon from '../../../../assets/icons/free.svg'
+import StarterIcon from '../../../../assets/icons/starter.svg'
+import ProIcon from '../../../../assets/icons/pro.svg'
+import EnterpriseIcon from '../../../../assets/icons/enterprise.svg'
 // import BellIcon from '../../../../assets/icons/bell.svg'
 
 import styles from './Navbar.module.css'
@@ -21,6 +25,14 @@ interface IProps {
     accountType?: string
 }
 
+export enum IAccountType {
+    FREE = 'FREE',
+    STARTER = 'STARTER',
+    PRO = 'PRO',
+    ENTERPRISE = 'ENTERPRISE',
+    ADMIN = 'ADMIN'
+}
+
 const rightItems = [
     {
         Icon : SupportIcon,
@@ -33,9 +45,9 @@ const rightItems = [
 ]
 
 const Navbar = (props : IProps) => {
-    const { imageSrc, noMenu, haveMoreSlots } = props
+    const { imageSrc, noMenu, haveMoreSlots, accountType } = props
 
-    const [isARStudio,setIsARStudio] = useState(false)
+    const [ isARStudio,setIsARStudio] = useState(false)
     const [ isPublicRoute, setPublicRoute ] = useState(false)
     const [ arStudioModalOpen, setARStudioModalOpen ] = useState(false)
 
@@ -66,13 +78,28 @@ const Navbar = (props : IProps) => {
     const renderedRightItems = rightItems.map(({ Icon, href }, index) => {
         return  <Link key={index} href={href}>
                 <a className={styles.navbarLeftItems} >
-                    <div style={{width:'16px',marginRight:'24px'}}>
+                    <div style={{width:'16px'}}>
                         {/* @ts-ignore */}
                         <Icon fill={'black'} />
                     </div>
                 </a>
             </Link>
     })
+
+    const renderAccountType = () => {
+        if(accountType === IAccountType.FREE){
+            return <FreeIcon></FreeIcon>
+
+        } else if(accountType === IAccountType.STARTER){
+            return <StarterIcon></StarterIcon>
+
+        } else if(accountType === IAccountType.PRO){
+            return <ProIcon></ProIcon>
+
+        } else if(accountType === IAccountType.ENTERPRISE){
+            return <EnterpriseIcon></EnterpriseIcon>
+        }
+    }
 
     return (
         <>
@@ -89,6 +116,11 @@ const Navbar = (props : IProps) => {
                         </div>
 
                         <div className={`${styles.desktopItems} ${styles.subContainer}`}>
+                            
+                            <div className = {styles.navbarAccountType} style={{marginRight:'24px', paddingTop:'5px'}}>
+                                {renderAccountType()}
+                            </div>
+                            
                             {renderedRightItems}
                             
                             {noMenu?null:<ProfileMenu imageSrc={imageSrc} />}

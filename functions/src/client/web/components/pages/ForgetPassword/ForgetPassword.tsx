@@ -40,7 +40,7 @@ const ForgetPassword = () => {
                             Then cool down and type your email address retrieve it!</p>
                         <br></br>
                         <div className={styles.formContainer}>
-                            <EmailInput value={email} onChange={setEmail} />
+                            <EmailInput text={"Email address"} value={email} onChange={setEmail} />
                             <SolidButton onClick={recoverPassword} ><h3>Recover Password</h3></SolidButton>
                         </div>
                         <p style={{color:'red'}}>{error}</p>
@@ -48,12 +48,13 @@ const ForgetPassword = () => {
                     <div className={`${styles.column} ${styles.section}`}>
                         <div className={styles.row}>
                             <CheckedIcon />
-                            <div className={styles.column}>
+                            <div className={styles.column} style={{paddingLeft:'10px'}} >
                                 <h1>Check Your Email Inbox!</h1>
                                 <p>We have sent a link to your email to recover your password</p>
                             </div>
                         </div>
-                        <div className={styles.formContainer}>
+                        <br></br>
+                        <div className={styles.row} style={{width:'40%', paddingLeft:'60px'}}>
                             <SolidButton onClick={() => router.push('/login')} ><h3>Go to login</h3></SolidButton>
                         </div>
                     </div>}
