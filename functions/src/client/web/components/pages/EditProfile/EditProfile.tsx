@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import SolidButton from '../../common/buttons/SolidButton'
 import Navbar from '../../common/Navbar'
 import Input from '../../common/inputs/Input'
-// import DatePicker from '../../common/inputs/DatePicker'
+import DatePicker from '../../common/inputs/DatePicker'
 import GenderDropdown from '../../common/inputs/GenderDropdown'
 import CountryPicker from '../../common/inputs/CountryPicker'
 import Loading from '../../common/Loading'
@@ -20,6 +20,7 @@ import firebase, { getDirectURL } from '../../../config/firebase'
 import styles from './EditProfile.module.css'
 import { editUser, getUser } from '../../../API/user'
 import MultiLineInput from '../../common/inputs/MultiLineInput'
+import moment from 'moment'
 
 const EditProfile = () => {
     const router = useRouter()
@@ -33,12 +34,12 @@ const EditProfile = () => {
     const [ surname, setSurname ] = useState('')
     const [ username, setUsername ] = useState('')
     const [ bio, setBio ] = useState('')
-    const [ birthday, setBirthday ] = useState('')
+    const [ birthday, setBirthday ] = useState(moment())
     const [ gender, setGender ] = useState({value:'Male',label:'Male'})
     const [ location, setLocation ] = useState('')
     const [ email, setEmail ] = useState('')
     const [ businessName, setBusinessName ] = useState('')
-    // const [ businessType, setBusinessType ] = useState('')
+    const [ businessType, setBusinessType ] = useState('')
     const [ whyToUse, setWhyToUse ] = useState('')
     const [ websiteURL, setWebsiteURL ] = useState('')
     const [ vatNumber, setVatNumber ] = useState('')
@@ -66,7 +67,7 @@ const EditProfile = () => {
                             setLocation(userData.location);
                             setSurname(userData.surname)
                             setUsername(userData.username)
-                            setBirthday(userData.birthday)
+                            setBirthday(moment(userData.birthday))
                             const g = userData.gender
                             const gValue = g.charAt(0).toUpperCase() + g.toLowerCase().slice(1)
                             setGender({value:gValue,label:gValue})
@@ -77,7 +78,7 @@ const EditProfile = () => {
                                 })
                             }
                             setBusinessName(userData.companyName)
-                            // setBusinessType(userData.companyType)
+                            setBusinessType('Type')
                             if(userData.bio) setBio(userData.bio)
                             setWhyToUse(userData.whyUseARize)
                             setWebsiteURL(userData.websiteURL)
@@ -129,7 +130,7 @@ const EditProfile = () => {
             gender : gender.value.toUpperCase(),
             location,
             companyName :businessName,
-            // companyType :businessType,
+            companyType :businessType,
             whyUseARize :whyToUse,
             websiteURL :websiteURL,
             vatNumber
@@ -179,8 +180,8 @@ const EditProfile = () => {
                     <MultiLineInput placeholder='Please write a few sentences to describe your business so when sharing your ARize profile it will be seen by others' maxInputLength={200} required={false} text='Your company bio' value={bio} onChange={setBio}  />
                     <Input placeholder='example@mail.com' disabled required text='Email' type='text' value={email} onChange={setEmail}  RightIcon={PenIcon} onRightIconClick={() => router.push('/change-email')}/>
                     <Input placeholder='************' disabled required text='Password' type='password' value={'123456789'} onChange={() => ''} RightIcon={PenIcon} onRightIconClick={() => router.push('/forget-password')}/>
-                    {/* <DatePicker error={error.birthday} value={birthday} onChange={validateAndSet(setBirthday,birthdayValidator)} /> */}
-                    <Input placeholder='dd/mm/yyyy' error={error.birthday} maxInputLength={30} required text='Date of birth' type='date' value={birthday} onChange={validateAndSet(setBirthday,birthdayValidator)}/>
+                    <DatePicker error={error.birthday} value={birthday} onChange={validateAndSet(setBirthday,birthdayValidator)} />
+                    {/* <Input placeholder='dd/mm/yyyy' error={error.birthday} maxInputLength={30} required text='Date of birth' type='date' value={birthday} onChange={validateAndSet(setBirthday,birthdayValidator)}/> */}
                     <GenderDropdown error={error.gender} onSelect={validateAndSet(setGender, genderValidator)} selected={gender} />
                     <CountryPicker error={error.location} value={location} onChange={validateAndSet(setLocation, locationValidator)} />
                     <div style={{ display:'flex',flexDirection:'row',justifyContent:'space-between' }}>

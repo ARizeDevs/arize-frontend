@@ -44,7 +44,7 @@ const CompleteProfile = () => {
                 surname,
                 bio,
                 username,
-                birthday,
+                birthday: birthday.toISOString(),
                 gender : gender.value.toUpperCase(),
                 location,
             }
