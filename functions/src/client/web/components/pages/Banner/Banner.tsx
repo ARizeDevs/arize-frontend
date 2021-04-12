@@ -30,7 +30,7 @@ const Banner = (_props : IProps) => {
     //         <div className={styles.root} style={{backgroundColor:'white',width:'90%'}}>
     //             <div style={{height:'100%',width:"70%",display:'flex',flexDirection:'column'}}>
     //                 <p style={{width:'100%',height:'30%',wordWrap: 'break-word',textOverflow: 'ellipsis',overflow:'hidden'}}>{postTitle}</p>
-    //                 <small style={{color:'var(--main-lightgray2-color)',width:'100%',height:'70%',wordWrap: 'break-word',textOverflow: 'ellipsis',overflow:'hidden'}}>{link}</small>
+    //                 <small style={{color:'var(--main-lightgray2-color)',width:'100%',height:'70%',wordWrap: 'break-word',,overflow:'hidden'}}>{link}</small>
     //             </div>
     //             <div style={{width:'30%'}}>
     //                 <SolidButton height='30px' onClick={() => router.push(link)} colorTheme={'blue'} ><div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center',width:'100%'}}><GlobeIcon /><p style={{color:'white',marginLeft:'8px'}}>visit</p></div></SolidButton>
