@@ -61,7 +61,7 @@ const CropperModal = (props) => {
                     image={imageSrc}
                     crop={crop}
                     zoom={zoom}
-                    aspect={1}
+                    aspect={1.4285}
                     onCropChange={setCrop}
                     onCropComplete={onCropComplete}
                     onZoomChange={setZoom}

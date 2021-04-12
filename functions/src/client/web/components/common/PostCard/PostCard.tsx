@@ -82,10 +82,12 @@ const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, remove
     } , [imageURL]) 
 
     useEffect(() => {
-        const imageRatio = .7
-        imageRef.current.height = imageRef.current.width * imageRatio
-    }, [imageRef?(imageRef.current?imageRef.current.width:null):null])
+        console.log(imageRef.current.clientWidth);
 
+        const imageRatio = .7
+        imageRef.current.style.height = `${imageRef.current.clientWidth * imageRatio}px`
+    }, [imageRef?(imageRef.current?imageRef.current.clientWidth:null):null])
+// 
     const onShareClick = async () => {
         if(typeof window !== 'undefined' && window.navigator) {
             const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
@@ -132,10 +134,10 @@ const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, remove
                     <DotIcon />
                 </div>
             </div>}
-            {/* <div className={styles.postImageContainer}> */}
-                <img ref={imageRef} className={styles.postImage} onClick={() => {if(!processing)router.push(`/model-viewer/${id}`)}}  src={image} />
-                {processing?<div className={`${styles.processingOverlay}`} ><h3 style={{color:'white'}} >Processing ...</h3></div>:null}
-            {/* </div> */}
+            <div ref={imageRef} className={styles.postImageContainer}>
+                <img className={styles.postImage} onClick={() => {if(!processing)router.push(`/model-viewer/${id}`)}}  src={image} />
+            </div>
+            {processing?<div className={`${styles.processingOverlay}`} ><h3 style={{color:'white'}} >Processing ...</h3></div>:null}
             <div className={styles.divider} />
             <h3 className={styles.title}>{title}</h3>
             <div style={{width:'100%',paddingLeft:'16px',paddingRight:'16px',boxSizing:'border-box'}}>
