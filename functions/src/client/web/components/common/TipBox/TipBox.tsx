@@ -6,21 +6,24 @@ interface IProps {
     style : Object,
     title : string,
     description : string,
-    imageSrc : string
+    imageSrc : string,
+    onClick?: () => void 
 }
 
 const TipBox = (props : IProps) => {
-    const { style, description, imageSrc, title, } = props
+    const { style, description, imageSrc, title, onClick} = props
 
     return (
-        <div className={styles.shadowedBox} style={style}>
+        <div onClick={onClick} className={styles.shadowedBox} style={style}>
 
-            <div className={styles.mediaContainer} style={{background:`url(${imageSrc})`}}>
-                
-            </div>
-            <div className={styles.textContainer}>
-                <h3>{title}</h3>
-                <div style={{width:'100%'}}>
+            {/* <div className={styles.mediaContainer} style={{backgroundImage:`url(${imageSrc})`}}>  
+            </div> */}
+
+            <img src={imageSrc} className={styles.mediaContainer} />
+
+            <div className={styles.textContainer} style={{marginLeft:'10px'}} >
+                <h4 style={{fontSize:16, color:'#FF6F48'}}>{title}</h4>
+                <div style={{width:'100%', fontSize:13,color:'#FF6F48', marginTop:'10px'}}>
                     <p style={{textOverflow: 'ellipsis',overflow:'hidden'}}>{description}</p>
                 </div>
             </div>

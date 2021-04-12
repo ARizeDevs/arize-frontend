@@ -12,7 +12,7 @@ interface IProps {
     shares : number,
     tdViews : number,
     arViews : number,
-    clicks : number,
+    clicks ?: number,
 }
 
 const Circle = ({Icon,tip} : {Icon : any, tip : string}) => {
@@ -43,23 +43,24 @@ const Item = ({ value, Icon, tip } : {value : any , Icon : any, tip : string}) =
 }
 
 const ProfileInsights = (props : IProps) => {
-    const { arViews, shares, tdViews, clicks } = props
+    const { arViews, shares, tdViews} = props
 
-    let conversion : any = '-'
-    if(arViews+tdViews !== 0) {
-        conversion = (clicks/(arViews+tdViews))*100
-    }
+    // let conversion : any = '-'
+    // if(arViews+tdViews !== 0) {
+    //     conversion = (clicks/(arViews+tdViews))*100
+    // }
 
     return (
         <div className={styles.root}>
-            <h4>Insights</h4>
+            <h4>Profile insights</h4>
+            <p>(insights from all posts combined)</p>
             <br></br>
             <div style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly',flexWrap:'wrap'}}>
-                <Item tip='Shares' Icon={ShareIcon} value={shares} />
                 <Item tip='3D Views' Icon={TDViewsIcon} value={tdViews} />
                 <Item tip='AR Views' Icon={ARViewsIcon} value={arViews} />
-                <Item tip='Clicks' Icon={ClickIcon} value={clicks} />
-                <Item tip='Conversion' Icon={SelectionIcon} value={conversion} />
+                <Item tip='Shares' Icon={ShareIcon} value={shares} />
+                {/* <Item tip='Clicks' Icon={ClickIcon} value={clicks} />
+                <Item tip='Conversion' Icon={SelectionIcon} value={conversion} /> */}
             </div>
         </div>)
 }

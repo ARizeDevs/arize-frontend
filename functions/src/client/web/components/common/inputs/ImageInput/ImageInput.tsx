@@ -21,6 +21,7 @@ interface IProps {
     toggle? : boolean,
     setToggle? : (value : boolean) => void,
     error? : string
+    description?: string
 }
 
 
@@ -28,7 +29,7 @@ interface IProps {
 const ImageInput = (props : IProps) => {
     const { toggle, error, 
         // hdrFile, setHDRFile, 
-        setToggle, text, extensions, imageSrc, setImageSrc } = props
+        setToggle, text, extensions, imageSrc, setImageSrc, description } = props
 
     const [ modalOpen , setModalOpen ] = useState(false)
 
@@ -84,6 +85,7 @@ const ImageInput = (props : IProps) => {
                     <p style={{display:'flex',fontWeight:'bold',alignItems:'center'}} className={error || localError?styles.error:''}>{text}</p>
                 </div>
                 }
+                <p style={{fontWeight:'normal'}} >{description}</p>
             {/* @ts-ignore */}
             {toggle === undefined || toggle ?
                 <>

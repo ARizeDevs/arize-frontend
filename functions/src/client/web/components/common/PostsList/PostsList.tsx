@@ -11,6 +11,7 @@ import EmptySearchIcon from '../../../../assets/banners/File searching.svg'
 import styles from './PostsList.module.css'
 import PostCard from '../PostCard'
 import LoadingInline from '../LoadingInline'
+import Placeholder from 'react-select/src/components/Placeholder'
 
 interface IProps {
     searchText : string,
@@ -18,7 +19,7 @@ interface IProps {
     list : IPost[],
     fetchingPosts : boolean,
     searchList : IPost[],
-    removeEdits : boolean
+    removeEdits : boolean,
 }
 
 interface IPost { status: string,arViewsCount : number , tdViewsCount : number , sharesCount : number ,imageURL : string, id : string, title : string }
@@ -26,7 +27,7 @@ interface IPost { status: string,arViewsCount : number , tdViewsCount : number ,
 const SearchBar = ({ text, setText } : { text : string, setText : (text : string) => void }) => {
     return (
         <div style={{width:'100%',position:'sticky',top:'0px'}}>
-            <Input required={false} type='text' LeftIcon={SearchIcon} onChange={setText} value={text} />
+            <Input placeholder="Search for a post based on tag or tilte ..." required={false} type='text' LeftIcon={SearchIcon} onChange={setText} value={text} />
         </div>
     )
 }

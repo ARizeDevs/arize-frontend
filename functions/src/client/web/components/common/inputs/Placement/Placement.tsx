@@ -25,15 +25,15 @@ const Placement = (props : IProps) => {
             <br></br>
             <div className={styles.itemsContainer}>
             <div onMouseLeave={() => setOnTheWallHover(false)} onMouseEnter={() => setOnTheWallHover(true)} onClick={() => setIsOnTheGround(false)} className={styles.items}>
-                <p style={{fontWeight:700,fontSize:13}}>On the wall</p>
-                <p>Suitable for artworks or object that need to be placed on a wall horizontally </p>
+                <p style={{fontWeight:700,fontSize:15}}>On the wall</p>
+                <p style={{fontSize:13, marginTop:'10px'}}>Suitable for artworks or object that need to be placed on a wall horizontally </p>
                 <br></br>
                     {!isOnTheGround?<WallActive /> : onTheWallHover?<WallHover /> : <WallDeactive />}
                 </div>
                 <br></br>
                 <div onMouseLeave={() => setOnTheGroundHover(false)} onMouseEnter={() => setOnTheGroundHover(true)} onClick={() => setIsOnTheGround(true)} className={styles.items}>
-                <p style={{fontWeight:700,fontSize:13}}>On the floor</p>
-                <p>Suitable for furniture or object that need to be placed on the ground vertically </p>
+                <p style={{fontWeight:700,fontSize:15}}>On the floor</p>
+                <p style={{fontSize:13, marginTop:'10px'}}>Suitable for furniture or object that need to be placed on the ground vertically </p>
                 <br></br>
                 {isOnTheGround?<GroundActive /> : onTheGroundHover?<GroundHover /> : <GroundDeactive />}
                 </div>

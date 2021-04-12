@@ -40,7 +40,7 @@ const ARStudioPostDetail = (props : IProps) => {
                 <br></br>
                 <div className={styles.contentImageContainer}>
                     <div className={styles.imageInputContainer}>
-                        <ImageInput error={error.imageSrc} setImageSrc={setImageSrc}  imageSrc={imageSrc} text='Thumbnail*' extensions={['jpg','jpeg','png']} />
+                        <ImageInput error={error.imageSrc} setImageSrc={setImageSrc}  imageSrc={imageSrc} text='Thumbnail (jpg, jpeg, png)*' description='A simpe picture of your product/3d model as a preview' extensions={['jpg','jpeg','png']} />
                     </div>
                     <br></br>
                     {/* <Checkbox isChecked={false} setIsChecked={() => ''} text={<div style={{display:'flex',flexDirection:'column',marginTop:20}}><p style={{fontWeight:700}}>I don’t have my 3D model file</p><p style={{fontWeight:400}}> (You can still create your post woithout having the 3D files)</p></div>}/> */}

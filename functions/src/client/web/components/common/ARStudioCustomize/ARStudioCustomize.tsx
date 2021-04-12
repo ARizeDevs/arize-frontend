@@ -104,7 +104,8 @@ const ARStudioPostDetail = (props : IProps) => {
                                 <ImageInput 
                                     // hdrFile={hdrFile} 
                                     // setHDRFile={setHDRFile} 
-                                    error={error.postBackgroundImageBase64} toggle={hasSkyBox} setToggle={setHasSkyBox} setImageSrc={setPostBackgroundImageBase64}  imageSrc={postBackgroundImageBase64} text='Skybox*' extensions={['hdr','jpeg','jpg','png']}/>
+                                    error={error.postBackgroundImageBase64} toggle={hasSkyBox} setToggle={setHasSkyBox} setImageSrc={setPostBackgroundImageBase64}  imageSrc={postBackgroundImageBase64} text='Skybox (jpeg, jpg, png)*'  
+                                    description='This is a 360° image that will be srounding your model and it is being reflected on the reflectic part of your 3D model/ product' extensions={['hdr','jpeg','jpg','png']}/>
                             </div>
                         </div>
                         
@@ -121,7 +122,7 @@ const ARStudioPostDetail = (props : IProps) => {
                                 />
                                 <Slider 
                                     min={1}
-                                    max={100}
+                                    max={23}
                                     value={shadowSoftness}
                                     onChange={setShadowSoftness}
                                     text='Softness'
@@ -146,7 +147,7 @@ const ARStudioPostDetail = (props : IProps) => {
                                 max={100}
                                 value={exposure}
                                 onChange={setExposure}
-                                text='Exposure'
+                                text='Light brightness'
                             />
                             {/* <p style={{marginBottom:10,fontWeight:900}}>Exposure</p>
                             <div className={styles.sliderContainer}>
