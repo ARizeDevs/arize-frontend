@@ -26,7 +26,7 @@ interface IPost { removeEdits:boolean ,status: string,arViewsCount : number , td
 
 const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, removeEdits, title, status,} : IPost) => {
 
-    const imageRef = useRef(null);
+    const imageRef = useRef<any>(null);
 
     const [ image, setImage ] = useState('')
 
