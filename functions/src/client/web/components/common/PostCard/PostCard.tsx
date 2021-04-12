@@ -83,8 +83,10 @@ const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, remove
 
     useEffect(() => {
         const imageRatio = .7
-        imageRef.current.style.height = `${imageRef.current.clientWidth * imageRatio}px`
-    }, [imageRef?(imageRef.current?imageRef.current.clientWidth:null):null])
+        if(imageRef && imageRef.current && imageRef.current.style) {
+            imageRef.current.style.height = `${imageRef.current.clientWidth * imageRatio}px`
+        }
+    }, [imageRef && imageRef.current?imageRef.current.clientWidth:null])
 
     const onShareClick = async () => {
         if(typeof window !== 'undefined' && window.navigator) {

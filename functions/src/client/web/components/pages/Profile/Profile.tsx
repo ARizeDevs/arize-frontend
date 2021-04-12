@@ -49,7 +49,7 @@ const Profile = (props : IProps) => {
     const [ bio, setBio ] = useState('')
     const [ arViews, setARViews ] = useState(0)
     const [ tdViews, setTDViews ] = useState(0)
-    const [ clicks, setClicks ] = useState(0)
+    // const [ clicks, setClicks ] = useState(0)
     const [ totalShares, setTotalShares ] = useState(0)
     const [ fetchingData, setFetchingData] = useState(1)
     const [ showGoToTop, setShowGoToTop ] = useState(false)
@@ -174,7 +174,7 @@ const Profile = (props : IProps) => {
                         let arViews = 0
                         let tdViews = 0
                         let shares = 0
-                        let c = 0
+                        // let c = 0
                         userData.posts.forEach((p : any) => {
                             if(p.arViewsCount) {
                                 arViews += p.arViewsCount
@@ -185,14 +185,14 @@ const Profile = (props : IProps) => {
                             if(p.sharesCount) {
                                 shares += p.sharesCount
                             }
-                            if(p.clicksCount) {
-                                c += p.clicksCount
-                            }
+                            // if(p.clicksCount) {
+                            //     c += p.clicksCount
+                            // }
                         })
                         setTotalShares(shares)
                         setARViews(arViews)
                         setTDViews(tdViews)
-                        setClicks(c)
+                        // setClicks(c)
                     }
                     setMaxSlots(userData.maxSlots)
                     if(userData.bio) setBio(userData.bio)

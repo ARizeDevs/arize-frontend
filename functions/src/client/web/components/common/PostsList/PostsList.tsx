@@ -11,7 +11,7 @@ import EmptySearchIcon from '../../../../assets/banners/File searching.svg'
 import styles from './PostsList.module.css'
 import PostCard from '../PostCard'
 import LoadingInline from '../LoadingInline'
-import Placeholder from 'react-select/src/components/Placeholder'
+// import Placeholder from 'react-select/src/components/Placeholder'
 
 interface IProps {
     searchText : string,
