@@ -82,12 +82,10 @@ const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, remove
     } , [imageURL]) 
 
     useEffect(() => {
-        console.log(imageRef.current.clientWidth);
-
         const imageRatio = .7
         imageRef.current.style.height = `${imageRef.current.clientWidth * imageRatio}px`
     }, [imageRef?(imageRef.current?imageRef.current.clientWidth:null):null])
-// 
+
     const onShareClick = async () => {
         if(typeof window !== 'undefined' && window.navigator) {
             const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
