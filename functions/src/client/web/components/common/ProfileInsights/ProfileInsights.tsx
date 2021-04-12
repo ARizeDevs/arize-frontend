@@ -55,7 +55,7 @@ const ProfileInsights = (props : IProps) => {
             <h4>Profile insights</h4>
             <p>(insights from all posts combined)</p>
             <br></br>
-            <div style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly',flexWrap:'wrap'}}>
+            <div style={{width:'100%',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'left',flexWrap:'wrap'}}>
                 <Item tip='3D Views' Icon={TDViewsIcon} value={tdViews} />
                 <Item tip='AR Views' Icon={ARViewsIcon} value={arViews} />
                 <Item tip='Shares' Icon={ShareIcon} value={shares} />

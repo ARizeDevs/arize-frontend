@@ -119,14 +119,13 @@ const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, remove
 
     return (
         <div className={styles.root}>
-
             {removeEdits?null:
             <div className={styles.editsContainer} >
-                <div className={styles.sharePost}>
+                <div className={styles.sharePost} style={{width:'40%'}}>
                     <SolidButton borderRadius='8px' height='30px' onClick={onShareClick} >
                         <div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}>
                             <AddToWebsiteIcon />
-                            <h5>Add to website</h5>
+                            <h4>Add to website</h4>
                         </div>
                     </SolidButton>
                 </div>
@@ -173,11 +172,15 @@ const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, remove
                 </div>
                 &nbsp;&nbsp;
                 <div style={{display:'flex',flexDirection:'row',flexWrap:'wrap'}}>
-                    <div style={{width:'60px',marginRight:'10px'}}>
-                        <SolidButton colorTheme='black' onClick={() => {if(!processing)router.push(`/model-viewer/${id}`)}} ><div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}><TDViewIcon /><h3>3D</h3></div></SolidButton>
+                    <div style={{width:'70px',marginRight:'10px'}}>
+                        <SolidButton borderRadius='8px' colorTheme='black' onClick={() => {if(!processing)router.push(`/model-viewer/${id}`)}} ><div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}><TDViewIcon /><h4>3D</h4></div></SolidButton>
                     </div>
-                    <div style={{width:'60px'}}>
-                        <SolidButton onClick={onARClick} ><div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}><ARViewIcon /><h3>AR</h3></div></SolidButton>
+                    <div style={{width:'70px'}}>
+                        <SolidButton borderRadius='8px' onClick={onARClick}>
+                            <div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}>
+                                <ARViewIcon />
+                                <h4>AR</h4>
+                            </div></SolidButton>
                     </div>
                 </div>
             </div>
