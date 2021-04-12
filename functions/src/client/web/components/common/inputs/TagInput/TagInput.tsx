@@ -28,7 +28,7 @@ const TagInput = (props : IProps) => {
 
     return (
         <>
-            <Input placeholder={placeholder} maxInputLength={maxInputLength} error={error} onKeyDown={handleKeyDown} value={value} onChange={setValue} required type='text' text='Post Tags' />
+            <Input placeholder={placeholder} maxInputLength={maxInputLength} error={error} onKeyDown={handleKeyDown} value={value} onChange={setValue} required type='text' text='Post Tags (Press enter to add)' />
             <TagList tags={tags} onCloseClick={handleCloseTag} />
         </>
     )

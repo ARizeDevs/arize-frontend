@@ -10,6 +10,7 @@ import SolidButton from '../../common/buttons/SolidButton'
 
 import Navbar from '../../common/Navbar'
 import SolidRoundImage from '../../common/RoundImage/SolidRoundImage'
+import TipBox from '../../common/TipBox'
 
 import styles from './Profile.module.css'
 import RemainingSlots from '../../common/RemainingSlots'
@@ -239,16 +240,20 @@ const Profile = (props : IProps) => {
                             </div>:null}
                         </div>
                         <br></br>
-                        <br></br>
                         <h1 className={styles.name}>{companyName?companyName:`${name} ${surname}`}</h1>
-                        <p className={styles.lightColor}>{user?location:username}</p>
-                        <br></br>
+                        <p className={styles.lightColor} style={{marginTop:'10px', fontWeight:'bold' , fontSize:20}}>{user?location:username}</p>
                         {user !== null ? <h4 style={{color : 'var(--main-blue-color)'}}>{postsCount} posts</h4> : null}
                         <br></br>
                         <div style={{width:'70%'}}>
                             <p>{bio}</p>
                         </div>
                         <br></br>
+                        <TipBox 
+                            onClick={()=>{window.open('https://youtu.be/Ihkf43Hy43E')}} 
+                            style={{width:'50%', marginTop:'10px', cursor:'pointer'}} 
+                            title='Create your first AR!' 
+                            description='Check out this 1:30 minute tutorial to create your first AR!' 
+                            imageSrc='/images/createAR.png' ></TipBox>
                     </div>
                     <div className={`${styles.profileSections} ${styles.statisticsSection}`}>
                         
@@ -260,14 +265,15 @@ const Profile = (props : IProps) => {
                                     <SolidButton colorTheme={'black'} onClick={() => router.push('/pricing')}  ><h3>Upgrade</h3></SolidButton>
                                 </div>
                                 <br></br>
-                                <div className={styles.shadowedBox}>
+                                <div className={styles.shadowedBox} >
                                     <ProfileInsights 
                                         arViews={arViews}
                                         shares={totalShares}
                                         tdViews={tdViews}
-                                        clicks={clicks}
                                     />
                                 </div>
+                                <br></br>
+                                <h4 style={{marginLeft:'2px', marginTop:'10px'}}>Don’t have your 3D models? <a>Click Here</a></h4>
                             </>
                         :   <div className={styles.row}>
                                 {websiteURL?<div style={{width : '180px',marginRight : '10px'}}>
@@ -292,13 +298,12 @@ const Profile = (props : IProps) => {
                         }
                     </div>
                 </div>
-                <br></br>
                 <div className={styles.profilePostsContainer}>
                     {user === null ?
                     <>
                         <div className={styles.rowContainer} style={{width:'100%'}}>
                             <div className={styles.rowContainer} style={{justifyContent:'flex-start'}}>
-                                <p className={styles.lightColor}>My Posts ( {postsCount} posts )</p>
+                                <p style={{fontWeight:'bold', color:'#0078FF'}} >My Posts ({postsCount} posts)</p>
                             </div>
 
                             {/* {posts.length !== 0 ?<div style={{width:'140px'}}>

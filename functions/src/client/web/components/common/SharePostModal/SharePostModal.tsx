@@ -108,11 +108,11 @@ const SharePostModal = (props : IProps) => {
                                     <MultiLineInput rows={6} text='' required={false} value={embedText} onChange={() => {}} />
                                     :<Input type='text' text={''} required={false} value={shareURL} onChange={() => {}} />}
                                 <br></br>
-                                <div className={styles.row} style={{width:'70%'}}>
+                                <div className={styles.row} style={{width:'50%'}}>
                                     <SolidButton onClick = {isEmbedPage?onEmbedClick:onShareClick}>
                                         {isEmbedPage?
-                                        <h3>Copy code to clipbaord</h3>
-                                        : <h3>Copy link to clipboard</h3>}
+                                        <h3>Copy code</h3>
+                                        : <h3>Copy link</h3>}
                                     </SolidButton>
                                     {isEmbedPage?
                                         <CopyCodeToast on={on}></CopyCodeToast>:
@@ -138,7 +138,7 @@ const CopyLinkToast = ({ on } : { on : boolean}) => {
 }
 
 const CopyCodeToast = ({ on } : { on : boolean}) => {
-    return (
+    return (    
         <div className={styles.copyTextToast} style={{opacity:!on?'0':'1'}}>
             <RoundTick />
             <h5>Code copied</h5>
