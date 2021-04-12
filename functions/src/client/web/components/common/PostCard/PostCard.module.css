@@ -4,31 +4,68 @@
     display: flex;
     flex-direction: column;
     margin: auto;
-    position: relative
+    position: relative;
+    border-radius : 20px;
+    box-sizing: border-box;
+    /* padding: 16px; */
+    box-shadow: -3px 10px 20px 1px rgba(0,0,0,0.1);
+}
+
+.editsContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 16px;
+    padding-bottom: 0px;
 }
 
 .postImage {
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     cursor: pointer;
-    position: relative;
-    border-radius: 20px;
+    margin-top: 16px;
+    /* margin-bottom: 16px; */
+    /* padding-left: 16px; */
+    /* padding-right: 16px; */
+    /* padding-top: 16px; */
+    /* padding-bottom: 16px; */
+    /* box-sizing: border-box; */
+    /* position: relative; */
+    /* border-radius: 50px; */
+}
+
+.divider {
+    width: 100%;
+    height: 2px;
+    background-color: var(--main-lightgray-color);
+}
+
+.title {
+    padding: 16px;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    width: 70%;
+    white-space: nowrap;
+    overflow: hidden !important;
 }
 
 .editPost {
     cursor: pointer;
     width:24px;
-    position:absolute;
-    right:3%;
-    top:3%;
+    /* position:absolute; */
+    /* right:3%; */
+    /* top:3%; */
 }
 
 .sharePost {
     cursor: pointer;
-    width:150px;
-    position:absolute;
-    left:3%;
-    top:3%;
+    width:120px;
+    /* position:absolute; */
+    /* left:3%; */
+    /* top:3%; */
 }
 
 .processingOverlay {

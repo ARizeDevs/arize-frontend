@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 
 import { getDirectURL } from '../../../config/firebase'
@@ -25,6 +25,8 @@ import SolidButton from '../buttons/SolidButton'
 interface IPost { removeEdits:boolean ,status: string,arViewsCount : number , tdViewsCount : number , sharesCount : number ,imageURL : string, id : string, title : string }
 
 const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, removeEdits, title, status,} : IPost) => {
+
+    const imageRef = useRef(null);
 
     const [ image, setImage ] = useState('')
 
@@ -79,6 +81,11 @@ const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, remove
         .catch((error) => console.log(error))
     } , [imageURL]) 
 
+    useEffect(() => {
+        const imageRatio = .7
+        imageRef.current.height = imageRef.current.width * imageRatio
+    }, [imageRef?(imageRef.current?imageRef.current.width:null):null])
+
     const onShareClick = async () => {
         if(typeof window !== 'undefined' && window.navigator) {
             const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
@@ -110,30 +117,36 @@ const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, remove
 
     return (
         <div className={styles.root}>
-            <div className={styles.postImageContainer}>
-                <img className={styles.postImage} onClick={() => {if(!processing)router.push(`/model-viewer/${id}`)}}  src={image} />
-                {removeEdits?null:
-                <>
-                    <div className={styles.sharePost}>
-                        <SolidButton onClick={onShareClick} >
-                            <div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}>
-                                <AddToWebsiteIcon />
-                                <h3>Add to website</h3>
-                            </div>
-                        </SolidButton>
-                    </div>
-                    <div className={styles.editPost} onClick={() => setMenuOpen(!menuOpen)}>
-                        <DotIcon />
-                    </div>
-                </>}
+
+            {removeEdits?null:
+            <div className={styles.editsContainer} >
+                <div className={styles.sharePost}>
+                    <SolidButton borderRadius='8px' height='30px' onClick={onShareClick} >
+                        <div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}>
+                            <AddToWebsiteIcon />
+                            <h5>Add to website</h5>
+                        </div>
+                    </SolidButton>
+                </div>
+                <div className={styles.editPost} onClick={() => setMenuOpen(!menuOpen)}>
+                    <DotIcon />
+                </div>
+            </div>}
+            {/* <div className={styles.postImageContainer}> */}
+                <img ref={imageRef} className={styles.postImage} onClick={() => {if(!processing)router.push(`/model-viewer/${id}`)}}  src={image} />
                 {processing?<div className={`${styles.processingOverlay}`} ><h3 style={{color:'white'}} >Processing ...</h3></div>:null}
+            {/* </div> */}
+            <div className={styles.divider} />
+            <h3 className={styles.title}>{title}</h3>
+            <div style={{width:'100%',paddingLeft:'16px',paddingRight:'16px',boxSizing:'border-box'}}>
+                <div className={styles.divider} />
             </div>
             {menuOpen?<PostCardMenu onCloseRequest={() => setMenuOpen(false)} onEdit={onEdit} onDelete={onDelete} onInsights={onInsights} onView={onView}  />:null}
-            <div style={{flexWrap:'wrap',marginTop:'10px',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+            <div style={{flexWrap:'wrap',padding:'16px',display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
                 <div style={{display:'flex',flexWrap:'wrap',flexDirection:'row'}}>
                     <div className={styles.view}>
                         {/* @ts-ignore */}
-                        <EyeIcon fill='var(--main-lightgray2-color)'/>
+                        <EyeIcon fill='black'/>
                         <div className={styles.viewToolTip}>
                             <div className={styles.textPart}>
                                 <ARViewsIcon />&nbsp;&nbsp;
@@ -151,17 +164,17 @@ const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, remove
                     &nbsp;
                         <div onClick={onShareClick} className={styles.share}>
                             {/* @ts-ignore */}
-                            <ShareIcon fill='var(--main-lightgray2-color)'/>
+                            <ShareIcon fill='black'/>
                         </div>
                     &nbsp;
                     <small style={{color : 'var(--main-lightgray2-color)'}}>{(sharesCount?sharesCount:0) +(shareAdded?1:0)}</small>
                 </div>
                 &nbsp;&nbsp;
                 <div style={{display:'flex',flexDirection:'row',flexWrap:'wrap'}}>
-                    <div style={{width:'100px',marginRight:'10px'}}>
+                    <div style={{width:'60px',marginRight:'10px'}}>
                         <SolidButton colorTheme='black' onClick={() => {if(!processing)router.push(`/model-viewer/${id}`)}} ><div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}><TDViewIcon /><h3>3D</h3></div></SolidButton>
                     </div>
-                    <div style={{width:'100px'}}>
+                    <div style={{width:'60px'}}>
                         <SolidButton onClick={onARClick} ><div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-evenly'}}><ARViewIcon /><h3>AR</h3></div></SolidButton>
                     </div>
                 </div>

@@ -16,10 +16,13 @@ const SolidButton = (props : IProps) => {
             color:`${colorTheme}`,
             background: colorTheme
         }
-        if ( width ) style.width = width
-        if ( height ) style.height = height 
-        if ( borderRadius ) style.borderRadius = borderRadius 
     }
+    if ( width ) style.width = width
+    if ( height ) style.height = height 
+    if ( borderRadius ) style.borderRadius = borderRadius 
+
+    console.log(style);
+    
 
     return (
         <button onClick={onClick} className={styles.btn + newClass} style={style} ><div style={{color:'white'}}>{children}</div></button>

@@ -39,7 +39,7 @@ const EditProfile = () => {
     const [ location, setLocation ] = useState('')
     const [ email, setEmail ] = useState('')
     const [ businessName, setBusinessName ] = useState('')
-    const [ businessType, setBusinessType ] = useState('')
+    // const [ businessType, setBusinessType ] = useState('')
     const [ whyToUse, setWhyToUse ] = useState('')
     const [ websiteURL, setWebsiteURL ] = useState('')
     const [ vatNumber, setVatNumber ] = useState('')
@@ -78,7 +78,7 @@ const EditProfile = () => {
                                 })
                             }
                             setBusinessName(userData.companyName)
-                            setBusinessType('Type')
+                            // setBusinessType('Type')
                             if(userData.bio) setBio(userData.bio)
                             setWhyToUse(userData.whyUseARize)
                             setWebsiteURL(userData.websiteURL)
@@ -130,7 +130,7 @@ const EditProfile = () => {
             gender : gender.value.toUpperCase(),
             location,
             companyName :businessName,
-            companyType :businessType,
+            // companyType :businessType,
             whyUseARize :whyToUse,
             websiteURL :websiteURL,
             vatNumber
