@@ -86,10 +86,9 @@ const Navbar = (props : IProps) => {
             </Link>
     })
 
-    const renderAccountType = () => {
+    const renderAccountType = ()=> {
         if(accountType === IAccountType.FREE){
             return <FreeIcon></FreeIcon>
-
         } else if(accountType === IAccountType.STARTER){
             return <StarterIcon></StarterIcon>
 
@@ -99,6 +98,8 @@ const Navbar = (props : IProps) => {
         } else if(accountType === IAccountType.ENTERPRISE){
             return <EnterpriseIcon></EnterpriseIcon>
         }
+
+        return null;
     }
 
     return (
