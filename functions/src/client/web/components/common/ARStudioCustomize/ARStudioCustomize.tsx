@@ -92,7 +92,7 @@ const ARStudioPostDetail = (props : IProps) => {
     return (
         <div className={styles.root}>
             <div className={styles.inputWrapper}>
-            <Collapsible  triggerStyle={{cursor:'pointer', fontWeight:800,alignItems:'center',display:'flex',fontSize:16}} open={true} transitionTime={250} trigger={<div style={{width:'100%',paddingBottom:'10px', display:'flex',flexDirection:'row',justifyContent:'space-between'}}><p style={{display:'flex',flexDirection:'row',alignItems:'center'}}>3D View Setting</p><AngleDown></AngleDown></div>}>
+            <Collapsible triggerStyle={{cursor:'pointer', fontWeight:800,alignItems:'center',display:'flex',fontSize:16}} open={true} transitionTime={250} trigger={<div style={{width:'100%',paddingBottom:'10px', display:'flex',flexDirection:'row',justifyContent:'space-between',height:'60px'}}><p style={{display:'flex',flexDirection:'row',alignItems:'center'}}>3D View Setting</p><AngleDown></AngleDown></div>}>
                         <Toggle active={!hasSkyBox} setActive={(value : boolean) => setHasSkyBox(!value)} text='Solid Background' />
                         {!hasSkyBox && 
                         <div style={{width:'95%',marginBottom:20}}>
@@ -165,7 +165,7 @@ const ARStudioPostDetail = (props : IProps) => {
                         </Collapsible>
                            
                 <>
-                <Collapsible  triggerStyle={{cursor:'pointer',paddingTop:20,borderTop:' 1px solid #EBEBEB ', fontWeight:800,alignItems:'center',display:'flex',fontSize:16}} open={true} transitionTime={250} trigger={<div style={{width:'100%',paddingBottom:'10px', display:'flex',flexDirection:'row',justifyContent:'space-between'}}><p style={{display:'flex',flexDirection:'row',alignItems:'center'}}>Custom Branding</p><AngleDown></AngleDown></div>}>
+                <Collapsible  triggerStyle={{cursor:'pointer',paddingTop:20,borderTop:' 1px solid #EBEBEB ', fontWeight:800,alignItems:'center',display:'flex',fontSize:16}} open={true} transitionTime={250} trigger={<div style={{width:'100%',paddingBottom:'10px', display:'flex',flexDirection:'row',justifyContent:'space-between',height:'60px'}}><p style={{display:'flex',flexDirection:'row',alignItems:'center'}}>Custom Branding</p><AngleDown></AngleDown></div>}>
                     <div className={styles.contentImageContainer}>
                         <div className={styles.imageInputContainer}>
                             <ImageInput error={error.imageSrc} toggle={hasWaterMark} setToggle={setHasWaterMark} setImageSrc={setWaterMarkBase64}  imageSrc={waterMarkBase64} text='Watermark*' extensions={['jpeg','jpg','png']}/>
