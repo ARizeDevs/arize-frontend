@@ -1,9 +1,9 @@
 import React from 'react'
 
 import ShareIcon from '../../../../assets/icons/share-alt.svg'
-import ClickIcon from '../../../../assets/icons/click.svg'
+// import ClickIcon from '../../../../assets/icons/click.svg'
 import ARViewsIcon from '../../../../assets/icons/ar-views.svg'
-import SelectionIcon from '../../../../assets/icons/selection.svg'
+// import SelectionIcon from '../../../../assets/icons/selection.svg'
 import TDViewsIcon from '../../../../assets/icons/3d-views.svg'
 
 import styles from './ProfileInsights.module.css'
