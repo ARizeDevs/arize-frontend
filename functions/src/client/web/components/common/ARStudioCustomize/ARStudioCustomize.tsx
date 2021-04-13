@@ -104,6 +104,7 @@ const ARStudioPostDetail = (props : IProps) => {
                                 <ImageInput 
                                     // hdrFile={hdrFile} 
                                     // setHDRFile={setHDRFile} 
+                                    noCropper
                                     error={error.postBackgroundImageBase64} toggle={hasSkyBox} setToggle={setHasSkyBox} setImageSrc={setPostBackgroundImageBase64}  imageSrc={postBackgroundImageBase64} text='Skybox (jpeg, jpg, png)*'  
                                     description='This is a 360° image that will be srounding your model and it is being reflected on the reflectic part of your 3D model/ product' extensions={['hdr','jpeg','jpg','png']}/>
                             </div>

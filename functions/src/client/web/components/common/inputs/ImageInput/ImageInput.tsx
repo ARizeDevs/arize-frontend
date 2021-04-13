@@ -21,7 +21,8 @@ interface IProps {
     toggle? : boolean,
     setToggle? : (value : boolean) => void,
     error? : string
-    description?: string
+    description?: string,
+    noCropper? : boolean
 }
 
 
@@ -29,7 +30,7 @@ interface IProps {
 const ImageInput = (props : IProps) => {
     const { toggle, error, 
         // hdrFile, setHDRFile, 
-        setToggle, text, extensions, imageSrc, setImageSrc, description } = props
+        setToggle, text, extensions, noCropper, imageSrc, setImageSrc, description } = props
 
     const [ modalOpen , setModalOpen ] = useState(false)
 
@@ -54,7 +55,7 @@ const ImageInput = (props : IProps) => {
             const base64Image : string = await toDataURL(URL.createObjectURL(file)) as string
             setImageSrc(base64Image)
             // if(setHDRFile) setHDRFile(null)
-            setModalOpen(true)
+            if(!noCropper) setModalOpen(true)
         // }
         // console.log(base64Image)
         // let mimeType = base64Image.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/)![1]
@@ -99,7 +100,7 @@ const ImageInput = (props : IProps) => {
                         onChange={onImageChange}
                         onError={(errMsg : any) => {console.log(errMsg);setLocalError(errMsg)}}
                     >
-                        <div onClick={() => setModalOpen(true)}  style={{width:'100%',height:'100%',display:'flex',justifyContent:'center',alignItems:'center'}}>
+                        <div onClick={() => {if(!noCropper) setModalOpen(true)}}  style={{width:'100%',height:'100%',display:'flex',justifyContent:'center',alignItems:'center'}}>
                             <ImageUploadLogo />
                         </div>
                     </FilePicker>:<FilePicker
@@ -108,17 +109,31 @@ const ImageInput = (props : IProps) => {
                         maxSize={5}
                         onError={(errMsg : any) => {console.log(errMsg);setLocalError(errMsg)}}
                     >
-                        <div onClick={() => setModalOpen(true)}  style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
+                        <div onClick={() => {if(!noCropper) setModalOpen(true)}}  style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
 
                             <ImageUploadLogo />
                         </div>
                     </FilePicker>} 
                 </div>:
+                (noCropper?
+                <FilePicker
+                        dims={{width : '100%' , height : '100%'}}
+                        onChange={onImageChange}
+                        maxSize={5}
+                        onError={(errMsg : any) => {console.log(errMsg);setLocalError(errMsg)}}
+                    >
+                    <div className={`${styles.imagePickerButton} ${error || localError?styles.imagePickerButtonError:''}`}>
+                        <img onClick={() => {if(!noCropper) setModalOpen(true)}} src={imageSrc} className={styles.image}>
+
+                        </img>
+                    </div>
+                </FilePicker>
+                :
                 <div className={`${styles.imagePickerButton} ${error || localError?styles.imagePickerButtonError:''}`}>
-                    <img onClick={() => setModalOpen(true)} src={imageSrc} className={styles.image}>
+                    <img onClick={() => {if(!noCropper) setModalOpen(true)}} src={imageSrc} className={styles.image}>
 
                     </img>
-                </div>}
+                </div>)}
                 {error ?<Message type={IMessageTypes.ERROR} text={error} />:
                     localError ? <Message type={IMessageTypes.ERROR} text={localError} />:null
                     // hdrFile?<Message type={IMessageTypes.ACTIVE} text={'File successfully uploaded!'} />:null
