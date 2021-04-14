@@ -326,8 +326,8 @@ const ARStudio = (props : IProps) => {
                 hasARButton, arButtonTextColor, arButtonBackgroundColor,
                 hasShareButton, shareButtonBackgroundColor, shareButtonTextColor, allowScaling,
                 (exposure/10).toString(), isOnTheGround, solidBackgroundColor, autoPlay, 
-                backGroundImageChanged?(hasSkyBox?postBackgroundImageBase64:''):null,
-                null, waterMarkChanged?(hasWaterMark?waterMarkBase64 : ''):null,
+                hasSkyBox?(backGroundImageChanged?postBackgroundImageBase64:null):'',
+                null, hasWaterMark?(waterMarkChanged?waterMarkBase64 : null):'',
                 // backGroundImageChanged?(hasSkyBox?skyBoxHDRFile:''):null
             )
 
