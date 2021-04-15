@@ -116,6 +116,7 @@ export const savePost = async (
         formData.append('solidBackgroundColor',solidBackgroundColor)
 
         formData.append('postImageBase64',imageBase64Encoded)
+        console.log("Here is the image:" + imageBase64Encoded);
         formData.append('postBackgroundImageBase64',postBackgroundImageBase64)
         formData.append('tokenId',tokenId)
         formData.append('content',contentFile)
@@ -190,7 +191,7 @@ export const editPost = async (
         if(tags) formData.append('tags',tags.join(','))
 
         if(imageBase64Encoded) formData.append('postImageBase64',imageBase64Encoded)
-        if(contentFile) formData.append('file',contentFile)
+        if(contentFile) formData.append('content',contentFile)
 
         if(postBackgroundImageBase64 !== null) {
             // if(skyBoxHDRFile === null || !skyBoxHDRFile || typeof skyBoxHDRFile === 'string') {

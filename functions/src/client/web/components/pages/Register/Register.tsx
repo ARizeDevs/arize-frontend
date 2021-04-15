@@ -181,7 +181,7 @@ const Register = () => {
                     </div>
                     <AuthFooter onAppleClick={onAppleClick} onFacebookClick={onFacebookClick}/>
                     <div style={{width:'100%',marginBottom:'30px'}}>
-                        <p>By signing up via Facebook or Apple you agree to the <Link href='/info/terms'><a>Terms</a></Link> & <Link href='/info/privacy-policy'><a>Privacy Policy</a></Link></p>
+                        <p>By signing up you agree to the <Link href='https://arize.io/termsandconditions.html'><a>Terms</a></Link> & <Link href='https://arize.io/privacyandpolicy.html'><a>Privacy Policy</a></Link></p>
                     </div>
                 </div>
             </div>

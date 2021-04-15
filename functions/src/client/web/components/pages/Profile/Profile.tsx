@@ -249,7 +249,7 @@ const Profile = (props : IProps) => {
                         </div>
                         <br></br>
                         <TipBox 
-                            onClick={()=>{window.open('https://youtu.be/Ihkf43Hy43E')}} 
+                            onClick={()=>{window.open('https://youtu.be/otu_KWfEfUU')}} 
                             style={{width:'50%', marginTop:'10px', cursor:'pointer'}} 
                             title='Create your first AR!' 
                             description='Check out this 1:30 minute tutorial to create your first AR!' 
