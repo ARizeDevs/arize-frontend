@@ -54,8 +54,8 @@ const ARStudio = (props : IProps) => {
     const [ shareButtonTextColor, setShareButtonTextColor]  = useState('#FFFFFF')
 
     const [ hasARButton, setHasARButton ] = useState(true)
-    const [ arButtonBackgroundColor, setArButtonBackgroundColor] = useState('#FFFFFF')
-    const [ arButtonTextColor, setArButtonTextColor] = useState('#81B8EC')
+    const [ arButtonBackgroundColor, setArButtonBackgroundColor] = useState('#0078FF')
+    const [ arButtonTextColor, setArButtonTextColor] = useState('#FFFFFF')
 
     const [ exposure, setExposure ] = useState(10)
     const [ shadowIntensity, setShadowIntensity ] = useState(10)
@@ -85,7 +85,7 @@ const ARStudio = (props : IProps) => {
 
     // const [ profilePicSrc, setProfilePicSrc ] = useState('')
     const [ userId, setUserId ] = useState('')
-    const [ isOnTheGround,setIsOnTheGround ]= useState(false)
+    const [ isOnTheGround,setIsOnTheGround ]= useState(true)
 
     // const [ skyBoxHDRFile, setSkyBoxHDRFile ] = useState<File | null>()
 

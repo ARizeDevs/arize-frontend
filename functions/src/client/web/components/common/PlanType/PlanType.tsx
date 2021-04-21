@@ -13,6 +13,7 @@ interface IProps {
   buttonColor?:string;
   cardTitle:string;
   priceMonthly?:JSX.Element;
+  activePlan?: boolean;
   titleColor?:string;
   priceYearly?:JSX.Element;
   priceColor?:string;
@@ -24,8 +25,9 @@ interface IProps {
 
 
 const PlanType = (props : IProps) => {
-  const {productNum,buttonTitle,activeBorder, buttonColor, cardTitle,titleColor,priceMonthly,priceYearly,priceColor, details, onClick} = props
- const [value,setValue]= useState(false)
+  const {productNum,buttonTitle,activeBorder, buttonColor, cardTitle,titleColor,priceMonthly,priceYearly,priceColor, details, onClick, activePlan} = props
+  const [value,setValue]= useState(false)
+
 
   return (
    <div className={styles.colomnContainer}>
@@ -39,7 +41,7 @@ const PlanType = (props : IProps) => {
       </h1>
       <div className={styles.choosePlan}>
         
-        {!priceMonthly && <Message type={IMessageTypes.ACTIVE} text={'Active Plan'}/>}
+        {activePlan && <Message type={IMessageTypes.ACTIVE} text={'Active Plan'}/>}
         
         <h2 style={{color:priceColor}}>
           {value ? priceYearly : priceMonthly}

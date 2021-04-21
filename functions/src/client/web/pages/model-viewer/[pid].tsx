@@ -35,6 +35,7 @@ const modelViewer = ({ poster ,post, isAryanTer } : { poster : string, userAgent
     const [ backGroundImage, setBackgrounImage ] = useState('')
     const [ waterMarkImage, setWaterMarkImage] = useState('');
     const [ hasWaterMark, setHasWaterMark] = useState(false);
+    const [ isOnTheWall, setIsOnTheWall] = useState(false);
 
     useEffect(() => {
         getDirectURL(post.glbFileURL).then((url) => setGLBUrl(url)).catch(() => '' )
@@ -43,6 +44,12 @@ const modelViewer = ({ poster ,post, isAryanTer } : { poster : string, userAgent
             getDirectURL(post.waterMarkImage).then((url) => setWaterMarkImage(url)).catch(() => '')
             setHasWaterMark(true);
             console.log(waterMarkImage);
+        }
+
+        console.log(post.placement);
+        
+        if(post.placement === "ON_THE_WALL"){
+            setIsOnTheWall(true);
         }
 
         if(post.backGroundImage) getDirectURL(post.backGroundImage).then((url) => setBackgrounImage(url)).catch(() => '' )
@@ -54,8 +61,9 @@ const modelViewer = ({ poster ,post, isAryanTer } : { poster : string, userAgent
             <Head>
                 <link rel="shortcut icon" href="/images/favicon.png" />
                 <title>Model Viewer</title>
-                <script type="module" src="https://unpkg.com/@google/model-viewer@1.1.0/dist/model-viewer.js"></script>
-                <script noModule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
+                {/* <script type="module" src="https://unpkg.com/@google/model-viewer@1.1.0/dist/model-viewer.js"></script> */}
+                {/* <script noModule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script> */}
+                <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"></script>
                 <meta name="og:site_name" content='ARize' />
                 <meta name="og:type" content='website' />
                 <meta name="og:title" content={post.title} />
@@ -94,6 +102,7 @@ const modelViewer = ({ poster ,post, isAryanTer } : { poster : string, userAgent
                     backgroundImage={backGroundImage} 
                     hasWaterMark={hasWaterMark}
                     waterMarkBase64={waterMarkImage}
+                    isOnTheWall={isOnTheWall}
                 />
             </div>
         </>

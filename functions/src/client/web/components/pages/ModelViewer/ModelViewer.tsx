@@ -74,6 +74,7 @@ const ModelViewer = (props : IProps) => {
     let startX, startY;
     let lastX, lastY;
 
+
     useEffect(() => {
         if(typeof window !== 'undefined' && window.navigator) {
             const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
@@ -83,7 +84,6 @@ const ModelViewer = (props : IProps) => {
         document.oncontextmenu= () => {
             return false;
         }
-
         const viewer = document.getElementById('myviewer')
         const onModelLoad = () => {
             if(viewer.activateAR && openar) {
@@ -259,9 +259,6 @@ const ModelViewer = (props : IProps) => {
 
     //--------------- end Panning ----------//
 
-    console.log('////////');
-    console.log(backgroundImage);
-    console.log('//////////');
     
     return (<div style={{width:'100%',height:'100%',position:'relative',backgroundColor:solidBackgroundColor?solidBackgroundColor:'#FFFFF'}}>
                 <model-viewer

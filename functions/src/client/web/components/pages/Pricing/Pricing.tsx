@@ -15,6 +15,10 @@ const Pricing = () => {
     const [ packageName, setPackageName] = useState('');
     const [ postCount, setPostCount] = useState(0);
     const [ maxSlots, setMaxSlots] = useState(0);
+    const [ freeActive, setFreeActive] = useState(false);
+    const [ starterActive, setStarterActive] = useState(false);
+    const [ proActive, setProActive] = useState(false);
+    const [ enterpriseActive, setEnterpriseActive] = useState(false);
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged(async function(user) {
@@ -31,7 +35,11 @@ const Pricing = () => {
 
                         setPostCount(userData.postsCount);
                         setMaxSlots(userData.maxSlots);
-
+                        if(userData.accountType === 'FREE') setFreeActive(true);
+                        if(userData.accountType === 'STARTER') setStarterActive(true);
+                        if(userData.accountType === 'PRO') setProActive(true);
+                        if(userData.accountType === "ENTERPRISE") setEnterpriseActive(true);
+                        console.log(userData.accountType);
                     }
                 }
             } catch (error) {
@@ -70,6 +78,7 @@ const Pricing = () => {
                    <PlanType
                         cardTitle='Free'
                         productNum='3'
+                        activePlan={freeActive}
                         details={[
                             {title:'Up to 1,500 views', checked:true},
                             {title:'3D Visualizer', checked:true},
@@ -85,6 +94,7 @@ const Pricing = () => {
                 
                    <PlanType
                         productNum='50'
+                        activePlan={starterActive}
                         details={[
                             {title:'2K+ views, €0.01 / view', checked:true},
                             {title:'3D Visualizer', checked:true},
@@ -115,6 +125,7 @@ const Pricing = () => {
                    />
                     <PlanType
                         productNum='120'
+                        activePlan={proActive}
                         details={[
                             {title:'4K+ views, €0.01 / view', checked:true},
                             {title:'3D Visualizer', checked:true},
@@ -147,6 +158,7 @@ const Pricing = () => {
                    />
                     <PlanType
                         productNum='200+'
+                        activePlan={enterpriseActive}
                         details={[
                             {title:'4K+ views, €0.01 / view', checked:true},
                             {title:'3D Visualizer', checked:true},
