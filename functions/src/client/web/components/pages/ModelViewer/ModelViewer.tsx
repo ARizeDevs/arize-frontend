@@ -270,6 +270,7 @@ const ModelViewer = (props : IProps) => {
                     loading="lazy"
                     reveal={autoPlay?"auto":"interaction"}
                     camera-controls
+                    autoPlay // auto play the first animation 
                     // style={`background-color: ${solidBackgroundColor};`}
                     quick-look-browsers="safari chrome"
                     ar-placement={isOnTheWall?'wall':''}
@@ -278,6 +279,7 @@ const ModelViewer = (props : IProps) => {
                     shadow-intensity={hasShadow?shadowIntensity:'0'}
                     shadow-softness={hasShadow?shadowSoftness:'0'}
                     skybox-image={backgroundImage?backgroundImage:null}
+                    environment-image="neutral"
                     title={title}
                     alt={title}
                     ios-src={usdzURL}
