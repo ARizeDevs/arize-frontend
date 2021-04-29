@@ -1,5 +1,6 @@
 import React , { useEffect, useState } from 'react'
-import { ChromePicker } from 'react-color';
+import {SketchPicker, ColorResult } from 'react-color';
+import rgbHex from "rgb-hex";
 import SolidButton from '../../buttons/SolidButton';
 import Message from '../../Message';
 import { IMessageTypes } from '../../Message/Message';
@@ -22,6 +23,10 @@ const ColorPicker = (props : IProps) => {
         setTempColor(color)
     } , [color])
 
+    const colorResultToFullHex = (c : ColorResult) => {
+        return "#" + rgbHex(c.rgb.r, c.rgb.g, c.rgb.b, c.rgb.a)
+    }
+
     const onCancel = () => {setIsOpen(false);}
     const onDone = () => {setColor(tempColor);setIsOpen(false)}
 
@@ -35,11 +40,12 @@ const ColorPicker = (props : IProps) => {
             </div>
             {isOpen?<div style={{left:0,right:0,top:0,bottom:0,position:'fixed',zIndex: 100,display:'flex',alignItems:'center',justifyContent:'center'}}>
                 <div className={styles.modal} >
-                <ChromePicker
+                <SketchPicker
                     className={styles.SketchPicker}
                     color={tempColor}
-                    onChange={(color : any) => {setTempColor(color.hex);}}
-                    onChangeComplete={(color : any) => {setTempColor(color.hex);}}
+                    // disableAlpha={false}  
+                    onChange={(color : ColorResult) => {setTempColor(colorResultToFullHex(color));}}
+                    onChangeComplete={(color : ColorResult) => {setTempColor(colorResultToFullHex(color));}}
                 />
                 <br></br>
                 <div style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
