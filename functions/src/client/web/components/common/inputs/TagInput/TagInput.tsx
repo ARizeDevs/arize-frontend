@@ -18,6 +18,12 @@ const TagInput = (props : IProps) => {
 
     const handleKeyDown = (e : any) => {
         if (e.key === 'Enter') {
+            onEditEndHandle()
+        }
+    }
+
+    const onEditEndHandle = () =>{
+        if(value){
             tags.push(value)
             onTagsChanged(tags)
             setValue('')
@@ -28,7 +34,7 @@ const TagInput = (props : IProps) => {
 
     return (
         <>
-            <Input placeholder={placeholder} maxInputLength={maxInputLength} error={error} onKeyDown={handleKeyDown} value={value} onChange={setValue} required type='text' text='Post Tags (Press enter to add)' />
+            <Input placeholder={placeholder} maxInputLength={maxInputLength} onEditEnd={onEditEndHandle} error={error} onKeyDown={handleKeyDown}  value={value} onChange={setValue} required type='text' text='Post Tags (Press enter to add)' />
             <TagList tags={tags} onCloseClick={handleCloseTag} />
         </>
     )

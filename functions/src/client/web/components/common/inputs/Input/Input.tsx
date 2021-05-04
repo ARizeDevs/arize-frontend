@@ -19,16 +19,21 @@ interface IProps {
     onKeyDown? : (e : any) => void,
     disabled? : boolean,
     error? : string,
-    maxInputLength? : number
-    shouldFocus? : boolean
+    maxInputLength? : number,
+    shouldFocus? : boolean,
+    onEditEnd?: ()=> void
 }
 
 const Input = (props : IProps) => {
-    const { error, maxInputLength, disabled, text, required, LeftIcon, RightIcon, type, onLeftIconClick, onRightIconClick, onChange, value, placeholder, removeBorder, shouldFocus, onKeyDown } = props
+    const { error, maxInputLength, disabled, text, required, LeftIcon, RightIcon, type, onLeftIconClick, onRightIconClick, onChange, value, placeholder, removeBorder, shouldFocus, onKeyDown, onEditEnd } = props
     const [ active, setActive ] = useState(false)
 
     const onFocus = () => setActive(true)
-    const onBlur = () => setActive(false)
+    const onBlur = () => {
+        setActive(false)
+        if(onEditEnd) onEditEnd()
+    }
+
 
     console.log(shouldFocus);
 

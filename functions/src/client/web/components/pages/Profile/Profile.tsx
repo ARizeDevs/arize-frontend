@@ -251,8 +251,8 @@ const Profile = (props : IProps) => {
                         <TipBox 
                             onClick={()=>{window.open('https://youtu.be/otu_KWfEfUU')}} 
                             style={{width:'50%', marginTop:'10px', cursor:'pointer'}} 
-                            title='Create your first AR!' 
-                            description='Check out this 1:30 minute tutorial to create your first AR!' 
+                            title='Tutorial:' 
+                            description='Create your first AR in 2 minutes' 
                             imageSrc='/images/createAR.png' ></TipBox>
                     </div>
                     <div className={`${styles.profileSections} ${styles.statisticsSection}`}>

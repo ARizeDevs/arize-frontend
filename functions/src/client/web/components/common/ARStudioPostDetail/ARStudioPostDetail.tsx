@@ -3,7 +3,6 @@ import React from 'react'
 import SolidButton from '../buttons/SolidButton'
 import Input from '../inputs/Input'
 import TagInput from '../inputs/TagInput'
-import MultiLineInput from '../inputs/MultiLineInput'
 import ImageInput from '../../common/inputs/ImageInput'
 import ContentInput from '../../common/inputs/ContentInput'
 
@@ -29,26 +28,29 @@ interface IProps {
 const ARStudioPostDetail = (props : IProps) => {
     const {error, buttonText, onFinish , imageSrc, setImageSrc, title, setTitle, tags, setTags, description, setDescription, contentFile, setContentFile} = props
 
+    setDescription('');
+    console.log(description);
+
     return (
         <div className={styles.root}>
             <div className={styles.inputWrapper}>
                 <p style={{fontSize:16,fontWeight:900}}>Details and files</p>
                 <br></br>
                 <Input placeholder='title...' error={error.title} maxInputLength={50} required text="Post Title"  type="text" value={title} onChange={setTitle} />
-                <MultiLineInput placeholder='description...' maxInputLength={200} required={false} text="Post Description" value={description} onChange={setDescription} />
+                <br></br>
+                {/* <MultiLineInput placeholder='description...' maxInputLength={200} required={false} text="Post Description" value={description} onChange={setDescription} /> */}
                 <TagInput placeholder='tag...' maxInputLength={30} error={error.tags} tags={tags} onTagsChanged={(tags : string[]) => setTags(tags)} />
                 <br></br>
                 <div className={styles.contentImageContainer}>
                     <div className={styles.imageInputContainer}>
-                        <ImageInput error={error.imageSrc} setImageSrc={setImageSrc}  imageSrc={imageSrc} text='Thumbnail (jpg, jpeg, png)*' description='A simpe picture of your product/3d model as a preview' extensions={['jpg','jpeg','png']} />
-                    </div>
-                    <br></br>
-                    {/* <Checkbox isChecked={false} setIsChecked={() => ''} text={<div style={{display:'flex',flexDirection:'column',marginTop:20}}><p style={{fontWeight:700}}>I don’t have my 3D model file</p><p style={{fontWeight:400}}> (You can still create your post woithout having the 3D files)</p></div>}/> */}
-                    <div className={styles.imageInputContainer}>
                         <ContentInput error={error.contentFile} file={contentFile} setFile={setContentFile} extensions={['zip','glb']}  text='GLB / ZIP' />
                     </div>
+                    <br></br>
+                    <div className={styles.imageInputContainer}>
+                        <ImageInput error={error.imageSrc} setImageSrc={setImageSrc}  imageSrc={imageSrc} text='Thumbnail (jpg, jpeg, png)*' description='A simpe picture of your product/3d model as a preview' extensions={['jpg','jpeg','png']} />
+                    </div>
+                    {/* <Checkbox isChecked={false} setIsChecked={() => ''} text={<div style={{display:'flex',flexDirection:'column',marginTop:20}}><p style={{fontWeight:700}}>I don’t have my 3D model file</p><p style={{fontWeight:400}}> (You can still create your post woithout having the 3D files)</p></div>}/> */}
                 </div>
-                <br></br>
             </div>
             <div className={styles.buttonWrapper}>
                 <SolidButton onClick={onFinish} ><h3>{buttonText}</h3></SolidButton>
