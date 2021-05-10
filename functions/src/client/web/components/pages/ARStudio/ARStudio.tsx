@@ -127,8 +127,8 @@ const ARStudio = (props : IProps) => {
                         id = postID[0]
                     }
                     const post = await getPost(id as string, true)
-                    if(post && post.data.data){
-                        const postData = post.data.data.data
+                    if(post && post.data){
+                        const postData = post.data.data
                         setTitle(postData.title)
                         getDirectURL(postData.imageURL).then((url) => setImageSrc(url))
                         setDescription(postData.description)

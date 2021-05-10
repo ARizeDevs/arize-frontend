@@ -133,7 +133,7 @@ export async function  getServerSideProps (context : any) {
   
         const result = await getPost(id , true)
         
-        const poster = await getDirectURL(result.data.data.data.imageURL)
+        const poster = await getDirectURL(result.data.data.imageURL)
         return {
           props: { post : result.data.data.data, poster },
         }
