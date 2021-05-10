@@ -25,6 +25,7 @@ import { editPost } from '../../../API/posts'
 import ModelViewer from '../ModelViewer'
 import TextSwitch from '../../common/inputs/TextSwitch'
 import toDataURL from '../../../helpers/toDataURL'
+import ARStudio3DChoosing from '../../common/ARStudio3DChoosing'
 
 interface IProps {
     isEdit? : boolean,
@@ -210,7 +211,6 @@ const ARStudio = (props : IProps) => {
 
     const submitPosition = () => setPage(2)
     const onCustomizeBackButtonClicked = () => {setPage(1);setDesktop(false);}
-
     
     const onPostCreationPhase1 = async () => {
         const errorResult = validatePostDetail(title, tags, imageSrc, contentFile)
@@ -242,7 +242,7 @@ const ARStudio = (props : IProps) => {
                         )
                 } else {
                     setSubmiting(false)
-                    setPage(3)
+                    setPage(5)
                     return
                 }
                 
@@ -409,6 +409,36 @@ const ARStudio = (props : IProps) => {
                             <TextSwitch disabled={false} text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
 
                         </div>:null}
+
+                        {page===4?<div className={styles.topBar}>
+                            <div  onClick={() => setPage(3)} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start', marginRight:'50px'}}>
+                                <div style={{width:'16px',marginRight:'16px'}}>
+                                    {/* @ts-ignore */}
+                                    <ArrowLeftIcon fill='black'/>
+                                </div>
+                                <p style={{display:'flex',fontWeight:'bold',alignSelf:'center'}}>Back</p>
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                            </div>
+                            <TextSwitch disabled={false} text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
+
+                        </div>:null}
+
+                        {page===5?<div className={styles.topBar}>
+                            <div  onClick={() => setPage(4)} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start', marginRight:'50px'}}>
+                                <div style={{width:'16px',marginRight:'16px'}}>
+                                    {/* @ts-ignore */}
+                                    <ArrowLeftIcon fill='black'/>
+                                </div>
+                                <p style={{display:'flex',fontWeight:'bold',alignSelf:'center'}}>Back</p>
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                            </div>
+                            <TextSwitch disabled={false} text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
+
+                        </div>:null}
                     {!desktop && <div className={styles.previewWrapperMobile}>
                         <Preview
                             page={page}
@@ -469,7 +499,7 @@ const ARStudio = (props : IProps) => {
                 
                 
                 
-        {page===1?
+        {page===1? // Template Choosing
         <div className={styles.form}>
             <div className={styles.cust}>
                 <div className={styles.inner} style={{width:'100%'}}>
@@ -485,8 +515,29 @@ const ARStudio = (props : IProps) => {
             </div>
         </div>:null}
                         
-                
-        {page===2?
+
+        {page===2? // 3D Option Choosing
+            <div className={styles.form}>
+            <div className={styles.cust}>
+                <div className={styles.inner}>
+                    <ARStudio3DChoosing
+                        on3DModelExist ={() => {setPage(4)}}
+                        OnLibraryChosen= {() => {setPage(3)}}
+                    />
+                </div>
+            </div>
+        </div>:null}
+
+        {page===3? // ARize Library
+            <div className={styles.form}>
+            <div className={styles.cust}>
+                <div className={styles.inner}>
+
+                </div>
+            </div>
+        </div>:null}
+
+        {page===4? // Post Detailes
         <div className={styles.form}>
             <div className={styles.cust}>
                 <div className={styles.inner}>
@@ -508,8 +559,10 @@ const ARStudio = (props : IProps) => {
                 </div>
             </div>
         </div>:null}
-                        
-        {page===3?
+
+        
+
+        {page===5? // All 3D detailes
         <div className={styles.form}>
             <div className={styles.cust}>
                 <div className={styles.inner}>
