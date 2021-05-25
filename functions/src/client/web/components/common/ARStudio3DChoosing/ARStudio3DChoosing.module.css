@@ -1,0 +1,28 @@
+.root {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: flex-start; */
+    height: 100%;
+}
+
+.inputWrapper {
+    flex: 1 1 auto;
+    width: 100%;
+    padding-left: 10%; 
+    padding-right: 10%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    
+}
+
+.borderedBTN {
+    /* background-color: white !important; */
+    border: 1px solid var(--main-blue-color) !important;
+    margin-top: 20px;
+    height: 60px;
+    /* color : var(--main-blue-color) !important */
+}

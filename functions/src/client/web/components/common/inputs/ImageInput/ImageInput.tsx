@@ -67,7 +67,7 @@ const ImageInput = (props : IProps) => {
                         onChange={onImageChange}
                         onError={(errMsg : any) => {console.log(errMsg);setLocalError(errMsg)}}
                     >
-                        <div onClick={() => {if(!noCropper) setModalOpen(true)}}  style={{width:'100%',height:'100%',display:'flex',justifyContent:'center',alignItems:'center'}}>
+                        <div onClick={() => {if(!noCropper) setModalOpen(true)}}  style={{width:'100%',height:'100px',display:'flex',justifyContent:'center',alignItems:'center'}}>
                             <ImageUploadLogo />
                         </div>
                     </FilePicker>:<FilePicker
