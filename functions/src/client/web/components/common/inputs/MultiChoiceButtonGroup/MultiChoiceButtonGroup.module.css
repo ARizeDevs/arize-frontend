@@ -1,0 +1,20 @@
+.root {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.buttonWrapper {
+    margin: 7px;
+    /* width: 70px; */
+}
+
+.normal {
+    box-shadow: none !important;
+}
+
+.bordered {
+    border: 1px solid var(--main-blue-color) !important;
+    box-shadow: none !important;
+}

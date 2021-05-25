@@ -29,7 +29,6 @@ const ARStudioPostDetail = (props : IProps) => {
     const {error, buttonText, onFinish , imageSrc, setImageSrc, title, setTitle, tags, setTags, description, setDescription, contentFile, setContentFile} = props
 
     setDescription('');
-    console.log(description);
 
     return (
         <div className={styles.root}>

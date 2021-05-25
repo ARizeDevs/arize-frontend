@@ -8,20 +8,43 @@
 .bodyContainer {
     padding: 40px;
     margin-top: 30px;
-
+    padding-left: 15%;
+    padding-right: 15%;
     height: 92vh;
     /* flex: 1 1; */
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    position: relative;
-    overflow-y: hidden;
+    justify-content: flex-start;
+    flex-direction: column;
     /* display: flex; */
     /* flex-direction: row; */
     /* align-items: flex-start; */
     /* justify-content: space-evenly; */
 }
+
+.header {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;   
+}
+
+.totals {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.thumbnail {
+    width: 72px;
+    height: 72px;
+    border-radius: 10px;
+}
+
+
 
 .columnContainer {
     display: flex;

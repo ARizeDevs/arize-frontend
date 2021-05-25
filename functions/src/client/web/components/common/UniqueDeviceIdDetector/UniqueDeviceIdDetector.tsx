@@ -16,10 +16,6 @@ const UniqueDeviceIdDetector = (props : IProps) => {
     const [ location, setLocation ] = useState({ lat : undefined, long : undefined} as { lat : undefined|string, long : undefined|string })
 
     useEffect(() => {
-        console.log('here')
-
-         
-
         const unsubscribe = firebase.auth().onAuthStateChanged(async function(user) {
             if(!user) {
                 if(typeof window !== undefined) {

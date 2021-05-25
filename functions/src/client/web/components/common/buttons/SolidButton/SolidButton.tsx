@@ -21,9 +21,6 @@ const SolidButton = (props : IProps) => {
     if ( height ) style.height = height 
     if ( borderRadius ) style.borderRadius = borderRadius 
 
-    console.log(style);
-    
-
     return (
         <button onClick={onClick} className={styles.btn + newClass} style={style} ><div style={{color:'white'}}>{children}</div></button>
     )
