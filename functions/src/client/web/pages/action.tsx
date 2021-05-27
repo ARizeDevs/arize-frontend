@@ -13,8 +13,6 @@ const action = () => {
     const [ oobCode, setOOBCode ] = useState('')
 
     useEffect(() => {
-        console.log('here');
-        
         const mode = router.query.mode
         let code = router.query.oobCode
         if(typeof code === typeof []) {
@@ -47,10 +45,8 @@ const action = () => {
             if(code) {
                 auth.applyActionCode(code as string)
                 .then(() => {
-                    console.log('verified')
                     setMode(2)
                 }).catch(e => {
-                    console.log('-----------')
                     console.log(e)
                     router.push('/login')
                 })

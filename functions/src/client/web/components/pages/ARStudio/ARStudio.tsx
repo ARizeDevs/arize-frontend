@@ -99,10 +99,6 @@ const ARStudio = (props : IProps) => {
     }
 
     useEffect(() => {
-        console.log(hasShadow)
-    }, [hasShadow])
-
-    useEffect(() => {
         const getInitData = async () => {
             try {
                 const user = await getUser(null)
@@ -162,7 +158,6 @@ const ARStudio = (props : IProps) => {
                             setSolidBackgroundColor(postData.solidBackgroundColor)
                         }
 
-                        console.log(postData.placement)
                         if(postData.placement === 'ON_THE_GROUND') {
                             setIsOnTheGround(true)
                         } else if(postData.placement === "ON_THE_WALL"){
@@ -259,8 +254,6 @@ const ARStudio = (props : IProps) => {
                 )
             }
 
-            console.log(result)
-
             setSubmiting(false)
             if (result && result.success)
             {
@@ -289,9 +282,6 @@ const ARStudio = (props : IProps) => {
     }
     
     const onPostCreationPhase2 = async () => {
-        console.log(hasWaterMark + "/" + waterMarkChanged);
-        console.log("WaterMark URL:" + waterMarkBase64);
-        
         if(submiting) return
 
         const errorResult = validateCustomizationDetail(

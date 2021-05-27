@@ -34,9 +34,6 @@ const Input = (props : IProps) => {
         if(onEditEnd) onEditEnd()
     }
 
-
-    console.log(shouldFocus);
-
     const labelText = `${text}${required?'*':''}`
 
     const onInputChanged = (e : any) => {

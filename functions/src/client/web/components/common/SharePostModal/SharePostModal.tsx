@@ -42,7 +42,6 @@ const SharePostModal = (props : IProps) => {
             if(typeof window !== 'undefined' && window.navigator) {
                 try {
                     await window.navigator.share({ title: "ARize", url: shareURL });
-                    console.log("Data was shared successfully");
                 } catch (err) {
                     console.error("Share failed:", err.message);
                 }    

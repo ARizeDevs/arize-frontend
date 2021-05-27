@@ -89,13 +89,15 @@ const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, remove
     }, [imageRef && imageRef.current?imageRef.current.clientWidth:null])
 
     const onShareClick = async () => {
+        console.log('here')
+        
+
         if(typeof window !== 'undefined' && window.navigator) {
             const mobile = /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
 
             if(mobile) {
                 try {
                     await window.navigator.share({ title: "ARize", url: `https://arizear.app/model-viewer/${id}` });
-                    console.log("Data was shared successfully");
                 } catch (err) {
                     console.error("Share failed:", err.message);
                 }    
@@ -108,7 +110,9 @@ const PostCard = ({imageURL, id, arViewsCount, sharesCount, tdViewsCount, remove
                     setShareAdded(true)
                     try {
                         // @ts-ignore
-                        await sharePost( id)
+                        const result = await sharePost( id)
+                        console.log(result);
+                        
                     } catch(error) {
                         console.log(error)
                     }

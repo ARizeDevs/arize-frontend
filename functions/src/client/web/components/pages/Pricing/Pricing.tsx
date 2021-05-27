@@ -39,7 +39,6 @@ const Pricing = () => {
                         if(userData.accountType === 'STARTER') setStarterActive(true);
                         if(userData.accountType === 'PRO') setProActive(true);
                         if(userData.accountType === "ENTERPRISE") setEnterpriseActive(true);
-                        console.log(userData.accountType);
                     }
                 }
             } catch (error) {

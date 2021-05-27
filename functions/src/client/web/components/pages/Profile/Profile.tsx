@@ -171,27 +171,9 @@ const Profile = (props : IProps) => {
                     if(userData.posts) {
                         setPostsCount(userData.postsCount)
                         setPosts(userData.posts.reverse())
-                        let arViews = 0
-                        let tdViews = 0
-                        let shares = 0
-                        // let c = 0
-                        userData.posts.forEach((p : any) => {
-                            if(p.arViewsCount) {
-                                arViews += p.arViewsCount
-                            }
-                            if(p.tdViewsCount) {
-                                tdViews += p.tdViewsCount
-                            }
-                            if(p.sharesCount) {
-                                shares += p.sharesCount
-                            }
-                            // if(p.clicksCount) {
-                            //     c += p.clicksCount
-                            // }
-                        })
-                        setTotalShares(shares)
-                        setARViews(arViews)
-                        setTDViews(tdViews)
+                        setTotalShares(userData.totalShares)
+                        setARViews(userData.totalARViews)
+                        setTDViews(userData.totalTDViews)
                         // setClicks(c)
                     }
                     setMaxSlots(userData.maxSlots)

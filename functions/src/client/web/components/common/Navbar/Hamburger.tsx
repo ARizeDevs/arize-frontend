@@ -32,7 +32,6 @@ const Hamburger  = () => {
 
                         const shareURL = `https://arizear.app/profile/${userID}`
                         await window.navigator.share({ title: "ARize", url: shareURL });
-                        console.log("Data was shared successfully");
                     } catch (err) {
                         console.error("Share failed:", err.message);
                     }    

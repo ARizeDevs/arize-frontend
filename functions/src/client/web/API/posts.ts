@@ -3,6 +3,16 @@ import { getTokenID, getUserID } from './utils'
 
 const postServerRoute = '/post'
 
+export const getStatistics = async ( postID : string) => {
+    const tokenId = await getTokenID()
+
+    return axios.get(`${postServerRoute}/statistics/${postID}`,{
+        headers : {
+            'Authorization' : tokenId
+        }
+    })
+}
+
 export const sharePost = async ( postID : string) => {
     // firebase.analytics().logEvent('share', { post : postID, viewer : UUID })
     return axios.post(`${postServerRoute}/${postID}/share`, {})
@@ -116,19 +126,10 @@ export const savePost = async (
         formData.append('solidBackgroundColor',solidBackgroundColor)
 
         formData.append('postImageBase64',imageBase64Encoded)
-        console.log("Here is the image:" + imageBase64Encoded);
         formData.append('postBackgroundImageBase64',postBackgroundImageBase64)
         formData.append('tokenId',tokenId)
         formData.append('content',contentFile)
         
-        console.log(contentFile);
-        
-        // if(skyBoxHDRImage !== null) {
-        //     console.log(skyBoxHDRImage);
-            
-        //     formData.append('skyBoxHDRImage',skyBoxHDRImage)
-        // }
-
         const result = await axios({
             method: "POST",
             url: postServerRoute,
@@ -194,21 +195,11 @@ export const editPost = async (
         if(contentFile) formData.append('content',contentFile)
 
         if(postBackgroundImageBase64 !== null) {
-            // if(skyBoxHDRFile === null || !skyBoxHDRFile || typeof skyBoxHDRFile === 'string') {
-                formData.append('postBackgroundImageBase64',postBackgroundImageBase64)
-            // }
+            formData.append('postBackgroundImageBase64',postBackgroundImageBase64)
         }
-        // if(skyBoxHDRFile !== null) {
-        //     console.log('2');
-        //     if(typeof skyBoxHDRFile !== 'string' && skyBoxHDRFile) {
-        //         console.log('3');
-        //         formData.append('skyBoxHDRImage',skyBoxHDRFile)
-        //     }
-        // }
 
         if(hasShadow !== null) {
             if(hasShadow) {
-                console.log('shadow ,',shadowIntensity,'  : ',shadowSoftness)
                 formData.append('hasShadow','true')
                 if(shadowIntensity) formData.append('shadowIntensity',shadowIntensity)
                 if(shadowSoftness) formData.append('shadowSoftness', shadowSoftness)
@@ -240,10 +231,8 @@ export const editPost = async (
 
         if(allowScaling !== null) {
             if(allowScaling) {
-                console.log('scaling added')
                 formData.append('allowScaling','true')
             } else {
-                console.log('scaling removed')
                 formData.append('allowScaling','false')
             }
         }

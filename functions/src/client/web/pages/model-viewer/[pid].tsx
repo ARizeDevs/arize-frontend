@@ -18,7 +18,6 @@ const modelViewer = ({ poster ,post, isAryanTer } : { poster : string, userAgent
     }
     
     useEffect(() => {
-        console.log(router.query)
         if(router.query){
             if(router.query['openar']) {
                 setOpenar(true)
@@ -43,10 +42,7 @@ const modelViewer = ({ poster ,post, isAryanTer } : { poster : string, userAgent
         if(post.waterMarkImage){
             getDirectURL(post.waterMarkImage).then((url) => setWaterMarkImage(url)).catch(() => '')
             setHasWaterMark(true);
-            console.log(waterMarkImage);
         }
-
-        console.log(post.placement);
         
         if(post.placement === "ON_THE_WALL"){
             setIsOnTheWall(true);

@@ -38,44 +38,11 @@ const ImageInput = (props : IProps) => {
 
     if(imageSrc && localError) setLocalError('')
 
-    console.log('--------');
-    console.log(error);
-    console.log(localError);
-    
     const onImageChange = async (file : File) => {
-        // const name = file.name
-        // const splitedName = name.split('.')
-        // const extension = splitedName[splitedName.length -1 ]
-        // if(extension === 'hdr') {
-        //     console.log('xd');
-        //     console.log(file);
-        //     if(setHDRFile) setHDRFile(file)
-        //     setImageSrc('')
-        // } else {
             const base64Image : string = await toDataURL(URL.createObjectURL(file)) as string
             setImageSrc(base64Image)
-            // if(setHDRFile) setHDRFile(null)
+
             if(!noCropper) setModalOpen(true)
-        // }
-        // console.log(base64Image)
-        // let mimeType = base64Image.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/)![1]
-        // const extension = mimeTypes.detectExtension(mimeType)
-        // console.log(extension);
-        
-        // if(extensions) {
-        //     const result = extensions.findIndex((item) => item===extension)
-        //     if(result !== -1) {
-        //         console.log('1');
-                
-        //     } else {
-        //         console.log('2');
-        //         setImageSrc('')
-        //         setModalOpen(false)
-        //     }
-        // } else {
-        //     setImageSrc(base64Image)
-        //     setModalOpen(true)
-        // }
     } 
 
     return <div className={styles.root}>
