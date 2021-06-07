@@ -405,7 +405,7 @@ const ARStudio = (props : IProps) => {
                     <TextSwitch disabled={false} text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
                     </div>:null}
             {page===4?<div className={styles.topBar}>
-                <div  onClick={() => setPage(3)} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start', marginRight:'50px'}}>
+                <div  onClick={() => setPage(2)} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start', marginRight:'50px'}}>
                     <div style={{width:'16px',marginRight:'16px'}}>
                         {/* @ts-ignore */}
                         <ArrowLeftIcon fill='black'/>
