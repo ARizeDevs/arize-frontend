@@ -26,6 +26,7 @@ import ModelViewer from '../ModelViewer'
 import TextSwitch from '../../common/inputs/TextSwitch'
 import toDataURL from '../../../helpers/toDataURL'
 import ARStudio3DChoosing from '../../common/ARStudio3DChoosing'
+import TDGalleryList from '../../common/TDGalleryList'
 
 interface IProps {
     isEdit? : boolean,
@@ -99,6 +100,12 @@ const ARStudio = (props : IProps) => {
     }
 
     useEffect(() => {
+
+
+        const getTDGalleryItems = async () => {
+            
+        }
+
         const getInitData = async () => {
             try {
                 const user = await getUser(null)
@@ -516,7 +523,11 @@ const ARStudio = (props : IProps) => {
             <div className={styles.form}>
             <div className={styles.cust}>
                 <div className={styles.inner}>
-
+                <p style={{fontSize:16, fontWeight:900}}> Choose a 3D model</p>
+                <br></br>
+                <TDGalleryList  />
+                <br></br>
+                <SolidButton onClick={()=>{}}><h3>Next</h3></SolidButton>
                 </div>
             </div>
         </div>:null}
