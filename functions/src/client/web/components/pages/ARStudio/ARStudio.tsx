@@ -265,7 +265,7 @@ const ARStudio = (props : IProps) => {
                 // @ts-ignore
                 getDirectURL(result.data.glbFileURL).then((url : string) => setContentFile(url))
                 firebase.analytics().logEvent('creation_success', { user : userId } )
-                setPage(3)
+                setPage(5)
             } else {
                 firebase.analytics().logEvent('creation_failed', { user : userId } )
                 addToast('Something went wrong',{ appearance : 'error' })
@@ -371,141 +371,135 @@ const ARStudio = (props : IProps) => {
                 </div>
                 {/* <TextSwitch disabled={true} text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/> */}
             </div>:null}
-                        {page===2?<div className={styles.topBar}>
-                            <div  onClick={() => {setPage(1);setDesktop(false)}} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start', marginRight:'50px'}}>
-                            <div style={{width:'16px',marginRight:'16px'}}>
-                                    {/* @ts-ignore */}
-                                    <ArrowLeftIcon fill='black'/>
-                                </div>
-                                <p style={{display:'flex',fontWeight:'bold',alignSelf:'center'}}>Back</p>
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                </div>
-                                <TextSwitch disabled={false} text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
-
-                        </div>:null}
-                        {page===3?<div className={styles.topBar}>
-                            <div  onClick={() => setPage(2)} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start', marginRight:'50px'}}>
-                                <div style={{width:'16px',marginRight:'16px'}}>
-                                    {/* @ts-ignore */}
-                                    <ArrowLeftIcon fill='black'/>
-                                </div>
-                                <p style={{display:'flex',fontWeight:'bold',alignSelf:'center'}}>Back</p>
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                            </div>
-                            <TextSwitch disabled={false} text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
-
-                        </div>:null}
-
-                        {page===4?<div className={styles.topBar}>
-                            <div  onClick={() => setPage(3)} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start', marginRight:'50px'}}>
-                                <div style={{width:'16px',marginRight:'16px'}}>
-                                    {/* @ts-ignore */}
-                                    <ArrowLeftIcon fill='black'/>
-                                </div>
-                                <p style={{display:'flex',fontWeight:'bold',alignSelf:'center'}}>Back</p>
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                            </div>
-                            <TextSwitch disabled={false} text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
-
-                        </div>:null}
-
-                        {page===5?<div className={styles.topBar}>
-                            <div  onClick={() => setPage(4)} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start', marginRight:'50px'}}>
-                                <div style={{width:'16px',marginRight:'16px'}}>
-                                    {/* @ts-ignore */}
-                                    <ArrowLeftIcon fill='black'/>
-                                </div>
-                                <p style={{display:'flex',fontWeight:'bold',alignSelf:'center'}}>Back</p>
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                            </div>
-                            <TextSwitch disabled={false} text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
-
-                        </div>:null}
-                    {!desktop && <div className={styles.previewWrapperMobile}>
-                        <Preview
-                            page={page}
-                            hasSkybox={hasSkyBox}
-                            hasWaterMark={hasWaterMark}
-                            waterMarkBase64={isEdit?waterMarkBase64:page===3 ?waterMarkBase64:''}
-                            // hasSolidBackground={hasSolidBackground}
-                            solidBackgroundColor={solidBackgroundColor}
-                            shadowIntensity={shadowIntensity}
-                            shadowSoftness={shadowSoftness}
-                            arButtonBackgroundColor={arButtonBackgroundColor}
-                            arButtonTextColor={arButtonTextColor}
-                            hasARButton={hasARButton}
-                            hasShareButton={hasShareButton}
-                            shareButtonBackgroundColor={shareButtonBackgroundColor}
-                            shareButtonTextColor={shareButtonTextColor}
-                            allowScaling={allowScaling}
-                            buttnPreview={false}
-                            id={postID? postID as string : (savedPostID?savedPostID:'') }
-                            exposure={exposure}
-                            postTitle={title}
-                            autoPlay={autoPlay}
-                            isOnTheGround={isOnTheGround}
-                            backgrounImage={hasSkyBox?postBackgroundImageBase64:''}
-                            contentFile={contentFile}
-                            hasShadow={hasShadow}
-                            poster={imageSrc}
-                        />
-                    </div>}
-                    {desktop && <div className={styles.previewWrapperDesktop}> 
-                        <ModelViewer
-                            hasWaterMark={page===3?hasWaterMark:false}
-                            waterMarkBase64={hasWaterMark ?(isEdit?waterMarkBase64:(page===3 ?waterMarkBase64:undefined)):undefined}
-                            arButtonTextColor={arButtonTextColor}
-                            arButtonBackgroundColor={arButtonBackgroundColor}
-                            hasARButton={hasARButton}
-                            hasShadow={hasShadow}
-                            hasShareButton={hasShareButton}
-                            shareButtonBackgroundColor={shareButtonBackgroundColor}
-                            shareButtonTextColor={shareButtonTextColor}
-                            solidBackgroundColor={solidBackgroundColor}
-                            shadowIntensity={(shadowIntensity/10).toString()}
-                            shadowSoftness={(shadowSoftness/10).toString()}
-                            exposure={(exposure/10).toString()}
-                            allowScaling={allowScaling}
-                            showQR={true}
-                            id={isEdit?postID as string:(savedPostID?savedPostID:'')}
-                            title={title}
-                            autoPlay={autoPlay}
-                            glbURL={typeof window !== "undefined" && contentFile ?  (typeof contentFile !== "string"? window.URL.createObjectURL(contentFile) : contentFile ):''}
-                            backgroundImage={hasSkyBox?postBackgroundImageBase64:''}
-                            poster={imageSrc}
-                            showShare={true}
-                            usdzURL={''}
+            {page===2?<div className={styles.topBar}>
+                <div  onClick={() => {setPage(1);setDesktop(false)}} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start', marginRight:'50px'}}>
+                    <div style={{width:'16px',marginRight:'16px'}}>
+                        {/* @ts-ignore */}
+                        <ArrowLeftIcon fill='black'/>
+                    </div>
+                        <p style={{display:'flex',fontWeight:'bold',alignSelf:'center'}}>Back</p>
+                            &nbsp;
+                            &nbsp;
+                            &nbsp;
+                    </div>
+                        <TextSwitch disabled={false} text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
+                    </div>:null}
+            {page===3?<div className={styles.topBar}>
+                <div  onClick={() => setPage(2)} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start', marginRight:'50px'}}>
+                    <div style={{width:'16px',marginRight:'16px'}}>
+                        {/* @ts-ignore */}
+                        <ArrowLeftIcon fill='black'/>
+                    </div>
+                        <p style={{display:'flex',fontWeight:'bold',alignSelf:'center'}}>Back</p>
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                    </div>
+                    <TextSwitch disabled={false} text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
+                    </div>:null}
+            {page===4?<div className={styles.topBar}>
+                <div  onClick={() => setPage(3)} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start', marginRight:'50px'}}>
+                    <div style={{width:'16px',marginRight:'16px'}}>
+                        {/* @ts-ignore */}
+                        <ArrowLeftIcon fill='black'/>
+                    </div>
+                    <p style={{display:'flex',fontWeight:'bold',alignSelf:'center'}}>Back</p>
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                </div>
+                    <TextSwitch disabled={false} text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
+                </div>:null}
+            {page===5?<div className={styles.topBar}>
+                <div  onClick={() => setPage(4)} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start', marginRight:'50px'}}>
+                    <div style={{width:'16px',marginRight:'16px'}}>
+                        {/* @ts-ignore */}
+                        <ArrowLeftIcon fill='black'/>
+                    </div>
+                    <p style={{display:'flex',fontWeight:'bold',alignSelf:'center'}}>Back</p>
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                </div>
+                    <TextSwitch disabled={false} text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
+            </div>:null}
+                    
+                    
+            {!desktop && <div className={styles.previewWrapperMobile}>
+                <Preview
+                    page={page}
+                    hasSkybox={hasSkyBox}
+                    hasWaterMark={hasWaterMark}
+                    waterMarkBase64={isEdit?waterMarkBase64:page===3 ?waterMarkBase64:''}
+                    // hasSolidBackground={hasSolidBackground}
+                    solidBackgroundColor={solidBackgroundColor}
+                    shadowIntensity={shadowIntensity}
+                    shadowSoftness={shadowSoftness}
+                    arButtonBackgroundColor={arButtonBackgroundColor}
+                    arButtonTextColor={arButtonTextColor}
+                    hasARButton={hasARButton}
+                    hasShareButton={hasShareButton}
+                    shareButtonBackgroundColor={shareButtonBackgroundColor}
+                    shareButtonTextColor={shareButtonTextColor}
+                    allowScaling={allowScaling}
+                    buttnPreview={false}
+                    id={postID? postID as string : (savedPostID?savedPostID:'') }
+                    exposure={exposure}
+                    postTitle={title}
+                    autoPlay={autoPlay}
+                    isOnTheGround={isOnTheGround}
+                    backgrounImage={hasSkyBox?postBackgroundImageBase64:''}
+                    contentFile={contentFile}
+                    hasShadow={hasShadow}
+                    poster={imageSrc}
+                />
+            </div>}
+            {desktop && <div className={styles.previewWrapperDesktop}> 
+                <ModelViewer
+                        hasWaterMark={page===3?hasWaterMark:false}
+                        waterMarkBase64={hasWaterMark ?(isEdit?waterMarkBase64:(page===3 ?waterMarkBase64:undefined)):undefined}
+                        arButtonTextColor={arButtonTextColor}
+                        arButtonBackgroundColor={arButtonBackgroundColor}
+                        hasARButton={hasARButton}
+                        hasShadow={hasShadow}
+                        hasShareButton={hasShareButton}
+                        shareButtonBackgroundColor={shareButtonBackgroundColor}
+                        shareButtonTextColor={shareButtonTextColor}
+                        solidBackgroundColor={solidBackgroundColor}
+                        shadowIntensity={(shadowIntensity/10).toString()}
+                        shadowSoftness={(shadowSoftness/10).toString()}
+                        exposure={(exposure/10).toString()}
+                        allowScaling={allowScaling}
+                        showQR={true}
+                        id={isEdit?postID as string:(savedPostID?savedPostID:'')}
+                        title={title}
+                        autoPlay={autoPlay}
+                        glbURL={typeof window !== "undefined" && contentFile ?  (typeof contentFile !== "string"? window.URL.createObjectURL(contentFile) : contentFile ):''}
+                        backgroundImage={hasSkyBox?postBackgroundImageBase64:''}
+                        poster={imageSrc}
+                        showShare={true}
+                        usdzURL={''}
                     />
                 </div>}
             </div>
                 
                 
-                
         {page===1? // Template Choosing
-        <div className={styles.form}>
-            <div className={styles.cust}>
-                <div className={styles.inner} style={{width:'100%'}}>
-                    <div className={styles.inputWrapper}>
-                        <div>
-                            <Placement isOnTheGround={isOnTheGround} setIsOnTheGround={(value : boolean) => { setIsOnTheGround(value);setIsOnTheGroundChanged(true)}}/>
+            <div className={styles.form}>
+                <div className={styles.cust}>
+                    <div className={styles.inner} style={{width:'100%'}}>
+                        <div className={styles.inputWrapper}>
+                            <div>
+                                <Placement isOnTheGround={isOnTheGround} setIsOnTheGround={(value : boolean) => { setIsOnTheGround(value);setIsOnTheGroundChanged(true)}}/>
+                            </div>
+                        </div>
+                        <div className={styles.buttonWrapper}>
+                            <SolidButton onClick={submitPosition} ><h3>Next</h3></SolidButton>
                         </div>
                     </div>
-                    <div className={styles.buttonWrapper}>
-                            <SolidButton onClick={submitPosition} ><h3>Next</h3></SolidButton>
-                    </div>
                 </div>
-            </div>
-        </div>:null}
+            </div>:null}
                         
-
         {page===2? // 3D Option Choosing
             <div className={styles.form}>
             <div className={styles.cust}>
@@ -549,8 +543,6 @@ const ARStudio = (props : IProps) => {
                 </div>
             </div>
         </div>:null}
-
-        
 
         {page===5? // All 3D detailes
         <div className={styles.form}>
