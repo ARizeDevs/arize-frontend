@@ -28,9 +28,9 @@ const DetailBox = (props : IProps) => {
                         <h5>{item.label}</h5>
                     </div>
                     <div style={{display:'flex',flexDirection:'column',alignItems:'flex-end',justifyContent:'space-between'}}>
-                        <h5>{`Total Views: ${item.tdView + item.arView}`}</h5>
+                        <h5 style={{marginBottom:'3px'}}>{`Total Views: ${item.tdView + item.arView}`}</h5>
                         <small>
-                            <p style={{ color:'var(--main-lightgray2-color)' }}>{`AR Views: ${item.arView}`}</p>
+                            <p style={{ color:'var(--main-lightgray2-color)',marginBottom:'3px' }}>{`AR Views: ${item.arView}`}</p>
                         </small>
                         <small>
                             <p style={{ color:'var(--main-lightgray2-color)' }}>{`3D Views: ${item.tdView}`}</p>

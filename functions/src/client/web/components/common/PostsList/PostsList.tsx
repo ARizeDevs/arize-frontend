@@ -22,7 +22,7 @@ interface IProps {
     removeEdits : boolean,
 }
 
-interface IPost { status: string,arViewsCount : number , tdViewsCount : number , sharesCount : number ,imageURL : string, id : string, title : string }
+interface IPost { status: string,totalARViews : number , totalTDViews : number , totalShares : number ,imageURL : string, id : string, title : string }
 
 const SearchBar = ({ text, setText } : { text : string, setText : (text : string) => void }) => {
     return (

@@ -52,11 +52,11 @@ export const getPost = async (id : string , author : boolean) => {
     return axios.get(`${postServerRoute}/${id}${author?'?author=true':''}`)
 }
 
-export const getAllPosts = async (author : string | null, startDocId : string | null, offset : number | null , limit : number | null, searchText : string | null) => {
+export const getAllPosts = async (author : string | null, startDocId : string | null, offset : number | null , limit : number | null, searchText : string | null,getStatistics : boolean, justGetTotal : boolean) => {
     let id : any = author
     if(!id) id = await getUserID()
     
-    return axios.get(`${postServerRoute}?${id?`uid=${id}`:''}&${startDocId?`startDocId=${startDocId}`:''}&${limit?`limit=${limit}`:''}&${offset?`offset=${offset}`:''}&${searchText?`searchText=${searchText}`:''}`)
+    return axios.get(`${postServerRoute}?${id?`uid=${id}`:''}&${startDocId?`startDocId=${startDocId}`:''}&${limit?`limit=${limit}`:''}&${offset?`offset=${offset}`:''}&${searchText?`searchText=${searchText}`:''}&${getStatistics?`getStatistics=true`:''}&${justGetTotal?`justGetTotal=true`:''}`)
 }
 
 

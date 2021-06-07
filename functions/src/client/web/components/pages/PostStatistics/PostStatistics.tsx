@@ -152,7 +152,7 @@ const PostStatistics = (props : IProps ) => {
             <div className={styles.bodyContainer}>
                 <div className={styles.header}>
                 <div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}} >
-                        <div style={{ width : '72px', height : '72px'}}>
+                        <div style={{ width : '72px', height : '72px',marginRight:'8px'}}>
                             <SolidRoundImage 
                                 borderRadius='10px'
                                 imageSrc={thumbnail}
@@ -178,11 +178,11 @@ const PostStatistics = (props : IProps ) => {
                     <TotalBox width='220px' text='Total Shares' value={sharesCount} color='#47D27E' />
                 </div>
                 <br></br>
-                <div style={{ display : 'flex' , flexDirection : 'row', alignItems : 'flex-start', justifyContent : 'space-between',width:'100%'}}>
-                    <div style={{ width : '45%', height : '450px' }}>
+                <div className={styles.details}>
+                    <div style={{ width : '530px', height : '450px', margin:'15px' }}>
                         <DetailBox title='Location'  data={locationData} />
                     </div>
-                    <div style={{ width : '45%', height : '450px' }}>
+                    <div style={{ width : '530px', height : '450px', margin:'15px' }}>
                         <DetailBox title='Referrer Website'  data={referrerData} />
                     </div>
                 </div>

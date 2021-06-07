@@ -19,7 +19,7 @@ const TotalBox = (props : IProps) => {
             justifyContent:'flex-start',
             border : '1px solid',
             borderColor : color,
-            margin : '10px',
+            margin : '15px',
             width ,
             borderRadius : '10px',
             padding : '20px',
