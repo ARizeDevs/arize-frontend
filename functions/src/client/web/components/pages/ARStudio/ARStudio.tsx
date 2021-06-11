@@ -1,4 +1,4 @@
-import React , { useState, useEffect } from 'react'
+import React , { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 
 
@@ -27,6 +27,10 @@ import TextSwitch from '../../common/inputs/TextSwitch'
 import toDataURL from '../../../helpers/toDataURL'
 import ARStudio3DChoosing from '../../common/ARStudio3DChoosing'
 import TDGalleryList from '../../common/TDGalleryList'
+import useDebounce from '../../../helpers/useDebounce'
+import { getAllTDGallery } from '../../../API/tdGallery'
+import TDGalleryItem from '../../common/TDGallery'
+import createFileFromURL from '../../../helpers/createFileFromURL'
 
 interface IProps {
     isEdit? : boolean,
@@ -83,6 +87,14 @@ const ARStudio = (props : IProps) => {
     const [ error, setError ] = useState({})
     const [ isOnTheGroundChanged, setIsOnTheGroundChanged ] = useState(false)
     const [ desktop,setDesktop]= useState(false)
+    
+    const [ all3DItemsFetched, setAll3DItemsFetched ] = useState(false)
+    const [ fetching3DItems, setFetching3DItems ] = useState(false)
+    const [ TDItems, setTDItems ] = useState([])
+    const [ selectedTDItem, setSelectedTDItem ] = useState<any>(null)
+
+    const scrollObject = useRef(null);
+    const TDItemsPageSize = 9
     // const [ fullScreen, setFullScreen ] = useState(false)
 
     // const [ profilePicSrc, setProfilePicSrc ] = useState('')
@@ -90,6 +102,51 @@ const ARStudio = (props : IProps) => {
     const [ isOnTheGround,setIsOnTheGround ]= useState(true)
 
     // const [ skyBoxHDRFile, setSkyBoxHDRFile ] = useState<File | null>()
+
+  const loadMoreTDItems = useDebounce( (items : any[], setItems : (items : any[], newItems : any[]) => void) => {
+        getAllTDGallery(null, items.length, TDItemsPageSize, null)
+        .then((result : any) => {
+            const newItems = result.data.data
+
+            console.log(newItems);
+            
+            if((newItems as any).length < TDItemsPageSize) {               
+              setAll3DItemsFetched(true)
+            }
+
+            setItems(items, newItems)
+        })
+        .catch((error : any) => {
+            console.log(error)
+        })
+        .finally(() => {
+            setFetching3DItems(false)
+        })
+    } , 500)
+
+    const onScroll = (e : any) => {
+      const scrollY = e.target.scrollTop
+      const limit = Math.max( document.body.scrollHeight, document.body.offsetHeight, 
+          document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight ) - 30
+      
+      if(scrollY !== 0) {
+          if(limit < scrollY ) {
+
+              if(!fetchingData  && !fetching3DItems ) {
+                      if(!all3DItemsFetched) {
+                          setFetching3DItems(true)
+                          
+                          const set = (items : any[] , newItems : any[]) => setTDItems([...newItems.reverse(),...items])
+                          loadMoreTDItems(TDItems, set)
+                      }
+              }
+          }
+          // setShowGoToTop(true)
+      } else {
+          // setShowGoToTop(false)
+      }
+  }
+
 
     const validateAndSet = (fn : (arg : any) => void, validate : (arg : any) => any) => {
         return (value : any) => {
@@ -100,13 +157,21 @@ const ARStudio = (props : IProps) => {
     }
 
     useEffect(() => {
-
-
-        const getTDGalleryItems = async () => {
-            
+      console.log('heeeeeeeeeeeeeeeeeeeeeeeeeeeee');
+      
+        try {
+          const set = (items : any[] , newItems : any[]) => setTDItems([...newItems.reverse(),...items])
+          loadMoreTDItems(TDItems, set)
+          
+        } catch (error) {
+          console.log(error);
+          
         }
 
+            
+
         const getInitData = async () => {
+
             try {
                 const user = await getUser(null)
                 if(user && user.data.data){
@@ -211,7 +276,7 @@ const ARStudio = (props : IProps) => {
     } , [isEdit,postID])
 
 
-    const submitPosition = () => setPage(2)
+    const submitPosition = () => setPage(isEdit?4:2)
     const onCustomizeBackButtonClicked = () => {setPage(1);setDesktop(false);}
     
     const onPostCreationPhase1 = async () => {
@@ -405,7 +470,7 @@ const ARStudio = (props : IProps) => {
                     <TextSwitch disabled={false} text1='Mobile' text2='Desktop' isOn={desktop} setIsOn={setDesktop}/>
                     </div>:null}
             {page===4?<div className={styles.topBar}>
-                <div  onClick={() => setPage(2)} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start', marginRight:'50px'}}>
+                <div  onClick={() => setPage(isEdit?1:2)} style={{cursor:'pointer',display:'flex' , flexDirection : 'row', alignItems:'center' , justifyContent : 'flex-start', marginRight:'50px'}}>
                     <div style={{width:'16px',marginRight:'16px'}}>
                         {/* @ts-ignore */}
                         <ArrowLeftIcon fill='black'/>
@@ -525,9 +590,24 @@ const ARStudio = (props : IProps) => {
                 <div className={styles.inner}>
                 <p style={{fontSize:16, fontWeight:900}}> Choose a 3D model</p>
                 <br></br>
-                <TDGalleryList  />
+                <TDGalleryList selected={selectedTDItem} onChange={async (item : any) => {
+                
+                  setSelectedTDItem(item)
+                  const contentFileDirectURL = await getDirectURL(item.glbFileURL)
+                  const imageSrcDirectURL = await getDirectURL(item.imageURL)
+
+                  const file : any = await createFileFromURL(contentFileDirectURL)
+                  setContentFile(file)
+                  // setContentFileChanged(true)
+                  setImageSrc(await toDataURL(imageSrcDirectURL) as string)
+                }} scrollRef={scrollObject} onScroll={onScroll} itemList={TDItems} fetchingItems={fetching3DItems} />
                 <br></br>
-                <SolidButton onClick={()=>{}}><h3>Next</h3></SolidButton>
+                <SolidButton onClick={async ()=>{
+                  if(selectedTDItem) {
+                    
+                    setPage(4)
+                  } 
+                }}><h3>Next</h3></SolidButton>
                 </div>
             </div>
         </div>:null}

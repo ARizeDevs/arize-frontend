@@ -3,7 +3,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    margin: auto;
+    /* margin: auto; */
     position: relative;
     border-radius : 20px;
     box-sizing: border-box;

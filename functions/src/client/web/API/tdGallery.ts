@@ -1,7 +1,6 @@
-import { async } from 'q'
 import axios from  '../config/api'
 
-const tdGalleryRoute = '/TDGallery'
+const tdGalleryRoute = '/gallery'
 
 export const getAllTDGallery = async (startDocId: string | null, offset: number | null, limit: number | null, searchText: string | null) => {
     
