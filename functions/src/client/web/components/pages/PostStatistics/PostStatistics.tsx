@@ -31,8 +31,8 @@ const PostStatistics = (props : IProps ) => {
     const [ arViewsCount, setARViewsCount] = useState(0)
     const [ tdViewsCount, setTDViewsCount] = useState(0)
     const [ sharesCount, setSharesCount] = useState(0)
-    const [ referrerData, setReferrerData ] = useState([])
-    const [ locationData, setLocationData ] = useState([])
+    const [ referrerData, setReferrerData ] = useState<any>([])
+    const [ locationData, setLocationData ] = useState<any>([])
 
     useEffect(() => {
         if(statistics) {
@@ -42,8 +42,8 @@ const PostStatistics = (props : IProps ) => {
             setTDViewsCount(statisticsData.TD_VIEW && statisticsData.TD_VIEW[timeIntervalLabels[timeIntervalChoice]] && statisticsData.TD_VIEW[timeIntervalLabels[timeIntervalChoice]].count ? statisticsData.TD_VIEW[timeIntervalLabels[timeIntervalChoice]].count : 0)
             setSharesCount(statisticsData.SHARE && statisticsData.SHARE[timeIntervalLabels[timeIntervalChoice]] && statisticsData.SHARE[timeIntervalLabels[timeIntervalChoice]].count ? statisticsData.SHARE[timeIntervalLabels[timeIntervalChoice]].count : 0)
 
-            const tempReferrerData = {}
-            const tempLocationData = {}
+            const tempReferrerData : any = {}
+            const tempLocationData : any = {}
 
             let AR_VIEW_referrer = {}
             let TD_VIEW_referrer = {}

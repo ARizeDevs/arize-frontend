@@ -29,7 +29,6 @@ import ARStudio3DChoosing from '../../common/ARStudio3DChoosing'
 import TDGalleryList from '../../common/TDGalleryList'
 import useDebounce from '../../../helpers/useDebounce'
 import { getAllTDGallery } from '../../../API/tdGallery'
-import TDGalleryItem from '../../common/TDGallery'
 import createFileFromURL from '../../../helpers/createFileFromURL'
 
 interface IProps {
@@ -90,7 +89,7 @@ const ARStudio = (props : IProps) => {
     
     const [ all3DItemsFetched, setAll3DItemsFetched ] = useState(false)
     const [ fetching3DItems, setFetching3DItems ] = useState(false)
-    const [ TDItems, setTDItems ] = useState([])
+    const [ TDItems, setTDItems ] = useState<any>([])
     const [ selectedTDItem, setSelectedTDItem ] = useState<any>(null)
 
     const scrollObject = useRef(null);

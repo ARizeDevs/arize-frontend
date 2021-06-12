@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import LoadingInline from '../LoadingInline';
 import TDGalleryItem from '../TDGallery';
 
@@ -66,7 +66,7 @@ interface IGalleryItem { imageURL: string, glbFileURL: string, usdzFileURL: stri
 
 
 
-const GalleryItems = (props: {selected : IGalleryItem, itemList:IGalleryItem[], windowWidth: number, onClick : (item : IGalleryItem) => void}) => {
+const GalleryItems = (props: {selected : IGalleryItem, itemList:IGalleryItem[], onClick : (item : IGalleryItem) => void}) => {
   const { itemList, onClick, selected } = props
   
   const renderedList = itemList.map((item) => {
@@ -93,7 +93,7 @@ const TDGalleryList = (props: IProps) => {
     return(
         <div ref={scrollRef} onScroll={onScroll} className={styles.root}>
             {
-              <GalleryItems selected={selected} windowWidth = {null} itemList={itemList} onClick={onChange}/>
+              <GalleryItems selected={selected} itemList={itemList} onClick={onChange}/>
             }
             <br></br>
             {fetchingItems ? <LoadingInline/> : null}

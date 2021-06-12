@@ -26,7 +26,7 @@ interface IProps {
 }
 
 const ARStudioPostDetail = (props : IProps) => {
-    const {error, buttonText, onFinish , imageSrc, setImageSrc, title, setTitle, tags, setTags, description, setDescription, contentFile, setContentFile} = props
+    const {error, buttonText, onFinish , imageSrc, setImageSrc, title, setTitle, tags, setTags, setDescription, contentFile, setContentFile} = props
 
     setDescription('');
 
