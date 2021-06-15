@@ -44,7 +44,7 @@ const ARStudio = (props : IProps) => {
     const router = useRouter()
 
     const [ submiting , setSubmiting ] = useState(false)
-    const [ fetchingData, setFetchingData ] = useState(true)
+    const [ fetchingData, setFetchingData ] = useState(false)
     const [ savedPostID, setSavedPostID ] = useState<string | null>(null)
 
     const [ page, setPage ] = useState(1)
@@ -93,7 +93,7 @@ const ARStudio = (props : IProps) => {
     const [ selectedTDItem, setSelectedTDItem ] = useState<any>(null)
 
     const scrollObject = useRef(null);
-    const TDItemsPageSize = 9
+    const TDItemsPageSize = 6
     // const [ fullScreen, setFullScreen ] = useState(false)
 
     // const [ profilePicSrc, setProfilePicSrc ] = useState('')
@@ -103,8 +103,10 @@ const ARStudio = (props : IProps) => {
     // const [ skyBoxHDRFile, setSkyBoxHDRFile ] = useState<File | null>()
 
   const loadMoreTDItems = useDebounce( (items : any[], setItems : (items : any[], newItems : any[]) => void) => {
-        getAllTDGallery(null, items.length, TDItemsPageSize, null)
+      setFetching3DItems(true)
+      getAllTDGallery(null, items.length, TDItemsPageSize, null)
         .then((result : any) => {
+
             const newItems = result.data.data
 
             console.log(newItems);
@@ -119,15 +121,19 @@ const ARStudio = (props : IProps) => {
             console.log(error)
         })
         .finally(() => {
-            setFetching3DItems(false)
+          setFetching3DItems(false)
         })
     } , 500)
 
     const onScroll = (e : any) => {
       const scrollY = e.target.scrollTop
-      const limit = Math.max( document.body.scrollHeight, document.body.offsetHeight, 
-          document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight ) - 30
       
+      const limit = e.target.scrollHeight - e.target.offsetHeight - 100
+      
+      console.log(limit);
+      console.log(scrollY);
+      
+
       if(scrollY !== 0) {
           if(limit < scrollY ) {
 
@@ -135,7 +141,7 @@ const ARStudio = (props : IProps) => {
                       if(!all3DItemsFetched) {
                           setFetching3DItems(true)
                           
-                          const set = (items : any[] , newItems : any[]) => setTDItems([...newItems.reverse(),...items])
+                          const set = (items : any[] , newItems : any[]) => setTDItems([...items,...newItems.reverse()])
                           loadMoreTDItems(TDItems, set)
                       }
               }
@@ -159,7 +165,7 @@ const ARStudio = (props : IProps) => {
       console.log('heeeeeeeeeeeeeeeeeeeeeeeeeeeee');
       
         try {
-          const set = (items : any[] , newItems : any[]) => setTDItems([...newItems.reverse(),...items])
+          const set = (items : any[] , newItems : any[]) => setTDItems([...items,...newItems.reverse()])
           loadMoreTDItems(TDItems, set)
           
         } catch (error) {
@@ -189,6 +195,8 @@ const ARStudio = (props : IProps) => {
 
             if(isEdit && postID) {
                 try {
+                  setFetchingData(true)
+
                     let id = postID
                     if(postID && typeof postID === typeof [])
                     {

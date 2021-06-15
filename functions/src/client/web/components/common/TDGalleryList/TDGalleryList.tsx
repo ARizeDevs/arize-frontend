@@ -71,7 +71,7 @@ const GalleryItems = (props: {selected : IGalleryItem, itemList:IGalleryItem[], 
   
   const renderedList = itemList.map((item) => {
     return (
-      <div style={{ margin:'8px',position:'relative'}}>
+      <div style={{ margin:'8px'}}>
         <TDGalleryItem selected={selected && selected.name === item.name?true:false} onClick={() => onClick(item)} glbFileURL={item.glbFileURL} usdzFileURL={item.usdzFileURL} name={item.name} imageURL={item.imageURL} />
       </div>
     )
