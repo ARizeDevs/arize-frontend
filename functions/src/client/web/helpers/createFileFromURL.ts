@@ -8,7 +8,12 @@ const createFileFromURL = (url : string) => {
     xhr.onload = function() 
     {
         blob  = xhr.response
-        resolve(new File([blob], url.substring(url.lastIndexOf('/')+1)))
+
+        const fileName = url.indexOf('?') === -1 ? url.substring(url.lastIndexOf('/')+1) : url.substring(url.lastIndexOf('/')+1,url.indexOf('?'))
+
+        console.log(fileName);
+        
+        resolve(new File([blob], fileName))
     }
     xhr.send()
   })
