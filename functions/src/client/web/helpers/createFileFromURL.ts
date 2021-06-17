@@ -13,7 +13,11 @@ const createFileFromURL = (url : string) => {
 
         console.log(fileName);
         
-        resolve(new File([blob], fileName))
+        if(blob) {
+          resolve(new File([blob], fileName))
+        } else {
+          reject('something wrong')
+        }
     }
     xhr.send()
   })
