@@ -1,4 +1,5 @@
 import axios from '../config/api'
+import getReferrer from '../helpers/getReferrer'
 import { getTokenID, getUserID } from './utils'
 
 const postServerRoute = '/post'
@@ -15,7 +16,8 @@ export const getStatistics = async ( postID : string) => {
 
 export const sharePost = async ( postID : string) => {
     // firebase.analytics().logEvent('share', { post : postID, viewer : UUID })
-    return axios.post(`${postServerRoute}/${postID}/share`, {})
+    const referrer = getReferrer()
+    return axios.post(`${postServerRoute}/${postID}/share`, { referrer })
 }
 
 export const view3DPost = async (postID : string, ua? : string | null, ipAddress? : string | null) => {
@@ -25,13 +27,18 @@ export const view3DPost = async (postID : string, ua? : string | null, ipAddress
     } else {
         userAgent = navigator.userAgent
     }
+
+    const referrer = getReferrer()
+
     // firebase.analytics().logEvent('3d_view', { post : postID, viewer : UUID })
-    return axios.post(`${postServerRoute}/${postID}/3dview`, {ip : ipAddress?ipAddress:''} , { headers : { 'user-agent' : userAgent}})
+    return axios.post(`${postServerRoute}/${postID}/3dview`, {ip : ipAddress?ipAddress:'', referrer} , { headers : { 'user-agent' : userAgent}})
 }
 
 export const viewARPost = async ( postID : string) => {
     // firebase.analytics().logEvent('ar_view', { post : postID, viewer : UUID })
-    return axios.post(`${postServerRoute}/${postID}/arview`, {})
+    const referrer = getReferrer()
+
+    return axios.post(`${postServerRoute}/${postID}/arview`, { referrer })
 }
 
 export const deletePost = async (id : string ) => {
