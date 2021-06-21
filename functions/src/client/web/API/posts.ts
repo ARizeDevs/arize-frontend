@@ -27,7 +27,6 @@ export const view3DPost = async (postID : string, ua? : string | null, ipAddress
     } else {
         userAgent = navigator.userAgent
     }
-
     const referrer = getReferrer()
 
     // firebase.analytics().logEvent('3d_view', { post : postID, viewer : UUID })
