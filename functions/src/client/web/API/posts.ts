@@ -25,6 +25,7 @@ export const view3DPost = async (postID : string, ua? : string | null, ipAddress
     } else {
         userAgent = navigator.userAgent
     }
+    console.log(userAgent);
     // firebase.analytics().logEvent('3d_view', { post : postID, viewer : UUID })
     return axios.post(`${postServerRoute}/${postID}/3dview`, {ip : ipAddress?ipAddress:''} , { headers : { 'user-agent' : userAgent}})
 }

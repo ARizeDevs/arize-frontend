@@ -2,6 +2,9 @@ import { getCode } from 'country-list'
 import React, { useEffect, useState } from 'react'
 import MultiChoiceButtonGroup from '../../common/inputs/MultiChoiceButtonGroup'
 import Loading from '../../common/Loading'
+import { getUser } from '../../../API/user'
+import firebase from 'firebase'
+import { getDirectURL } from '../../../config/firebase'
 // @ts-ignore
 import ReactCountryFlag  from "react-country-flag"
 
@@ -26,8 +29,11 @@ const PostStatistics = (props : IProps ) => {
 
     const { statistics, date, thumbnail, title } = props
     
-    
-    const [timeIntervalChoice, setTimeIntervalChoice] = useState(4)
+    const [ profileImg, setProfileImage] = useState('');
+    const [ accountType, setAccountType] = useState('');
+    const [ postCount, setPostCount] = useState(0);
+    const [ maxSlots, setMaxSlots] = useState(0);
+    const [ timeIntervalChoice, setTimeIntervalChoice] = useState(4)
     const [ arViewsCount, setARViewsCount] = useState(0)
     const [ tdViewsCount, setTDViewsCount] = useState(0)
     const [ sharesCount, setSharesCount] = useState(0)
@@ -35,6 +41,32 @@ const PostStatistics = (props : IProps ) => {
     const [ locationData, setLocationData ] = useState<any>([])
 
     useEffect(() => {
+
+        firebase.auth().onAuthStateChanged(async function(user) {
+            try {
+                if(user) {
+                    const user = await getUser(null)
+                    if(user && user.data.data){
+                        const userData = user.data.data
+                        if(userData.profilePicURL) {
+                            getDirectURL(userData.profilePicURL).then((url : any) => {
+                                setProfileImage(url)
+                            })
+                        }
+
+                        setPostCount(userData.postsCount);
+                        setMaxSlots(userData.maxSlots);
+                        setAccountType(userData.accountType)
+
+                    }
+                }
+            } catch (error) {
+
+            }
+        })
+
+        
+
         if(statistics) {
             const statisticsData = statistics.data
 
@@ -148,7 +180,7 @@ const PostStatistics = (props : IProps ) => {
 
     return (
         <div className={styles.root}>
-            <Navbar />
+            <Navbar imageSrc={profileImg} haveMoreSlots={maxSlots - postCount > 0} accountType={accountType}/>
             <div className={styles.bodyContainer}>
                 <div className={styles.header}>
                 <div style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}} >
