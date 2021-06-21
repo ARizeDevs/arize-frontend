@@ -4,11 +4,13 @@ interface IProps {
     text : string,
     value : number,
     color : string,
-    width : string
+    width : string,
+    marginLeft : string,
+    marginRight : string
 }
 
 const TotalBox = (props : IProps) => {
-    const { text, color, value, width } = props
+    const { text, color, value, width, marginLeft, marginRight } = props
 
     return (
         <div style={{
@@ -20,6 +22,8 @@ const TotalBox = (props : IProps) => {
             border : '1px solid',
             borderColor : color,
             margin : '15px',
+            marginLeft,
+            marginRight,
             width ,
             borderRadius : '10px',
             padding : '20px',

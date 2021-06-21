@@ -27,7 +27,7 @@ const PostStatistics = (props : IProps ) => {
     const { statistics, date, thumbnail, title } = props
     
     
-    const [timeIntervalChoice, setTimeIntervalChoice] = useState(0)
+    const [timeIntervalChoice, setTimeIntervalChoice] = useState(4)
     const [ arViewsCount, setARViewsCount] = useState(0)
     const [ tdViewsCount, setTDViewsCount] = useState(0)
     const [ sharesCount, setSharesCount] = useState(0)
@@ -172,17 +172,17 @@ const PostStatistics = (props : IProps ) => {
                 </div>
                 <br></br>
                 <div className={styles.totals}>
-                    <TotalBox width='220px' text='Total Views' value={arViewsCount + tdViewsCount} color='#141323' />
-                    <TotalBox width='220px' text='3D Views' value={tdViewsCount} color='#FF6F48' />
-                    <TotalBox width='220px' text='AR Views' value={arViewsCount} color='#0078FF' />
-                    <TotalBox width='220px' text='Total Shares' value={sharesCount} color='#47D27E' />
+                    <TotalBox marginLeft='0px' marginRight='15px' width='220px' text='Total Views' value={arViewsCount + tdViewsCount} color='#141323' />
+                    <TotalBox marginLeft='15px' marginRight='15px' width='220px' text='3D Views' value={tdViewsCount} color='#FF6F48' />
+                    <TotalBox marginLeft='15px' marginRight='15px' width='220px' text='AR Views' value={arViewsCount} color='#0078FF' />
+                    <TotalBox marginLeft='0px' marginRight='0px' width='220px' text='Total Shares' value={sharesCount} color='#47D27E' />
                 </div>
                 <br></br>
                 <div className={styles.details}>
-                    <div style={{ width : '530px', height : '450px', margin:'15px' }}>
+                    <div style={{ width : '530px', height : '450px', margin:'15px', marginLeft:'0px' }}>
                         <DetailBox title='Location'  data={locationData} />
                     </div>
-                    <div style={{ width : '530px', height : '450px', margin:'15px' }}>
+                    <div style={{ width : '530px', height : '450px', margin:'15px', marginRight:'0px' }}>
                         <DetailBox title='Referrer Website'  data={referrerData} />
                     </div>
                 </div>
