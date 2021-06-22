@@ -20,17 +20,17 @@ export const sharePost = async ( postID : string) => {
     return axios.post(`${postServerRoute}/${postID}/share`, { referrer })
 }
 
-export const view3DPost = async (postID : string, ua? : string | null, ipAddress? : string | null) => {
+export const view3DPost = async (postID : string,referrer : string | null, ua? : string | null, ipAddress? : string | null) => {
     let userAgent = ''
     if(ua) {
         userAgent = ua
     } else {
         userAgent = navigator.userAgent
     }
-    const referrer = getReferrer()
+    const ref = referrer?referrer:getReferrer()
 
     // firebase.analytics().logEvent('3d_view', { post : postID, viewer : UUID })
-    return axios.post(`${postServerRoute}/${postID}/3dview`, {ip : ipAddress?ipAddress:'', referrer} , { headers : { 'user-agent' : userAgent}})
+    return axios.post(`${postServerRoute}/${postID}/3dview`, {ip : ipAddress?ipAddress:'', referrer:ref} , { headers : { 'user-agent' : userAgent}})
 }
 
 export const viewARPost = async ( postID : string) => {

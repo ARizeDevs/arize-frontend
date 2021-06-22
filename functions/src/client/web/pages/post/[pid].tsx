@@ -176,10 +176,10 @@ export async function  getServerSideProps (context : any) {
     const id = context.params.pid
     const ua = context.req.headers['user-agent']
     const ipAddress =  requestIp.getClientIp(context.req)
-
+    const referrer = context.headers['referer']
 
     try {
-        await view3DPost(id, ua, ipAddress)
+        await view3DPost(id, referrer, ua, ipAddress)
     } catch(error) {
         console.log(error)
     }
