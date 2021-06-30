@@ -79,7 +79,7 @@ const Profile = (props : IProps) => {
     }
 
     const loadMorePosts = useDebounce( (posts : any[], setPosts : (posts : any[], newPosts : any[]) => void, searchText : string | null) => {
-        getAllPosts(user && user.id?user.id:null, null, posts.length, postsPageSize, searchText? searchText : null, true, true)
+        getAllPosts(user && user.id?user.id:null, null, posts.length, postsPageSize, searchText? searchText : null, false, false)
         .then((result : any) => {
             const newPosts = result.data.data
 
